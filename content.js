@@ -792,6 +792,273 @@ window.PYLAB_CONTENT = {
     }
   ],
 
+  commands: [
+    {
+      id: "print",
+      title: "print()",
+      category: "Ausgabe",
+      syntax: "print(wert)",
+      short: "Gibt Text, Zahlen oder berechnete Werte aus.",
+      summary: "Mit print() machst du sichtbar, was dein Programm berechnet oder mitteilen soll.",
+      details: [
+        "Text steht in Anführungszeichen. Zahlen und Variablen können direkt ausgegeben werden.",
+        "Mehrere Werte trennst du mit Komma. Python setzt dann automatisch Leerzeichen dazwischen.",
+        "print() ist auch beim Debuggen hilfreich, weil du Zwischenwerte kontrollieren kannst."
+      ],
+      example: `name = "Mia"\npunkte = 42\nprint("Hallo", name)\nprint("Punkte:", punkte)`,
+      pitfalls: [
+        "print(\"2 + 3\") gibt den Text aus, print(2 + 3) berechnet 5.",
+        "Vergiss die schließende Klammer nicht."
+      ],
+      relatedLesson: "sequenz",
+      xp: 10,
+      exercise: {
+        question: "Welche Zeile gibt das berechnete Ergebnis 8 aus?",
+        options: ["print(\"5 + 3\")", "print(5 + 3)", "print = 5 + 3"],
+        correct: 1,
+        feedback: "Ohne Anführungszeichen wird der Ausdruck berechnet."
+      }
+    },
+    {
+      id: "input",
+      title: "input()",
+      category: "Eingabe",
+      syntax: "text = input(\"Frage: \")",
+      short: "Liest eine Eingabe als Text ein.",
+      summary: "Mit input() kann eine Nutzerin oder ein Nutzer einen Wert an dein Programm übergeben.",
+      details: [
+        "input() liefert immer Text, auch wenn jemand eine Zahl eintippt.",
+        "Die Frage in den Klammern sollte klar sagen, was eingegeben werden soll.",
+        "Für Rechnungen wandelst du die Eingabe danach mit int() oder float() um."
+      ],
+      example: `name = input("Name: ")\nprint("Hallo", name)`,
+      pitfalls: [
+        "Mit Text kann Python nicht direkt rechnen.",
+        "In PythonLab werden input()-Werte im Aufgabenbereich über vorbereitete Eingabezeilen simuliert."
+      ],
+      relatedLesson: "eingaben",
+      xp: 10,
+      exercise: {
+        question: "Welchen Datentyp liefert input() zuerst?",
+        options: ["int", "float", "str"],
+        correct: 2,
+        feedback: "input() liefert zuerst immer Text, also str."
+      }
+    },
+    {
+      id: "type-conversion",
+      title: "int(), float(), str()",
+      category: "Umwandlung",
+      syntax: "zahl = int(text)",
+      short: "Wandelt Werte in passende Datentypen um.",
+      summary: "Umwandlungen brauchst du besonders nach input(), wenn aus eingegebenem Text eine Zahl werden soll.",
+      details: [
+        "int() erzeugt eine Ganzzahl, float() eine Dezimalzahl und str() Text.",
+        "Wähle den Typ passend zum Sachverhalt: Stückzahlen sind meistens int, Preise eher float.",
+        "Eine unpassende Eingabe wie zwölf statt 12 kann eine Fehlermeldung auslösen."
+      ],
+      example: `alter = int(input("Alter: "))\npreis = float(input("Preis: "))\nprint("Nächstes Jahr:", alter + 1)`,
+      pitfalls: [
+        "int(\"3.5\") funktioniert nicht, weil 3.5 keine ganze Zahl ist.",
+        "str() ist nützlich, wenn Werte zu Text zusammengesetzt werden sollen."
+      ],
+      relatedLesson: "eingaben",
+      xp: 10,
+      exercise: {
+        question: "Welche Umwandlung passt zu einer eingegebenen Anzahl von Tickets?",
+        options: ["int(input(...))", "float(input(...))", "str(input(...))"],
+        correct: 0,
+        feedback: "Eine Anzahl ist eine ganze Zahl, deshalb passt int()."
+      }
+    },
+    {
+      id: "comparisons",
+      title: "Vergleiche",
+      category: "Bedingungen",
+      syntax: "alter >= 18",
+      short: "Prüfen, ob eine Aussage wahr oder falsch ist.",
+      summary: "Vergleiche liefern True oder False und steuern damit if- und while-Blöcke.",
+      details: [
+        "== prüft Gleichheit, = weist einen Wert zu.",
+        "Häufige Operatoren sind !=, <, <=, > und >=.",
+        "Vergleiche solltest du besonders an Grenzwerten testen."
+      ],
+      example: `punkte = 73\nprint(punkte >= 50)\nprint(punkte == 100)`,
+      pitfalls: [
+        "Ein einzelnes = ist keine Prüfung.",
+        "Achte bei Grenzen darauf, ob der Grenzwert selbst dazugehören soll."
+      ],
+      relatedLesson: "if",
+      xp: 10,
+      exercise: {
+        question: "Welcher Ausdruck prüft, ob alter mindestens 16 ist?",
+        options: ["alter = 16", "alter >= 16", "alter < 16"],
+        correct: 1,
+        feedback: ">= bedeutet größer gleich."
+      }
+    },
+    {
+      id: "if-elif-else",
+      title: "if, elif, else",
+      category: "Verzweigung",
+      syntax: "if bedingung:",
+      short: "Führt abhängig von Bedingungen unterschiedliche Blöcke aus.",
+      summary: "Verzweigungen lassen Programme auf Fälle reagieren, statt immer denselben Weg zu nehmen.",
+      details: [
+        "Nach if und elif steht eine Bedingung mit Doppelpunkt.",
+        "Der dazugehörige Block ist eingerückt.",
+        "elif prüft weitere Fälle, else fängt alle übrigen Fälle ab."
+      ],
+      example: `punkte = 73\nif punkte >= 90:\n    print("Gold")\nelif punkte >= 50:\n    print("bestanden")\nelse:\n    print("noch üben")`,
+      pitfalls: [
+        "Die Reihenfolge der Bedingungen ist wichtig.",
+        "else hat keine eigene Bedingung."
+      ],
+      relatedLesson: "elif",
+      xp: 15,
+      exercise: {
+        question: "Warum steht bei mehreren Notengrenzen meist die höchste Grenze zuerst?",
+        options: [
+          "Damit hohe Werte nicht vorher von einer niedrigeren Grenze abgefangen werden",
+          "Weil Python sonst keine Zahlen lesen kann",
+          "Die Reihenfolge ist immer egal"
+        ],
+        correct: 0,
+        feedback: "Python nimmt den ersten passenden Zweig."
+      }
+    },
+    {
+      id: "logic",
+      title: "and, or, not",
+      category: "Bedingungen",
+      syntax: "alter >= 16 and hat_ausweis",
+      short: "Verknüpft oder dreht Wahrheitswerte.",
+      summary: "Logische Operatoren machen Bedingungen präziser, wenn mehrere Teilfragen wichtig sind.",
+      details: [
+        "and ist nur wahr, wenn beide Teilbedingungen wahr sind.",
+        "or ist wahr, wenn mindestens eine Teilbedingung wahr ist.",
+        "not dreht True zu False und False zu True."
+      ],
+      example: `alter = 17\nhat_ausweis = True\nif alter >= 16 and hat_ausweis:\n    print("Zugang erlaubt")`,
+      pitfalls: [
+        "Formuliere die Regel zuerst als deutschen Satz.",
+        "Klammern helfen bei längeren Bedingungen."
+      ],
+      relatedLesson: "logik",
+      xp: 10,
+      exercise: {
+        question: "Wann ist A and B wahr?",
+        options: ["Wenn A oder B wahr ist", "Nur wenn A und B wahr sind", "Nie"],
+        correct: 1,
+        feedback: "and verlangt beide Wahrheitswerte."
+      }
+    },
+    {
+      id: "for-range",
+      title: "for und range()",
+      category: "Schleifen",
+      syntax: "for i in range(1, 6):",
+      short: "Wiederholt einen Block für eine bekannte Anzahl von Durchläufen.",
+      summary: "for-Schleifen eignen sich, wenn du weißt, über welche Werte oder wie oft wiederholt werden soll.",
+      details: [
+        "range(1, 6) liefert 1, 2, 3, 4, 5. Der Endwert ist nicht enthalten.",
+        "Die Laufvariable erhält nacheinander jeden Wert.",
+        "Der Schleifenkörper ist eingerückt."
+      ],
+      example: `for i in range(1, 6):\n    print(i * 5)`,
+      pitfalls: [
+        "Prüfe immer, ob der letzte Wert wirklich enthalten sein soll.",
+        "range(5) startet bei 0 und endet vor 5."
+      ],
+      relatedLesson: "for",
+      xp: 15,
+      exercise: {
+        question: "Welche Werte durchläuft i bei range(2, 5)?",
+        options: ["2, 3, 4", "2, 3, 4, 5", "0, 1, 2, 3, 4"],
+        correct: 0,
+        feedback: "Start inklusive, Ende exklusiv."
+      }
+    },
+    {
+      id: "while",
+      title: "while",
+      category: "Schleifen",
+      syntax: "while bedingung:",
+      short: "Wiederholt einen Block, solange eine Bedingung wahr ist.",
+      summary: "while-Schleifen sind passend, wenn vorher nicht feststeht, wie viele Durchläufe nötig sind.",
+      details: [
+        "Vor jedem Durchlauf wird die Bedingung geprüft.",
+        "Im Schleifenkörper muss sich etwas in Richtung Ende verändern.",
+        "Startwert, Bedingung und Veränderung gehören zusammen."
+      ],
+      example: `guthaben = 40\nwhile guthaben < 100:\n    guthaben = guthaben + 15\nprint(guthaben)`,
+      pitfalls: [
+        "Ohne Veränderung entsteht schnell eine Endlosschleife.",
+        "Teste mit kleinen Startwerten, ob die Schleife endet."
+      ],
+      relatedLesson: "while",
+      xp: 15,
+      exercise: {
+        question: "Welcher Baustein verhindert typischerweise eine Endlosschleife?",
+        options: ["Eine Veränderung der Bedingungsvariable", "Mehr Leerzeilen", "Ein längerer Variablenname"],
+        correct: 0,
+        feedback: "Die Bedingung muss irgendwann falsch werden können."
+      }
+    },
+    {
+      id: "functions",
+      title: "def und return",
+      category: "Funktionen",
+      syntax: "def name(parameter):",
+      short: "Bündelt eine Teilaufgabe als wiederverwendbaren Baustein.",
+      summary: "Funktionen machen Programme übersichtlicher und erlauben, Teilprobleme getrennt zu lösen.",
+      details: [
+        "def definiert eine Funktion. Erst ein Aufruf führt sie aus.",
+        "Parameter sind Eingabewerte für die Funktion.",
+        "return gibt ein Ergebnis an den Aufrufer zurück."
+      ],
+      example: `def flaeche(breite, hoehe):\n    return breite * hoehe\n\nwert = flaeche(4, 6)\nprint(wert)`,
+      pitfalls: [
+        "print() zeigt etwas an, return gibt einen Wert zurück.",
+        "Der Funktionskörper muss eingerückt sein."
+      ],
+      relatedLesson: "funktionen",
+      xp: 15,
+      exercise: {
+        question: "Was macht return in einer Funktion?",
+        options: ["Es beendet PythonLab", "Es gibt einen Wert an den Aufrufer zurück", "Es druckt immer automatisch"],
+        correct: 1,
+        feedback: "return liefert ein Ergebnis, das weiterverwendet werden kann."
+      }
+    },
+    {
+      id: "lists",
+      title: "Listen, len(), append()",
+      category: "Datenstrukturen",
+      syntax: "werte = [4, 7, 2]",
+      short: "Speichert mehrere Werte in einer geordneten Sammlung.",
+      summary: "Listen sind der erste Schritt zu Datenstrukturen: mehrere Werte werden gemeinsam gespeichert und durchlaufen.",
+      details: [
+        "Mit eckigen Klammern erzeugst du eine Liste.",
+        "append() hängt einen Wert am Ende an.",
+        "len() liefert die Anzahl der Elemente."
+      ],
+      example: `werte = [4, 7, 2]\nwerte.append(9)\nprint(len(werte))\nfor wert in werte:\n    print(wert)`,
+      pitfalls: [
+        "Listenindizes beginnen bei 0.",
+        "append() verändert die Liste und gibt keinen neuen Listenwert zurück."
+      ],
+      relatedLesson: "listen",
+      xp: 15,
+      exercise: {
+        question: "Was liefert len([4, 7, 2])?",
+        options: ["2", "3", "13"],
+        correct: 1,
+        feedback: "len() zählt die Elemente, nicht deren Summe."
+      }
+    }
+  ],
+
   structograms: {
     operators: [
       {
@@ -1195,6 +1462,20 @@ window.PYLAB_CONTENT = {
       condition: { type: "xp", value: 300 }
     },
     {
+      id: "command-starter",
+      title: "Befehlskenner",
+      description: "Löse deine erste Befehls-Miniaufgabe.",
+      icon: "braces",
+      condition: { type: "commands", value: 1 }
+    },
+    {
+      id: "command-library",
+      title: "Syntaxbibliothek",
+      description: "Löse alle Befehls-Miniaufgaben.",
+      icon: "library",
+      condition: { type: "allCommands" }
+    },
+    {
       id: "structure-reader",
       title: "Strukturleser",
       description: "Löse deine erste Struktogramm-Aufgabe.",
@@ -1220,10 +1501,11 @@ window.PYLAB_CONTENT = {
   tools: [
     {
       title: "Informatik-Stick",
-      description: "Der einfachste Start am Schul-PC: Der Informatik-Stick bündelt die benötigten und schulisch freigegebenen Programme an einem Ort.",
-      note: "Für die meisten Aufgaben reicht es, die Programme direkt über den Informatik-Stick zu starten.",
+      description: "Der einfachste Start am Schul-PC: Der Informatik-Stick bündelt die benötigten, kostenlosen und schulisch freigegebenen Programme an einem Ort.",
+      note: "Download, Dokumentation, Neuigkeiten und Versionshistorie liegen auf der offiziellen Schultasche-BW-Seite.",
       icon: "usb",
-      url: ""
+      url: "https://schultasche-bw.de/",
+      linkLabel: "Download und Doku"
     },
     {
       title: "Thonny",

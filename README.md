@@ -1,6 +1,6 @@
 # PythonLab
 
-**Aktuelle Version:** 0.7.0
+**Aktuelle Version:** 0.8.0
 **Dokumentationsstand:** 17. Juni 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
@@ -41,7 +41,7 @@ für die nichtgewerblichen beruflichen Gymnasien:
 Die vollständige Materialsammlung mit Informationsblättern, Aufgaben und
 Musterlösungen liegt ausschließlich in der privaten Unterrichtsablage:
 
-`D:\Google Drive\Lehramt\Lernfelder\BPE5`
+`G:\Meine Ablage\Lehramt\Lernfelder\BPE5\bpe-5-grundlagen-der-programmierung-version-mit-python\bpe-5-gdp_python`
 
 Musterlösungen und private Originaldateien werden nicht in dieses öffentliche
 Repository übernommen.
@@ -50,9 +50,11 @@ Repository übernommen.
 
 - fünf Etappen mit insgesamt zwölf Python-Lektionen
 - zwölf automatisch prüfbare Programmieraufgaben
+- eigener Reiter **Befehle** mit zehn Python-Basiselementen, Beispielen,
+  Detailseiten und kleinen XP-Aufgaben
 - Struktogramm-Labor mit fünf Grundformen und fünf geprüften Übungen
 - echter Python-Interpreter im Browser über Pyodide
-- XP, Level, Lernfortschritt und zehn Erfolge
+- XP, Level, Lernfortschritt und zwölf Erfolge
 - lokales Lernprofil mit Name oder Kürzel
 - Speicherung von Code- und Struktogramm-Entwürfen
 - Export und Import des vollständigen Lernstands als JSON-Datei
@@ -77,6 +79,14 @@ Repository übernommen.
 - Funktionen, Parameter und Rückgabewerte
 - Listen als Erweiterung
 - systematische Fehlersuche
+
+### Befehle
+
+Der Reiter **Befehle** bündelt die wichtigsten Sprachmittel aus BPE 5 als
+kurze, wiederholbare Syntaxkarten. Enthalten sind Ausgabe, Eingabe,
+Typumwandlung, Vergleiche, Alternativen, logische Operatoren, Schleifen,
+Funktionen und Listen. Jede Karte führt zu einer Detailseite mit Erklärung,
+Beispiel, typischen Stolperstellen und einer Miniaufgabe.
 
 ### Struktogramme
 
@@ -116,14 +126,14 @@ Der Lernstand wird aktuell unter dem Schlüssel `pythonlab-v1` im
 - XP und Aktivitätstage
 - abgeschlossene Lektionen
 - gelöste Python-Aufgaben
+- gelöste Befehls-Miniaufgaben
 - gelöste Struktogramm-Aufgaben
 - Codeentwürfe
 - Struktogramm-Entwürfe
 
-Browserstände unter dem früheren Schlüssel `pythonwerkstatt-bg-v1` werden beim
-Laden weiterhin gelesen und beim nächsten Speichern in das neue PythonLab-Format
-übernommen. JSON-Sicherungen mit dem alten App-Kennzeichen werden beim Import
-aus Kompatibilitätsgründen ebenfalls akzeptiert.
+JSON-Sicherungen müssen das aktuelle App-Kennzeichen `PythonLab` tragen. Ältere
+Zwischenstände aus der Entwicklungsphase werden nicht mehr als offizielles
+Importformat geführt.
 
 Es gibt kein Backend und kein zentrales Schülerkonto. Daten werden nicht an
 einen eigenen Server übertragen. Browserdaten können jedoch durch
@@ -140,7 +150,10 @@ gespeichert.
 
 Für die Arbeit am Schul-PC stehen folgende Programme bereit:
 
-- **Informatik-Stick:** zentrale Startmöglichkeit für die benötigten Programme
+- **[Informatik-Stick](https://schultasche-bw.de/):** zentrale
+  Startmöglichkeit für die benötigten kostenlosen und schulisch freigegebenen
+  Programme; Download, Dokumentation und Versionshinweise liegen auf der
+  offiziellen Schultasche-BW-Seite.
 - **[Thonny](https://thonny.org/):** Python-Entwicklungsumgebung
 - **[Struktogrammer Web](https://jakobsawazki.github.io/struktogrammer-web/):**
   lokales Schwesterprojekt für freie Nassi-Shneiderman-Struktogramme
@@ -183,6 +196,18 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - abschließender Abruf der GitHub-Pages-Version
 
 ## Versionsverlauf
+
+### 0.8.0 – 17. Juni 2026
+
+- offiziellen Schultasche-BW-Link für den Informatik-Stick im Nachschlagebereich ergänzt
+- neuen Reiter **Befehle** mit zehn Python-Basiselementen, Detailseiten,
+  Beispielen und XP-Miniaufgaben erstellt
+- Lernstandsmodell um `completedCommands` erweitert
+- zwei Erfolge für Befehlsaufgaben ergänzt
+- BPE5-Quellenstruktur im Projekt dokumentiert und Originalmaterialien bewusst
+  aus dem öffentlichen Repository herausgehalten
+- `TASKS.md` als zentrale Aufgaben-, Versions- und Ideenliste angelegt
+- leere `tasks.txt` abgelöst
 
 ### 0.7.0 – 17. Juni 2026
 
@@ -245,6 +270,8 @@ Priorisiert:
 
 1. Weitere bildungsplanorientierte Transferaufgaben ergänzen.
 2. Kompetenzansicht mit verständlich formulierten Ich-kann-Zielen entwickeln.
+3. BPE5-Materialien weiter in eigene PythonLab-Aufgaben übertragen, ohne
+   Originalarbeitsblätter oder Musterlösungen ungeprüft zu veröffentlichen.
 
 Optional:
 
@@ -259,12 +286,11 @@ Optional:
 1. Dieses `README.md` vollständig lesen.
 2. `UEBERGABE_Codex.md` und `docs/BPE5_ABGLEICH_2025.md` lesen.
 3. `git status -sb` und `git log --oneline -5` prüfen.
-4. `tasks.txt` von oben nach unten bearbeiten, sofern die Datei Aufgaben
-   enthält.
+4. `TASKS.md` von oben nach unten prüfen und fortschreiben.
 5. Bestehende Gestaltung und Datenmodelle in `content.js` und `app.js`
    beibehalten.
-6. Private Materialien aus `...\Lernfelder\BPE5` nur als Referenz lesen und
-   niemals ungeprüft veröffentlichen.
+6. Private Materialien aus `G:\Meine Ablage\Lehramt\Lernfelder\BPE5` nur als
+   Referenz lesen und niemals ungeprüft veröffentlichen.
 7. Nach Änderungen Syntax, Funktion, Desktop und Mobilansicht prüfen.
 8. Dokumentation und Versionsverlauf aktualisieren.
 9. Änderungen committen, nach `main` pushen und GitHub Pages kontrollieren.
@@ -272,7 +298,8 @@ Optional:
 Empfohlener Startprompt:
 
 > Arbeite im Projekt PythonLab. Lies README.md,
-> UEBERGABE_Codex.md, docs/BPE5_ABGLEICH_2025.md und tasks.txt. Prüfe danach
+> UEBERGABE_Codex.md, TASKS.md, docs/BPE5_ABGLEICH_2025.md und
+> references/bpe5/README.md. Prüfe danach
 > git status und den aktuellen Live-Stand. Bearbeite die offenen Aufgaben in
 > der vorhandenen Architektur, teste Desktop und Mobilansicht und
 > veröffentliche den geprüften Stand wieder über GitHub Pages.
@@ -280,5 +307,7 @@ Empfohlener Startprompt:
 ## Weitere Dokumentation
 
 - [Übergabe für die Weiterarbeit](UEBERGABE_Codex.md)
+- [Zentrale Aufgabenliste und Projektstand](TASKS.md)
 - [Didaktik, Datenschutz und Quellen](docs/TECHNIK_UND_DIDAKTIK.md)
 - [Abgleich mit BPE 5, Materialstand 31.07.2025](docs/BPE5_ABGLEICH_2025.md)
+- [BPE5-Quellen und Integrationsentscheidung](references/bpe5/README.md)

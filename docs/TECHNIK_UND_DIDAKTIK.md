@@ -12,6 +12,13 @@ Das Portal reduziert die Einstiegshürde durch kurze Lernschritte:
 
 Die Reihenfolge orientiert sich an BPE 5: Sequenz, Variablen und Datentypen, Ein- und Ausgabe, Berechnungen, Alternativen, Wiederholungen, Funktionen und Modularisierung. Listen und Debugging sind als zugängliche Erweiterung angefügt.
 
+Der Reiter **Befehle** ergänzt diesen Lernzyklus als kurze Syntaxbibliothek.
+Lernende können dort Sprachmittel wie `print()`, `input()`, `if`,
+`for`, `while`, Funktionen und Listen einzeln nachschlagen. Jede Detailseite
+enthält eine knappe Erklärung, ein lauffähiges Beispiel, typische
+Stolperstellen und eine kleine Aufgabe mit XP. Dadurch eignet sich der Bereich
+für Wiederholung während des Übens, ohne den Lernpfad zu verlassen.
+
 ## Datenschutz
 
 Die Anwendung besitzt kein Backend. Name oder Kürzel, Fortschritt und Codeentwürfe werden ausschließlich im lokalen Browserspeicher abgelegt.
@@ -86,14 +93,15 @@ Die Aufgabenprüfung verwendet je nach Lernziel:
 - Landesbildungsserver Baden-Württemberg: [Materialien zum Bildungsplan Informatik an den nichtgewerblichen Beruflichen Gymnasien](https://www.schule-bw.de/faecher-und-schularten/mathematisch-naturwissenschaftliche-faecher/informatik/material/materialien-zum-neuen-bildungsplan-informatik-an-den-nichtgewerblichen-beruflichen-gymnasien)
 - Landesbildungsserver Baden-Württemberg: [Grundlagen der Programmierung – Version mit Python, Stand 31.07.2025](https://www.schule-bw.de/resolveuid/4bf04e3081af47f9aa0a7455778f3cbe)
 - Landesbildungsserver Baden-Württemberg: [Operatorenliste für Struktogramme, Version 2.2 vom 01.09.2024](https://www.schule-bw.de/faecher-und-schularten/mathematisch-naturwissenschaftliche-faecher/informatik/material/materialien-zum-neuen-bildungsplan-informatik-an-den-nichtgewerblichen-beruflichen-gymnasien/operatorenliste-fuer-struktogramme-v2-2.pdf)
+- Schultasche Baden-Württemberg: [Informatikstick 2025, Download und Dokumentation](https://schultasche-bw.de/)
 - Struktogrammer Web: lokales Schwesterprojekt unter `G:\Meine Ablage\Codex\Struktogrammer`
 - hus Struktogrammer: [Offizielle Projektseite der Java-Version](https://struktogrammer.ch/Web_files/page1_JavaVersion.html)
 - Pyodide: [Using Pyodide in a web worker](https://pyodide.org/en/stable/usage/webworker.html)
 - Lucide: [Lucide Icons](https://lucide.dev/)
 
-Die lokale Referenzdatei liegt unter
-`D:\Google Drive\Lehramt\Lernfelder\BPE5\bpe-5-grundlagen-der-programmierung-version-mit-python.zip`.
-Das Archiv enthält das Kompetenzraster sowie die Ich-kann-Listen zu den
+Die entpackte lokale Referenz liegt unter
+`G:\Meine Ablage\Lehramt\Lernfelder\BPE5\bpe-5-grundlagen-der-programmierung-version-mit-python\bpe-5-gdp_python`.
+Das Material enthält das Kompetenzraster sowie die Ich-kann-Listen zu den
 Lernfortschritten 1 bis 3. Diese Dokumente wurden inhaltlich gesichtet.
 Es wurden keine Musterlösungen und keine privaten Originaldateien in das
 öffentliche Projekt übernommen.
@@ -123,7 +131,9 @@ den lokal eingebundenen Struktogrammer Web.
 Die Kaufmännische Schule stellt den Lernenden Thonny und den hus
 Struktogrammer auf den Schul-PCs sowie über den Informatik-Stick bereit. Der
 Stick dient als zentraler Einstieg und enthält die für den Unterricht
-benötigten Programme.
+benötigten Programme. Download, Dokumentation, Neuigkeiten und Versionshinweise
+werden im Portal auf die offizielle Schultasche-BW-Seite
+`https://schultasche-bw.de/` verlinkt.
 
 Zusätzlich ist Struktogrammer Web als Schwesterprojekt eingebunden. Das Icon
 liegt in `assets/struktogrammer-mark.png`; der Link zeigt aus PythonLab auf

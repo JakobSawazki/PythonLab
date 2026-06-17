@@ -780,13 +780,15 @@ h4 {
 }
 
 .structure-promo h2,
-.structure-lead h2 {
+.structure-lead h2,
+.commands-lead h2 {
   margin-bottom: 10px;
   font-size: clamp(1.7rem, 3vw, 2.6rem);
 }
 
 .structure-promo p,
-.structure-lead p {
+.structure-lead p,
+.commands-lead p {
   color: #405149;
 }
 
@@ -803,6 +805,7 @@ h4 {
 .lesson-grid,
 .exercise-grid,
 .achievement-grid,
+.command-grid,
 .reference-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -813,6 +816,7 @@ h4 {
 .lesson-card,
 .exercise-card,
 .achievement-card,
+.command-card,
 .reference-card {
   position: relative;
   display: flex;
@@ -826,7 +830,8 @@ h4 {
 
 .module-card:hover,
 .lesson-card:hover,
-.exercise-card:hover {
+.exercise-card:hover,
+.command-card:hover {
   border-color: #9bb9aa;
   box-shadow: var(--shadow);
 }
@@ -864,6 +869,7 @@ h4 {
 .lesson-card h3,
 .exercise-card h3,
 .achievement-card h3,
+.command-card h3,
 .reference-card h3 {
   margin-bottom: 7px;
   font-size: 1.06rem;
@@ -873,6 +879,7 @@ h4 {
 .lesson-card p,
 .exercise-card p,
 .achievement-card p,
+.command-card p,
 .reference-card p {
   color: var(--muted);
   font-size: 0.9rem;
@@ -891,12 +898,14 @@ h4 {
 }
 
 .lesson-card,
-.exercise-card {
+.exercise-card,
+.command-card {
   cursor: pointer;
 }
 
 .lesson-card:focus-visible,
-.exercise-card:focus-visible {
+.exercise-card:focus-visible,
+.command-card:focus-visible {
   outline: 3px solid rgba(53, 119, 168, 0.3);
   outline-offset: 2px;
 }
@@ -927,7 +936,8 @@ h4 {
 }
 
 .lesson-card .lesson-meta,
-.exercise-card .exercise-meta {
+.exercise-card .exercise-meta,
+.command-card .exercise-meta {
   margin-top: auto;
   padding-top: 10px;
 }
@@ -1400,6 +1410,139 @@ code {
   font-size: 0.78rem;
   line-height: 1.5;
   white-space: pre;
+}
+
+.commands-lead {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.65fr);
+  gap: clamp(24px, 5vw, 70px);
+  align-items: center;
+  padding: clamp(24px, 4vw, 46px) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.commands-lead > div:first-child {
+  max-width: 790px;
+}
+
+.command-progress {
+  display: grid;
+  gap: 9px;
+  padding: 22px;
+  border-radius: 8px;
+  background: var(--green-900);
+  color: #fff;
+}
+
+.command-progress strong {
+  font-size: 2.5rem;
+}
+
+.command-progress small,
+.command-progress span {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.command-category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0;
+}
+
+.command-card {
+  gap: 9px;
+  min-height: 270px;
+}
+
+.command-card > .command-category {
+  max-width: calc(100% - 42px);
+  color: var(--green-700);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.command-card code {
+  overflow-wrap: anywhere;
+  color: var(--green-900);
+}
+
+.command-card pre,
+.command-syntax {
+  overflow: auto;
+  margin: 4px 0 0;
+  padding: 12px;
+  border-radius: 6px;
+  background: var(--surface-soft);
+  color: var(--green-900);
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  white-space: pre;
+}
+
+.command-detail {
+  display: grid;
+  gap: 18px;
+}
+
+.command-detail-header h2 code {
+  overflow-wrap: anywhere;
+  color: var(--green-900);
+}
+
+.command-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.command-copy,
+.command-example-panel {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+}
+
+.command-copy {
+  display: grid;
+  gap: 20px;
+}
+
+.command-copy h3,
+.command-example-panel .eyebrow {
+  margin-bottom: 8px;
+}
+
+.command-copy p,
+.command-copy li {
+  color: #3e4b46;
+}
+
+.command-copy ul {
+  margin: 0;
+  padding-left: 21px;
+}
+
+.command-example-panel {
+  position: sticky;
+  top: 102px;
+}
+
+.command-example-panel .code-example {
+  margin: 0 0 18px;
+}
+
+.command-example-panel .command-syntax {
+  margin-bottom: 18px;
+}
+
+.command-check {
+  max-width: 920px;
 }
 
 .tools-band {
@@ -2111,6 +2254,7 @@ code {
 :root[data-theme="dark"] .module-number,
 :root[data-theme="dark"] .continue-progress,
 :root[data-theme="dark"] .structure-progress-panel,
+:root[data-theme="dark"] .command-progress,
 :root[data-theme="dark"] .tool-icon,
 :root[data-theme="dark"] .backup-action-icon,
 :root[data-theme="dark"] .order-number {
@@ -2171,8 +2315,11 @@ code {
 
 :root[data-theme="dark"] .structure-promo p,
 :root[data-theme="dark"] .structure-lead p,
+:root[data-theme="dark"] .commands-lead p,
 :root[data-theme="dark"] .lesson-copy p,
 :root[data-theme="dark"] .lesson-copy li,
+:root[data-theme="dark"] .command-copy p,
+:root[data-theme="dark"] .command-copy li,
 :root[data-theme="dark"] .exercise-brief li,
 :root[data-theme="dark"] .structure-brief li,
 :root[data-theme="dark"] .tool-item p {
@@ -2229,6 +2376,8 @@ code {
 }
 
 :root[data-theme="dark"] .backup-summary > div,
+:root[data-theme="dark"] .command-copy,
+:root[data-theme="dark"] .command-example-panel,
 :root[data-theme="dark"] .empty-state {
   border-color: var(--line);
   background: var(--surface-soft);
@@ -2236,8 +2385,16 @@ code {
 
 :root[data-theme="dark"] .backup-summary strong,
 :root[data-theme="dark"] .lesson-copy code:not(.code-example code),
+:root[data-theme="dark"] .command-card code,
+:root[data-theme="dark"] .command-detail-header h2 code,
 :root[data-theme="dark"] .reference-card code {
   color: var(--green-700);
+}
+
+:root[data-theme="dark"] .command-card pre,
+:root[data-theme="dark"] .command-syntax {
+  color: #bcefd7;
+  background: #111a17;
 }
 
 :root[data-theme="dark"] .empty-state {
@@ -2271,6 +2428,7 @@ code {
   .lesson-grid,
   .exercise-grid,
   .achievement-grid,
+  .command-grid,
   .reference-grid,
   .tool-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2285,6 +2443,7 @@ code {
   }
 
   .exercise-brief,
+  .command-example-panel,
   .structure-brief {
     position: static;
   }
@@ -2357,7 +2516,9 @@ code {
   }
 
   .structure-promo,
-  .structure-lead {
+  .structure-lead,
+  .commands-lead,
+  .command-detail-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2415,6 +2576,7 @@ code {
   .lesson-grid,
   .exercise-grid,
   .achievement-grid,
+  .command-grid,
   .reference-grid,
   .operator-grid,
   .tool-grid {

@@ -1,6 +1,6 @@
 # Abgleich mit BPE 5: Grundlagen der Programmierung
 
-Stand des Abgleichs: 9. Juni 2026  
+Stand des Abgleichs: 17. Juni 2026
 Referenzmaterial: Version mit Python, Stand 31. Juli 2025
 
 ## Verbindliche Referenz
@@ -14,11 +14,17 @@ Jahrgangsstufe 1:
 
 Private lokale Referenz:
 
-`D:\Google Drive\Lehramt\Lernfelder\BPE5\bpe-5-grundlagen-der-programmierung-version-mit-python.zip`
+`G:\Meine Ablage\Lehramt\Lernfelder\BPE5\bpe-5-grundlagen-der-programmierung-version-mit-python\bpe-5-gdp_python`
 
-Das Archiv enthält 3.668 Einträge, darunter das Kompetenzraster, drei
-Ich-kann-Listen, Unterrichtsmaterialien, Aufgaben und Musterlösungen. Diese
-Originaldateien werden nicht in das öffentliche GitHub-Repository übernommen.
+Die entpackte Fassung enthält 3.495 Dateien in den Ordnern
+`Lernfortschritt 1`, `Lernfortschritt 1_PythonKara`,
+`Lernfortschritt 2` und `Lernfortschritt 3`, darunter das Kompetenzraster,
+Ich-kann-Listen, Unterrichtsmaterialien, Aufgaben, Struktogramme,
+Python-Dateien und Musterlösungen. Diese Originaldateien werden nicht in das
+öffentliche GitHub-Repository übernommen.
+
+Im Projekt ist die Ordnung der Quelle zusätzlich unter
+`references/bpe5/README.md` dokumentiert.
 
 ## Kompetenzbereiche
 
@@ -55,6 +61,7 @@ beziehungsweise Greenfoot ist nicht Bestandteil des browserbasierten Portals.
 | Rechenoperatoren | 03 Rechnen mit Python | vollständig |
 | Benutzereingaben und Typumwandlung | 04 Eingaben und Umwandlung | vollständig |
 | Funktionen, Parameter und Rückgabewerte | 10 Funktionen | vollständig |
+| zentrale Syntax wiederholen | Reiter Befehle | als kompakte Nachschlage- und Übungskarten umgesetzt |
 | Programme als Struktogramm dokumentieren | Struktogramm-Labor | als geführte Übungen umgesetzt |
 | Grafische Benutzeroberflächen | Zusatzinhalt | noch nicht umgesetzt |
 
@@ -73,6 +80,7 @@ später als Python-Plus-Modul ergänzt werden.
 | `and`, `or` und `not` | 07 Logische Operatoren | vollständig |
 | Zählerschleife `for` | 08 `for`-Schleifen | vollständig |
 | Kopfgesteuerte Schleife `while` | 09 `while`-Schleifen | vollständig |
+| Syntax sicher anwenden | Reiter Befehle | mit Miniaufgaben zu Alternativen, Logik und Schleifen umgesetzt |
 | Kontrollstrukturen als Struktogramm | Struktogramm-Labor | vollständig als Grundformen und Übungen |
 
 **Bewertung:** Die Python-Kontrollstrukturen und ihre Darstellung als
@@ -89,10 +97,12 @@ die Selbstständigkeit beim Üben stärken.
 ## Priorisierte Weiterentwicklung
 
 1. Weitere Struktogramm-Aufgaben mit alltagsnahen Transferproblemen ergänzen.
-2. Die Verzahnung mit Struktogrammer Web für freie Struktogramme bei Bedarf ausbauen.
-3. Ein optionales GUI-Kapitel, sofern es im konkreten Unterricht eingesetzt
+2. Die Befehlsbibliothek um weitere typische Fehlerbilder, Mini-Übungen und
+   Querverweise zu passenden Lektionen erweitern.
+3. Die Verzahnung mit Struktogrammer Web für freie Struktogramme bei Bedarf ausbauen.
+4. Ein optionales GUI-Kapitel, sofern es im konkreten Unterricht eingesetzt
    wird.
-4. Eine Kompetenzansicht, die den Lernenden die offiziellen Ich-kann-Ziele in
+5. Eine Kompetenzansicht, die den Lernenden die offiziellen Ich-kann-Ziele in
    verständlicher Sprache zeigt.
 
 ## Urheberrechtliche Grenze

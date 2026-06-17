@@ -3,9 +3,7 @@
 
   const content = window.PYLAB_CONTENT;
   const storageKey = "pythonlab-v1";
-  const legacyStorageKeys = ["pythonwerkstatt-bg-v1"];
   const backupAppId = "PythonLab";
-  const acceptedBackupAppIds = new Set([backupAppId, "PythonWerkstatt BG"]);
   const themeStorageKey = "pythonlab-theme-v1";
   const main = document.querySelector("#mainContent");
   const sidebar = document.querySelector("#sidebar");
@@ -26,6 +24,7 @@
     xp: 0,
     completedLessons: [],
     completedExercises: [],
+    completedCommands: [],
     completedStructograms: [],
     drafts: {},
     structogramDrafts: {},
@@ -59,9 +58,11 @@
   function normalizeState(candidate = {}) {
     const lessonIds = new Set(content.lessons.map((lesson) => lesson.id));
     const exerciseIds = new Set(content.exercises.map((exercise) => exercise.id));
+    const commandIds = new Set(content.commands.map((command) => command.id));
     const structogramIds = new Set(content.structograms.exercises.map((exercise) => exercise.id));
     const completedLessons = uniqueAllowedStrings(candidate.completedLessons, lessonIds);
     const completedExercises = uniqueAllowedStrings(candidate.completedExercises, exerciseIds);
+    const completedCommands = uniqueAllowedStrings(candidate.completedCommands, commandIds);
     const completedStructograms = uniqueAllowedStrings(candidate.completedStructograms, structogramIds);
     const drafts = {};
     const structogramDrafts = {};
@@ -94,6 +95,7 @@
     const xp =
       completedLessons.reduce((sum, id) => sum + (lessonById(id)?.xp || 0), 0) +
       completedExercises.reduce((sum, id) => sum + (exerciseById(id)?.xp || 0), 0) +
+      completedCommands.reduce((sum, id) => sum + (commandById(id)?.xp || 0), 0) +
       completedStructograms.reduce((sum, id) => sum + (structogramExerciseById(id)?.xp || 0), 0);
 
     return {
@@ -102,6 +104,7 @@
       xp,
       completedLessons,
       completedExercises,
+      completedCommands,
       completedStructograms,
       drafts,
       structogramDrafts,
@@ -114,8 +117,7 @@
 
   function loadState() {
     try {
-      const storedRaw = localStorage.getItem(storageKey) ||
-        legacyStorageKeys.map((key) => localStorage.getItem(key)).find(Boolean);
+      const storedRaw = localStorage.getItem(storageKey);
       const stored = storedRaw ? JSON.parse(storedRaw) : null;
       return normalizeState(stored || {});
     } catch {
@@ -196,6 +198,10 @@
     return content.structograms.exercises.find((exercise) => exercise.id === id);
   }
 
+  function commandById(id) {
+    return content.commands.find((command) => command.id === id);
+  }
+
   function currentLevel() {
     let index = 0;
     levels.forEach((level, levelIndex) => {
@@ -249,6 +255,7 @@
     const keyByKind = {
       lesson: "completedLessons",
       exercise: "completedExercises",
+      command: "completedCommands",
       structogram: "completedStructograms"
     };
     const key = keyByKind[kind];
@@ -284,6 +291,12 @@
     if (condition.type === "exercises") {
       return state.completedExercises.length >= condition.value;
     }
+    if (condition.type === "commands") {
+      return state.completedCommands.length >= condition.value;
+    }
+    if (condition.type === "allCommands") {
+      return state.completedCommands.length === content.commands.length;
+    }
     if (condition.type === "structograms") {
       return state.completedStructograms.length >= condition.value;
     }
@@ -305,7 +318,8 @@
     }
     if (condition.type === "all") {
       return state.completedLessons.length === content.lessons.length &&
-        state.completedExercises.length === content.exercises.length;
+        state.completedExercises.length === content.exercises.length &&
+        state.completedCommands.length === content.commands.length;
     }
     return false;
   }
@@ -380,6 +394,24 @@
         <div class="exercise-meta">
           <span class="meta-pill difficulty-${exercise.difficulty}">${difficultyLabel(exercise.difficulty)}</span>
           <span class="meta-pill"><i data-lucide="sparkles"></i>${exercise.xp} XP</span>
+        </div>
+      </article>`;
+  }
+
+  function commandCard(command) {
+    const completed = state.completedCommands.includes(command.id);
+    return `
+      <article class="command-card" tabindex="0" role="button" data-command="${command.id}" aria-label="${escapeHtml(command.title)} öffnen">
+        <span class="lesson-state ${completed ? "is-done" : ""}">
+          <i data-lucide="${completed ? "check" : "braces"}"></i>
+        </span>
+        <span class="command-category">${escapeHtml(command.category)}</span>
+        <h3><code>${escapeHtml(command.title)}</code></h3>
+        <p>${escapeHtml(command.short)}</p>
+        <pre>${escapeHtml(command.syntax)}</pre>
+        <div class="exercise-meta">
+          <span class="meta-pill"><i data-lucide="book-open"></i>${escapeHtml(lessonById(command.relatedLesson)?.title || "Python")}</span>
+          <span class="meta-pill"><i data-lucide="sparkles"></i>${command.xp} XP</span>
         </div>
       </article>`;
   }
@@ -499,7 +531,7 @@
         </div>
         <div class="stat-item">
           <span class="stat-icon is-blue"><i data-lucide="square-terminal"></i></span>
-          <div><strong>${state.completedExercises.length} / ${content.exercises.length}</strong><small>Aufgaben gelöst</small></div>
+          <div><strong>${state.completedExercises.length + state.completedCommands.length} / ${content.exercises.length + content.commands.length}</strong><small>Übungen gelöst</small></div>
         </div>
         <div class="stat-item">
           <span class="stat-icon is-yellow"><i data-lucide="trophy"></i></span>
@@ -619,6 +651,103 @@
         `).join("")}
       </div>
       <div class="exercise-grid">${filtered.map(exerciseCard).join("")}</div>`;
+  }
+
+  function renderCommands() {
+    setHeading("Python-Werkzeuge", "Befehle");
+    activateNav("commands");
+    const completed = state.completedCommands.length;
+    const categories = [...new Set(content.commands.map((command) => command.category))];
+    main.innerHTML = `
+      <section class="commands-lead">
+        <div>
+          <p class="eyebrow">Syntax verstehen</p>
+          <h2>Die wichtigsten Python-Befehle auf einen Blick.</h2>
+          <p>Jede Karte erklärt kurz, wofür ein Befehl gedacht ist. Öffne einen Befehl für Details, typische Fehler und eine kleine Übung mit XP.</p>
+        </div>
+        <div class="command-progress">
+          <small>Dein Befehlsstand</small>
+          <strong>${completed} / ${content.commands.length}</strong>
+          <span>Miniaufgaben gelöst</span>
+        </div>
+      </section>
+      <div class="command-category-list" aria-label="Befehlskategorien">
+        ${categories.map((category) => `<span class="tag"><i data-lucide="folder"></i>${escapeHtml(category)}</span>`).join("")}
+      </div>
+      <div class="command-grid">${content.commands.map(commandCard).join("")}</div>`;
+  }
+
+  function renderCommandDetail(id) {
+    const command = commandById(id);
+    if (!command) {
+      go("commands");
+      return;
+    }
+    setHeading(command.category, command.title);
+    activateNav("commands");
+    const completed = state.completedCommands.includes(command.id);
+    const lesson = lessonById(command.relatedLesson);
+    main.innerHTML = `
+      <button class="text-button back-button" type="button" data-route="commands">
+        <i data-lucide="arrow-left"></i>
+        Zu allen Befehlen
+      </button>
+      <article class="command-detail">
+        <header class="detail-header command-detail-header">
+          <div class="lesson-meta">
+            <span class="meta-pill"><i data-lucide="tag"></i>${escapeHtml(command.category)}</span>
+            <span class="meta-pill"><i data-lucide="sparkles"></i>${command.xp} XP</span>
+            ${completed ? `<span class="completion-chip"><i data-lucide="circle-check"></i> Gelöst</span>` : ""}
+          </div>
+          <h2><code>${escapeHtml(command.title)}</code></h2>
+          <p>${escapeHtml(command.summary)}</p>
+        </header>
+
+        <section class="command-detail-grid">
+          <div class="command-copy">
+            <section>
+              <h3>Wofür brauchst du das?</h3>
+              ${command.details.map((detail) => `<p>${inlineCode(detail)}</p>`).join("")}
+            </section>
+            <section>
+              <h3>Typische Stolperstellen</h3>
+              <ul>${command.pitfalls.map((pitfall) => `<li>${inlineCode(pitfall)}</li>`).join("")}</ul>
+            </section>
+            <div class="button-row">
+              ${lesson ? `
+                <button class="button button-secondary" type="button" data-lesson="${lesson.id}">
+                  <i data-lucide="book-open"></i>
+                  Passende Lektion öffnen
+                </button>` : ""}
+            </div>
+          </div>
+          <aside class="command-example-panel">
+            <p class="eyebrow">Syntax</p>
+            <pre class="command-syntax">${escapeHtml(command.syntax)}</pre>
+            <p class="eyebrow">Beispiel</p>
+            <pre class="code-example"><code>${escapeHtml(command.example)}</code></pre>
+          </aside>
+        </section>
+
+        <section class="quick-check command-check">
+          <p class="eyebrow">Miniaufgabe</p>
+          <h3>${escapeHtml(command.exercise.question)}</h3>
+          <form id="commandExerciseForm" data-command-id="${command.id}">
+            <div class="answer-options">
+              ${command.exercise.options.map((option, index) => `
+                <label class="answer-option">
+                  <input type="radio" name="commandAnswer" value="${index}">
+                  <span>${escapeHtml(option)}</span>
+                </label>`).join("")}
+            </div>
+            <button class="button button-primary" type="submit">
+              <i data-lucide="check"></i>
+              ${completed ? "Antwort prüfen" : "Befehl abschließen"}
+            </button>
+            <div class="feedback" id="commandFeedback"></div>
+          </form>
+        </section>
+      </article>`;
   }
 
   function renderStructograms() {
@@ -862,7 +991,7 @@
               <small>${escapeHtml(tool.note)}</small>
               ${tool.url ? `
                 <a class="text-button" href="${tool.url}" target="_blank" rel="noreferrer">
-                  Projektseite <i data-lucide="external-link"></i>
+                  ${escapeHtml(tool.linkLabel || "Projektseite")} <i data-lucide="external-link"></i>
                 </a>` : ""}
             </article>`).join("")}
         </div>
@@ -1031,6 +1160,30 @@
     feedback.textContent = message;
   }
 
+  function checkCommandExercise(form) {
+    const command = commandById(form.dataset.commandId);
+    const selected = form.querySelector('input[name="commandAnswer"]:checked');
+    const feedback = document.querySelector("#commandFeedback");
+    if (!command || !feedback) {
+      return;
+    }
+    if (!selected) {
+      feedback.className = "feedback is-visible is-error";
+      feedback.textContent = "Wähle zuerst eine Antwort aus.";
+      return;
+    }
+    const success = Number(selected.value) === command.exercise.correct;
+    feedback.className = `feedback is-visible ${success ? "is-success" : "is-error"}`;
+    if (success) {
+      const firstCompletion = award("command", command.id, command.xp);
+      feedback.textContent = firstCompletion
+        ? `${command.exercise.feedback} ${command.xp} XP wurden gutgeschrieben.`
+        : command.exercise.feedback;
+    } else {
+      feedback.textContent = "Noch nicht ganz. Lies Beispiel und Stolperstellen noch einmal.";
+    }
+  }
+
   function showResult(success, title, detail) {
     const banner = document.querySelector("#resultBanner");
     banner.className = `result-banner is-visible ${success ? "is-success" : "is-error"}`;
@@ -1091,7 +1244,7 @@
     summary.innerHTML = `
       <div><strong>${state.xp} XP</strong><small>Erfahrung</small></div>
       <div><strong>${state.completedLessons.length}</strong><small>Lektionen</small></div>
-      <div><strong>${state.completedExercises.length + state.completedStructograms.length}</strong><small>Aufgaben</small></div>`;
+      <div><strong>${state.completedExercises.length + state.completedCommands.length + state.completedStructograms.length}</strong><small>Aufgaben</small></div>`;
   }
 
   async function exportProgress() {
@@ -1143,7 +1296,7 @@
 
     try {
       const parsed = JSON.parse(await file.text());
-      if (!acceptedBackupAppIds.has(parsed?.app) || !parsed.data) {
+      if (parsed?.app !== backupAppId || !parsed.data) {
         throw new Error("Keine PythonLab-Datei");
       }
       if (!Number.isInteger(parsed.formatVersion) || parsed.formatVersion > backupFormatVersion) {
@@ -1362,6 +1515,8 @@
       renderHome();
     } else if (route.name === "path") {
       renderPath();
+    } else if (route.name === "commands") {
+      renderCommands();
     } else if (route.name === "structograms") {
       renderStructograms();
     } else if (route.name === "practice") {
@@ -1372,6 +1527,8 @@
       renderReference();
     } else if (route.name === "lesson") {
       renderLesson(route.id);
+    } else if (route.name === "command") {
+      renderCommandDetail(route.id);
     } else if (route.name === "exercise") {
       renderExercise(route.id);
     } else if (route.name === "structogram") {
@@ -1389,6 +1546,7 @@
   document.addEventListener("click", (event) => {
     const routeButton = event.target.closest("[data-route]");
     const lessonButton = event.target.closest("[data-lesson]");
+    const commandButton = event.target.closest("[data-command]");
     const exerciseButton = event.target.closest("[data-exercise]");
     const structogramButton = event.target.closest("[data-structogram]");
     const filterButton = event.target.closest("[data-filter]");
@@ -1401,6 +1559,9 @@
     }
     if (lessonButton) {
       go(`lesson/${lessonButton.dataset.lesson}`);
+    }
+    if (commandButton) {
+      go(`command/${commandButton.dataset.command}`);
     }
     if (exerciseButton) {
       go(`exercise/${exerciseButton.dataset.exercise}`);
@@ -1460,11 +1621,13 @@
   });
 
   document.addEventListener("keydown", (event) => {
-    const card = event.target.closest("[data-lesson], [data-exercise], [data-structogram]");
+    const card = event.target.closest("[data-lesson], [data-command], [data-exercise], [data-structogram]");
     if (card && (event.key === "Enter" || event.key === " ")) {
       event.preventDefault();
       if (card.dataset.lesson) {
         go(`lesson/${card.dataset.lesson}`);
+      } else if (card.dataset.command) {
+        go(`command/${card.dataset.command}`);
       } else if (card.dataset.exercise) {
         go(`exercise/${card.dataset.exercise}`);
       } else {
@@ -1512,6 +1675,10 @@
       } else {
         showQuizFeedback(false, `Noch nicht. ${lesson.quiz.explanation}`);
       }
+    }
+    if (event.target.id === "commandExerciseForm") {
+      event.preventDefault();
+      checkCommandExercise(event.target);
     }
   });
 
