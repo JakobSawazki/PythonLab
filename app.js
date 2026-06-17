@@ -2,7 +2,10 @@
   "use strict";
 
   const content = window.PYLAB_CONTENT;
-  const storageKey = "pythonwerkstatt-bg-v1";
+  const storageKey = "pythonlab-v1";
+  const legacyStorageKeys = ["pythonwerkstatt-bg-v1"];
+  const backupAppId = "PythonLab";
+  const acceptedBackupAppIds = new Set([backupAppId, "PythonWerkstatt BG"]);
   const main = document.querySelector("#mainContent");
   const sidebar = document.querySelector("#sidebar");
   const backdrop = document.querySelector("#mobileBackdrop");
@@ -108,7 +111,9 @@
 
   function loadState() {
     try {
-      const stored = JSON.parse(localStorage.getItem(storageKey));
+      const storedRaw = localStorage.getItem(storageKey) ||
+        legacyStorageKeys.map((key) => localStorage.getItem(key)).find(Boolean);
+      const stored = storedRaw ? JSON.parse(storedRaw) : null;
       return normalizeState(stored || {});
     } catch {
       return { ...defaultState };
@@ -283,7 +288,7 @@
   function setHeading(eyebrow, title) {
     document.querySelector("#viewEyebrow").textContent = eyebrow;
     document.querySelector("#viewTitle").textContent = title;
-    document.title = `${title} · PythonWerkstatt`;
+    document.title = `${title} · PythonLab`;
   }
 
   function closeMobileNav() {
@@ -674,14 +679,14 @@
 
       <section class="structure-tool-note">
         <div>
-          <p class="eyebrow">Zugelassenes Hilfsmittel</p>
-          <h2>hus Struktogrammer</h2>
-          <p>Für umfangreichere Zeichnungen kann der offizielle Java-Editor verwendet werden. Das Labor hier im Portal dient zum Verstehen und Üben direkt im Browser.</p>
+          <p class="eyebrow">Freies Zeichnen</p>
+          <h2>Struktogrammer Web</h2>
+          <p>Für umfangreichere freie Zeichnungen öffnet PythonLab den Struktogrammer Web als Schwesterprojekt. Das Labor hier im Portal dient zum Verstehen und Üben direkt im Browser.</p>
         </div>
-        <a class="button button-secondary" href="https://struktogrammer.ch/Web_files/page1_JavaVersion.html"
+        <a class="button button-secondary" href="https://jakobsawazki.github.io/struktogrammer-web/"
           target="_blank" rel="noreferrer">
           <i data-lucide="external-link"></i>
-          Projektseite öffnen
+          Struktogrammer öffnen
         </a>
       </section>`;
   }
@@ -801,13 +806,13 @@
     setHeading("Werkzeuge und Syntax", "Nachschlagen");
     activateNav("reference");
     main.innerHTML = `
-      <p class="view-intro">Hier findest du die schulisch bereitgestellten Hilfsmittel und kurze Muster für die wichtigsten Python-Sprachelemente.</p>
+      <p class="view-intro">Hier findest du die schulisch bereitgestellten Hilfsmittel, den eingebundenen Struktogrammer Web und kurze Muster für die wichtigsten Python-Sprachelemente.</p>
       <section class="tools-band">
         <div class="section-heading">
           <div>
             <p class="eyebrow">Am Schul-PC</p>
             <h2>Erlaubte Hilfsmittel</h2>
-            <p>Thonny und der hus Struktogrammer sind installiert und zusätzlich über den Informatik-Stick verfügbar.</p>
+            <p>Thonny und der hus Struktogrammer sind installiert und zusätzlich über den Informatik-Stick verfügbar; der Struktogrammer Web ist als lokales Schwesterprojekt verlinkt.</p>
           </div>
         </div>
         <div class="tool-grid">
@@ -1028,12 +1033,12 @@
   }
 
   function exportFileName() {
-    return `pythonwerkstatt-${safeFilePart(state.name)}-${todayKey()}.json`;
+    return `pythonlab-${safeFilePart(state.name)}-${todayKey()}.json`;
   }
 
   function backupPayload() {
     return {
-      app: "PythonWerkstatt BG",
+      app: backupAppId,
       formatVersion: backupFormatVersion,
       exportedAt: new Date().toISOString(),
       data: state
@@ -1061,7 +1066,7 @@
         const handle = await window.showSaveFilePicker({
           suggestedName,
           types: [{
-            description: "PythonWerkstatt-Lernstand",
+            description: "PythonLab-Lernstand",
             accept: { "application/json": [".json"] }
           }]
         });
@@ -1100,8 +1105,8 @@
 
     try {
       const parsed = JSON.parse(await file.text());
-      if (parsed?.app !== "PythonWerkstatt BG" || !parsed.data) {
-        throw new Error("Keine PythonWerkstatt-Datei");
+      if (!acceptedBackupAppIds.has(parsed?.app) || !parsed.data) {
+        throw new Error("Keine PythonLab-Datei");
       }
       if (!Number.isInteger(parsed.formatVersion) || parsed.formatVersion > backupFormatVersion) {
         throw new Error("Die Datei stammt aus einer neueren Version");
@@ -1506,8 +1511,8 @@
 
   createWorker();
   renderRoute();
-  if (!state.name && !sessionStorage.getItem("pythonwerkstatt-profile-seen")) {
-    sessionStorage.setItem("pythonwerkstatt-profile-seen", "1");
+  if (!state.name && !sessionStorage.getItem("pythonlab-profile-seen")) {
+    sessionStorage.setItem("pythonlab-profile-seen", "1");
     window.setTimeout(() => profileDialog.showModal(), 350);
   }
 })();

@@ -1,6 +1,6 @@
-# Übergabeprotokoll: PythonWerkstatt BG
+# Übergabeprotokoll: PythonLab
 
-Stand: 9. Juni 2026
+Stand: 17. Juni 2026
 
 ## Projektziel
 
@@ -8,10 +8,10 @@ Stand: 9. Juni 2026
 
 ## Ablage und Repository
 
-- Windows-Pfad Gerät 1: `D:\Google Drive\Lehramt\Lernfelder\Python-Lernportal-BG`
-- Erwarteter Pfad Gerät 2: `C:\Google Drive\Lehramt\Lernfelder\Python-Lernportal-BG`
-- GitHub-Repository: `https://github.com/JakobSawazki/Python-Lernportal-BG`
-- GitHub Pages: `https://jakobsawazki.github.io/Python-Lernportal-BG/`
+- Aktueller lokaler Projektpfad: `G:\Meine Ablage\Codex\PythonLab`
+- Lokales Schwesterprojekt: `G:\Meine Ablage\Codex\Struktogrammer`
+- GitHub-Repository: `https://github.com/JakobSawazki/PythonLab`
+- GitHub Pages: `https://jakobsawazki.github.io/PythonLab/`
 - Projektzuordnung: Sawazki Electronics; Gegenlink in der Fußnavigation von
   `https://jakobsawazki.github.io/sawazki-electronics/`
 
@@ -32,6 +32,7 @@ Verbindliche fachliche Referenz:
 - fünf Lernetappen mit zwölf Lektionen
 - zwölf Aufgaben mit editierbarem Python-Code
 - Struktogramm-Labor mit fünf Grundformen und fünf interaktiven Aufgaben
+- direkter Kopfzeilen-Link zum lokalen Struktogrammer Web
 - automatische Prüfung von Ausgabe, Variablen und Funktionen
 - Pyodide 0.29.4 in einem Web Worker
 - Abbruch sehr langer Programme nach zehn Sekunden
@@ -50,12 +51,15 @@ Verbindliche fachliche Referenz:
 | `app.js` | Routing, Rendern, Lernstand, XP, Aufgabenprüfung |
 | `python-worker.js` | Laden und Ausführen von Pyodide |
 | `assets/python-lernraum.png` | Titelbild der Übersicht |
+| `assets/struktogrammer-mark.png` | Icon für den Struktogrammer-Web-Link |
 | `docs/TECHNIK_UND_DIDAKTIK.md` | Quellen, Datenschutz und didaktische Entscheidungen |
 | `docs/BPE5_ABGLEICH_2025.md` | Abdeckung des offiziellen Kompetenzrasters und offene Ausbauschritte |
 
 ## Zustandsmodell
 
-Der Schlüssel im Browser lautet `pythonwerkstatt-bg-v1`. Gespeichert werden:
+Der aktuelle Schlüssel im Browser lautet `pythonlab-v1`. Der frühere Schlüssel
+`pythonwerkstatt-bg-v1` wird beim Laden weiterhin gelesen, damit vorhandene
+Browserstände übernommen werden können. Gespeichert werden:
 
 - `name`
 - `xp`
@@ -89,7 +93,7 @@ XP werden pro Lektion und Aufgabe nur einmal vergeben.
 ## Sinnvolle nächste Schritte
 
 1. Weitere Struktogramm-Transferaufgaben ergänzen.
-2. Optional einen freien Struktogramm-Editor oder Export entwickeln.
+2. Die Verzahnung mit Struktogrammer Web bei Bedarf ausbauen.
 3. Den ikonischen Einstieg aus Lernfortschritt 1 bei Bedarf didaktisch übertragen.
 4. Die GUI-Inhalte aus Lernfortschritt 2 als optionales Zusatzmodul prüfen.
 5. Weitere Python-Aufgabenvarianten ergänzen.
@@ -107,4 +111,4 @@ XP werden pro Lektion und Aufgabe nur einmal vergeben.
 
 Empfohlener Startauftrag:
 
-> Öffne `UEBERGABE_Codex.md` und prüfe anschließend `git status`, `README.md`, `content.js` und `app.js`. Das Projekt ist das öffentliche Python-Lernportal für BPE 5. Arbeite mit dem vorhandenen Stil weiter und veröffentliche Änderungen nach Prüfung wieder über GitHub Pages.
+> Öffne `UEBERGABE_Codex.md` und prüfe anschließend `git status`, `README.md`, `content.js` und `app.js`. Das Projekt ist PythonLab, das öffentliche Python-Lernportal für BPE 5. Arbeite mit dem vorhandenen Stil weiter und veröffentliche Änderungen nach Prüfung wieder über GitHub Pages.

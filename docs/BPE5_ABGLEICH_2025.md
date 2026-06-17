@@ -89,7 +89,7 @@ die Selbstständigkeit beim Üben stärken.
 ## Priorisierte Weiterentwicklung
 
 1. Weitere Struktogramm-Aufgaben mit alltagsnahen Transferproblemen ergänzen.
-2. Optional einen freien Struktogramm-Editor oder einen Export entwickeln.
+2. Die Verzahnung mit Struktogrammer Web für freie Struktogramme bei Bedarf ausbauen.
 3. Ein optionales GUI-Kapitel, sofern es im konkreten Unterricht eingesetzt
    wird.
 4. Eine Kompetenzansicht, die den Lernenden die offiziellen Ich-kann-Ziele in

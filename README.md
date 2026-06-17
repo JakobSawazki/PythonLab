@@ -1,20 +1,20 @@
-# PythonWerkstatt BG
+# PythonLab
 
-**Aktuelle Version:** 0.5.0
-**Dokumentationsstand:** 9. Juni 2026
-**Live:** https://jakobsawazki.github.io/Python-Lernportal-BG/
-**Repository:** https://github.com/JakobSawazki/Python-Lernportal-BG
+**Aktuelle Version:** 0.6.0
+**Dokumentationsstand:** 17. Juni 2026
+**Live:** https://jakobsawazki.github.io/PythonLab/
+**Repository:** https://github.com/JakobSawazki/PythonLab
 
 Browserbasierte Lernumgebung für Schülerinnen und Schüler des
 nichtgewerblichen beruflichen Gymnasiums. Die Anwendung behandelt die
 Bildungsplaneinheit 5 „Grundlagen der Programmierung“ in Jahrgangsstufe 1 mit
 Python.
 
-![Übersicht der PythonWerkstatt](docs/screenshots/startseite-desktop.png)
+![Übersicht von PythonLab](docs/screenshots/startseite-desktop.png)
 
 ## Ziel und Vorhaben
 
-Die PythonWerkstatt soll Lernenden einen ruhigen, verständlichen und
+PythonLab soll Lernenden einen ruhigen, verständlichen und
 bildungsplanorientierten Einstieg in die Programmierung ermöglichen. Jeder
 Themenbereich folgt demselben Lernzyklus:
 
@@ -56,6 +56,7 @@ Repository übernommen.
 - lokales Lernprofil mit Name oder Kürzel
 - Speicherung von Code- und Struktogramm-Entwürfen
 - Export und Import des vollständigen Lernstands als JSON-Datei
+- direkter Kopfzeilen-Link zum lokalen Struktogrammer Web
 - kompakter Nachschlagebereich
 - responsive Oberfläche für Computer, Tablet und Smartphone
 - Tastaturbedienung und semantische Bedienelemente
@@ -98,7 +99,7 @@ aufgebaut. Dadurch kann es direkt über GitHub Pages veröffentlicht werden.
 | `content.js` | Module, Lektionen, Aufgaben, Erfolge und Referenzen |
 | `app.js` | Routing, Rendern, Lernstand, XP und Prüfungen |
 | `python-worker.js` | Python-Ausführung mit Pyodide im Web Worker |
-| `assets/` | selbst erzeugte Bildmedien |
+| `assets/` | selbst erzeugte Bildmedien und Struktogrammer-Mark |
 | `docs/` | fachliche, technische und visuelle Dokumentation |
 
 Hash-Routing wie `#lesson/sequenz` oder `#structograms` hält alle Ansichten mit
@@ -106,7 +107,7 @@ GitHub Pages kompatibel.
 
 ## Lernstand und Datenschutz
 
-Der Lernstand wird aktuell unter dem Schlüssel `pythonwerkstatt-bg-v1` im
+Der Lernstand wird aktuell unter dem Schlüssel `pythonlab-v1` im
 `localStorage` des Browsers gespeichert. Enthalten sind:
 
 - Name oder Kürzel
@@ -116,6 +117,11 @@ Der Lernstand wird aktuell unter dem Schlüssel `pythonwerkstatt-bg-v1` im
 - gelöste Struktogramm-Aufgaben
 - Codeentwürfe
 - Struktogramm-Entwürfe
+
+Browserstände unter dem früheren Schlüssel `pythonwerkstatt-bg-v1` werden beim
+Laden weiterhin gelesen und beim nächsten Speichern in das neue PythonLab-Format
+übernommen. JSON-Sicherungen mit dem alten App-Kennzeichen werden beim Import
+aus Kompatibilitätsgründen ebenfalls akzeptiert.
 
 Es gibt kein Backend und kein zentrales Schülerkonto. Daten werden nicht an
 einen eigenen Server übertragen. Browserdaten können jedoch durch
@@ -132,12 +138,17 @@ Für die Arbeit am Schul-PC stehen folgende Programme bereit:
 
 - **Informatik-Stick:** zentrale Startmöglichkeit für die benötigten Programme
 - **[Thonny](https://thonny.org/):** Python-Entwicklungsumgebung
+- **[Struktogrammer Web](https://jakobsawazki.github.io/struktogrammer-web/):**
+  lokales Schwesterprojekt für freie Nassi-Shneiderman-Struktogramme
 - **[hus Struktogrammer](https://struktogrammer.ch/Web_files/page1_JavaVersion.html):**
   Java-Anwendung für Struktogramme
 
 Thonny und der hus Struktogrammer sind auf den Schul-PCs installiert und
 zusätzlich über den Informatik-Stick erreichbar. Der hus Struktogrammer liegt
-außerdem als Java-Datei in den Unterrichtsmaterialien.
+außerdem als Java-Datei in den Unterrichtsmaterialien. Der Struktogrammer Web
+liegt im lokalen Schwesterordner `G:\Meine Ablage\Codex\Struktogrammer` und ist
+in PythonLab oben rechts sowie im Nachschlagebereich auf die Live-Version
+verlinkt.
 
 Nach schulischer Vorgabe sind diese Werkzeuge für den Informatikunterricht und
 die entsprechend freigegebenen Prüfungssituationen vorgesehen. Für
@@ -168,6 +179,13 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - abschließender Abruf der GitHub-Pages-Version
 
 ## Versionsverlauf
+
+### 0.6.0 – 17. Juni 2026
+
+- Projektname in Oberfläche, Lernstandsdateien und Dokumentation auf PythonLab umgestellt
+- Lernstandsspeicherung auf `pythonlab-v1` umgestellt und Altbestände weiterlesbar gehalten
+- Struktogrammer Web über die Kopfzeile und den Nachschlagebereich verlinkt
+- Struktogrammer-Mark aus dem Schwesterprojekt nach `assets/struktogrammer-mark.png` übernommen
 
 ### 0.5.0 – 9. Juni 2026
 
@@ -203,7 +221,7 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 
 ### 0.1.0 – 9. Juni 2026
 
-- erste vollständige PythonWerkstatt veröffentlicht
+- erste vollständige Lernumgebung veröffentlicht
 - zwölf Lektionen und zwölf Python-Aufgaben erstellt
 - Pyodide-Ausführung, Lernprofil, XP, Level und Erfolge implementiert
 - responsive Desktop- und Mobiloberfläche aufgebaut
@@ -219,7 +237,7 @@ Priorisiert:
 
 Optional:
 
-- freier Struktogramm-Editor oder Export
+- weitere Verzahnung mit Struktogrammer Web
 - GUI-Kapitel mit Python
 - Lernstandsynchronisation über ein datenschutzkonformes Backend
 - separater Prüfungsmodus mit Authentifizierung
@@ -242,7 +260,7 @@ Optional:
 
 Empfohlener Startprompt:
 
-> Arbeite im Projekt PythonWerkstatt BG. Lies README.md,
+> Arbeite im Projekt PythonLab. Lies README.md,
 > UEBERGABE_Codex.md, docs/BPE5_ABGLEICH_2025.md und tasks.txt. Prüfe danach
 > git status und den aktuellen Live-Stand. Bearbeite die offenen Aufgaben in
 > der vorhandenen Architektur, teste Desktop und Mobilansicht und

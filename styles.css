@@ -343,7 +343,8 @@ h4 {
 }
 
 .runtime-chip,
-.points-chip {
+.points-chip,
+.structogrammer-link {
   min-height: 38px;
   display: inline-flex;
   gap: 8px;
@@ -354,6 +355,24 @@ h4 {
   background: var(--surface);
   font-size: 0.78rem;
   white-space: nowrap;
+}
+
+.structogrammer-link {
+  color: var(--ink);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.structogrammer-link:hover {
+  border-color: var(--green-500);
+  color: var(--green-900);
+  background: var(--surface-soft);
+}
+
+.structogrammer-link img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .points-chip {
@@ -2119,6 +2138,16 @@ code {
   .runtime-chip {
     width: 38px;
     justify-content: center;
+  }
+
+  .structogrammer-link {
+    width: 38px;
+    justify-content: center;
+    padding-inline: 6px;
+  }
+
+  .structogrammer-link span {
+    display: none;
   }
 
   .mobile-backdrop {

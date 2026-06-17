@@ -447,7 +447,7 @@ window.PYLAB_CONTENT = {
             "Mit `def` definierst du eine Funktion. Der eingerückte Block beschreibt, was die Funktion erledigt.",
             "Eine Definition führt den Block noch nicht aus. Erst ein Funktionsaufruf startet ihn."
           ],
-          code: `def begruessung():\n    print("Willkommen in der PythonWerkstatt!")\n\nbegruessung()`
+          code: `def begruessung():\n    print("Willkommen in PythonLab!")\n\nbegruessung()`
         },
         {
           title: "Parameter",
@@ -572,14 +572,14 @@ window.PYLAB_CONTENT = {
       difficulty: "easy",
       xp: 25,
       instructions: [
-        "Gib zuerst den Text PythonWerkstatt aus.",
+        "Gib zuerst den Text PythonLab aus.",
         "Gib danach den Text Ich übe selbst! aus.",
         "Gib in der dritten Zeile das Ergebnis von 6 + 4 aus."
       ],
       starter: `# Schreibe deine drei Ausgaben hier\n`,
       check: {
         type: "output",
-        expected: "PythonWerkstatt\nIch übe selbst!\n10"
+        expected: "PythonLab\nIch übe selbst!\n10"
       }
     },
     {
@@ -1231,6 +1231,13 @@ window.PYLAB_CONTENT = {
       note: "Auf den Schul-PCs installiert und zusätzlich über den Informatik-Stick verfügbar.",
       icon: "terminal",
       url: "https://thonny.org/"
+    },
+    {
+      title: "Struktogrammer Web",
+      description: "Browserbasierter Editor zum freien Erstellen, Bearbeiten, Speichern und Exportieren von Nassi-Shneiderman-Struktogrammen.",
+      note: "Als Schwesterprojekt eingebunden und über das Symbol rechts oben direkt erreichbar.",
+      icon: "workflow",
+      url: "https://jakobsawazki.github.io/struktogrammer-web/"
     },
     {
       title: "hus Struktogrammer",
