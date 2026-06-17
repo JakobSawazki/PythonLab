@@ -23,6 +23,26 @@
   --sidebar-width: 250px;
 }
 
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #ecf5f0;
+  --muted: #a8bbb2;
+  --bg: #101714;
+  --surface: #17231f;
+  --surface-soft: #22332d;
+  --line: #34483f;
+  --green-700: #8bdabb;
+  --green-500: #56bf91;
+  --yellow-soft: #372f18;
+  --coral-soft: #3a211d;
+  --blue-soft: #172f3f;
+  --danger: #ff9c98;
+  --success: #83dfaa;
+  --code-bg: #0b1110;
+  --code-line: #2d4038;
+  --shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -132,6 +152,10 @@ h4 {
   padding: 20px 14px;
   border-right: 1px solid var(--line);
   background: #fbfdfc;
+}
+
+:root[data-theme="dark"] .sidebar {
+  background: #121b18;
 }
 
 .brand {
@@ -275,7 +299,8 @@ h4 {
   background: var(--surface-soft);
 }
 
-.backup-button {
+.backup-button,
+.theme-toggle-button {
   border-color: var(--line);
   background: var(--surface);
   color: var(--green-700);
@@ -321,6 +346,11 @@ h4 {
   border-bottom: 1px solid rgba(212, 221, 216, 0.9);
   background: rgba(244, 247, 245, 0.94);
   backdrop-filter: blur(10px);
+}
+
+:root[data-theme="dark"] .topbar {
+  border-bottom-color: rgba(52, 72, 63, 0.92);
+  background: rgba(16, 23, 20, 0.94);
 }
 
 .topbar h1 {
@@ -381,6 +411,12 @@ h4 {
   border-color: #ecd88f;
 }
 
+:root[data-theme="dark"] .points-chip {
+  color: #f3cf6a;
+  border-color: #66501f;
+  background: #352b12;
+}
+
 .status-dot {
   width: 8px;
   height: 8px;
@@ -412,13 +448,14 @@ h4 {
 .portal-footer {
   width: min(1280px, 100%);
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 12px;
   margin: 0 auto;
   padding: 18px clamp(18px, 3vw, 40px) 24px;
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.74rem;
+  text-align: right;
 }
 
 .portal-footer a {
@@ -2064,6 +2101,160 @@ code {
   color: #8f3030;
 }
 
+:root[data-theme="dark"] a {
+  color: var(--green-700);
+}
+
+:root[data-theme="dark"] .nav-item.is-active,
+:root[data-theme="dark"] .filter-button:hover,
+:root[data-theme="dark"] .filter-button.is-active,
+:root[data-theme="dark"] .module-number,
+:root[data-theme="dark"] .continue-progress,
+:root[data-theme="dark"] .structure-progress-panel,
+:root[data-theme="dark"] .tool-icon,
+:root[data-theme="dark"] .backup-action-icon,
+:root[data-theme="dark"] .order-number {
+  background: #1f5f4e;
+  color: #fff;
+}
+
+:root[data-theme="dark"] .button-primary {
+  background: #2f8f6d;
+  color: #fff;
+}
+
+:root[data-theme="dark"] .button-primary:hover {
+  background: #26785c;
+}
+
+:root[data-theme="dark"] .button-secondary,
+:root[data-theme="dark"] .filter-button,
+:root[data-theme="dark"] .backup-action {
+  border-color: var(--line);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .button-secondary:hover,
+:root[data-theme="dark"] .icon-button:hover,
+:root[data-theme="dark"] .nav-item:hover,
+:root[data-theme="dark"] .backup-action:hover {
+  background: var(--surface-soft);
+}
+
+:root[data-theme="dark"] .stat-icon {
+  color: #9de0c2;
+}
+
+:root[data-theme="dark"] .stat-icon.is-yellow,
+:root[data-theme="dark"] .achievement-icon,
+:root[data-theme="dark"] .dialog-icon {
+  color: #f3cf6a;
+  background: #3a321a;
+}
+
+:root[data-theme="dark"] .stat-icon.is-coral {
+  color: #ffae9e;
+  background: #3a211d;
+}
+
+:root[data-theme="dark"] .stat-icon.is-blue {
+  color: #92c9f2;
+  background: #172f3f;
+}
+
+:root[data-theme="dark"] .structure-promo,
+:root[data-theme="dark"] .structure-canvas-panel {
+  border-color: var(--line);
+  background: #15251f;
+}
+
+:root[data-theme="dark"] .structure-promo p,
+:root[data-theme="dark"] .structure-lead p,
+:root[data-theme="dark"] .lesson-copy p,
+:root[data-theme="dark"] .lesson-copy li,
+:root[data-theme="dark"] .exercise-brief li,
+:root[data-theme="dark"] .structure-brief li,
+:root[data-theme="dark"] .tool-item p {
+  color: #b8cac1;
+}
+
+:root[data-theme="dark"] .difficulty-easy,
+:root[data-theme="dark"] .lesson-state.is-done,
+:root[data-theme="dark"] .feedback.is-success,
+:root[data-theme="dark"] .result-banner.is-success,
+:root[data-theme="dark"] .completion-chip,
+:root[data-theme="dark"] .toast {
+  border-color: #315f45;
+  background: #173625;
+  color: #8ee0ab;
+}
+
+:root[data-theme="dark"] .difficulty-medium,
+:root[data-theme="dark"] .toast.is-xp {
+  border-color: #66501f;
+  background: #3a321a;
+  color: #f3cf6a;
+}
+
+:root[data-theme="dark"] .difficulty-plus,
+:root[data-theme="dark"] .feedback.is-error,
+:root[data-theme="dark"] .result-banner.is-error,
+:root[data-theme="dark"] .toast.is-error {
+  border-color: #6b312e;
+  background: #3a211d;
+  color: #ffaaa0;
+}
+
+:root[data-theme="dark"] .objectives-band,
+:root[data-theme="dark"] .callout.is-warning {
+  background: #362d17;
+}
+
+:root[data-theme="dark"] .callout {
+  border-color: #37584a;
+  background: #172a22;
+}
+
+:root[data-theme="dark"] .profile-dialog {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .profile-dialog input,
+:root[data-theme="dark"] .structure-slot select {
+  border-color: var(--line);
+  background: #111a17;
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .backup-summary > div,
+:root[data-theme="dark"] .empty-state {
+  border-color: var(--line);
+  background: var(--surface-soft);
+}
+
+:root[data-theme="dark"] .backup-summary strong,
+:root[data-theme="dark"] .lesson-copy code:not(.code-example code),
+:root[data-theme="dark"] .reference-card code {
+  color: var(--green-700);
+}
+
+:root[data-theme="dark"] .empty-state {
+  color: var(--muted);
+}
+
+:root[data-theme="dark"] .stg-diagram,
+:root[data-theme="dark"] .stg-loop-body,
+:root[data-theme="dark"] .order-block {
+  background: #f7faf8;
+  color: #17201c;
+}
+
+:root[data-theme="dark"] .stg-loop {
+  background: #eef3f0;
+}
+
 @keyframes toast-in {
   from {
     transform: translateY(10px);
@@ -2191,7 +2382,7 @@ code {
   }
 
   .portal-footer {
-    align-items: flex-start;
+    align-items: flex-end;
     flex-direction: column;
     padding-inline: 14px;
   }
@@ -2345,7 +2536,7 @@ code {
     display: none;
   }
 
-  .points-chip svg {
+  .points-chip {
     display: none;
   }
 

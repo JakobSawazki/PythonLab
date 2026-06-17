@@ -32,7 +32,8 @@ Verbindliche fachliche Referenz:
 - fünf Lernetappen mit zwölf Lektionen
 - zwölf Aufgaben mit editierbarem Python-Code
 - Struktogramm-Labor mit fünf Grundformen und fünf interaktiven Aufgaben
-- direkter Kopfzeilen-Link zum lokalen Struktogrammer Web
+- direkter Kopfzeilen-Link zum Struktogrammer Web
+- umschaltbarer Light- und Dark-Mode
 - automatische Prüfung von Ausgabe, Variablen und Funktionen
 - Pyodide 0.29.4 in einem Web Worker
 - Abbruch sehr langer Programme nach zehn Sekunden
@@ -70,6 +71,9 @@ Browserstände übernommen werden können. Gespeichert werden:
 - `structogramDrafts`
 - `activityDates`
 - `lastLessonId`
+
+Die gewählte Darstellung wird getrennt davon unter `pythonlab-theme-v1`
+gespeichert. Zulässige Werte sind `light` und `dark`.
 
 Es gibt kein Backend und keine automatische Synchronisation zwischen Geräten.
 Das ist für die datenschutzarme Version beabsichtigt. Über das

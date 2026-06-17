@@ -1,6 +1,6 @@
 # PythonLab
 
-**Aktuelle Version:** 0.6.0
+**Aktuelle Version:** 0.7.0
 **Dokumentationsstand:** 17. Juni 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
@@ -56,8 +56,10 @@ Repository übernommen.
 - lokales Lernprofil mit Name oder Kürzel
 - Speicherung von Code- und Struktogramm-Entwürfen
 - Export und Import des vollständigen Lernstands als JSON-Datei
-- direkter Kopfzeilen-Link zum lokalen Struktogrammer Web
+- direkter Kopfzeilen-Link zum Struktogrammer Web
+- umschaltbarer Light- und Dark-Mode
 - kompakter Nachschlagebereich
+- schlichter Footer-Hinweis `Designed by Sawazki Electronics`
 - responsive Oberfläche für Computer, Tablet und Smartphone
 - Tastaturbedienung und semantische Bedienelemente
 
@@ -131,6 +133,8 @@ deshalb als JSON-Datei gesichert und später auf demselben oder einem anderen
 Gerät geladen werden. Der Browser darf den Desktop aus Sicherheitsgründen
 nicht automatisch auswählen. In unterstützten Browsern erscheint ein
 Speicherdialog; andernfalls landet die Datei üblicherweise im Download-Ordner.
+Die gewählte Darstellung wird separat unter `pythonlab-theme-v1` im Browser
+gespeichert.
 
 ## Schulisch bereitgestellte Hilfsmittel
 
@@ -179,6 +183,13 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - abschließender Abruf der GitHub-Pages-Version
 
 ## Versionsverlauf
+
+### 0.7.0 – 17. Juni 2026
+
+- Light-/Dark-Mode mit lokal gespeicherter Auswahl ergänzt
+- Theme-Schalter neben dem Lernstand-Speichern-Button eingebaut
+- Footer auf `Designed by Sawazki Electronics` vereinfacht
+- Sawazki-Electronics-Gegenlink auf die neue PythonLab-Pages-Adresse abgestimmt
 
 ### 0.6.0 – 17. Juni 2026
 

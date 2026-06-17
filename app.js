@@ -6,6 +6,7 @@
   const legacyStorageKeys = ["pythonwerkstatt-bg-v1"];
   const backupAppId = "PythonLab";
   const acceptedBackupAppIds = new Set([backupAppId, "PythonWerkstatt BG"]);
+  const themeStorageKey = "pythonlab-theme-v1";
   const main = document.querySelector("#mainContent");
   const sidebar = document.querySelector("#sidebar");
   const backdrop = document.querySelector("#mobileBackdrop");
@@ -16,6 +17,8 @@
   const progressFileInput = document.querySelector("#progressFileInput");
   const runtimeChip = document.querySelector("#runtimeChip");
   const runtimeText = document.querySelector("#runtimeText");
+  const themeToggleButton = document.querySelector("#themeToggleButton");
+  const themeColorMeta = document.querySelector('meta[name="theme-color"]');
   const backupFormatVersion = 1;
 
   const defaultState = {
@@ -123,6 +126,41 @@
   function saveState() {
     localStorage.setItem(storageKey, JSON.stringify(state));
     updateChrome();
+  }
+
+  function readTheme() {
+    try {
+      return localStorage.getItem(themeStorageKey) === "dark" ? "dark" : "light";
+    } catch {
+      return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    }
+  }
+
+  function applyTheme(theme, persist = true) {
+    const normalized = theme === "dark" ? "dark" : "light";
+    document.documentElement.dataset.theme = normalized;
+    themeColorMeta?.setAttribute("content", normalized === "dark" ? "#101714" : "#173f35");
+
+    if (themeToggleButton) {
+      themeToggleButton.setAttribute("aria-pressed", String(normalized === "dark"));
+      themeToggleButton.setAttribute(
+        "aria-label",
+        normalized === "dark" ? "Light Mode aktivieren" : "Dark Mode aktivieren"
+      );
+      themeToggleButton.title = normalized === "dark" ? "Light Mode aktivieren" : "Dark Mode aktivieren";
+      themeToggleButton.innerHTML = `<i data-lucide="${normalized === "dark" ? "sun" : "moon"}"></i>`;
+      renderIcons();
+    }
+
+    if (persist) {
+      try {
+        localStorage.setItem(themeStorageKey, normalized);
+      } catch {}
+    }
+  }
+
+  function toggleTheme() {
+    applyTheme(readTheme() === "dark" ? "light" : "dark");
   }
 
   function escapeHtml(value) {
@@ -1502,6 +1540,7 @@
     updateBackupSummary();
     backupDialog.showModal();
   });
+  themeToggleButton?.addEventListener("click", toggleTheme);
   document.querySelector("#backupCloseButton").addEventListener("click", () => backupDialog.close());
   document.querySelector("#exportProgressButton").addEventListener("click", exportProgress);
   document.querySelector("#importProgressButton").addEventListener("click", () => progressFileInput.click());
@@ -1509,6 +1548,7 @@
 
   window.addEventListener("hashchange", renderRoute);
 
+  applyTheme(readTheme(), false);
   createWorker();
   renderRoute();
   if (!state.name && !sessionStorage.getItem("pythonlab-profile-seen")) {

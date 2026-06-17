@@ -42,8 +42,8 @@ sind:
   beim Abmelden gelöscht.
 
 Nicht garantiert ist die Speicherung bei wechselnden PCs, Gastkonten,
-zurückgesetzten Benutzerprofilen oder zentraler Browserbereinigung. Die
-PythonLab behandelt den Browserstand deshalb als bequeme lokale
+zurückgesetzten Benutzerprofilen oder zentraler Browserbereinigung. PythonLab
+behandelt den Browserstand deshalb als bequeme lokale
 Zwischenspeicherung, nicht als dauerhafte Datensicherung.
 
 ### Lernstand als Datei
@@ -59,6 +59,14 @@ Desktop ungefragt beschreiben. Unterstützt der Browser die File System Access
 API, kann der Lernende im Speicherdialog Desktop oder Informatik-Stick wählen.
 Sonst wird die Datei als normaler Download gespeichert und kann anschließend
 verschoben werden.
+
+### Darstellung
+
+PythonLab unterstützt Light- und Dark-Mode. Die Auswahl wird unter
+`pythonlab-theme-v1` im lokalen Browserspeicher abgelegt und nicht in die
+Lernstandsdatei geschrieben. Die Umschaltung verändert CSS-Variablen und einige
+gezielte Kontrastregeln; die Struktogramm-Arbeitsflächen bleiben bewusst hell,
+damit die Nassi-Shneiderman-Blöcke auch im Dark-Mode eindeutig lesbar bleiben.
 
 ## Technische Architektur
 
@@ -120,6 +128,9 @@ benötigten Programme.
 Zusätzlich ist Struktogrammer Web als Schwesterprojekt eingebunden. Das Icon
 liegt in `assets/struktogrammer-mark.png`; der Link zeigt aus PythonLab auf
 `https://jakobsawazki.github.io/struktogrammer-web/`.
+
+Die Portal-Fußzeile verweist schlicht mit `Designed by Sawazki Electronics` auf
+die Hauptseite `https://jakobsawazki.github.io/sawazki-electronics/`.
 
 Die Portalformulierung vermeidet eine allgemeine, zeitlich unbegrenzte
 Zulassungsaussage. Sie verweist darauf, dass für konkrete schriftliche und
