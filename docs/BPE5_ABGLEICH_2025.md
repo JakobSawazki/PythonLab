@@ -1,6 +1,6 @@
 # Abgleich mit BPE 5: Grundlagen der Programmierung
 
-Stand des Abgleichs: 17. Juni 2026
+Stand des Abgleichs: 18. Juni 2026
 Referenzmaterial: Version mit Python, Stand 31. Juli 2025
 
 ## Verbindliche Referenz
@@ -14,14 +14,15 @@ Jahrgangsstufe 1:
 
 Private lokale Referenz:
 
-`G:\Meine Ablage\Lehramt\Lernfelder\BPE5\bpe-5-grundlagen-der-programmierung-version-mit-python\bpe-5-gdp_python`
+`G:\Meine Ablage\Codex\PythonLab\resources\bpe-5-grundlagen-der-programmierung-version-mit-python\bpe-5-gdp_python`
 
 Die entpackte Fassung enthält 3.495 Dateien in den Ordnern
 `Lernfortschritt 1`, `Lernfortschritt 1_PythonKara`,
 `Lernfortschritt 2` und `Lernfortschritt 3`, darunter das Kompetenzraster,
 Ich-kann-Listen, Unterrichtsmaterialien, Aufgaben, Struktogramme,
 Python-Dateien und Musterlösungen. Diese Originaldateien werden nicht in das
-öffentliche GitHub-Repository übernommen.
+öffentliche GitHub-Repository übernommen. Der Ordner `resources/` ist lokal
+vorhanden und wird per `.gitignore` vom Pages-Repository getrennt.
 
 Im Projekt ist die Ordnung der Quelle zusätzlich unter
 `references/bpe5/README.md` dokumentiert.
@@ -99,10 +100,14 @@ die Selbstständigkeit beim Üben stärken.
 1. Weitere Struktogramm-Aufgaben mit alltagsnahen Transferproblemen ergänzen.
 2. Die Befehlsbibliothek um weitere typische Fehlerbilder, Mini-Übungen und
    Querverweise zu passenden Lektionen erweitern.
-3. Die Verzahnung mit Struktogrammer Web für freie Struktogramme bei Bedarf ausbauen.
-4. Ein optionales GUI-Kapitel, sofern es im konkreten Unterricht eingesetzt
+3. Die bisherige KA-Webarbeit als nicht benotete Übungsvorbereitung prüfen und
+   in PythonLab integrieren.
+4. Die Codeprüfung um robustere Testfälle, Teilpunkte und optional
+   KI-gestützte Hinweise erweitern.
+5. Die Verzahnung mit Struktogrammer Web für freie Struktogramme bei Bedarf ausbauen.
+6. Ein optionales GUI-Kapitel, sofern es im konkreten Unterricht eingesetzt
    wird.
-5. Eine Kompetenzansicht, die den Lernenden die offiziellen Ich-kann-Ziele in
+7. Eine Kompetenzansicht, die den Lernenden die offiziellen Ich-kann-Ziele in
    verständlicher Sprache zeigt.
 
 ## Urheberrechtliche Grenze

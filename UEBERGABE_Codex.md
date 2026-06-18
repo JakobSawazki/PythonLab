@@ -1,6 +1,6 @@
 # Übergabeprotokoll: PythonLab
 
-Stand: 17. Juni 2026
+Stand: 18. Juni 2026
 
 ## Projektziel
 
@@ -10,13 +10,16 @@ Stand: 17. Juni 2026
 
 - Aktueller lokaler Projektpfad: `G:\Meine Ablage\Codex\PythonLab`
 - Lokales Schwesterprojekt: `G:\Meine Ablage\Codex\Struktogrammer`
-- Lokale BPE5-Referenz: `G:\Meine Ablage\Lehramt\Lernfelder\BPE5\bpe-5-grundlagen-der-programmierung-version-mit-python\bpe-5-gdp_python`
+- Lokale BPE5-Referenz: `G:\Meine Ablage\Codex\PythonLab\resources\bpe-5-grundlagen-der-programmierung-version-mit-python\bpe-5-gdp_python`
+- Lokale Implementierungsablage: `G:\Meine Ablage\Codex\PythonLab\implementations`
 - GitHub-Repository: `https://github.com/JakobSawazki/PythonLab`
 - GitHub Pages: `https://jakobsawazki.github.io/PythonLab/`
 - Projektzuordnung: Sawazki Electronics; Gegenlink in der Fußnavigation von
   `https://jakobsawazki.github.io/sawazki-electronics/`
 
-Die private Materialsammlung liegt getrennt unter `G:\Meine Ablage\Lehramt\Lernfelder\BPE5`. Sie enthält unter anderem Musterlösungen und wird absichtlich nicht in dieses öffentliche Repository kopiert. Im Projekt liegen nur eigene Dokumentation, Abgleich und Integrationsnotizen.
+Die private Materialsammlung liegt jetzt lokal im Projektordner unter `resources/`. Sie enthält unter anderem Musterlösungen und bleibt absichtlich per `.gitignore` aus dem öffentlichen GitHub-Pages-Repository heraus. Im veröffentlichten Projekt liegen nur eigene Dokumentation, Abgleich und Integrationsnotizen.
+
+`implementations/` ist eine lokale Ablage für verwandte Umsetzungen, darunter die frühere KA-Webarbeit. Diese Inhalte sollen perspektivisch als nicht benotete Übungs- oder Vorbereitungseinheit eingebunden werden, sind aber nicht Teil des PythonLab-Pages-Repos.
 
 Verbindliche fachliche Referenz:
 
@@ -36,6 +39,7 @@ Verbindliche fachliche Referenz:
 - Reiter **Befehle** mit zehn Python-Basiselementen, Detailseiten und XP-Miniaufgaben
 - Struktogramm-Labor mit fünf Grundformen und fünf interaktiven Aufgaben
 - direkter Kopfzeilen-Link zum Struktogrammer Web
+- einheitlicher Icon-Button für den Struktogrammer-Web-Link
 - umschaltbarer Light- und Dark-Mode
 - automatische Prüfung von Ausgabe, Variablen und Funktionen
 - Pyodide 0.29.4 in einem Web Worker
@@ -59,6 +63,7 @@ Verbindliche fachliche Referenz:
 | `TASKS.md` | zentrale Aufgabenliste, Versionshistorie, offene Punkte und Ideen |
 | `docs/TECHNIK_UND_DIDAKTIK.md` | Quellen, Datenschutz und didaktische Entscheidungen |
 | `docs/BPE5_ABGLEICH_2025.md` | Abdeckung des offiziellen Kompetenzrasters und offene Ausbauschritte |
+| `docs/KI_CODEPRUEFUNG_KONZEPT.md` | Konzept für dynamischere Codeprüfung und optionale KI-Auswertung |
 | `references/bpe5/README.md` | lokale BPE5-Quellenstruktur und Veröffentlichungsgrenze |
 
 ## Zustandsmodell
@@ -102,11 +107,13 @@ XP werden pro Lektion und Aufgabe nur einmal vergeben.
 
 1. Weitere Struktogramm-Transferaufgaben ergänzen.
 2. Weitere Befehlsseiten und Übungen aus BPE5 ergänzen, insbesondere zu häufigen Fehlermeldungen und Programmentwurf.
-3. Die Verzahnung mit Struktogrammer Web bei Bedarf ausbauen.
-4. Den ikonischen Einstieg aus Lernfortschritt 1 bei Bedarf didaktisch übertragen.
-5. Die GUI-Inhalte aus Lernfortschritt 2 als optionales Zusatzmodul prüfen.
-6. Weitere Python-Aufgabenvarianten ergänzen.
-7. Vor einem Einsatz als Leistungsnachweis ein separates Prüfungsprojekt mit Authentifizierung und serverseitiger Speicherung planen.
+3. Codeprüfung robuster machen: mehr Testfälle, AST-/Strukturchecks, Teilpunkte und optional KI-gestützte Hinweise.
+4. Die KA-Webarbeit aus `implementations/KA` als nicht benotete Übungsvorbereitung in PythonLab integrieren.
+5. Die Verzahnung mit Struktogrammer Web bei Bedarf ausbauen.
+6. Den ikonischen Einstieg aus Lernfortschritt 1 bei Bedarf didaktisch übertragen.
+7. Die GUI-Inhalte aus Lernfortschritt 2 als optionales Zusatzmodul prüfen.
+8. Weitere Python-Aufgabenvarianten ergänzen.
+9. Vor einem Einsatz als Leistungsnachweis ein separates Prüfungsprojekt mit Authentifizierung und serverseitiger Speicherung planen.
 
 ## Grenzen
 
@@ -120,4 +127,4 @@ XP werden pro Lektion und Aufgabe nur einmal vergeben.
 
 Empfohlener Startauftrag:
 
-> Öffne `UEBERGABE_Codex.md`, `README.md`, `TASKS.md`, `docs/BPE5_ABGLEICH_2025.md` und `references/bpe5/README.md`. Prüfe anschließend `git status`, `content.js` und `app.js`. Das Projekt ist PythonLab, das öffentliche Lernportal für BPE 5. Arbeite mit dem vorhandenen Stil weiter und veröffentliche Änderungen nach Prüfung wieder über GitHub Pages.
+> Öffne `UEBERGABE_Codex.md`, `README.md`, `TASKS.md`, `docs/BPE5_ABGLEICH_2025.md`, `docs/KI_CODEPRUEFUNG_KONZEPT.md` und `references/bpe5/README.md`. Prüfe anschließend `git status`, `content.js` und `app.js`. Das Projekt ist PythonLab, das öffentliche Lernportal für BPE 5. Arbeite mit dem vorhandenen Stil weiter und veröffentliche Änderungen nach Prüfung wieder über GitHub Pages. `resources/` und `implementations/` sind lokale Referenzablagen und dürfen nicht ungeprüft veröffentlicht werden.

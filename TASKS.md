@@ -1,7 +1,7 @@
 # PythonLab Tasks und Projektstand
 
-Stand: 17. Juni 2026  
-Aktuelle Version: 0.8.0  
+Stand: 18. Juni 2026
+Aktuelle Version: 0.8.1
 Live: `https://jakobsawazki.github.io/PythonLab/`
 
 ## Leitentscheidung
@@ -30,17 +30,25 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 - 2026-06-17: BPE5-Quellenstruktur unter `references/bpe5/` dokumentiert.
 - 2026-06-17: `.gitignore` um Schutzpfade für mögliche lokale BPE5-Originalkopien ergänzt.
 - 2026-06-17: Diese `TASKS.md` als zentrale Aufgabenliste erstellt und `tasks.txt` abgelöst.
+- 2026-06-18: BPE5-Originalmaterialien lokal unter `resources/` eingeordnet und vom öffentlichen Repository ausgeschlossen.
+- 2026-06-18: Lokale Implementierungsablage `implementations/` dokumentiert.
+- 2026-06-18: Struktogrammer-Web-Link oben rechts als einheitlichen Icon-Button gestaltet.
+- 2026-06-18: Ausgabeprüfung toleranter für Leerzeilen, Zeilenabstände und Zahlen in Textausgaben gemacht.
+- 2026-06-18: Konzept für robustere Codeprüfung und optionale KI-Hilfe unter `docs/KI_CODEPRUEFUNG_KONZEPT.md` dokumentiert.
 
 ## Offen Priorisiert
 
-1. Befehlsbibliothek ausbauen: Fehlermeldungen, String-Methoden, Listenmethoden, `len()`, `range()`-Varianten und Mini-Quizze ergänzen.
-2. Kompetenzansicht erstellen: BPE5-Ich-kann-Ziele in verständlicher Sprache anzeigen und mit Lektionen, Übungen, Befehlen und Struktogrammen verknüpfen.
-3. Weitere BPE5-Transferaufgaben entwickeln, besonders zu Alternativen, Schleifen, Funktionen und Struktogramm-Übersetzung.
-4. Den ikonischen Einstieg aus Lernfortschritt 1 didaktisch prüfen und bei Bedarf als optionales Einstiegsmodul umsetzen.
-5. GUI-Inhalte aus Lernfortschritt 2 als Python-Plus-Modul prüfen.
-6. Struktogrammer Web stärker verzahnen, zum Beispiel durch konkrete Aufgabenlinks oder Import-/Export-Hinweise.
-7. Screenshots nach größeren UI-Änderungen erneuern.
-8. GitHub-Pages-Liveprüfung nach jedem Push dokumentieren.
+1. Codeprüfung weiter robuster machen: mehrere Testfälle, Teilpunkte, genauere Fehlhinweise und AST-Prüfung für zentrale Konzepte.
+2. KI-Hilfe nur optional über Serverless-Proxy planen, niemals mit sichtbarem API-Key im Browser.
+3. Befehlsbibliothek ausbauen: Fehlermeldungen, String-Methoden, Listenmethoden, `len()`, `range()`-Varianten und Mini-Quizze ergänzen.
+4. Kompetenzansicht erstellen: BPE5-Ich-kann-Ziele in verständlicher Sprache anzeigen und mit Lektionen, Übungen, Befehlen und Struktogrammen verknüpfen.
+5. Weitere BPE5-Transferaufgaben entwickeln, besonders zu Alternativen, Schleifen, Funktionen und Struktogramm-Übersetzung.
+6. KA-Webarbeit aus `implementations/KA` als nicht benotete Übungsvorbereitung prüfen und integrieren.
+7. Den ikonischen Einstieg aus Lernfortschritt 1 didaktisch prüfen und bei Bedarf als optionales Einstiegsmodul umsetzen.
+8. GUI-Inhalte aus Lernfortschritt 2 als Python-Plus-Modul prüfen.
+9. Struktogrammer Web stärker verzahnen, zum Beispiel durch konkrete Aufgabenlinks oder Import-/Export-Hinweise.
+10. Screenshots nach größeren UI-Änderungen erneuern.
+11. GitHub-Pages-Liveprüfung nach jedem Push dokumentieren.
 
 ## Ideen
 
@@ -48,13 +56,15 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 - Markierte Lieblingsbefehle oder persönliche Merkliste.
 - Aufgabenserien nach Kompetenzbereich statt nur nach Lernpfad.
 - Lehrkraftmodus für vorbereitete Übungssets.
+- Wissenscheck oder Übungsvorbereitung als eigener Bereich ohne Notencharakter.
 - Offline-freundliche Variante mit lokal gehostetem Pyodide und Lucide.
 - Datenschutzkonforme optionale Synchronisation für Schulgeräte.
 - Prüfungsmodus als separates, serverseitig abgesichertes Projekt.
 
 ## Arbeitsregeln
 
-- Originalmaterialien aus BPE5 nur lesen, nicht ungeprüft veröffentlichen.
+- Originalmaterialien aus `resources/` nur lesen, nicht ungeprüft veröffentlichen.
+- `implementations/` ist eine lokale Ablage mit eigener Historie und wird nicht als Teil von PythonLab veröffentlicht.
 - Öffentliche Inhalte eigenständig formulieren.
 - Neue Inhalte bevorzugt in `content.js` ergänzen.
 - Lernstandsänderungen immer in `normalizeState`, Export/Import und Dokumentation nachziehen.

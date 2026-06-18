@@ -1,16 +1,17 @@
 # BPE5-Quellen und Integration
 
-Stand: 17. Juni 2026
+Stand: 18. Juni 2026
 
 Dieser Ordner dokumentiert, wie die offiziellen BPE5-Materialien als Referenz
-für PythonLab genutzt werden. Die Originaldateien selbst werden hier bewusst
-nicht abgelegt und nicht über GitHub Pages veröffentlicht.
+für PythonLab genutzt werden. Die Originaldateien liegen jetzt lokal im
+Projektordner unter `resources/`, werden aber bewusst nicht über GitHub Pages
+veröffentlicht.
 
 ## Lokale Quelle
 
 Entpackte Referenz:
 
-`G:\Meine Ablage\Lehramt\Lernfelder\BPE5\bpe-5-grundlagen-der-programmierung-version-mit-python\bpe-5-gdp_python`
+`G:\Meine Ablage\Codex\PythonLab\resources\bpe-5-grundlagen-der-programmierung-version-mit-python\bpe-5-gdp_python`
 
 Offizielle Online-Quelle:
 
@@ -51,10 +52,10 @@ Aktuell umgesetzt:
 
 ## Veröffentlichungsgrenze
 
-Die BPE5-Originalmaterialien bleiben in der privaten Unterrichtsablage. Vor
-einer Veröffentlichung einzelner Originalbestandteile müssen Lizenz,
-Urheberrecht, Musterlösungen und schulische Prüfungsrelevanz separat geprüft
-werden.
+Die BPE5-Originalmaterialien bleiben lokal in PythonLab, aber außerhalb des
+öffentlichen Repositories. Vor einer Veröffentlichung einzelner
+Originalbestandteile müssen Lizenz, Urheberrecht, Musterlösungen und
+schulische Prüfungsrelevanz separat geprüft werden.
 
-`.gitignore` hält mögliche lokale Kopien unter `references/bpe5/original/`
+`.gitignore` hält `resources/bpe-5-grundlagen-der-programmierung-version-mit-python/`
 aus dem Repository heraus.

@@ -1,7 +1,7 @@
 # PythonLab
 
-**Aktuelle Version:** 0.8.0
-**Dokumentationsstand:** 17. Juni 2026
+**Aktuelle Version:** 0.8.1
+**Dokumentationsstand:** 18. Juni 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
 
@@ -39,9 +39,10 @@ für die nichtgewerblichen beruflichen Gymnasien:
 - [Materialübersicht](https://www.schule-bw.de/faecher-und-schularten/mathematisch-naturwissenschaftliche-faecher/informatik/material/materialien-zum-neuen-bildungsplan-informatik-an-den-nichtgewerblichen-beruflichen-gymnasien)
 
 Die vollständige Materialsammlung mit Informationsblättern, Aufgaben und
-Musterlösungen liegt ausschließlich in der privaten Unterrichtsablage:
+Musterlösungen liegt lokal im Projektordner, wird aber per `.gitignore` aus
+dem öffentlichen GitHub-Pages-Repository herausgehalten:
 
-`G:\Meine Ablage\Lehramt\Lernfelder\BPE5\bpe-5-grundlagen-der-programmierung-version-mit-python\bpe-5-gdp_python`
+`G:\Meine Ablage\Codex\PythonLab\resources\bpe-5-grundlagen-der-programmierung-version-mit-python\bpe-5-gdp_python`
 
 Musterlösungen und private Originaldateien werden nicht in dieses öffentliche
 Repository übernommen.
@@ -59,6 +60,7 @@ Repository übernommen.
 - Speicherung von Code- und Struktogramm-Entwürfen
 - Export und Import des vollständigen Lernstands als JSON-Datei
 - direkter Kopfzeilen-Link zum Struktogrammer Web
+- einheitlicher Icon-Button für den Struktogrammer-Web-Link
 - umschaltbarer Light- und Dark-Mode
 - kompakter Nachschlagebereich
 - schlichter Footer-Hinweis `Designed by Sawazki Electronics`
@@ -197,6 +199,15 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 
 ## Versionsverlauf
 
+### 0.8.1 – 18. Juni 2026
+
+- lokale BPE5-Originalmaterialien im Projekt unter `resources/` dokumentiert
+- lokale KA-/Übungsvorbereitung unter `implementations/` dokumentiert
+- beide lokalen Ablagen per `.gitignore` vom öffentlichen PythonLab-Repository getrennt
+- Konzeptnotiz für dynamischere Codeprüfung mit optionaler KI-Unterstützung ergänzt
+- Ausgabeprüfung toleranter für Leerzeilen, Zeilenabstände und Zahlen in Textausgaben gemacht
+- Struktogrammer-Web-Link in der Kopfzeile als einheitlichen Icon-Button gestaltet
+
 ### 0.8.0 – 17. Juni 2026
 
 - offiziellen Schultasche-BW-Link für den Informatik-Stick im Nachschlagebereich ergänzt
@@ -272,10 +283,13 @@ Priorisiert:
 2. Kompetenzansicht mit verständlich formulierten Ich-kann-Zielen entwickeln.
 3. BPE5-Materialien weiter in eigene PythonLab-Aufgaben übertragen, ohne
    Originalarbeitsblätter oder Musterlösungen ungeprüft zu veröffentlichen.
+4. Übungsvorbereitung aus `implementations/KA` als nicht benotete
+   Wissensabfrage in PythonLab einbinden.
 
 Optional:
 
 - weitere Verzahnung mit Struktogrammer Web
+- dynamischere Codeprüfung mit Rubriken, Teilpunkten und optionaler KI-Hilfe
 - GUI-Kapitel mit Python
 - Lernstandsynchronisation über ein datenschutzkonformes Backend
 - separater Prüfungsmodus mit Authentifizierung
@@ -289,8 +303,8 @@ Optional:
 4. `TASKS.md` von oben nach unten prüfen und fortschreiben.
 5. Bestehende Gestaltung und Datenmodelle in `content.js` und `app.js`
    beibehalten.
-6. Private Materialien aus `G:\Meine Ablage\Lehramt\Lernfelder\BPE5` nur als
-   Referenz lesen und niemals ungeprüft veröffentlichen.
+6. Lokale Materialien aus `resources/` und `implementations/` nur als Referenz
+   lesen und niemals ungeprüft veröffentlichen.
 7. Nach Änderungen Syntax, Funktion, Desktop und Mobilansicht prüfen.
 8. Dokumentation und Versionsverlauf aktualisieren.
 9. Änderungen committen, nach `main` pushen und GitHub Pages kontrollieren.
@@ -310,4 +324,5 @@ Empfohlener Startprompt:
 - [Zentrale Aufgabenliste und Projektstand](TASKS.md)
 - [Didaktik, Datenschutz und Quellen](docs/TECHNIK_UND_DIDAKTIK.md)
 - [Abgleich mit BPE 5, Materialstand 31.07.2025](docs/BPE5_ABGLEICH_2025.md)
+- [Konzept: dynamische Codeprüfung und KI](docs/KI_CODEPRUEFUNG_KONZEPT.md)
 - [BPE5-Quellen und Integrationsentscheidung](references/bpe5/README.md)

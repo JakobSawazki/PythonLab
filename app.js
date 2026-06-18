@@ -1378,7 +1378,19 @@
   }
 
   function normalizeOutput(value) {
-    return String(value).replace(/\r\n/g, "\n").trim();
+    return String(value)
+      .replace(/\r\n/g, "\n")
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .join("\n");
+  }
+
+  function lastOutputNumber(value) {
+    const lines = normalizeOutput(value).split("\n").filter(Boolean);
+    const lastLine = lines.at(-1) || "";
+    const numbers = lastLine.match(/-?\d+(?:[.,]\d+)?/g);
+    return numbers ? Number(numbers.at(-1).replace(",", ".")) : Number.NaN;
   }
 
   async function runExercise(checkSolution) {
@@ -1420,8 +1432,7 @@
       } else if (check.type === "output") {
         passed = normalizeOutput(result.stdout) === normalizeOutput(check.expected);
       } else if (check.type === "outputNumber") {
-        const lastLine = normalizeOutput(result.stdout).split("\n").at(-1)?.replace(",", ".");
-        passed = Math.abs(Number(lastLine) - check.expected) < 0.001;
+        passed = Math.abs(lastOutputNumber(result.stdout) - check.expected) < 0.001;
       }
 
       if (passed) {

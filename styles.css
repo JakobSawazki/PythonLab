@@ -300,7 +300,8 @@ h4 {
 }
 
 .backup-button,
-.theme-toggle-button {
+.theme-toggle-button,
+.structogrammer-link {
   border-color: var(--line);
   background: var(--surface);
   color: var(--green-700);
@@ -373,8 +374,7 @@ h4 {
 }
 
 .runtime-chip,
-.points-chip,
-.structogrammer-link {
+.points-chip {
   min-height: 38px;
   display: inline-flex;
   gap: 8px;
@@ -388,8 +388,7 @@ h4 {
 }
 
 .structogrammer-link {
-  color: var(--ink);
-  font-weight: 800;
+  color: var(--green-700);
   text-decoration: none;
 }
 
@@ -400,8 +399,8 @@ h4 {
 }
 
 .structogrammer-link img {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   object-fit: contain;
 }
 
@@ -2488,16 +2487,6 @@ code {
   .runtime-chip {
     width: 38px;
     justify-content: center;
-  }
-
-  .structogrammer-link {
-    width: 38px;
-    justify-content: center;
-    padding-inline: 6px;
-  }
-
-  .structogrammer-link span {
-    display: none;
   }
 
   .mobile-backdrop {

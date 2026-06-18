@@ -99,12 +99,12 @@ Die Aufgabenprüfung verwendet je nach Lernziel:
 - Pyodide: [Using Pyodide in a web worker](https://pyodide.org/en/stable/usage/webworker.html)
 - Lucide: [Lucide Icons](https://lucide.dev/)
 
-Die entpackte lokale Referenz liegt unter
-`G:\Meine Ablage\Lehramt\Lernfelder\BPE5\bpe-5-grundlagen-der-programmierung-version-mit-python\bpe-5-gdp_python`.
+Die entpackte lokale Referenz liegt im Projektordner unter
+`G:\Meine Ablage\Codex\PythonLab\resources\bpe-5-grundlagen-der-programmierung-version-mit-python\bpe-5-gdp_python`.
 Das Material enthält das Kompetenzraster sowie die Ich-kann-Listen zu den
 Lernfortschritten 1 bis 3. Diese Dokumente wurden inhaltlich gesichtet.
-Es wurden keine Musterlösungen und keine privaten Originaldateien in das
-öffentliche Projekt übernommen.
+Die Dateien liegen lokal zur besseren Ordnung im Projekt, werden aber per
+`.gitignore` nicht in das öffentliche GitHub-Pages-Repository übernommen.
 
 Der detaillierte Soll-Ist-Abgleich ist in
 [`BPE5_ABGLEICH_2025.md`](BPE5_ABGLEICH_2025.md) dokumentiert.
@@ -146,6 +146,14 @@ Die Portalformulierung vermeidet eine allgemeine, zeitlich unbegrenzte
 Zulassungsaussage. Sie verweist darauf, dass für konkrete schriftliche und
 mündliche Abiturprüfungen die jeweils aktuellen schulischen
 Prüfungsanweisungen maßgeblich sind.
+
+## Lokale Implementierungen
+
+Der Ordner `G:\Meine Ablage\Codex\PythonLab\implementations` enthält verwandte
+Umsetzungen, unter anderem die bisherige KA-Webarbeit. Dieser Ordner besitzt
+eine eigene Git-Historie und wird nicht als Teil von PythonLab veröffentlicht.
+Didaktisch soll daraus später keine benotete Klassenarbeit entstehen, sondern
+eine freiwillige Übungsvorbereitung zur Selbstkontrolle.
 
 ## Bildnachweis
 

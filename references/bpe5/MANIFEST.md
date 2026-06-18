@@ -1,9 +1,13 @@
 # BPE5-Manifest
 
-Stand: 17. Juni 2026
+Stand: 18. Juni 2026
 
 Dieses Manifest fasst die lokal gesichtete BPE5-Quelle zusammen. Es ersetzt
 nicht die Originalmaterialien und enthält keine Musterlösungen.
+
+Lokale Quelle:
+
+`G:\Meine Ablage\Codex\PythonLab\resources\bpe-5-grundlagen-der-programmierung-version-mit-python\bpe-5-gdp_python`
 
 | Bereich | Umfang | Nutzung in PythonLab |
 | --- | ---: | --- |
