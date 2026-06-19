@@ -50,6 +50,7 @@
   let requestCounter = 0;
   const exerciseAttempts = new Map();
   let lastExerciseReview = null;
+  let lastShownXp = state.xp;
 
   function uniqueAllowedStrings(values, allowedIds) {
     if (!Array.isArray(values)) {
@@ -319,6 +320,9 @@
     if (condition.type === "xp") {
       return state.xp >= condition.value;
     }
+    if (condition.type === "streak") {
+      return streak() >= condition.value;
+    }
     if (condition.type === "all") {
       return state.completedLessons.length === content.lessons.length &&
         state.completedExercises.length === content.exercises.length &&
@@ -338,6 +342,15 @@
       ? `${state.xp} XP · Höchstes Level`
       : `${state.xp} / ${level.nextMin} XP`;
     document.querySelector("#topXp").textContent = `${state.xp} XP`;
+
+    const pointsChip = document.querySelector(".points-chip");
+    if (pointsChip && state.xp > lastShownXp) {
+      pointsChip.classList.remove("is-bumped");
+      void pointsChip.offsetWidth;
+      pointsChip.classList.add("is-bumped");
+      pointsChip.addEventListener("animationend", () => pointsChip.classList.remove("is-bumped"), { once: true });
+    }
+    lastShownXp = state.xp;
   }
 
   function setHeading(eyebrow, title) {

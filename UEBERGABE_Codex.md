@@ -34,14 +34,17 @@ Verbindliche fachliche Referenz:
 ## Aktueller Funktionsumfang
 
 - Übersicht mit persönlichem nächsten Schritt und Lernstatistik
-- fünf Lernetappen mit vierzehn Lektionen
-- vierzehn Aufgaben mit editierbarem Python-Code
+- fünf Lernetappen mit sechzehn Lektionen
+- zweiundzwanzig Aufgaben mit editierbarem Python-Code, davon mehrere freie Transferaufgaben
 - eigener Funktionsabschnitt mit drei Lektionen: ohne Parameter, mit Parametern und mit Rückgabewert
-- Reiter **Befehle** mit zehn Python-Basiselementen, Detailseiten und XP-Miniaufgaben
+- Modul Python Plus mit Listen, Listen erweitern, Text bearbeiten und Fehlersuche
+- Reiter **Befehle** mit neunzehn Python-Basiselementen, Detailseiten und XP-Miniaufgaben
 - Struktogramm-Labor mit fünf Grundformen und fünf interaktiven Aufgaben
 - direkter Kopfzeilen-Link zum Struktogrammer Web
 - einheitlicher Icon-Button für den Struktogrammer-Web-Link
 - Dark Mode als Standard für neue Browserprofile und weiterhin umschaltbarer Light Mode
+- veredeltes Design mit Verlaufs- und Schattensystem, Hover-Lifts, animierten
+  Fortschrittsbalken und Inhaltseinblendung; respektiert `prefers-reduced-motion`
 - alle Erklärungsbeispiele direkt in den Lektionen mit Pyodide ausführbar
 - automatische Prüfung von Ausgabe, Variablen und Funktionen
 - konkrete Python-Diagnosen und drei gestufte lokale Hinweise je Programmieraufgabe
@@ -101,7 +104,9 @@ werden beim Import verworfen beziehungsweise neu berechnet.
 
 ## Inhalte bearbeiten
 
-Neue Inhalte möglichst nur in `content.js` ergänzen. Jede Lektion verweist mit `practiceId` auf eine Aufgabe. Jede Aufgabe verweist mit `lessonId` zurück. Befehlsseiten liegen im Array `commands`; jede Befehls-Miniaufgabe vergibt XP über `completedCommands`.
+Neue Inhalte möglichst nur in `content.js` ergänzen. Jede Lektion verweist mit `practiceId` auf eine Aufgabe. Jede Aufgabe verweist mit `lessonId` zurück. Mehrere Aufgaben dürfen sich eine `lessonId` teilen; zusätzliche Aufgaben erscheinen als freie Transferaufgaben im Reiter **Üben**. Befehlsseiten liegen im Array `commands`; jede Befehls-Miniaufgabe vergibt XP über `completedCommands`.
+
+Erfolge liegen im Array `achievements`. Die Bedingungstypen werden in `app.js` in `achievementUnlocked` ausgewertet; neben den bestehenden Typen gibt es seit 0.11.0 den Typ `streak` für eine Mindest-Lernserie an aufeinanderfolgenden Tagen.
 
 Die Etappe `bausteine` bildet Funktionen jetzt in drei Schritten ab. Die alte
 Lektions-ID `funktionen` bezeichnet den Einstieg ohne Parameter und bleibt aus

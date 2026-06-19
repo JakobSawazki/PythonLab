@@ -32,8 +32,8 @@ window.PYLAB_CONTENT = {
       id: "plus",
       number: "05",
       title: "Python Plus",
-      description: "Listen nutzen, Fehler verstehen und Lösungen planen.",
-      lessonIds: ["listen", "debugging"]
+      description: "Listen vertiefen, Texte bearbeiten und Fehler verstehen.",
+      lessonIds: ["listen", "listen-methoden", "strings", "debugging"]
     }
   ],
 
@@ -651,9 +651,109 @@ window.PYLAB_CONTENT = {
       practiceId: "mittelwert-liste"
     },
     {
-      id: "debugging",
+      id: "listen-methoden",
       module: "plus",
       index: "14",
+      title: "Listen erweitern",
+      subtitle: "Listen lassen sich gezielt füllen, verkleinern und durchsuchen.",
+      duration: 18,
+      xp: 35,
+      difficulty: "medium",
+      objectives: [
+        "Werte mit append() und insert() hinzufügen",
+        "Mit pop() und remove() Werte entfernen",
+        "Mit in prüfen, ob ein Wert enthalten ist"
+      ],
+      sections: [
+        {
+          title: "Werte hinzufügen",
+          body: [
+            "`append()` hängt einen Wert ans Ende. `insert(position, wert)` setzt ihn an eine bestimmte Stelle.",
+            "Beide Methoden verändern die Liste direkt. Du musst das Ergebnis nicht erneut zuweisen."
+          ],
+          code: `aufgaben = ["lesen", "rechnen"]\naufgaben.append("üben")\naufgaben.insert(0, "ankommen")\nprint(aufgaben)`,
+          tip: "Schreibe nicht aufgaben = aufgaben.append(\"üben\"). append() gibt None zurück und würde die Liste löschen."
+        },
+        {
+          title: "Werte entfernen",
+          body: [
+            "`pop()` entfernt das letzte Element und gibt es zurück. `pop(0)` nimmt das erste.",
+            "`remove(wert)` löscht das erste Vorkommen eines bestimmten Wertes."
+          ],
+          code: `warteschlange = ["Mia", "Noah", "Sara"]\nnaechste = warteschlange.pop(0)\nprint("dran:", naechste)\nprint("warten noch:", warteschlange)`
+        },
+        {
+          title: "Suchen und zählen",
+          body: [
+            "Mit `wert in liste` prüfst du, ob ein Wert vorhanden ist. Das Ergebnis ist True oder False.",
+            "`len(liste)` liefert die Anzahl der Elemente, `liste.count(wert)` zählt, wie oft ein Wert vorkommt."
+          ],
+          code: `farben = ["rot", "blau", "rot", "grün"]\nprint("blau" in farben)\nprint(len(farben))\nprint(farben.count("rot"))`,
+          warning: "remove() meldet einen Fehler, wenn der gesuchte Wert nicht in der Liste ist. Prüfe im Zweifel vorher mit in."
+        }
+      ],
+      quiz: {
+        question: "Was liefert [\"a\", \"b\", \"a\"].count(\"a\")?",
+        options: ["1", "2", "3"],
+        correct: 1,
+        explanation: "count() zählt, wie oft der Wert vorkommt – hier zweimal."
+      },
+      practiceId: "einkaufsliste"
+    },
+    {
+      id: "strings",
+      module: "plus",
+      index: "15",
+      title: "Text bearbeiten",
+      subtitle: "Strings lassen sich zusammensetzen, umformen und Zeichen für Zeichen untersuchen.",
+      duration: 20,
+      xp: 35,
+      difficulty: "medium",
+      objectives: [
+        "Werte mit f-Strings übersichtlich in Text einsetzen",
+        "String-Methoden wie upper(), lower() und strip() anwenden",
+        "Einzelne Zeichen und Teilstücke eines Strings auslesen"
+      ],
+      sections: [
+        {
+          title: "f-Strings: Werte sauber einbauen",
+          body: [
+            "Ein f-String beginnt mit einem `f` vor dem Anführungszeichen. In geschweiften Klammern stehen Variablen oder Ausdrücke.",
+            "So entstehen lesbare Ausgaben, ohne viele Kommas oder Plus-Zeichen."
+          ],
+          code: `name = "Mia"\npunkte = 42\nprint(f"{name} hat {punkte} Punkte.")\nprint(f"Mit Bonus: {punkte + 8}")`,
+          tip: "Mit f\"{preis:.2f}\" zeigst du genau zwei Nachkommastellen – ideal für Geldbeträge."
+        },
+        {
+          title: "Methoden formen Text um",
+          body: [
+            "`upper()` schreibt alles groß, `lower()` alles klein. `strip()` entfernt Leerzeichen am Rand.",
+            "Solche Umformungen helfen, Eingaben einheitlich zu vergleichen."
+          ],
+          code: `eingabe = "  Ja  "\nantwort = eingabe.strip().lower()\nprint(antwort == "ja")\nprint("python".upper())`,
+          warning: "Die Methoden ändern den Originaltext nicht. Speichere das Ergebnis: text = text.upper()."
+        },
+        {
+          title: "Zeichen und Teilstücke",
+          body: [
+            "Jedes Zeichen hat eine Position. `wort[0]` ist das erste Zeichen, `wort[-1]` das letzte.",
+            "Mit `wort[0:3]` schneidest du ein Teilstück heraus; die zweite Zahl ist nicht enthalten."
+          ],
+          code: `wort = "Python"\nprint(wort[0])\nprint(wort[-1])\nprint(wort[0:3])\nprint(len(wort))`
+        }
+      ],
+      quiz: {
+        question: "Welche Ausgabe erzeugt print(f\"Summe: {3 + 4}\")?",
+        options: ["Summe: {3 + 4}", "Summe: 7", "Summe: 34"],
+        correct: 1,
+        explanation: "Im f-String wird der Ausdruck in den Klammern berechnet und eingesetzt."
+      },
+      practiceId: "namensschild"
+    },
+    {
+      id: "debugging",
+      module: "plus",
+      index: "16",
       title: "Fehler finden und Lösungen planen",
       subtitle: "Fehler sind Hinweise. Mit einer festen Strategie werden sie beherrschbar.",
       duration: 22,
@@ -1025,6 +1125,195 @@ window.PYLAB_CONTENT = {
         type: "tests",
         code: `assert gesamt == 40, "Für 5 Tickets zu 10 Euro sind nach Rabatt 40 Euro fällig."\nprint("__PYLAB_TESTS_OK__")`
       }
+    },
+    {
+      id: "klima-hinweis",
+      lessonId: "elif",
+      title: "Temperaturhinweis",
+      description: "Ordne eine Temperatur genau einer Empfehlung zu.",
+      difficulty: "medium",
+      xp: 40,
+      instructions: [
+        "30 Grad oder mehr: Hitze",
+        "20 bis 29 Grad: angenehm",
+        "10 bis 19 Grad: Jacke",
+        "Weniger als 10 Grad: kalt",
+        "Speichere die Empfehlung in der Variable hinweis und gib sie aus."
+      ],
+      hints: [
+        "Prüfe die Grenzwerte mit if, elif und else von oben nach unten.",
+        "Beginne mit der höchsten Grenze 30 und prüfe danach 20 und 10.",
+        "Jeder Zweig weist hinweis genau einen Text zu; bei 24 Grad ergibt sich angenehm."
+      ],
+      starter: `temperatur = 24\n\n# Bestimme die Variable hinweis\n\nprint(hinweis)\n`,
+      check: {
+        type: "tests",
+        code: `assert hinweis == "angenehm", "Bei 24 Grad lautet der Hinweis angenehm."\nprint("__PYLAB_TESTS_OK__")`
+      }
+    },
+    {
+      id: "gerade-summe",
+      lessonId: "for",
+      title: "Gerade Zahlen summieren",
+      description: "Verbinde Schleife und Rest-Operator.",
+      difficulty: "medium",
+      xp: 45,
+      instructions: [
+        "Durchlaufe mit einer for-Schleife die Zahlen 1 bis 20.",
+        "Addiere nur die geraden Zahlen zur Variable summe.",
+        "Gib summe am Ende aus."
+      ],
+      hints: [
+        "Nutze range(1, 21), damit auch die 20 enthalten ist.",
+        "Eine Zahl ist gerade, wenn zahl % 2 == 0 ist.",
+        "Erhöhe summe nur innerhalb der if-Bedingung um den aktuellen Wert."
+      ],
+      starter: `summe = 0\n\n# Addiere alle geraden Zahlen von 1 bis 20\n\nprint(summe)\n`,
+      check: {
+        type: "tests",
+        code: `assert summe == 110, "Die Summe der geraden Zahlen von 1 bis 20 ist 110."\nprint("__PYLAB_TESTS_OK__")`
+      }
+    },
+    {
+      id: "countdown",
+      lessonId: "while",
+      title: "Countdown zum Start",
+      description: "Zähle mit einer while-Schleife rückwärts.",
+      difficulty: "easy",
+      xp: 35,
+      instructions: [
+        "Beginne bei 5 und gib in jeder Runde die aktuelle Zahl aus.",
+        "Verringere die Zahl in jedem Durchlauf um 1.",
+        "Wiederhole, bis 1 ausgegeben wurde, und gib danach Start! aus."
+      ],
+      hints: [
+        "Die Schleife läuft, solange zahl größer als 0 ist.",
+        "Gib zuerst die Zahl aus und verringere sie danach mit zahl = zahl - 1.",
+        "Die Ausgabe von Start! steht nach der Schleife, also nicht eingerückt."
+      ],
+      starter: `zahl = 5\n\n# Zähle mit einer while-Schleife von 5 auf 1 herunter\n\nprint("Start!")\n`,
+      check: {
+        type: "output",
+        expected: "5\n4\n3\n2\n1\nStart!"
+      }
+    },
+    {
+      id: "maximum-funktion",
+      lessonId: "funktionen-rueckgabe",
+      title: "Den größeren Wert zurückgeben",
+      description: "Schreibe eine Funktion, die zwei Werte vergleicht.",
+      difficulty: "medium",
+      xp: 50,
+      instructions: [
+        "Definiere groesser(a, b) mit genau zwei Parametern.",
+        "Gib den größeren der beiden Werte mit return zurück.",
+        "Bei gleichen Werten soll dieser Wert zurückgegeben werden."
+      ],
+      hints: [
+        "Vergleiche die beiden Parameter mit if und else.",
+        "Gib das Ergebnis mit return zurück; print() allein ist kein Rückgabewert.",
+        "Sind beide gleich groß, darf jeder der beiden zurückgegeben werden."
+      ],
+      starter: `def groesser(a, b):\n    # Gib den größeren der beiden Werte zurück\n    pass\n\nprint(groesser(3, 9))\n`,
+      check: {
+        type: "tests",
+        code: `import inspect\nassert callable(groesser), "Definiere eine Funktion namens groesser."\nassert len(inspect.signature(groesser).parameters) == 2, "Die Funktion benötigt genau zwei Parameter."\nassert groesser(3, 9) == 9, "Bei 3 und 9 ist 9 der größere Wert."\nassert groesser(10, 2) == 10, "Bei 10 und 2 ist 10 der größere Wert."\nassert groesser(5, 5) == 5, "Bei zwei gleichen Werten wird dieser Wert zurückgegeben."\nprint("__PYLAB_TESTS_OK__")`
+      }
+    },
+    {
+      id: "einkaufsliste",
+      lessonId: "listen-methoden",
+      title: "Einkaufsliste pflegen",
+      description: "Erweitere und verkleinere eine Liste gezielt.",
+      difficulty: "medium",
+      xp: 40,
+      instructions: [
+        "Die Liste einkauf ist bereits vorhanden.",
+        "Füge \"Käse\" am Ende hinzu.",
+        "Entferne \"Milch\" aus der Liste.",
+        "Gib die fertige Liste aus."
+      ],
+      hints: [
+        "Mit einkauf.append(\"Käse\") hängst du einen Wert ans Ende an.",
+        "Mit einkauf.remove(\"Milch\") entfernst du den passenden Eintrag.",
+        "Schreibe nicht einkauf = einkauf.append(...); die Methode verändert die Liste direkt."
+      ],
+      starter: `einkauf = ["Brot", "Milch", "Apfel"]\n\n# Füge "Käse" hinzu\n\n# Entferne "Milch"\n\nprint(einkauf)\n`,
+      check: {
+        type: "tests",
+        code: `assert einkauf == ["Brot", "Apfel", "Käse"], "Nach dem Hinzufügen und Entfernen soll die Liste Brot, Apfel, Käse enthalten."\nassert len(einkauf) == 3, "Die Liste soll am Ende genau drei Einträge haben."\nprint("__PYLAB_TESTS_OK__")`
+      }
+    },
+    {
+      id: "namensschild",
+      lessonId: "strings",
+      title: "Namensschild gestalten",
+      description: "Setze Werte mit einem f-String zusammen und forme sie um.",
+      difficulty: "medium",
+      xp: 40,
+      instructions: [
+        "vorname und nachname sind vorgegeben.",
+        "Baue mit einem f-String den Text aus Vor- und Nachname, getrennt durch ein Leerzeichen.",
+        "Schreibe das Namensschild komplett in Großbuchstaben.",
+        "Gib das Ergebnis aus (erwartet wird MIA KOCH)."
+      ],
+      hints: [
+        "Ein f-String beginnt mit f vor dem Anführungszeichen: f\"{vorname} {nachname}\".",
+        "Mit .upper() machst du Text groß. Du kannst die ganze Zeichenkette am Ende umwandeln.",
+        "Speichere das Ergebnis in schild und gib genau diese Variable aus."
+      ],
+      starter: `vorname = "mia"\nnachname = "koch"\n\n# Baue ein Namensschild in Großbuchstaben\nschild = \n\nprint(schild)\n`,
+      check: {
+        type: "output",
+        expected: "MIA KOCH"
+      }
+    },
+    {
+      id: "vokale-zaehlen",
+      lessonId: "strings",
+      title: "Vokale zählen",
+      description: "Untersuche einen Text Zeichen für Zeichen.",
+      difficulty: "plus",
+      xp: 55,
+      instructions: [
+        "Definiere vokale(wort) mit einem Parameter.",
+        "Zähle, wie viele Vokale (a, e, i, o, u) im Wort stecken.",
+        "Große und kleine Vokale sollen gleich zählen.",
+        "Gib die Anzahl mit return zurück."
+      ],
+      hints: [
+        "Durchlaufe das Wort mit for zeichen in wort: und prüfe jedes Zeichen.",
+        "Mit zeichen.lower() in \"aeiou\" erkennst du auch große Vokale.",
+        "Erhöhe einen Zähler und gib ihn nach der Schleife mit return zurück."
+      ],
+      starter: `def vokale(wort):\n    anzahl = 0\n    # Durchlaufe das Wort und zähle die Vokale\n    return anzahl\n\nprint(vokale("Programmieren"))\n`,
+      check: {
+        type: "tests",
+        code: `import inspect\nassert callable(vokale), "Definiere eine Funktion namens vokale."\nassert len(inspect.signature(vokale).parameters) == 1, "Die Funktion erwartet genau einen Parameter."\nassert vokale("Programmieren") == 5, "In Programmieren stecken 5 Vokale."\nassert vokale("xyz") == 0, "In xyz steckt kein Vokal."\nassert vokale("Aeiou") == 5, "Achte auch auf große Vokale: a, e, i, o und u zählen mit."\nprint("__PYLAB_TESTS_OK__")`
+      }
+    },
+    {
+      id: "sternentreppe",
+      lessonId: "for",
+      title: "Sternentreppe bauen",
+      description: "Erzeuge ein wachsendes Muster mit einer Schleife.",
+      difficulty: "plus",
+      xp: 55,
+      instructions: [
+        "Gib eine Treppe aus Sternen mit vier Stufen aus.",
+        "Die erste Stufe hat einen Stern, die vierte Stufe vier Sterne.",
+        "Jede Stufe steht in einer eigenen Zeile."
+      ],
+      hints: [
+        "Mit \"*\" * 3 erzeugst du die Zeichenkette ***.",
+        "Eine for-Schleife mit range(1, 5) liefert die Stufenhöhen 1 bis 4.",
+        "Gib in jeder Runde \"*\" * stufe aus."
+      ],
+      starter: `# Gib eine Sternentreppe mit vier Stufen aus\n`,
+      check: {
+        type: "output",
+        expected: "*\n**\n***\n****"
+      }
     }
   ],
 
@@ -1291,6 +1580,240 @@ window.PYLAB_CONTENT = {
         options: ["2", "3", "13"],
         correct: 1,
         feedback: "len() zählt die Elemente, nicht deren Summe."
+      }
+    },
+    {
+      id: "comments",
+      title: "Kommentare #",
+      category: "Grundlagen",
+      syntax: "# Das ist ein Kommentar",
+      short: "Notizen im Code, die Python nicht ausführt.",
+      summary: "Mit # schreibst du Erklärungen direkt in den Code. Python überspringt alles ab dem Doppelkreuz bis zum Zeilenende.",
+      details: [
+        "Alles rechts vom # in derselben Zeile wird beim Ausführen ignoriert.",
+        "Kommentare erklären das Warum, nicht das Offensichtliche. Gute Namen ersetzen viele Kommentare.",
+        "Du kannst eine Codezeile vorübergehend „auskommentieren“, um sie testweise zu deaktivieren."
+      ],
+      example: `# Preis für eine Klassenfahrt berechnen\npreis_pro_tag = 45\ntage = 3\ngesamt = preis_pro_tag * tage  # ergibt 135\nprint(gesamt)`,
+      pitfalls: [
+        "Ein # mitten in einem String (\"a # b\") ist Text und kein Kommentar.",
+        "Zu viele selbstverständliche Kommentare machen Code unübersichtlicher, nicht klarer."
+      ],
+      relatedLesson: "sequenz",
+      xp: 10,
+      exercise: {
+        question: "Was passiert mit dem Text nach einem # in einer Codezeile?",
+        options: ["Er wird ausgegeben", "Python führt ihn nicht aus", "Er löst einen Fehler aus"],
+        correct: 1,
+        feedback: "Alles ab dem # bis zum Zeilenende ist nur für Menschen gedacht."
+      }
+    },
+    {
+      id: "fstrings",
+      title: "f-Strings",
+      category: "Ausgabe",
+      syntax: "f\"Hallo {name}\"",
+      short: "Setzt Werte sauber in einen Text ein.",
+      summary: "Ein f-String verbindet festen Text und Variablen, ohne mühsam mit Kommas und Plus zu jonglieren.",
+      details: [
+        "Schreibe ein f direkt vor das öffnende Anführungszeichen.",
+        "In geschweiften Klammern {} steht der Name oder ein Ausdruck, der eingesetzt wird.",
+        "Mit {wert:.2f} rundest du eine Dezimalzahl auf zwei Nachkommastellen für die Ausgabe."
+      ],
+      example: `name = "Mia"\npunkte = 42\npreis = 3.5\nprint(f"{name} hat {punkte} Punkte.")\nprint(f"Preis: {preis:.2f} Euro")`,
+      pitfalls: [
+        "Ohne das f vor dem Anführungszeichen bleibt {name} einfach als Text stehen.",
+        "Die geschweiften Klammern dürfen nicht vergessen werden: f\"{punkte}\" statt f\"punkte\"."
+      ],
+      relatedLesson: "strings",
+      xp: 15,
+      exercise: {
+        question: "Welche Zeile gibt Hallo Mia aus, wenn name = \"Mia\" ist?",
+        options: ["print(\"Hallo {name}\")", "print(f\"Hallo {name}\")", "print(f\"Hallo name\")"],
+        correct: 1,
+        feedback: "Nur mit f vor dem String und {name} in Klammern wird der Wert eingesetzt."
+      }
+    },
+    {
+      id: "modulo",
+      title: "% und //",
+      category: "Rechnen",
+      syntax: "rest = zahl % 2",
+      short: "Rest und ganzzahliges Ergebnis einer Division.",
+      summary: "Mit % erhältst du den Rest einer Division, mit // das abgerundete ganzzahlige Ergebnis. Beides ist beim Aufteilen und Prüfen sehr nützlich.",
+      details: [
+        "zahl % 2 ist 0, wenn zahl gerade ist, und 1, wenn sie ungerade ist.",
+        "// teilt und schneidet die Nachkommastellen ab: 17 // 5 ergibt 3.",
+        "Zusammen beschreiben // und % eine Division mit Rest: 17 = 3 * 5 + 2."
+      ],
+      example: `eier = 17\nkartons = eier // 6\nrest = eier % 6\nprint("Volle Kartons:", kartons)\nprint("Übrig:", rest)`,
+      pitfalls: [
+        "% ist der Rest-Operator, nicht das Prozentzeichen aus dem Alltag.",
+        "Bei / entsteht meist eine Dezimalzahl, bei // dagegen eine Ganzzahl."
+      ],
+      relatedLesson: "rechnen",
+      xp: 15,
+      exercise: {
+        question: "Womit prüfst du am einfachsten, ob zahl gerade ist?",
+        options: ["zahl // 2 == 0", "zahl % 2 == 0", "zahl / 2 == 0"],
+        correct: 1,
+        feedback: "Eine gerade Zahl lässt bei der Division durch 2 keinen Rest, also zahl % 2 == 0."
+      }
+    },
+    {
+      id: "round",
+      title: "round()",
+      category: "Rechnen",
+      syntax: "round(wert, stellen)",
+      short: "Rundet eine Zahl auf gewünschte Stellen.",
+      summary: "round() macht lange Dezimalzahlen lesbar, zum Beispiel bei Preisen oder Durchschnittswerten.",
+      details: [
+        "round(3.14159, 2) ergibt 3.14.",
+        "Ohne zweite Zahl rundet round() auf eine ganze Zahl: round(2.7) ergibt 3.",
+        "round() liefert einen neuen Wert; die ursprüngliche Variable bleibt unverändert."
+      ],
+      example: `summe = 100\nanzahl = 3\nschnitt = summe / anzahl\nprint(schnitt)\nprint(round(schnitt, 2))`,
+      pitfalls: [
+        "Nur zum Anzeigen runden – beim Weiterrechnen besser mit dem genauen Wert arbeiten.",
+        "round(2.5) kann je nach Zahl kaufmännisch zur geraden Ziffer runden; für reine Anzeige reicht das aus."
+      ],
+      relatedLesson: "rechnen",
+      xp: 10,
+      exercise: {
+        question: "Was ergibt round(7.456, 1)?",
+        options: ["7.4", "7.5", "8.0"],
+        correct: 1,
+        feedback: "Auf eine Nachkommastelle gerundet wird aus 7.456 der Wert 7.5."
+      }
+    },
+    {
+      id: "string-methods",
+      title: ".upper() .lower() .strip()",
+      category: "Text",
+      syntax: "text.upper()",
+      short: "Verändert Groß-/Kleinschreibung und entfernt Leerzeichen.",
+      summary: "String-Methoden liefern eine bearbeitete Kopie eines Textes, etwa für saubere Vergleiche oder einheitliche Ausgaben.",
+      details: [
+        ".upper() macht alle Buchstaben groß, .lower() alle klein.",
+        ".strip() entfernt Leerzeichen am Anfang und Ende.",
+        ".replace(\"alt\", \"neu\") ersetzt jedes Vorkommen eines Teilstücks."
+      ],
+      example: `eingabe = "  Ja  "\nantwort = eingabe.strip().lower()\nprint(antwort == "ja")\nprint("python".upper())`,
+      pitfalls: [
+        "Die Methoden ändern den Originaltext nicht, sondern geben einen neuen zurück: text = text.upper().",
+        "Vergiss die Klammern nicht: text.upper ohne () ist nur die Methode selbst, nicht ihr Ergebnis."
+      ],
+      relatedLesson: "strings",
+      xp: 15,
+      exercise: {
+        question: "Was liefert \"  Hallo \".strip()?",
+        options: ["\"hallo\"", "\"Hallo\"", "\"  Hallo \""],
+        correct: 1,
+        feedback: ".strip() entfernt nur die äußeren Leerzeichen, die Groß-/Kleinschreibung bleibt."
+      }
+    },
+    {
+      id: "string-index",
+      title: "Indizieren und Teilstücke",
+      category: "Text",
+      syntax: "text[0]   text[1:4]",
+      short: "Greift auf einzelne Zeichen oder Abschnitte zu.",
+      summary: "Jedes Zeichen eines Strings hat eine Position. Über diese Indizes liest du gezielt Zeichen oder ganze Teilstücke aus.",
+      details: [
+        "Die Zählung beginnt bei 0: bei \"Python\" ist text[0] das P.",
+        "Negative Indizes zählen von hinten: text[-1] ist das letzte Zeichen.",
+        "Mit text[1:4] erhältst du die Zeichen von Position 1 bis vor Position 4."
+      ],
+      example: `wort = "Python"\nprint(wort[0])\nprint(wort[-1])\nprint(wort[0:3])\nprint(len(wort))`,
+      pitfalls: [
+        "text[6] bei einem 6 Zeichen langen Wort löst einen Fehler aus, weil die Indizes bei 0 enden.",
+        "Beim Teilstück ist die zweite Zahl ausgeschlossen: [0:3] liefert drei Zeichen."
+      ],
+      relatedLesson: "strings",
+      xp: 15,
+      exercise: {
+        question: "Welches Zeichen liefert \"Lernen\"[1]?",
+        options: ["L", "e", "n"],
+        correct: 1,
+        feedback: "Index 0 ist das L, Index 1 also das e."
+      }
+    },
+    {
+      id: "list-methods",
+      title: ".append() .pop() in",
+      category: "Datenstrukturen",
+      syntax: "liste.append(wert)",
+      short: "Listen erweitern, verkleinern und durchsuchen.",
+      summary: "Mit Listenmethoden veränderst du eine Sammlung von Werten: hinzufügen, entfernen und prüfen, ob etwas enthalten ist.",
+      details: [
+        ".append(wert) hängt einen Wert am Ende an, .insert(0, wert) setzt ihn an eine Position.",
+        ".pop() entfernt das letzte Element und gibt es zurück, .remove(wert) löscht einen bestimmten Wert.",
+        "Mit wert in liste prüfst du, ob ein Wert vorhanden ist; das Ergebnis ist True oder False."
+      ],
+      example: `aufgaben = ["lesen", "rechnen"]\naufgaben.append("üben")\naufgaben.remove("lesen")\nprint(aufgaben)\nprint("üben" in aufgaben)`,
+      pitfalls: [
+        ".append() gibt nichts zurück; schreibe nicht liste = liste.append(x).",
+        ".remove(wert) entfernt nur das erste Vorkommen und meldet einen Fehler, wenn der Wert fehlt."
+      ],
+      relatedLesson: "listen-methoden",
+      xp: 15,
+      exercise: {
+        question: "Womit hängst du einen Wert am Ende einer Liste an?",
+        options: ["liste.add(wert)", "liste.append(wert)", "liste.insert(wert)"],
+        correct: 1,
+        feedback: "append() fügt am Ende an. add() gibt es für Listen nicht."
+      }
+    },
+    {
+      id: "range-steps",
+      title: "range() mit Schritten",
+      category: "Schleifen",
+      syntax: "range(start, ende, schritt)",
+      short: "Zahlenfolgen mit Start, Ende und Schrittweite.",
+      summary: "range() kann mehr als nur hochzählen: Mit einer dritten Zahl bestimmst du die Schrittweite, auch rückwärts.",
+      details: [
+        "range(0, 10, 2) liefert 0, 2, 4, 6, 8 – jeder zweite Wert.",
+        "range(5, 0, -1) zählt rückwärts: 5, 4, 3, 2, 1.",
+        "Der Endwert ist nie enthalten; prüfe deshalb immer den letzten erzeugten Wert."
+      ],
+      example: `for zahl in range(2, 11, 2):\n    print(zahl)\nprint("---")\nfor zahl in range(3, 0, -1):\n    print(zahl)`,
+      pitfalls: [
+        "Ohne negative Schrittweite erzeugt range(5, 0) gar keine Werte.",
+        "Eine Schrittweite von 0 ist nicht erlaubt und löst einen Fehler aus."
+      ],
+      relatedLesson: "for",
+      xp: 15,
+      exercise: {
+        question: "Welche Werte durchläuft range(1, 10, 3)?",
+        options: ["1, 4, 7", "1, 4, 7, 10", "1, 3, 6, 9"],
+        correct: 0,
+        feedback: "Start 1, Schrittweite 3, Ende vor 10: also 1, 4, 7."
+      }
+    },
+    {
+      id: "error-messages",
+      title: "Fehlermeldungen lesen",
+      category: "Fehlersuche",
+      syntax: "NameError: name 'x' is not defined",
+      short: "Aus Fehlermeldungen die Ursache ablesen.",
+      summary: "Eine Fehlermeldung ist kein Tadel, sondern ein Hinweis. Sie nennt die Art des Fehlers und meist die betroffene Zeile.",
+      details: [
+        "SyntaxError bedeutet einen Schreibfehler, etwa einen fehlenden Doppelpunkt oder eine offene Klammer.",
+        "NameError heißt, dass ein Name benutzt wird, der noch nicht existiert – oft ein Tippfehler.",
+        "TypeError entsteht, wenn Typen nicht zusammenpassen, zum Beispiel Text plus Zahl."
+      ],
+      example: `alter = "17"\n# Falsch: alter + 1 -> TypeError, weil Text und Zahl nicht passen\nalter = int(alter)\nprint(alter + 1)`,
+      pitfalls: [
+        "Lies die letzte Zeile der Meldung zuerst; sie nennt Fehlerart und Ursache.",
+        "Die genannte Zeilennummer zeigt, wo Python stolpert – der eigentliche Fehler kann eine Zeile davor liegen."
+      ],
+      relatedLesson: "debugging",
+      xp: 15,
+      exercise: {
+        question: "Welcher Fehler entsteht typischerweise bei \"3\" + 4?",
+        options: ["NameError", "TypeError", "SyntaxError"],
+        correct: 1,
+        feedback: "Text und Zahl passen nicht zusammen – das ist ein TypeError."
       }
     }
   ],
@@ -1726,6 +2249,34 @@ window.PYLAB_CONTENT = {
       condition: { type: "allStructograms" }
     },
     {
+      id: "list-wrangler",
+      title: "Listenprofi",
+      description: "Schließe die Lektion „Listen erweitern“ mit Aufgabe ab.",
+      icon: "list-checks",
+      condition: { type: "lessonExercise", value: "listen-methoden" }
+    },
+    {
+      id: "wordsmith",
+      title: "Textkünstler",
+      description: "Schließe die Lektion „Text bearbeiten“ mit Aufgabe ab.",
+      icon: "type",
+      condition: { type: "lessonExercise", value: "strings" }
+    },
+    {
+      id: "transfer-talent",
+      title: "Transfer-Talent",
+      description: "Löse mindestens 14 Programmieraufgaben.",
+      icon: "target",
+      condition: { type: "exercises", value: 14 }
+    },
+    {
+      id: "streak-keeper",
+      title: "Dranbleiber",
+      description: "Übe an drei Tagen in Folge.",
+      icon: "flame",
+      condition: { type: "streak", value: 3 }
+    },
+    {
       id: "workshop-master",
       title: "Werkstattmeister",
       description: "Schließe alle Lektionen und Übungen ab.",
@@ -1806,6 +2357,26 @@ window.PYLAB_CONTENT = {
       title: "Liste",
       description: "Mehrere Werte speichern und durchlaufen.",
       code: `werte = [4, 7, 2]\nwerte.append(9)\nfor wert in werte:\n    print(wert)`
+    },
+    {
+      title: "f-String",
+      description: "Werte sauber in Text einsetzen, optional gerundet.",
+      code: `name = "Mia"\npreis = 3.5\nprint(f"{name}: {preis:.2f} Euro")`
+    },
+    {
+      title: "Text bearbeiten",
+      description: "Groß-/Kleinschreibung, Ränder und Teilstücke.",
+      code: `wort = "  Python  "\nprint(wort.strip().upper())\nprint(wort.strip()[0:3])`
+    },
+    {
+      title: "Listen verändern",
+      description: "Hinzufügen, entfernen und auf Werte prüfen.",
+      code: `werte = [4, 7]\nwerte.append(9)\nwerte.remove(4)\nprint(7 in werte)`
+    },
+    {
+      title: "Rest und Teilen",
+      description: "Rest mit %, ganzzahliges Teilen mit //.",
+      code: `print(17 % 5)   # 2\nprint(17 // 5)  # 3\nprint(8 % 2 == 0)  # True`
     },
     {
       title: "Fehlersuche",

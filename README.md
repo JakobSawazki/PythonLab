@@ -1,6 +1,6 @@
 # PythonLab
 
-**Aktuelle Version:** 0.10.0
+**Aktuelle Version:** 0.11.0
 **Dokumentationsstand:** 19. Juni 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
@@ -49,20 +49,21 @@ Repository übernommen.
 
 ## Aktueller Funktionsumfang
 
-- fünf Etappen mit insgesamt vierzehn Python-Lektionen
-- vierzehn automatisch prüfbare Programmieraufgaben
-- eigener Reiter **Befehle** mit zehn Python-Basiselementen, Beispielen,
+- fünf Etappen mit insgesamt sechzehn Python-Lektionen
+- zweiundzwanzig automatisch prüfbare Programmieraufgaben, davon mehrere
+  freie Transferaufgaben über den Lektionspfad hinaus
+- eigener Reiter **Befehle** mit neunzehn Python-Basiselementen, Beispielen,
   Detailseiten und kleinen XP-Aufgaben
 - Struktogramm-Labor mit fünf Grundformen und fünf geprüften Übungen
 - echter Python-Interpreter im Browser über Pyodide
-- XP, Level, Lernfortschritt und zwölf Erfolge
+- XP, Level, Lernfortschritt und sechzehn Erfolge inklusive Serien-Erfolg
 - lokales Lernprofil mit Name oder Kürzel
 - Speicherung von Code- und Struktogramm-Entwürfen
 - Export und Import des vollständigen Lernstands als JSON-Datei
 - direkter Kopfzeilen-Link zum Struktogrammer Web
 - einheitlicher Icon-Button für den Struktogrammer-Web-Link
 - Dark Mode als Standard und weiterhin umschaltbarer Light Mode
-- alle 34 Erklärungsbeispiele direkt auf der Lektionsseite ausführbar
+- alle 40 Erklärungsbeispiele direkt auf der Lektionsseite ausführbar
 - dynamische Aufgabenprüfung mit konkreten Python-Diagnosen und gestuften Lernhinweisen
 - bestandene Programmieraufgabe schließt die zugehörige Lektion zuverlässig ab
 - vorbereiteter, freiwilliger Gemini-Lerncoach über einen geschützten Cloudflare Worker
@@ -83,7 +84,8 @@ Repository übernommen.
 - logische Operatoren `and`, `or` und `not`
 - `for`- und `while`-Schleifen
 - eigener Funktionsabschnitt: Funktionen ohne Parameter, mit Parametern und mit Rückgabewert
-- Listen als Erweiterung
+- Listen als Erweiterung sowie Listen erweitern mit `append()`, `pop()` und `in`
+- Text bearbeiten mit f-Strings, String-Methoden und Indizierung
 - systematische Fehlersuche
 
 ### Befehle
@@ -91,8 +93,11 @@ Repository übernommen.
 Der Reiter **Befehle** bündelt die wichtigsten Sprachmittel aus BPE 5 als
 kurze, wiederholbare Syntaxkarten. Enthalten sind Ausgabe, Eingabe,
 Typumwandlung, Vergleiche, Alternativen, logische Operatoren, Schleifen,
-Funktionen und Listen. Jede Karte führt zu einer Detailseite mit Erklärung,
-Beispiel, typischen Stolperstellen und einer Miniaufgabe.
+Funktionen und Listen sowie ergänzend Kommentare, f-Strings, Rest- und
+Ganzzahldivision, `round()`, String-Methoden, String-Indizierung,
+Listenmethoden, `range()` mit Schrittweite und das Lesen von Fehlermeldungen.
+Jede Karte führt zu einer Detailseite mit Erklärung, Beispiel, typischen
+Stolperstellen und einer Miniaufgabe.
 
 ### Struktogramme
 
@@ -213,6 +218,22 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - abschließender Abruf der GitHub-Pages-Version
 
 ## Versionsverlauf
+
+### 0.11.0 – 19. Juni 2026
+
+- Modul **Python Plus** um die Lektionen „Listen erweitern“ und „Text bearbeiten“ ergänzt
+- neun zusätzliche Befehlskarten (Kommentare, f-Strings, `%`/`//`, `round()`,
+  String-Methoden, String-Indizierung, Listenmethoden, `range()` mit Schritt,
+  Fehlermeldungen) mit Beispielen, Stolperstellen und Miniaufgaben
+- acht neue, automatisch geprüfte Programmieraufgaben, darunter freie
+  Transferaufgaben zu Alternativen, Schleifen, Funktionen und Text
+- vier neue Erfolge inklusive eines Serien-Erfolgs für Übung an drei Tagen in Folge
+- neue Referenzkarten zu f-Strings, Textbearbeitung, Listen und Rest/Teilen
+- Design veredelt: kohärentes Verlaufs- und Schattensystem, weiche Hover-Lifts
+  auf Karten und Buttons, feinere Radien, animierte Fortschrittsbalken,
+  Einblendung des Inhalts und dezente XP-Hervorhebung – Grünidentität bleibt erhalten
+- Reduzierte-Bewegung-Voreinstellung der Lernenden wird respektiert
+- alle Änderungen auf Desktop und Mobil sowie in Light und Dark Mode geprüft
 
 ### 0.10.0 – 19. Juni 2026
 

@@ -2,6 +2,7 @@
 Thumbs.db
 .idea/
 .vscode/
+.claude/
 *.log
 references/bpe5/original/
 references/bpe5/source/

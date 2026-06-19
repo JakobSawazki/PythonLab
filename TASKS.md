@@ -1,7 +1,7 @@
 # PythonLab Tasks und Projektstand
 
 Stand: 19. Juni 2026
-Aktuelle Version: 0.10.0
+Aktuelle Version: 0.11.0
 Live: `https://jakobsawazki.github.io/PythonLab/`
 
 ## Leitentscheidung
@@ -47,20 +47,29 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 - 2026-06-19: Funktionsaufgaben um mehrere Testwerte sowie AST- und Signaturprüfungen erweitert.
 - 2026-06-19: Erfolgreiche Programmierprüfung mit dem Abschluss der zugehörigen Lektion verbunden.
 - 2026-06-19: Freiwilligen Gemini-Lerncoach samt sicherem Cloudflare-Worker und lokalem Fallback vorbereitet.
+- 2026-06-19: v0.10.0-Stand committet, nach `main` gepusht und `resources/` (inkl. Bildungsplan-PDF) vollständig aus dem öffentlichen Repository ausgeschlossen.
+- 2026-06-19: Modul Python Plus um die Lektionen „Listen erweitern“ (listen-methoden) und „Text bearbeiten“ (strings) erweitert.
+- 2026-06-19: Befehlsbibliothek von zehn auf neunzehn Karten ausgebaut (Kommentare, f-Strings, `%`/`//`, `round()`, String-Methoden, String-Indizierung, Listenmethoden, `range()` mit Schritt, Fehlermeldungen).
+- 2026-06-19: Acht neue, automatisch geprüfte Programmieraufgaben ergänzt, darunter freie Transferaufgaben zu Alternativen, Schleifen, Funktionen und Text; alle mit Musterlösung getestet.
+- 2026-06-19: Vier neue Erfolge ergänzt, inklusive Serien-Erfolg über den neuen Bedingungstyp `streak` in `app.js`.
+- 2026-06-19: Vier neue Nachschlagekarten zu f-Strings, Textbearbeitung, Listen und Rest/Teilen ergänzt.
+- 2026-06-19: Design veredelt – Verlaufs- und Schattensystem, Hover-Lifts, animierte Fortschrittsbalken, Inhaltseinblendung und XP-Hervorhebung bei erhaltener Grünidentität; `prefers-reduced-motion` respektiert.
+- 2026-06-19: Stand auf Desktop (1280) und Mobil (390) sowie in Light und Dark Mode geprüft; neue Aufgaben real über Pyodide bestanden, keine Konsolenfehler.
 
 ## Offen Priorisiert
 
 1. Optionalen KI-Worker in Cloudflare und Gemini AI Studio einrichten, Endpoint in `config.js` eintragen und schulische Datenschutzfreigabe klären.
 2. Teilpunkte und Kompetenz-Rubriken für längere Transferaufgaben entwickeln.
-3. Befehlsbibliothek ausbauen: Fehlermeldungen, String-Methoden, Listenmethoden, `len()`, `range()`-Varianten und Mini-Quizze ergänzen.
-4. Kompetenzansicht erstellen: BPE5-Ich-kann-Ziele in verständlicher Sprache anzeigen und mit Lektionen, Übungen, Befehlen und Struktogrammen verknüpfen.
-5. Weitere BPE5-Transferaufgaben entwickeln, besonders zu Alternativen, Schleifen, Funktionen und Struktogramm-Übersetzung.
+3. Kompetenzansicht erstellen: BPE5-Ich-kann-Ziele in verständlicher Sprache anzeigen und mit Lektionen, Übungen, Befehlen und Struktogrammen verknüpfen.
+4. Weitere Struktogramm-Transferaufgaben (alltagsnah, auch geschachtelt) ergänzen.
+5. Befehlsbibliothek weiter abrunden: weitere typische Fehlerbilder und ggf. Karten zu `enumerate`/Wörterbüchern, sobald didaktisch sinnvoll. (Grundausbau String-/Listenmethoden, `range()`-Varianten, Fehlermeldungen in 0.11.0 erledigt.)
 6. KA-Webarbeit aus `implementations/KA` als nicht benotete Übungsvorbereitung prüfen und integrieren.
 7. Den ikonischen Einstieg aus Lernfortschritt 1 didaktisch prüfen und bei Bedarf als optionales Einstiegsmodul umsetzen.
 8. GUI-Inhalte aus Lernfortschritt 2 als Python-Plus-Modul prüfen.
 9. Struktogrammer Web stärker verzahnen, zum Beispiel durch konkrete Aufgabenlinks oder Import-/Export-Hinweise.
-10. Screenshots nach größeren UI-Änderungen erneuern.
-11. GitHub-Pages-Liveprüfung nach jedem Push dokumentieren.
+10. Teilpunkte und Kompetenz-Rubriken für längere Transferaufgaben entwickeln.
+11. Screenshots nach den 0.11.0-UI-Änderungen erneuern (Preview-Screenshots in der aktuellen Umgebung nicht verfügbar; lokal nachholen).
+12. GitHub-Pages-Liveprüfung nach jedem Push dokumentieren.
 
 ## Ideen
 

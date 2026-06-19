@@ -97,10 +97,13 @@ eigenen interaktiven Aufgabe behandelt.
 
 ## Bewusste Erweiterungen
 
-Die Lektionen zu Listen und systematischer Fehlersuche gehen über den engsten
-Kern des Kompetenzrasters hinaus. Sie bleiben bewusst im Portal, weil sie
-einen zugänglichen Übergang zu weiterführenden Python-Inhalten schaffen und
-die Selbstständigkeit beim Üben stärken.
+Die Lektionen zu Listen, Listen erweitern, Text bearbeiten und systematischer
+Fehlersuche gehen über den engsten Kern des Kompetenzrasters hinaus. Sie
+bleiben bewusst im Portal, weil sie einen zugänglichen Übergang zu
+weiterführenden Python-Inhalten schaffen und die Selbstständigkeit beim Üben
+stärken. f-Strings, String-Methoden und Listenmethoden werden zusätzlich als
+Befehlskarten mit Miniaufgaben angeboten, ohne den verpflichtenden Kern zu
+verschieben.
 
 ## Priorisierte Weiterentwicklung
 
