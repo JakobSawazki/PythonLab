@@ -37,6 +37,144 @@ window.PYLAB_CONTENT = {
     }
   ],
 
+  competencies: [
+    {
+      id: "planning",
+      number: "01",
+      title: "Abläufe planen und darstellen",
+      description: "Du erkennst die Grundbausteine eines Algorithmus und kannst sie als Struktogramm lesen.",
+      items: [
+        {
+          id: "sequence-plan",
+          title: "Ich kann einen Ablauf in die richtige Reihenfolge bringen.",
+          lessonIds: ["sequenz"],
+          exerciseIds: ["hallo-python"],
+          structogramIds: ["stg-sequenz"],
+          route: "lesson/sequenz"
+        },
+        {
+          id: "for-plan",
+          title: "Ich kann eine Zählerschleife erkennen und als Struktogramm darstellen.",
+          lessonIds: ["for"],
+          structogramIds: ["stg-for"],
+          route: "structograms"
+        },
+        {
+          id: "while-plan",
+          title: "Ich kann eine kopfgesteuerte Schleife planen und ihre Bedingung erklären.",
+          lessonIds: ["while"],
+          structogramIds: ["stg-while"],
+          route: "structograms"
+        },
+        {
+          id: "decision-plan",
+          title: "Ich kann Entscheidungen mit Ja- und Nein-Zweig darstellen.",
+          lessonIds: ["if", "elif", "logik"],
+          structogramIds: ["stg-alternative", "stg-nested"],
+          route: "structograms"
+        }
+      ]
+    },
+    {
+      id: "python-basics",
+      number: "02",
+      title: "Python-Grundlagen anwenden",
+      description: "Du entwickelst Programme mit Ausgaben, Variablen, Berechnungen, Eingaben und Funktionen.",
+      items: [
+        {
+          id: "output",
+          title: "Ich kann Texte und berechnete Werte mit print() ausgeben.",
+          lessonIds: ["sequenz"],
+          exerciseIds: ["hallo-python"],
+          commandIds: ["print"],
+          route: "lesson/sequenz"
+        },
+        {
+          id: "variables",
+          title: "Ich kann passende Variablen anlegen, verändern und auslesen.",
+          lessonIds: ["variablen"],
+          exerciseIds: ["punkte-variable"],
+          route: "lesson/variablen"
+        },
+        {
+          id: "calculations",
+          title: "Ich kann Rechenoperatoren in einem Python-Programm verwenden.",
+          lessonIds: ["rechnen"],
+          exerciseIds: ["rechteck-flaeche"],
+          commandIds: ["modulo", "round"],
+          route: "lesson/rechnen"
+        },
+        {
+          id: "inputs",
+          title: "Ich kann Eingaben einlesen und in Zahlen umwandeln.",
+          lessonIds: ["eingaben"],
+          exerciseIds: ["temperatur"],
+          commandIds: ["input", "type-conversion"],
+          route: "lesson/eingaben"
+        },
+        {
+          id: "functions",
+          title: "Ich kann Funktionen definieren, Parameter übergeben und Rückgabewerte nutzen.",
+          lessonIds: ["funktionen", "funktionen-parameter", "funktionen-rueckgabe"],
+          exerciseIds: ["pausensignal-funktion", "begruessung-parameter", "fahrtkosten-funktion"],
+          commandIds: ["functions"],
+          route: "lesson/funktionen"
+        }
+      ]
+    },
+    {
+      id: "control",
+      number: "03",
+      title: "Kontrollstrukturen entwickeln",
+      description: "Du setzt Alternativen und Wiederholungen passend zur Problemstellung ein.",
+      items: [
+        {
+          id: "one-sided-if",
+          title: "Ich kann eine einseitige Verzweigung mit einer passenden Bedingung entwickeln.",
+          lessonIds: ["if"],
+          exerciseIds: ["rabatt-if"],
+          commandIds: ["comparisons"],
+          route: "lesson/if"
+        },
+        {
+          id: "two-sided-if",
+          title: "Ich kann zwischen zwei oder mehreren Fällen unterscheiden.",
+          lessonIds: ["elif"],
+          exerciseIds: ["notenstufe", "preisangebot", "mietzuschuss"],
+          commandIds: ["if-elif-else"],
+          structogramIds: ["stg-alternative", "stg-nested"],
+          route: "lesson/elif"
+        },
+        {
+          id: "logical-conditions",
+          title: "Ich kann Bedingungen mit and, or und not sinnvoll verknüpfen.",
+          lessonIds: ["logik"],
+          exerciseIds: ["zugang-logik"],
+          commandIds: ["logic"],
+          route: "lesson/logik"
+        },
+        {
+          id: "for-loops",
+          title: "Ich kann eine for-Schleife für eine bekannte Anzahl von Wiederholungen einsetzen.",
+          lessonIds: ["for"],
+          exerciseIds: ["einmaleins", "gerade-summe", "sternentreppe", "taschengeld-tabelle"],
+          commandIds: ["for-range", "range-steps"],
+          structogramIds: ["stg-for"],
+          route: "lesson/for"
+        },
+        {
+          id: "while-loops",
+          title: "Ich kann mit while wiederholen, bis ein Ziel erreicht ist.",
+          lessonIds: ["while"],
+          exerciseIds: ["sparziel", "countdown", "fischteich"],
+          commandIds: ["while"],
+          structogramIds: ["stg-while"],
+          route: "lesson/while"
+        }
+      ]
+    }
+  ],
+
   lessons: [
     {
       id: "sequenz",
@@ -1313,6 +1451,102 @@ window.PYLAB_CONTENT = {
       check: {
         type: "output",
         expected: "*\n**\n***\n****"
+      }
+    },
+    {
+      id: "preisangebot",
+      lessonId: "elif",
+      title: "Preisangebot prüfen",
+      description: "Entscheide mit if und else, ob ein Angebot den Mindestpreis erreicht.",
+      difficulty: "medium",
+      xp: 135,
+      instructions: [
+        "Der Mindestpreis beträgt 24.99 Euro, das Angebot 22.50 Euro.",
+        "Liegt das Angebot unter dem Mindestpreis, speichere abgelehnt in ergebnis.",
+        "Andernfalls speichere angenommen in ergebnis.",
+        "Gib ergebnis aus."
+      ],
+      hints: [
+        "Vergleiche angebot mit mindestpreis in einer if-Bedingung.",
+        "Für angebot < mindestpreis gilt der Text abgelehnt; der andere Fall gehört in else.",
+        "Weise ergebnis in beiden Zweigen genau einen Text zu und gib die Variable erst danach aus."
+      ],
+      starter: `mindestpreis = 24.99\nangebot = 22.50\n\n# Entscheide zwischen "abgelehnt" und "angenommen"\nergebnis = ""\n\nprint(ergebnis)\n`,
+      check: {
+        type: "tests",
+        code: `import ast\nassert ergebnis == "abgelehnt", "22.50 Euro liegen unter dem Mindestpreis."\n_baum = ast.parse(__pylab_source__)\n_verzweigungen = [knoten for knoten in ast.walk(_baum) if isinstance(knoten, ast.If)]\nassert _verzweigungen, "Verwende eine if-Bedingung für den Vergleich."\nassert any(knoten.orelse for knoten in _verzweigungen), "Ergänze einen else-Zweig für das angenommene Angebot."\nprint("__PYLAB_TESTS_OK__")`
+      }
+    },
+    {
+      id: "mietzuschuss",
+      lessonId: "elif",
+      title: "Mietzuschuss staffeln",
+      description: "Ordne einen Mietpreis mit einer geschachtelten Verzweigung einem Zuschusssatz zu.",
+      difficulty: "plus",
+      xp: 165,
+      instructions: [
+        "Unter 500 Euro beträgt der Zuschusssatz 2 Prozent.",
+        "Von 500 bis unter 1000 Euro beträgt er 5 Prozent.",
+        "Ab 1000 Euro beträgt er 7 Prozent.",
+        "Bestimme satz mit einer geschachtelten Verzweigung und berechne zuschuss = miete * satz."
+      ],
+      hints: [
+        "Prüfe außen zuerst, ob miete kleiner als 1000 ist.",
+        "Innerhalb dieses Zweigs unterscheidest du nochmals zwischen unter 500 und mindestens 500.",
+        "Für 850 Euro gilt satz = 0.05 und damit zuschuss = 42.5."
+      ],
+      starter: `miete = 850\nsatz = 0\n\n# Bestimme 0.02, 0.05 oder 0.07 mit einer geschachtelten Verzweigung\n\nzuschuss = miete * satz\nprint(zuschuss)\n`,
+      check: {
+        type: "tests",
+        code: `import ast\nassert abs(satz - 0.05) < 0.0001, "Für 850 Euro gilt ein Zuschusssatz von 5 Prozent."\nassert abs(zuschuss - 42.5) < 0.0001, "Der Zuschuss für 850 Euro beträgt 42.50 Euro."\n_baum = ast.parse(__pylab_source__)\n_verzweigungen = [knoten for knoten in ast.walk(_baum) if isinstance(knoten, ast.If)]\nassert len(_verzweigungen) >= 2, "Verwende mindestens zwei Verzweigungen."\nassert any(any(isinstance(teil, ast.If) for teil in knoten.body + knoten.orelse) for knoten in _verzweigungen), "Eine Verzweigung soll innerhalb einer anderen liegen."\nprint("__PYLAB_TESTS_OK__")`
+      }
+    },
+    {
+      id: "taschengeld-tabelle",
+      lessonId: "for",
+      title: "Taschengeldtabelle erstellen",
+      description: "Berechne mit einer for-Schleife eine Entwicklung vom 6. bis zum 21. Lebensjahr.",
+      difficulty: "medium",
+      xp: 150,
+      instructions: [
+        "Das Taschengeld startet mit 10 Euro im Alter von 6 Jahren.",
+        "Nach jeder Ausgabe steigt es für das nächste Lebensjahr um 2 Euro.",
+        "Gib für jedes Alter von 6 bis einschließlich 21 zuerst das Alter und dann den Betrag aus.",
+        "Verwende dazu eine for-Schleife."
+      ],
+      hints: [
+        "range(6, 22) liefert alle Alterswerte von 6 bis einschließlich 21.",
+        "Gib in jeder Runde print(alter, taschengeld) aus.",
+        "Erhöhe taschengeld erst nach der Ausgabe um 2, damit das Alter 6 mit 10 Euro beginnt."
+      ],
+      starter: `taschengeld = 10\n\n# Gib Alter und Taschengeld von 6 bis 21 aus\n`,
+      check: {
+        type: "output",
+        expected: "6 10\n7 12\n8 14\n9 16\n10 18\n11 20\n12 22\n13 24\n14 26\n15 28\n16 30\n17 32\n18 34\n19 36\n20 38\n21 40"
+      }
+    },
+    {
+      id: "fischteich",
+      lessonId: "while",
+      title: "Fischbestand hochrechnen",
+      description: "Ermittle mit while, wann ein wachsender Bestand ein Ziel erreicht.",
+      difficulty: "medium",
+      xp: 150,
+      instructions: [
+        "Der Bestand startet bei 3 Fischen und verdoppelt sich jedes Jahr.",
+        "Wiederhole die Entwicklung, bis mindestens 100 Fische erreicht sind.",
+        "Erhöhe jahre in jedem Schleifendurchlauf um 1.",
+        "Gib zuerst jahre und danach bestand aus."
+      ],
+      hints: [
+        "Die Schleife läuft, solange bestand noch kleiner als ziel ist.",
+        "Verdopple bestand innerhalb der Schleife mit bestand = bestand * 2.",
+        "Nach 6 Jahren sind 192 Fische erreicht; beide Variablen werden geprüft."
+      ],
+      starter: `bestand = 3\nziel = 100\njahre = 0\n\n# Verdopple den Bestand, bis das Ziel erreicht ist\n\nprint(jahre)\nprint(bestand)\n`,
+      check: {
+        type: "tests",
+        code: `import ast\nassert jahre == 6, "Das Ziel wird nach 6 Verdopplungen erreicht."\nassert bestand == 192, "Nach 6 Jahren beträgt der Bestand 192 Fische."\n_baum = ast.parse(__pylab_source__)\nassert any(isinstance(knoten, ast.While) for knoten in ast.walk(_baum)), "Verwende eine while-Schleife."\nprint("__PYLAB_TESTS_OK__")`
       }
     }
   ],

@@ -18,7 +18,7 @@
       }
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=0.12.0">
+  <link rel="stylesheet" href="styles.css?v=0.13.0">
 </head>
 <body>
   <a class="skip-link" href="#mainContent">Zum Inhalt springen</a>
@@ -41,6 +41,10 @@
         <button class="nav-item" type="button" data-route="path">
           <i data-lucide="route"></i>
           <span>Lernpfad</span>
+        </button>
+        <button class="nav-item" type="button" data-route="competencies">
+          <i data-lucide="badge-check"></i>
+          <span>Kompetenzen</span>
         </button>
         <button class="nav-item" type="button" data-route="commands">
           <i data-lucide="braces"></i>
@@ -194,11 +198,11 @@
           <h2>Was bringen deine Punkte?</h2>
         </div>
       </div>
-      <p>Für jede abgeschlossene Lektion, jede gelöste Aufgabe, jeden geübten Befehl und jedes geplante Struktogramm bekommst du XP. Insgesamt kannst du so <strong>6000 Punkte</strong> sammeln.</p>
+      <p>Für jede abgeschlossene Lektion, jede gelöste Aufgabe, jeden geübten Befehl und jedes geplante Struktogramm bekommst du XP. Insgesamt kannst du so <strong id="availableXp">6600 Punkte</strong> sammeln.</p>
       <ul class="points-list">
-        <li><i data-lucide="check"></i> Je mehr du übst und sammelst, desto besser wirkt es sich auf deine Note aus.</li>
-        <li><i data-lucide="check"></i> Es gibt <strong>keine feste Umrechnung</strong> wie „so viele Punkte = Note X“. Entscheidend ist, dass du dranbleibst und viel ausprobierst.</li>
-        <li><i data-lucide="check"></i> Hauptsache, du hast Freude am Programmieren und lernst Python Schritt für Schritt kennen.</li>
+        <li><i data-lucide="check"></i><span>Je mehr du übst und sammelst, desto besser wirkt es sich auf deine Note aus.</span></li>
+        <li><i data-lucide="check"></i><span>Es gibt <strong>keine feste Umrechnung</strong> wie „so viele Punkte = Note X“. Entscheidend ist, dass du dranbleibst und viel ausprobierst.</span></li>
+        <li><i data-lucide="check"></i><span>Hauptsache, du hast Freude am Programmieren und lernst Python Schritt für Schritt kennen.</span></li>
       </ul>
       <div class="callout points-callout">
         <i data-lucide="sparkles"></i>
@@ -216,8 +220,8 @@
   <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
 
   <script src="https://unpkg.com/lucide@1.16.0/dist/umd/lucide.js"></script>
-  <script src="config.js?v=0.12.0"></script>
-  <script src="content.js?v=0.12.0"></script>
-  <script src="app.js?v=0.12.0"></script>
+  <script src="config.js?v=0.13.0"></script>
+  <script src="content.js?v=0.13.0"></script>
+  <script src="app.js?v=0.13.0"></script>
 </body>
 </html>

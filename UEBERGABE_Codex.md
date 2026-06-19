@@ -2,7 +2,7 @@
 
 Stand: 19. Juni 2026
 
-Aktueller Release-Stand: 0.12.0. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
+Aktueller Release-Stand: 0.13.0. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
 
 ## Projektziel
 
@@ -37,7 +37,7 @@ Verbindliche fachliche Referenz:
 
 - Übersicht mit persönlichem nächsten Schritt und Lernstatistik
 - fünf Lernetappen mit sechzehn Lektionen
-- zweiundzwanzig Aufgaben mit editierbarem Python-Code, davon mehrere freie Transferaufgaben
+- sechsundzwanzig Aufgaben mit editierbarem Python-Code, davon mehrere freie Transferaufgaben
 - eigener Funktionsabschnitt mit drei Lektionen: ohne Parameter, mit Parametern und mit Rückgabewert
 - Modul Python Plus mit Listen, Listen erweitern, Text bearbeiten und Fehlersuche
 - Reiter **Befehle** mit neunzehn Python-Basiselementen, Detailseiten und XP-Miniaufgaben
@@ -58,7 +58,8 @@ Verbindliche fachliche Referenz:
 - versionierter JSON-Export und -Import des vollständigen Lernstands
 - Nachschlagebereich mit kompakten Syntaxmustern
 - responsive Navigation und Tastaturbedienung
-- insgesamt exakt 6000 erreichbare XP mit erweiterten Levelgrenzen und erklärender Punkteanzeige
+- Kompetenzansicht mit drei BPE5-Bereichen, vierzehn Ich-kann-Zielen und verknüpften Lernaktivitäten
+- insgesamt exakt 6600 erreichbare XP mit erweiterten Levelgrenzen und erklärender Punkteanzeige
 
 ## Dateistruktur
 
@@ -66,7 +67,7 @@ Verbindliche fachliche Referenz:
 | --- | --- |
 | `index.html` | App-Shell, Navigation, Profildialog |
 | `styles.css` | gesamtes Design und responsive Regeln |
-| `content.js` | Module, Lektionen, Aufgaben, Erfolge, Nachschlagekarten |
+| `content.js` | Module, Lektionen, Kompetenzen, Aufgaben, Erfolge, Nachschlagekarten |
 | `app.js` | Routing, Rendern, Lernstand, XP, Aufgabenprüfung |
 | `python-worker.js` | Laden und Ausführen von Pyodide |
 | `config.js` | öffentliche Konfiguration des optionalen KI-Endpunkts ohne Secret |

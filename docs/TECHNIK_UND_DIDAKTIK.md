@@ -19,6 +19,13 @@ enthält eine knappe Erklärung, ein lauffähiges Beispiel, typische
 Stolperstellen und eine kleine Aufgabe mit XP. Dadurch eignet sich der Bereich
 für Wiederholung während des Übens, ohne den Lernpfad zu verlassen.
 
+Der Reiter **Kompetenzen** übersetzt das offizielle Raster in vierzehn
+verständliche Ich-kann-Ziele. Die Zuordnung zu Lektionen, Aufgaben,
+Befehlskarten und Struktogrammen liegt deklarativ in `content.js`. Der
+Fortschritt wird aus bereits vorhandenen Abschlüssen berechnet; es entstehen
+keine zusätzlichen Profildaten. Die Ansicht ist bewusst als Lernhilfe und
+nicht als Note oder diagnostisch belastbarer Leistungsnachweis formuliert.
+
 ## Datenschutz
 
 Die Kernanwendung besitzt kein Backend. Name oder Kürzel, Fortschritt und
