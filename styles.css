@@ -1238,6 +1238,11 @@ h4 {
   color: var(--plus-blue);
 }
 
+.difficulty-extra {
+  background: #efe6fb;
+  color: #6b46b0;
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -2931,6 +2936,12 @@ code {
   border-color: #28788a;
   background: var(--plus-blue-soft);
   color: var(--plus-blue);
+}
+
+:root[data-theme="dark"] .difficulty-extra {
+  border-color: #5a4290;
+  background: #241a3a;
+  color: #c4aef0;
 }
 
 :root[data-theme="dark"] .feedback.is-error,

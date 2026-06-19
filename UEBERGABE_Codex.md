@@ -37,13 +37,13 @@ Verbindliche fachliche Referenz:
 
 - Übersicht mit persönlichem nächsten Schritt und Lernstatistik
 - fünf Lernetappen mit sechzehn Lektionen
-- sechsundzwanzig Aufgaben mit editierbarem Python-Code, davon mehrere freie Transferaufgaben
+- siebenundzwanzig Aufgaben mit editierbarem Python-Code, davon mehrere freie Transferaufgaben sowie die Kategorie **Anwendung** (Fibonacci)
 - eigener Funktionsabschnitt mit drei Lektionen: ohne Parameter, mit Parametern und mit Rückgabewert
 - Modul Python Plus mit Listen, Listen erweitern, Text bearbeiten und Fehlersuche
 - Reiter **Befehle** mit neunzehn Python-Basiselementen, Detailseiten und XP-Miniaufgaben
 - Struktogramm-Labor mit fünf Grundformen und fünf interaktiven Aufgaben; zweiseitige Alternativen verwenden gemeinsame SVG-Mittelpunkte, Bedingungen mit `?` und die Zweigbeschriftungen `Ja`/`Nein`
 - direkter Kopfzeilen-Link zum Struktogrammer Web
-- einheitlicher Icon-Button für den Struktogrammer-Web-Link
+- eigenes grünes Struktogramm-SVG als Icon-Button für den Struktogrammer-Web-Link, im Stroke-Stil der übrigen Symbole
 - Dark Mode als Standard für neue Browserprofile und weiterhin umschaltbarer Light Mode
 - veredeltes Design mit Verlaufs- und Schattensystem, Hover-Lifts, animierten
   Fortschrittsbalken und Inhaltseinblendung; respektiert `prefers-reduced-motion`
@@ -59,7 +59,7 @@ Verbindliche fachliche Referenz:
 - Nachschlagebereich mit kompakten Syntaxmustern
 - responsive Navigation und Tastaturbedienung
 - Kompetenzansicht mit drei BPE5-Bereichen, vierzehn Ich-kann-Zielen und verknüpften Lernaktivitäten
-- insgesamt exakt 6600 erreichbare XP mit erweiterten Levelgrenzen und erklärender Punkteanzeige
+- insgesamt exakt 6800 erreichbare XP mit erweiterten Levelgrenzen und erklärender Punkteanzeige (`totalAvailableXp()` berechnet die Summe zur Laufzeit)
 
 ## Dateistruktur
 

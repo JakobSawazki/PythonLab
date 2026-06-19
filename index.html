@@ -18,7 +18,7 @@
       }
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=0.13.0">
+  <link rel="stylesheet" href="styles.css?v=0.14.0">
 </head>
 <body>
   <a class="skip-link" href="#mainContent">Zum Inhalt springen</a>
@@ -100,7 +100,13 @@
         <div class="topbar-actions">
           <a class="icon-button structogrammer-link" href="https://jakobsawazki.github.io/struktogrammer-web/" target="_blank" rel="noopener"
             title="Struktogrammer Web öffnen" aria-label="Struktogrammer Web öffnen">
-            <i data-lucide="workflow"></i>
+            <svg class="structogrammer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+              <line x1="3" y1="9" x2="21" y2="9"></line>
+              <path d="M3 9 L12 15 L21 9"></path>
+              <line x1="12" y1="15" x2="12" y2="21"></line>
+            </svg>
           </a>
           <button class="icon-button theme-toggle-button" id="themeToggleButton" type="button"
             title="Dark Mode aktivieren" aria-label="Dark Mode aktivieren" aria-pressed="false">
@@ -198,7 +204,7 @@
           <h2>Was bringen deine Punkte?</h2>
         </div>
       </div>
-      <p>Für jede abgeschlossene Lektion, jede gelöste Aufgabe, jeden geübten Befehl und jedes geplante Struktogramm bekommst du XP. Insgesamt kannst du so <strong id="availableXp">6600 Punkte</strong> sammeln.</p>
+      <p>Für jede abgeschlossene Lektion, jede gelöste Aufgabe, jeden geübten Befehl und jedes geplante Struktogramm bekommst du XP. Insgesamt kannst du so <strong id="availableXp">6800 Punkte</strong> sammeln.</p>
       <ul class="points-list">
         <li><i data-lucide="check"></i><span>Je mehr du übst und sammelst, desto besser wirkt es sich auf deine Note aus.</span></li>
         <li><i data-lucide="check"></i><span>Es gibt <strong>keine feste Umrechnung</strong> wie „so viele Punkte = Note X“. Entscheidend ist, dass du dranbleibst und viel ausprobierst.</span></li>
@@ -220,8 +226,8 @@
   <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
 
   <script src="https://unpkg.com/lucide@1.16.0/dist/umd/lucide.js"></script>
-  <script src="config.js?v=0.13.0"></script>
-  <script src="content.js?v=0.13.0"></script>
-  <script src="app.js?v=0.13.0"></script>
+  <script src="config.js?v=0.14.0"></script>
+  <script src="content.js?v=0.14.0"></script>
+  <script src="app.js?v=0.14.0"></script>
 </body>
 </html>

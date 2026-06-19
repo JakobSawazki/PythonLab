@@ -1548,6 +1548,30 @@ window.PYLAB_CONTENT = {
         type: "tests",
         code: `import ast\nassert jahre == 6, "Das Ziel wird nach 6 Verdopplungen erreicht."\nassert bestand == 192, "Nach 6 Jahren beträgt der Bestand 192 Fische."\n_baum = ast.parse(__pylab_source__)\nassert any(isinstance(knoten, ast.While) for knoten in ast.walk(_baum)), "Verwende eine while-Schleife."\nprint("__PYLAB_TESTS_OK__")`
       }
+    },
+    {
+      id: "fibonacci",
+      lessonId: "for",
+      title: "Fibonacci-Folge erzeugen",
+      description: "Eine berühmte Zahlenfolge aus Natur und Mathematik – Schritt für Schritt mit Python.",
+      difficulty: "extra",
+      xp: 200,
+      instructions: [
+        "Definiere fibonacci(anzahl) mit einem Parameter.",
+        "Die Folge beginnt mit 0 und 1; jede weitere Zahl ist die Summe der beiden vorherigen.",
+        "Gib eine Liste mit den ersten anzahl Fibonacci-Zahlen zurück.",
+        "Bei anzahl = 10 ergibt sich [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]."
+      ],
+      hints: [
+        "Starte mit a = 0, b = 1 und einer leeren Liste folge.",
+        "Hänge in jeder Runde a an die Liste an und berechne danach die nächste Zahl.",
+        "Den nächsten Wert bekommst du mit naechste = a + b; danach gilt a = b und b = naechste."
+      ],
+      starter: `def fibonacci(anzahl):\n    folge = []\n    a = 0\n    b = 1\n    # Wiederhole anzahl-mal: hänge a an folge an und berechne die nächste Zahl\n\n    return folge\n\nprint(fibonacci(10))\n`,
+      check: {
+        type: "tests",
+        code: `import inspect\nassert callable(fibonacci), "Definiere eine Funktion namens fibonacci."\nassert len(inspect.signature(fibonacci).parameters) == 1, "Die Funktion erwartet genau einen Parameter."\nassert fibonacci(0) == [], "Bei 0 angeforderten Zahlen ist die Liste leer."\nassert fibonacci(1) == [0], "Die Folge beginnt mit 0."\nassert fibonacci(2) == [0, 1], "Die ersten beiden Zahlen sind 0 und 1."\nassert fibonacci(10) == [0, 1, 1, 2, 3, 5, 8, 13, 21, 34], "Prüfe die ersten zehn Fibonacci-Zahlen."\nprint("__PYLAB_TESTS_OK__")`
+      }
     }
   ],
 

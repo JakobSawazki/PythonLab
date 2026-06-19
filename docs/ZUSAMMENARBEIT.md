@@ -33,9 +33,11 @@ pauschal gestagt oder veröffentlicht werden.
 
 - JavaScript-Syntax von `app.js`, `content.js` und `python-worker.js` prüfen.
 - Beziehungen zwischen Lektionen und Aufgaben sowie eindeutige IDs prüfen.
-- XP aus Lektionen, Aufgaben, Befehlen und Struktogrammen summieren; seit 0.13.0
-  muss die Summe exakt 6600 ergeben. Der Wert im Punktedialog wird zusätzlich
-  zur Laufzeit aus den Inhalten berechnet.
+- XP aus Lektionen, Aufgaben, Befehlen und Struktogrammen summieren; seit 0.14.0
+  muss die Summe exakt 6800 ergeben (die Fibonacci-Anwendungsaufgabe bringt
+  200 XP). Der Wert im Punktedialog wird zusätzlich zur Laufzeit aus den
+  Inhalten berechnet (`totalAvailableXp()`); bei neuen Aufgaben diesen Zielwert
+  hier mitführen.
 - `git diff --check` ausführen.
 - betroffene Ansichten im Browser in Dark Mode prüfen; bei Designänderungen
   zusätzlich Light Mode sowie Desktop und 390 Pixel Breite testen.
@@ -59,3 +61,31 @@ pauschal gestagt oder veröffentlicht werden.
 Eine Übergabe nennt kurz: geänderte Dateien, fachliche Entscheidung, ausgeführte
 Tests, offene Punkte und Git-Status. Nach einem Push wird die GitHub-Pages-Seite
 mit einem Cache-Buster geöffnet und auf die aktuelle Asset-Version geprüft.
+
+## Letzte Übergaben
+
+### 0.14.0 – Claude Code (Opus 4.8)
+
+- **Geänderte Dateien:** `content.js` (Fibonacci-Aufgabe), `app.js`
+  (`difficultyLabel` + Filter für `extra`), `styles.css` (`.difficulty-extra`
+  hell/dunkel), `index.html` (eigenes Struktogramm-SVG statt Lucide-`workflow`,
+  XP-Fallback 6800, Versionsparameter `?v=0.14.0`), `python-worker.js`-Verweis
+  in `app.js` auf `?v=0.14.0`; Doku in `README.md`, `TASKS.md`,
+  `UEBERGABE_Codex.md`, dieser Datei.
+- **Fachliche Entscheidung:** Neue Aufgabenkategorie **Anwendung**
+  (`difficulty: "extra"`, Label „Anwendung", violetter Akzent) für motivierende
+  Praxisbeispiele, die zeigen, wofür Python einsetzbar ist. Erste Aufgabe ist
+  Fibonacci (Wunsch des Lehrers, Quelle OneNote „5. Grundlagen der
+  Programmierung“). Das Kopfzeilen-Icon zeigt jetzt ein eigenes,
+  hus-/struktogramm-nahes SVG im grünen Stroke-Stil der übrigen Symbole.
+- **Tests:** Fibonacci-Musterlösung lokal und real über Pyodide bestanden
+  (`fibonacci(0..10)`); Filter „Anwendung", Icon-Farbe/-Größe, grüner
+  Lernzielkasten (Light+Dark), XP-Summe 6800 und 27 Aufgaben im Browser geprüft;
+  kein horizontaler Überlauf bei 1280 und 390 px; Browserkonsole fehlerfrei.
+- **Offene Punkte:** Kategorie Anwendung mit weiteren J1-Aufgaben füllen
+  (TASKS Punkt 9); Screenshots erneuern (Preview-Screenshots in der
+  Agent-Umgebung nicht verfügbar). Der zuvor von Codex gemeldete gelbe
+  Lernzielkasten ist bereits grün; ein gelber Eindruck stammt aus einem
+  veralteten/gecachten Browserstand.
+- **Git-Status bei Übergabe:** `main`, ein Release-Commit 0.14.0, nach
+  `origin/main` gepusht, GitHub-Pages-Build geprüft.

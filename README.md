@@ -1,6 +1,6 @@
 # PythonLab
 
-**Aktuelle Version:** 0.13.0
+**Aktuelle Version:** 0.14.0
 **Dokumentationsstand:** 19. Juni 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
@@ -50,19 +50,20 @@ Repository übernommen.
 ## Aktueller Funktionsumfang
 
 - fünf Etappen mit insgesamt sechzehn Python-Lektionen
-- sechsundzwanzig automatisch prüfbare Programmieraufgaben, davon mehrere
-  freie Transferaufgaben über den Lektionspfad hinaus
+- siebenundzwanzig automatisch prüfbare Programmieraufgaben, davon mehrere
+  freie Transferaufgaben sowie eine eigene Kategorie **Anwendung** mit der
+  Fibonacci-Aufgabe als motivierendem Praxisbeispiel
 - eigener Reiter **Befehle** mit neunzehn Python-Basiselementen, Beispielen,
   Detailseiten und kleinen XP-Aufgaben
 - Struktogramm-Labor mit fünf Grundformen und fünf geprüften Übungen
 - echter Python-Interpreter im Browser über Pyodide
-- insgesamt 6600 erreichbare XP, feinere Levelstufen, Lernfortschritt und siebzehn Erfolge inklusive Serien-Erfolg
+- insgesamt 6800 erreichbare XP, feinere Levelstufen, Lernfortschritt und siebzehn Erfolge inklusive Serien-Erfolg
 - eigene Kompetenzansicht mit vierzehn verständlichen BPE5-Ich-kann-Zielen und automatisch berechnetem Übungsstand
 - lokales Lernprofil mit Name oder Kürzel
 - Speicherung von Code- und Struktogramm-Entwürfen
 - Export und Import des vollständigen Lernstands als JSON-Datei
 - direkter Kopfzeilen-Link zum Struktogrammer Web
-- einheitlicher Icon-Button für den Struktogrammer-Web-Link
+- eigenes grünes Struktogramm-Icon für den Struktogrammer-Web-Link, passend zur übrigen Icon-Leiste
 - Dark Mode als Standard und weiterhin umschaltbarer Light Mode
 - alle 40 Erklärungsbeispiele direkt auf der Lektionsseite ausführbar
 - dynamische Aufgabenprüfung mit konkreten Python-Diagnosen und gestuften Lernhinweisen
@@ -219,6 +220,17 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - abschließender Abruf der GitHub-Pages-Version
 
 ## Versionsverlauf
+
+### 0.14.0 – 19. Juni 2026
+
+- neue Aufgabenkategorie **Anwendung** eingeführt und als Filter im Reiter **Üben** ergänzt
+- erste Anwendungsaufgabe **Fibonacci-Folge** ergänzt: Funktion `fibonacci(anzahl)`
+  mit Liste der ersten Fibonacci-Zahlen, mit Musterlösung real über Pyodide geprüft
+- erreichbare Gesamt-XP dadurch auf 6800 erhöht (Punkteanzeige berechnet die Summe weiterhin zur Laufzeit)
+- Kopfzeilen-Icon für den Struktogrammer Web durch ein eigenes, an die Struktogramm-Marke
+  angelehntes SVG ersetzt; gleicher grüner Stroke-Stil wie die übrigen Symbole
+- Desktop (1280) und Mobil (390) sowie Light und Dark Mode ohne horizontalen Überlauf und ohne Konsolenfehler geprüft
+- Übergabe- und Zusammenarbeitsregeln in `docs/ZUSAMMENARBEIT.md` fortgeschrieben (XP-Zielwert, Teamnotiz)
 
 ### 0.13.0 – 19. Juni 2026
 

@@ -187,7 +187,7 @@
   }
 
   function difficultyLabel(value) {
-    return { easy: "Grundlage", medium: "Vertiefung", plus: "Plus" }[value] || value;
+    return { easy: "Grundlage", medium: "Vertiefung", plus: "Plus", extra: "Anwendung" }[value] || value;
   }
 
   function lessonById(id) {
@@ -775,7 +775,8 @@
           ["all", "Alle Aufgaben"],
           ["easy", "Grundlagen"],
           ["medium", "Vertiefung"],
-          ["plus", "Python Plus"]
+          ["plus", "Python Plus"],
+          ["extra", "Anwendung"]
         ].map(([value, label]) => `
           <button class="filter-button ${exerciseFilter === value ? "is-active" : ""}" type="button" data-filter="${value}">${label}</button>
         `).join("")}
@@ -1713,7 +1714,7 @@
     pendingRuns = new Map();
     setRuntime("loading", "Python wird vorbereitet");
 
-    worker = new Worker("python-worker.js?v=0.13.0", { type: "module" });
+    worker = new Worker("python-worker.js?v=0.14.0", { type: "module" });
     workerReady = new Promise((resolve, reject) => {
       const readyTimeout = window.setTimeout(() => reject(new Error("Python konnte nicht geladen werden.")), 30000);
       worker.addEventListener("message", function onReady(event) {

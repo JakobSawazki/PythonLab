@@ -1,7 +1,7 @@
 # PythonLab Tasks und Projektstand
 
 Stand: 19. Juni 2026
-Aktuelle Version: 0.13.0
+Aktuelle Version: 0.14.0
 Live: `https://jakobsawazki.github.io/PythonLab/`
 
 ## Leitentscheidung
@@ -64,6 +64,10 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 - 2026-06-19: Vier BPE5-nahe Transferaufgaben zu Preisangebot, Mietzuschuss, Taschengeld und Fischbestand ergänzt und mit Musterlösungen geprüft.
 - 2026-06-19: Gesamtumfang auf sechsundzwanzig Programmieraufgaben und 6600 erreichbare XP erweitert.
 - 2026-06-19: GitHub-Pages-Liveprüfung als verbindlichen Bestandteil jeder Veröffentlichung in `docs/ZUSAMMENARBEIT.md` dokumentiert und angewendet.
+- 2026-06-19: Neue Aufgabenkategorie **Anwendung** (`difficulty: "extra"`) mit Filter, Label und eigener Farbe (Light/Dark) eingeführt.
+- 2026-06-19: Erste Anwendungsaufgabe **Fibonacci-Folge** ergänzt, Musterlösung real über Pyodide bestanden; Gesamt-XP auf 6800 angehoben.
+- 2026-06-19: Kopfzeilen-Icon für den Struktogrammer Web durch ein eigenes grünes SVG (Struktogramm-Marke) im einheitlichen Stroke-Stil ersetzt.
+- 2026-06-19: Bestätigt, dass der Lernzielkasten „Danach kannst du ...“ in Light und Dark Mode grün dargestellt wird (frühere gelbe Darstellung war ein veralteter Browserstand).
 
 ## Offen Priorisiert
 
@@ -75,7 +79,8 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 6. Den ikonischen Einstieg aus Lernfortschritt 1 didaktisch prüfen und bei Bedarf als optionales Einstiegsmodul umsetzen.
 7. GUI-Inhalte aus Lernfortschritt 2 als optionales Python-Plus-Modul prüfen.
 8. Struktogrammer Web stärker verzahnen, zum Beispiel durch konkrete Aufgabenlinks oder Import-/Export-Hinweise.
-9. Screenshots nach den 0.13.0-UI-Änderungen erneuern.
+9. Kategorie **Anwendung** ausbauen: weitere alltags- und anwendungsnahe Aufgaben aus dem J1-Unterricht (Quelle: OneNote „5. Grundlagen der Programmierung“) ergänzen, die zeigen, wofür Python eingesetzt wird. Fibonacci ist der erste Eintrag.
+10. Screenshots nach den UI-Änderungen ab 0.12.0 erneuern (Preview-Screenshots in der aktuellen Agent-Umgebung nicht verfügbar; lokal nachholen).
 
 ## Ideen
 
