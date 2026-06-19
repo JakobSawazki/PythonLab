@@ -1,7 +1,7 @@
 # PythonLab Tasks und Projektstand
 
 Stand: 19. Juni 2026
-Aktuelle Version: 0.12.0
+Aktuelle Version: 0.13.0
 Live: `https://jakobsawazki.github.io/PythonLab/`
 
 ## Leitentscheidung
@@ -59,21 +59,23 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 - 2026-06-19: Lernzielkästen in ein ruhiges Grünsystem überführt und Karten-Hover ohne unruhigen oberen Farbstreifen veredelt.
 - 2026-06-19: Zweiseitige Struktogramm-Alternativen mit exakt zusammentreffenden SVG-Diagonalen, Fragezeichen sowie ausgeschriebenen Zweigen `Ja` und `Nein` an den hus-Stil angenähert.
 - 2026-06-19: Gemeinsame Arbeitsregeln für Mensch, Claude Code und Codex unter `docs/ZUSAMMENARBEIT.md` festgehalten.
+- 2026-06-19: Textüberlagerung im Punktefenster durch stabile Textcontainer innerhalb der Listenzeilen behoben.
+- 2026-06-19: Kompetenzansicht mit drei BPE5-Bereichen, vierzehn Ich-kann-Zielen und automatisch berechnetem Übungsstand umgesetzt.
+- 2026-06-19: Vier BPE5-nahe Transferaufgaben zu Preisangebot, Mietzuschuss, Taschengeld und Fischbestand ergänzt und mit Musterlösungen geprüft.
+- 2026-06-19: Gesamtumfang auf sechsundzwanzig Programmieraufgaben und 6600 erreichbare XP erweitert.
+- 2026-06-19: GitHub-Pages-Liveprüfung als verbindlichen Bestandteil jeder Veröffentlichung in `docs/ZUSAMMENARBEIT.md` dokumentiert und angewendet.
 
 ## Offen Priorisiert
 
-1. Optionalen KI-Worker in Cloudflare und Gemini AI Studio einrichten, Endpoint in `config.js` eintragen und schulische Datenschutzfreigabe klären.
-2. Teilpunkte und Kompetenz-Rubriken für längere Transferaufgaben entwickeln.
-3. Kompetenzansicht erstellen: BPE5-Ich-kann-Ziele in verständlicher Sprache anzeigen und mit Lektionen, Übungen, Befehlen und Struktogrammen verknüpfen.
-4. Weitere Struktogramm-Transferaufgaben (alltagsnah, auch geschachtelt) ergänzen.
-5. Befehlsbibliothek weiter abrunden: weitere typische Fehlerbilder und ggf. Karten zu `enumerate`/Wörterbüchern, sobald didaktisch sinnvoll. (Grundausbau String-/Listenmethoden, `range()`-Varianten, Fehlermeldungen in 0.11.0 erledigt.)
-6. KA-Webarbeit aus `implementations/KA` als nicht benotete Übungsvorbereitung prüfen und integrieren.
-7. Den ikonischen Einstieg aus Lernfortschritt 1 didaktisch prüfen und bei Bedarf als optionales Einstiegsmodul umsetzen.
-8. GUI-Inhalte aus Lernfortschritt 2 als Python-Plus-Modul prüfen.
-9. Struktogrammer Web stärker verzahnen, zum Beispiel durch konkrete Aufgabenlinks oder Import-/Export-Hinweise.
-10. Teilpunkte und Kompetenz-Rubriken für längere Transferaufgaben entwickeln.
-11. Screenshots nach den 0.12.0-UI-Änderungen erneuern.
-12. GitHub-Pages-Liveprüfung nach jedem Push dokumentieren.
+1. Optionalen KI-Worker in Cloudflare und Gemini AI Studio einrichten, Endpoint in `config.js` eintragen und schulische Datenschutzfreigabe klären. Bis zur Freigabe bleibt der lokale Prüfer maßgeblich.
+2. Teilpunkte und visuelle Kompetenz-Rubriken für längere Transferaufgaben entwickeln.
+3. Weitere Struktogramm-Transferaufgaben ergänzen, besonders alltagsnahe und geschachtelte Abläufe.
+4. Befehlsbibliothek bei didaktischem Bedarf um `enumerate()` und Wörterbücher erweitern; beides liegt außerhalb des engsten BPE5-Kerns.
+5. KA-Webarbeit aus `implementations/KA` als nicht benotete Übungsvorbereitung prüfen und integrieren.
+6. Den ikonischen Einstieg aus Lernfortschritt 1 didaktisch prüfen und bei Bedarf als optionales Einstiegsmodul umsetzen.
+7. GUI-Inhalte aus Lernfortschritt 2 als optionales Python-Plus-Modul prüfen.
+8. Struktogrammer Web stärker verzahnen, zum Beispiel durch konkrete Aufgabenlinks oder Import-/Export-Hinweise.
+9. Screenshots nach den 0.13.0-UI-Änderungen erneuern.
 
 ## Ideen
 

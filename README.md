@@ -1,6 +1,6 @@
 # PythonLab
 
-**Aktuelle Version:** 0.12.0
+**Aktuelle Version:** 0.13.0
 **Dokumentationsstand:** 19. Juni 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
@@ -50,13 +50,14 @@ Repository übernommen.
 ## Aktueller Funktionsumfang
 
 - fünf Etappen mit insgesamt sechzehn Python-Lektionen
-- zweiundzwanzig automatisch prüfbare Programmieraufgaben, davon mehrere
+- sechsundzwanzig automatisch prüfbare Programmieraufgaben, davon mehrere
   freie Transferaufgaben über den Lektionspfad hinaus
 - eigener Reiter **Befehle** mit neunzehn Python-Basiselementen, Beispielen,
   Detailseiten und kleinen XP-Aufgaben
 - Struktogramm-Labor mit fünf Grundformen und fünf geprüften Übungen
 - echter Python-Interpreter im Browser über Pyodide
-- insgesamt 6000 erreichbare XP, feinere Levelstufen, Lernfortschritt und sechzehn Erfolge inklusive Serien-Erfolg
+- insgesamt 6600 erreichbare XP, feinere Levelstufen, Lernfortschritt und siebzehn Erfolge inklusive Serien-Erfolg
+- eigene Kompetenzansicht mit vierzehn verständlichen BPE5-Ich-kann-Zielen und automatisch berechnetem Übungsstand
 - lokales Lernprofil mit Name oder Kürzel
 - Speicherung von Code- und Struktogramm-Entwürfen
 - Export und Import des vollständigen Lernstands als JSON-Datei
@@ -219,6 +220,17 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 
 ## Versionsverlauf
 
+### 0.13.0 – 19. Juni 2026
+
+- Textüberlagerung im Punktefenster behoben; Hervorhebungen bleiben jetzt innerhalb des jeweiligen Listentextes
+- neue Kompetenzansicht mit drei BPE5-Kompetenzbereichen und vierzehn verständlich formulierten Ich-kann-Zielen ergänzt
+- Kompetenzfortschritt aus abgeschlossenen Lektionen, Aufgaben, Befehlen und Struktogrammen berechnet; ausdrücklich als Lernhilfe statt Note gekennzeichnet
+- vier eigenständig formulierte BPE5-Transferaufgaben ergänzt: Preisangebot, Mietzuschuss, Taschengeldtabelle und Fischbestand
+- Gesamtumfang auf sechsundzwanzig Programmieraufgaben und 6600 erreichbare XP erweitert
+- neue Aufgaben mit Musterlösungen, AST-Prüfungen und erwarteten Ausgaben getestet
+- Desktop-, Dark-Mode- und 390-Pixel-Mobilansicht ohne horizontalen Überlauf geprüft
+- offene Aufgabenliste bereinigt: doppelten Teilpunkte-Eintrag entfernt, Kompetenzansicht und Live-Prüfroutine als erledigt markiert
+
 ### 0.12.0 – 19. Juni 2026
 
 - XP aller Lernaktivitäten auf ein transparentes Gesamtsystem mit exakt 6000 erreichbaren Punkten skaliert und Levelgrenzen entsprechend erweitert
@@ -354,10 +366,9 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 Priorisiert:
 
 1. Weitere bildungsplanorientierte Transferaufgaben ergänzen.
-2. Kompetenzansicht mit verständlich formulierten Ich-kann-Zielen entwickeln.
-3. BPE5-Materialien weiter in eigene PythonLab-Aufgaben übertragen, ohne
+2. BPE5-Materialien weiter in eigene PythonLab-Aufgaben übertragen, ohne
    Originalarbeitsblätter oder Musterlösungen ungeprüft zu veröffentlichen.
-4. Übungsvorbereitung aus `implementations/KA` als nicht benotete
+3. Übungsvorbereitung aus `implementations/KA` als nicht benotete
    Wissensabfrage in PythonLab einbinden.
 
 Optional:

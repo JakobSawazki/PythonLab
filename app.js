@@ -232,6 +232,15 @@
     return total ? Math.round((done / total) * 100) : 0;
   }
 
+  function totalAvailableXp() {
+    return [
+      content.lessons,
+      content.exercises,
+      content.commands,
+      content.structograms.exercises
+    ].flat().reduce((sum, item) => sum + item.xp, 0);
+  }
+
   function todayKey(date = new Date()) {
     return [
       date.getFullYear(),
@@ -284,6 +293,31 @@
   function moduleProgress(module) {
     const done = module.lessonIds.filter((id) => state.completedLessons.includes(id)).length;
     return { done, total: module.lessonIds.length, percent: progressPercent(done, module.lessonIds.length) };
+  }
+
+  function competencyProgress(competency) {
+    const sources = [
+      [competency.lessonIds || [], state.completedLessons],
+      [competency.exerciseIds || [], state.completedExercises],
+      [competency.commandIds || [], state.completedCommands],
+      [competency.structogramIds || [], state.completedStructograms]
+    ];
+    const total = sources.reduce((sum, [ids]) => sum + ids.length, 0);
+    const done = sources.reduce((sum, [ids, completed]) =>
+      sum + ids.filter((id) => completed.includes(id)).length, 0);
+    return { done, total, percent: progressPercent(done, total) };
+  }
+
+  function competencyEvidence(competency) {
+    return [
+      { ids: competency.lessonIds || [], completed: state.completedLessons, label: "Lektionen", icon: "book-open-text" },
+      { ids: competency.exerciseIds || [], completed: state.completedExercises, label: "Aufgaben", icon: "code-2" },
+      { ids: competency.commandIds || [], completed: state.completedCommands, label: "Befehle", icon: "braces" },
+      { ids: competency.structogramIds || [], completed: state.completedStructograms, label: "Struktogramme", icon: "workflow" }
+    ].filter((source) => source.ids.length).map((source) => ({
+      ...source,
+      done: source.ids.filter((id) => source.completed.includes(id)).length
+    }));
   }
 
   function nextLesson() {
@@ -346,6 +380,10 @@
       ? `${state.xp} XP · Höchstes Level`
       : `${state.xp} / ${level.nextMin} XP`;
     document.querySelector("#topXp").textContent = `${state.xp} XP`;
+    const availableXp = document.querySelector("#availableXp");
+    if (availableXp) {
+      availableXp.textContent = `${totalAvailableXp()} Punkte`;
+    }
 
     const pointsChip = document.querySelector(".points-chip");
     if (pointsChip && state.xp > lastShownXp) {
@@ -657,6 +695,71 @@
             <div class="lesson-grid">${lessons.map(lessonCard).join("")}</div>
           </section>`;
       }).join("")}`;
+  }
+
+  function renderCompetencies() {
+    setHeading("BPE 5 · Dein Kompetenzraster", "Kompetenzen");
+    activateNav("competencies");
+    const allItems = content.competencies.flatMap((group) => group.items);
+    const secure = allItems.filter((item) => competencyProgress(item).percent === 100).length;
+    const doneActivities = allItems.reduce((sum, item) => sum + competencyProgress(item).done, 0);
+    const totalActivities = allItems.reduce((sum, item) => sum + competencyProgress(item).total, 0);
+    const overallPercent = progressPercent(doneActivities, totalActivities);
+
+    main.innerHTML = `
+      <section class="competency-lead">
+        <div>
+          <p class="eyebrow">Ich kann ...</p>
+          <h2>Sieh, was du schon sicher beherrschst.</h2>
+          <p>Die Ziele orientieren sich am offiziellen BPE5-Kompetenzraster. Dein Stand entsteht aus abgeschlossenen Lektionen, Aufgaben, Befehlen und Struktogrammen.</p>
+        </div>
+        <div class="competency-summary" aria-label="${overallPercent} Prozent der zugeordneten Lernaktivitäten abgeschlossen">
+          <strong>${overallPercent} %</strong>
+          <span>${secure} von ${allItems.length} Kompetenzen sicher geübt</span>
+          <div class="progress-track"><span style="width:${overallPercent}%"></span></div>
+        </div>
+      </section>
+
+      <div class="callout competency-note">
+        <i data-lucide="info"></i>
+        <p>Die Anzeige ist eine Lernhilfe und keine Note. „Sicher geübt“ bedeutet, dass du alle zugeordneten Aktivitäten abgeschlossen hast. Du kannst jedes Ziel jederzeit weiter vertiefen.</p>
+      </div>
+
+      ${content.competencies.map((group) => `
+        <section class="content-section competency-section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Kompetenzbereich ${escapeHtml(group.number)}</p>
+              <h2>${escapeHtml(group.title)}</h2>
+              <p>${escapeHtml(group.description)}</p>
+            </div>
+          </div>
+          <div class="competency-grid">
+            ${group.items.map((item) => {
+              const progress = competencyProgress(item);
+              const evidence = competencyEvidence(item);
+              const status = progress.percent === 100 ? "Sicher geübt" : progress.percent > 0 ? "In Arbeit" : "Noch offen";
+              return `
+                <article class="competency-card ${progress.percent === 100 ? "is-complete" : ""}">
+                  <div class="competency-card-heading">
+                    <span class="competency-state"><i data-lucide="${progress.percent === 100 ? "badge-check" : "target"}"></i></span>
+                    <div>
+                      <span class="competency-status">${status}</span>
+                      <h3>${escapeHtml(item.title)}</h3>
+                    </div>
+                  </div>
+                  <div class="progress-track" aria-label="${progress.percent} Prozent abgeschlossen"><span style="width:${progress.percent}%"></span></div>
+                  <div class="competency-evidence">
+                    ${evidence.map((source) => `<span><i data-lucide="${source.icon}"></i>${source.done}/${source.ids.length} ${source.label}</span>`).join("")}
+                  </div>
+                  <button class="text-button competency-action" type="button" data-route="${escapeHtml(item.route)}">
+                    ${progress.percent === 100 ? "Noch einmal ansehen" : "Weiter üben"}
+                    <i data-lucide="arrow-right"></i>
+                  </button>
+                </article>`;
+            }).join("")}
+          </div>
+        </section>`).join("")}`;
   }
 
   function renderPractice() {
@@ -1610,7 +1713,7 @@
     pendingRuns = new Map();
     setRuntime("loading", "Python wird vorbereitet");
 
-    worker = new Worker("python-worker.js?v=0.12.0", { type: "module" });
+    worker = new Worker("python-worker.js?v=0.13.0", { type: "module" });
     workerReady = new Promise((resolve, reject) => {
       const readyTimeout = window.setTimeout(() => reject(new Error("Python konnte nicht geladen werden.")), 30000);
       worker.addEventListener("message", function onReady(event) {
@@ -1901,6 +2004,8 @@
       renderHome();
     } else if (route.name === "path") {
       renderPath();
+    } else if (route.name === "competencies") {
+      renderCompetencies();
     } else if (route.name === "commands") {
       renderCommands();
     } else if (route.name === "structograms") {

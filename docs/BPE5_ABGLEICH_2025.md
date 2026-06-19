@@ -84,7 +84,7 @@ später als Python-Plus-Modul ergänzt werden.
 | --- | --- | --- |
 | Einseitige Verzweigung | 05 Vergleiche und `if` | vollständig |
 | Zweiseitige Verzweigung | 06 `if`, `elif` und `else` | vollständig |
-| Geschachtelte Verzweigung | Struktogramm-Labor, Aufgabe S5 | ausdrücklich umgesetzt |
+| Geschachtelte Verzweigung | Struktogramm-Labor, Aufgabe S5 und Transferaufgabe „Mietzuschuss staffeln“ | ausdrücklich umgesetzt |
 | `and`, `or` und `not` | 07 Logische Operatoren | vollständig |
 | Zählerschleife `for` | 08 `for`-Schleifen | vollständig |
 | Kopfgesteuerte Schleife `while` | 09 `while`-Schleifen | vollständig |
@@ -93,7 +93,19 @@ später als Python-Plus-Modul ergänzt werden.
 
 **Bewertung:** Die Python-Kontrollstrukturen und ihre Darstellung als
 Struktogramm sind vorhanden. Die geschachtelte Verzweigung wird in einer
-eigenen interaktiven Aufgabe behandelt.
+eigenen interaktiven Aufgabe behandelt. Seit Version 0.13.0 ergänzen vier
+eigenständig formulierte Transferaufgaben die Progression des Lernfortschritts 3:
+Preisangebot und Mietzuschuss für Alternativen sowie Taschengeld und Fischbestand
+für `for`- und `while`-Schleifen.
+
+## Kompetenzansicht im Portal
+
+Die drei Bereiche des offiziellen Kompetenzrasters werden seit Version 0.13.0
+im Reiter **Kompetenzen** in vierzehn verständliche Ich-kann-Ziele übersetzt.
+Jedes Ziel ist mit passenden Lektionen, Programmieraufgaben, Befehlskarten und
+Struktogrammen verknüpft. Der angezeigte Übungsstand wird ausschließlich aus
+abgeschlossenen Aktivitäten berechnet und ausdrücklich nicht als Note oder
+Leistungsnachweis bezeichnet.
 
 ## Bewusste Erweiterungen
 
@@ -117,8 +129,6 @@ verschieben.
 5. Die Verzahnung mit Struktogrammer Web für freie Struktogramme bei Bedarf ausbauen.
 6. Ein optionales GUI-Kapitel, sofern es im konkreten Unterricht eingesetzt
    wird.
-7. Eine Kompetenzansicht, die den Lernenden die offiziellen Ich-kann-Ziele in
-   verständlicher Sprache zeigt.
 
 ## Urheberrechtliche Grenze
 

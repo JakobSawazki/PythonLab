@@ -33,8 +33,9 @@ pauschal gestagt oder veröffentlicht werden.
 
 - JavaScript-Syntax von `app.js`, `content.js` und `python-worker.js` prüfen.
 - Beziehungen zwischen Lektionen und Aufgaben sowie eindeutige IDs prüfen.
-- XP aus Lektionen, Aufgaben, Befehlen und Struktogrammen summieren; seit 0.12.0
-  muss die Summe exakt 6000 ergeben.
+- XP aus Lektionen, Aufgaben, Befehlen und Struktogrammen summieren; seit 0.13.0
+  muss die Summe exakt 6600 ergeben. Der Wert im Punktedialog wird zusätzlich
+  zur Laufzeit aus den Inhalten berechnet.
 - `git diff --check` ausführen.
 - betroffene Ansichten im Browser in Dark Mode prüfen; bei Designänderungen
   zusätzlich Light Mode sowie Desktop und 390 Pixel Breite testen.
