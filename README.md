@@ -1,7 +1,7 @@
 # PythonLab
 
-**Aktuelle Version:** 0.8.1
-**Dokumentationsstand:** 18. Juni 2026
+**Aktuelle Version:** 0.10.0
+**Dokumentationsstand:** 19. Juni 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
 
@@ -49,8 +49,8 @@ Repository übernommen.
 
 ## Aktueller Funktionsumfang
 
-- fünf Etappen mit insgesamt zwölf Python-Lektionen
-- zwölf automatisch prüfbare Programmieraufgaben
+- fünf Etappen mit insgesamt vierzehn Python-Lektionen
+- vierzehn automatisch prüfbare Programmieraufgaben
 - eigener Reiter **Befehle** mit zehn Python-Basiselementen, Beispielen,
   Detailseiten und kleinen XP-Aufgaben
 - Struktogramm-Labor mit fünf Grundformen und fünf geprüften Übungen
@@ -61,7 +61,11 @@ Repository übernommen.
 - Export und Import des vollständigen Lernstands als JSON-Datei
 - direkter Kopfzeilen-Link zum Struktogrammer Web
 - einheitlicher Icon-Button für den Struktogrammer-Web-Link
-- umschaltbarer Light- und Dark-Mode
+- Dark Mode als Standard und weiterhin umschaltbarer Light Mode
+- alle 34 Erklärungsbeispiele direkt auf der Lektionsseite ausführbar
+- dynamische Aufgabenprüfung mit konkreten Python-Diagnosen und gestuften Lernhinweisen
+- bestandene Programmieraufgabe schließt die zugehörige Lektion zuverlässig ab
+- vorbereiteter, freiwilliger Gemini-Lerncoach über einen geschützten Cloudflare Worker
 - kompakter Nachschlagebereich
 - schlichter Footer-Hinweis `Designed by Sawazki Electronics`
 - responsive Oberfläche für Computer, Tablet und Smartphone
@@ -78,7 +82,7 @@ Repository übernommen.
 - einseitige und zweiseitige Verzweigungen
 - logische Operatoren `and`, `or` und `not`
 - `for`- und `while`-Schleifen
-- Funktionen, Parameter und Rückgabewerte
+- eigener Funktionsabschnitt: Funktionen ohne Parameter, mit Parametern und mit Rückgabewert
 - Listen als Erweiterung
 - systematische Fehlersuche
 
@@ -113,6 +117,8 @@ aufgebaut. Dadurch kann es direkt über GitHub Pages veröffentlicht werden.
 | `content.js` | Module, Lektionen, Aufgaben, Erfolge und Referenzen |
 | `app.js` | Routing, Rendern, Lernstand, XP und Prüfungen |
 | `python-worker.js` | Python-Ausführung mit Pyodide im Web Worker |
+| `config.js` | öffentliche, schlüsselfreie Konfiguration optionaler Dienste |
+| `services/ai-feedback-worker/` | optionaler Gemini-Proxy ohne API-Schlüssel im Browser |
 | `assets/` | selbst erzeugte Bildmedien und Struktogrammer-Mark |
 | `docs/` | fachliche, technische und visuelle Dokumentation |
 
@@ -137,8 +143,17 @@ JSON-Sicherungen müssen das aktuelle App-Kennzeichen `PythonLab` tragen. Älter
 Zwischenstände aus der Entwicklungsphase werden nicht mehr als offizielles
 Importformat geführt.
 
-Es gibt kein Backend und kein zentrales Schülerkonto. Daten werden nicht an
-einen eigenen Server übertragen. Browserdaten können jedoch durch
+Die lokale Prüfung, der Lernstand und alle Kernfunktionen benötigen kein
+Backend und kein zentrales Schülerkonto. Erst wenn der optionale KI-Dienst
+konfiguriert ist und ein Lernender ausdrücklich auf „KI-Tipp“ klickt, werden
+Aufgabenbeschreibung, aktueller Code und lokales Testergebnis an den
+eingerichteten Proxy und Gemini übertragen. Profilname, Lernstandsdatei und
+Eingabefeld werden nicht mitgesendet. Die kostenlose Gemini-Stufe kann Inhalte
+laut Google zur Produktverbesserung verwenden; die Oberfläche weist deshalb
+vor der ersten Übertragung darauf hin. Personenbezogene Daten gehören nicht in
+den Code.
+
+Browserdaten können durch
 Schulrichtlinien, Profilbereinigung oder einen Gerätewechsel verloren gehen.
 Über das Disketten-Symbol in der Kopfzeile kann der vollständige Lernstand
 deshalb als JSON-Datei gesichert und später auf demselben oder einem anderen
@@ -198,6 +213,33 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - abschließender Abruf der GitHub-Pages-Version
 
 ## Versionsverlauf
+
+### 0.10.0 – 19. Juni 2026
+
+- dynamische Codeprüfung um konkrete Assertion-, Syntax- und Laufzeitdiagnosen erweitert
+- für alle vierzehn Aufgaben drei gestufte, lokal erzeugte Lernhinweise ergänzt
+- Funktionsaufgaben mit zusätzlichen AST-, Signatur- und Testwertprüfungen abgesichert
+- bestandene Programmieraufgabe schließt nun auch die zugehörige Lektion ab
+- freiwilligen KI-Lerncoach in der Oberfläche vorbereitet; KI entscheidet nie über XP oder Abschluss
+- sicheren Cloudflare-Worker für Gemini mit CORS, Größenlimit, Rate-Limit und JSON-Validierung ergänzt
+- Gemini-Schlüssel konsequent aus Browser, GitHub Pages und Repository herausgehalten
+- Datenschutz- und Ausfallhinweise sowie vollständigen lokalen Fallback ergänzt
+
+### 0.9.0 – 19. Juni 2026
+
+- Etappe 04 zu einem eigenen Lernabschnitt über Funktionen mit drei Lektionen ausgebaut
+- Funktionen ohne Parameter, Parameter und Rückgabewerte jeweils schrittweise erklärt
+- zwei neue automatisch geprüfte Funktionsaufgaben ergänzt
+- Fahrtkostenaufgabe als Transferabschluss des Funktionsabschnitts eingeordnet
+- vorhandene Lernstände durch Beibehaltung der bisherigen Funktions-ID kompatibel gehalten
+- Schrift- und Icon-Kontrast beim Überfahren der Navigation im Dark Mode verbessert
+- Vertiefung und Plus mit freundlichen, klar unterscheidbaren Blautönen gestaltet
+- Schwierigkeitsfarben auch auf die Lernzielboxen der Lektionsseiten übertragen
+- alle Codebeispiele um eine direkte Ausführung mit sichtbarer Ausgabe ergänzt
+- Aufgabenbutton von warnendem Korallrot auf ein freundliches Blau umgestellt
+- Dark Mode für neue Browserprofile als Standard festgelegt
+- Styles, Inhalte, App und Python-Worker mit Versionsparametern gegen veraltete Browser-Caches abgesichert
+- BPE5-Abgleich und Projektdokumentation aktualisiert
 
 ### 0.8.1 – 18. Juni 2026
 
@@ -289,7 +331,7 @@ Priorisiert:
 Optional:
 
 - weitere Verzahnung mit Struktogrammer Web
-- dynamischere Codeprüfung mit Rubriken, Teilpunkten und optionaler KI-Hilfe
+- Teilpunkte und visuelle Kompetenz-Rubriken für komplexere Aufgaben
 - GUI-Kapitel mit Python
 - Lernstandsynchronisation über ein datenschutzkonformes Backend
 - separater Prüfungsmodus mit Authentifizierung

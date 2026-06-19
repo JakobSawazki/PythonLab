@@ -2,6 +2,7 @@
   "use strict";
 
   const content = window.PYLAB_CONTENT;
+  const appConfig = window.PYLAB_CONFIG || {};
   const storageKey = "pythonlab-v1";
   const backupAppId = "PythonLab";
   const themeStorageKey = "pythonlab-theme-v1";
@@ -47,6 +48,8 @@
   let workerReady = null;
   let pendingRuns = new Map();
   let requestCounter = 0;
+  const exerciseAttempts = new Map();
+  let lastExerciseReview = null;
 
   function uniqueAllowedStrings(values, allowedIds) {
     if (!Array.isArray(values)) {
@@ -132,9 +135,9 @@
 
   function readTheme() {
     try {
-      return localStorage.getItem(themeStorageKey) === "dark" ? "dark" : "light";
+      return localStorage.getItem(themeStorageKey) === "light" ? "light" : "dark";
     } catch {
-      return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+      return document.documentElement.dataset.theme === "light" ? "light" : "dark";
     }
   }
 
@@ -1015,6 +1018,34 @@
       </section>`;
   }
 
+  function renderLessonCodeDemo(section, sectionIndex) {
+    if (!section.code) {
+      return "";
+    }
+    const inputId = `exampleInput-${sectionIndex}`;
+    const outputId = `exampleOutput-${sectionIndex}`;
+    const hasExampleInput = typeof section.exampleInput === "string";
+    return `
+      <div class="lesson-code-demo">
+        <pre class="code-example"><code>${escapeHtml(section.code)}</code></pre>
+        <div class="lesson-code-controls">
+          ${hasExampleInput ? `
+            <label class="example-input-field" for="${inputId}">
+              <span>Beispieleingaben · eine Zeile pro input()</span>
+              <textarea id="${inputId}" spellcheck="false">${escapeHtml(section.exampleInput)}</textarea>
+            </label>` : ""}
+          <button class="button example-run-button" type="button" data-run-example="${sectionIndex}" aria-controls="${outputId}">
+            <i data-lucide="play"></i>
+            Beispiel ausführen
+          </button>
+        </div>
+        <div class="example-output" id="${outputId}" role="status" aria-live="polite" hidden>
+          <strong>Ausgabe</strong>
+          <pre></pre>
+        </div>
+      </div>`;
+  }
+
   function renderLesson(id) {
     const lesson = lessonById(id);
     if (!lesson) {
@@ -1027,7 +1058,7 @@
     activateNav("path");
     const completed = state.completedLessons.includes(lesson.id);
     main.innerHTML = `
-      <article class="lesson-detail">
+      <article class="lesson-detail difficulty-page-${lesson.difficulty}">
         <header class="detail-header">
           <button class="text-button back-button" type="button" data-route="path"><i data-lucide="arrow-left"></i> Zum Lernpfad</button>
           <div class="lesson-meta">
@@ -1044,12 +1075,12 @@
           <ul>${lesson.objectives.map((objective) => `<li>${escapeHtml(objective)}</li>`).join("")}</ul>
         </section>
 
-        ${lesson.sections.map((section) => `
+        ${lesson.sections.map((section, sectionIndex) => `
           <section class="lesson-section">
             <h3>${escapeHtml(section.title)}</h3>
             <div class="lesson-copy">
               ${section.body.map((paragraph) => `<p>${inlineCode(paragraph)}</p>`).join("")}
-              ${section.code ? `<pre class="code-example"><code>${escapeHtml(section.code)}</code></pre>` : ""}
+              ${renderLessonCodeDemo(section, sectionIndex)}
               ${section.tip ? `<div class="callout"><i data-lucide="lightbulb"></i><p>${inlineCode(section.tip)}</p></div>` : ""}
               ${section.warning ? `<div class="callout is-warning"><i data-lucide="triangle-alert"></i><p>${inlineCode(section.warning)}</p></div>` : ""}
             </div>
@@ -1078,7 +1109,7 @@
           <div class="section-heading">
             <div><h2>Jetzt selbst programmieren</h2><p>Wende das Gelernte direkt in einer kleinen Aufgabe an.</p></div>
           </div>
-          <button class="button button-coral" type="button" data-exercise="${lesson.practiceId}">
+          <button class="button button-practice" type="button" data-exercise="${lesson.practiceId}">
             <i data-lucide="terminal"></i>
             Aufgabe öffnen
           </button>
@@ -1095,6 +1126,7 @@
     const lesson = lessonById(exercise.lessonId);
     const savedDraft = state.drafts[exercise.id];
     const code = savedDraft ?? exercise.starter;
+    const aiFeedbackAvailable = Boolean(String(appConfig.aiFeedbackEndpoint || "").trim());
     setHeading(`Aufgabe zu Lektion ${lesson.index}`, exercise.title);
     activateNav("practice");
     main.innerHTML = `
@@ -1139,11 +1171,37 @@
               </button>
               <button class="button button-primary" type="button" id="checkCodeButton">
                 <i data-lucide="badge-check"></i>
-                Lösung prüfen
+                Code prüfen
               </button>
             </div>
           </div>
           <div class="result-banner" id="resultBanner"></div>
+          <section class="learning-coach" aria-labelledby="learningCoachTitle">
+            <div class="learning-coach-heading">
+              <span class="learning-coach-icon"><i data-lucide="brain-circuit"></i></span>
+              <div>
+                <p class="eyebrow">Lerncoach</p>
+                <h3 id="learningCoachTitle">Hinweise zu deinem Code</h3>
+              </div>
+              <span class="local-check-badge"><i data-lucide="shield-check"></i> Prüfung im Browser</span>
+            </div>
+            <p>Die automatische Prüfung führt deinen Code aus und testet das Ergebnis. Hinweise helfen weiter, ohne die fertige Lösung vorwegzunehmen.</p>
+            <div class="learning-coach-actions">
+              <button class="button button-secondary" type="button" id="hintCodeButton">
+                <i data-lucide="lightbulb"></i>
+                Lernhinweis anzeigen
+              </button>
+              ${aiFeedbackAvailable ? `
+                <button class="button button-ai" type="button" id="aiFeedbackButton">
+                  <i data-lucide="sparkles"></i>
+                  Freiwilligen KI-Tipp anfragen
+                </button>` : `
+                <span class="ai-setup-note"><i data-lucide="cloud-off"></i> KI-Tipps sind noch nicht freigeschaltet. Die lokale Prüfung funktioniert vollständig.</span>`}
+            </div>
+            ${aiFeedbackAvailable ? `
+              <p class="ai-privacy-note"><i data-lucide="info"></i> Nur nach einem Klick wird der aktuelle Code an den eingerichteten Gemini-Dienst gesendet. Trage keine Namen oder persönlichen Daten in den Code ein.</p>` : ""}
+            <div class="coach-feedback" id="coachFeedback" role="status" aria-live="polite" hidden></div>
+          </section>
         </section>
       </div>`;
 
@@ -1151,6 +1209,7 @@
     editor.addEventListener("input", () => {
       state.drafts[exercise.id] = editor.value;
       saveState();
+      lastExerciseReview = null;
     });
   }
 
@@ -1191,6 +1250,180 @@
       <i data-lucide="${success ? "circle-check" : "circle-alert"}"></i>
       <div><strong>${escapeHtml(title)}</strong><p>${escapeHtml(detail)}</p></div>`;
     renderIcons();
+  }
+
+  function showCoachFeedback(title, intro, items = [], tone = "info", source = "") {
+    const panel = document.querySelector("#coachFeedback");
+    if (!panel) {
+      return;
+    }
+    panel.hidden = false;
+    panel.className = `coach-feedback is-${tone}`;
+    panel.replaceChildren();
+
+    const heading = document.createElement("strong");
+    heading.textContent = title;
+    panel.append(heading);
+
+    if (intro) {
+      const paragraph = document.createElement("p");
+      paragraph.textContent = intro;
+      panel.append(paragraph);
+    }
+
+    const cleanItems = items.filter(Boolean).slice(0, 4);
+    if (cleanItems.length) {
+      const list = document.createElement("ul");
+      cleanItems.forEach((item) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = item;
+        list.append(listItem);
+      });
+      panel.append(list);
+    }
+
+    if (source) {
+      const note = document.createElement("small");
+      note.textContent = source;
+      panel.append(note);
+    }
+  }
+
+  function pythonDiagnostic(errorText) {
+    const text = String(errorText || "");
+    const assertion = text.match(/AssertionError:\s*([^\n]+)/);
+    if (assertion?.[1]) {
+      return assertion[1].trim();
+    }
+    const namedErrors = [
+      ["IndentationError", "Prüfe die Einrückung. Zeilen eines Blocks müssen gleich weit eingerückt sein."],
+      ["SyntaxError", "Python kann die Schreibweise noch nicht lesen. Prüfe besonders Doppelpunkte, Klammern und unvollständige Zuweisungen."],
+      ["NameError", "Ein verwendeter Name ist noch nicht definiert oder anders geschrieben."],
+      ["TypeError", "Hier werden Werte oder Funktionsaufrufe in einer unpassenden Form verbunden."],
+      ["ValueError", "Ein Wert lässt sich nicht wie vorgesehen umwandeln oder verarbeiten."],
+      ["ZeroDivisionError", "Eine Rechnung teilt durch 0. Prüfe den Nenner."],
+      ["IndexError", "Ein Listenplatz liegt außerhalb der vorhandenen Elemente."]
+    ];
+    return namedErrors.find(([name]) => text.includes(name))?.[1]
+      || "Lies die letzte Zeile der Fehlermeldung und prüfe anschließend die dort genannte Codezeile.";
+  }
+
+  function buildExerciseHints(exercise, code, errorText = "", attempt = 1) {
+    const hints = [];
+    const trimmedCode = String(code || "").trim();
+    if (!trimmedCode || trimmedCode === exercise.starter.trim()) {
+      hints.push("Im Startcode fehlen noch eigene Anweisungen. Arbeite die Schritte links nacheinander ab.");
+    }
+    if (/\bpass\b/.test(code)) {
+      hints.push("`pass` ist nur ein Platzhalter. Ersetze ihn durch die Anweisungen, die die Funktion ausführen soll.");
+    }
+    if (/=\s*(?:#.*)?$/m.test(code)) {
+      hints.push("Mindestens eine Zuweisung endet direkt nach dem Gleichheitszeichen. Rechts davon fehlt noch ein Wert oder Ausdruck.");
+    }
+    if (errorText) {
+      hints.push(pythonDiagnostic(errorText));
+    }
+    const stagedHints = Array.isArray(exercise.hints) ? exercise.hints : exercise.instructions;
+    if (stagedHints?.length) {
+      hints.push(stagedHints[Math.min(Math.max(attempt - 1, 0), stagedHints.length - 1)]);
+    }
+    return [...new Set(hints)].slice(0, 3);
+  }
+
+  function showExerciseHint() {
+    const exercise = exerciseById(parseRoute().id);
+    const editor = document.querySelector("#codeEditor");
+    if (!exercise || !editor) {
+      return;
+    }
+    const attempt = Math.max(1, exerciseAttempts.get(exercise.id) || 1);
+    const reviewError = lastExerciseReview?.exerciseId === exercise.id ? lastExerciseReview.error : "";
+    showCoachFeedback(
+      `Hinweis ${Math.min(attempt, 3)}`,
+      "Gehe in einem kleinen Schritt weiter und prüfe danach erneut.",
+      buildExerciseHints(exercise, editor.value, reviewError, attempt),
+      "info",
+      "Dieser Hinweis wird lokal aus Aufgabe, Code und Testergebnis erzeugt."
+    );
+  }
+
+  async function requestAiFeedback() {
+    const exercise = exerciseById(parseRoute().id);
+    const editor = document.querySelector("#codeEditor");
+    const button = document.querySelector("#aiFeedbackButton");
+    const endpoint = String(appConfig.aiFeedbackEndpoint || "").trim();
+    if (!exercise || !editor || !button || !endpoint) {
+      return;
+    }
+
+    if (!sessionStorage.getItem("pythonlab-ai-consent-v1")) {
+      const accepted = window.confirm(
+        "Für den freiwilligen KI-Tipp werden der aktuelle Code, die Aufgabenbeschreibung und das lokale Testergebnis an den eingerichteten Gemini-Dienst gesendet. " +
+        "In der kostenlosen Gemini-Stufe können Inhalte zur Verbesserung von Google-Produkten verwendet werden. Bitte verwende keine Namen oder persönlichen Daten. Jetzt senden?"
+      );
+      if (!accepted) {
+        return;
+      }
+      sessionStorage.setItem("pythonlab-ai-consent-v1", "1");
+    }
+
+    button.disabled = true;
+    button.innerHTML = `<i data-lucide="loader-circle"></i> KI denkt nach ...`;
+    showCoachFeedback("KI-Lerncoach", "Dein Code wird analysiert ...", [], "ai", "Die KI ergänzt die lokale Prüfung, entscheidet aber nicht über den Abschluss.");
+    renderIcons();
+
+    try {
+      const localReview = lastExerciseReview?.exerciseId === exercise.id
+        ? { passed: lastExerciseReview.passed, diagnostic: lastExerciseReview.diagnostic }
+        : { passed: null, diagnostic: "Noch nicht lokal geprüft." };
+      const response = await fetch(endpoint, {
+        method: "POST",
+        mode: "cors",
+        credentials: "omit",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          exercise: {
+            id: exercise.id,
+            title: exercise.title,
+            description: exercise.description,
+            instructions: exercise.instructions
+          },
+          code: editor.value.slice(0, 12000),
+          localReview
+        })
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(data.error || "Der KI-Dienst ist gerade nicht erreichbar.");
+      }
+      const feedback = data.feedback || {};
+      const observations = [
+        ...(Array.isArray(feedback.strengths) ? feedback.strengths : []),
+        ...(Array.isArray(feedback.nextSteps) ? feedback.nextSteps : []),
+        feedback.hint
+      ].filter(Boolean);
+      showCoachFeedback(
+        "KI-Rückmeldung",
+        feedback.summary || "Hier ist ein zusätzlicher Blick auf deinen Lösungsweg.",
+        observations,
+        "ai",
+        "KI-generierter Lernhinweis – kann Fehler enthalten und ersetzt nicht die automatische Prüfung."
+      );
+    } catch (error) {
+      showCoachFeedback(
+        "KI-Tipp derzeit nicht verfügbar",
+        error.message || "Der Dienst konnte nicht antworten.",
+        ["Nutze den lokalen Lernhinweis oder prüfe deinen Code erneut. Die Aufgabe kann weiterhin vollständig abgeschlossen werden."],
+        "warning",
+        "Es wurden keine Auswirkungen auf Prüfung, XP oder Lernfortschritt vorgenommen."
+      );
+    } finally {
+      if (button.isConnected) {
+        button.disabled = false;
+        button.innerHTML = `<i data-lucide="sparkles"></i> Weiteren KI-Tipp anfragen`;
+        renderIcons();
+      }
+    }
   }
 
   function setConsole(value, error = false) {
@@ -1330,7 +1563,7 @@
     pendingRuns = new Map();
     setRuntime("loading", "Python wird vorbereitet");
 
-    worker = new Worker("python-worker.js", { type: "module" });
+    worker = new Worker("python-worker.js?v=0.10.0", { type: "module" });
     workerReady = new Promise((resolve, reject) => {
       const readyTimeout = window.setTimeout(() => reject(new Error("Python konnte nicht geladen werden.")), 30000);
       worker.addEventListener("message", function onReady(event) {
@@ -1377,6 +1610,49 @@
     });
   }
 
+  async function runLessonExample(sectionIndex, button) {
+    const route = parseRoute();
+    const lesson = route.name === "lesson" ? lessonById(route.id) : null;
+    const section = lesson?.sections?.[sectionIndex];
+    const output = document.querySelector(`#exampleOutput-${sectionIndex}`);
+    const outputLabel = output?.querySelector("strong");
+    const outputText = output?.querySelector("pre");
+    const exampleInput = document.querySelector(`#exampleInput-${sectionIndex}`)?.value ?? section?.exampleInput ?? "";
+    if (!section?.code || !button || !output || !outputLabel || !outputText) {
+      return;
+    }
+
+    button.disabled = true;
+    button.innerHTML = `<i data-lucide="loader-circle"></i> Python arbeitet ...`;
+    output.hidden = false;
+    output.classList.remove("is-error");
+    outputLabel.textContent = "Ausgabe";
+    outputText.textContent = "Das Beispiel wird ausgeführt ...";
+    renderIcons();
+
+    try {
+      const result = await executePython(section.code, exampleInput);
+      const error = [result.stderr, result.error].filter(Boolean).join("\n");
+      if (error) {
+        output.classList.add("is-error");
+        outputLabel.textContent = "Fehler";
+        outputText.textContent = error;
+      } else {
+        outputText.textContent = result.stdout || "Das Programm wurde ohne sichtbare Ausgabe beendet.";
+      }
+    } catch (error) {
+      output.classList.add("is-error");
+      outputLabel.textContent = "Fehler";
+      outputText.textContent = error.message;
+    } finally {
+      if (button.isConnected) {
+        button.disabled = false;
+        button.innerHTML = `<i data-lucide="play"></i> Beispiel erneut ausführen`;
+        renderIcons();
+      }
+    }
+  }
+
   function normalizeOutput(value) {
     return String(value)
       .replace(/\r\n/g, "\n")
@@ -1406,6 +1682,10 @@
 
     runButton.disabled = true;
     checkButton.disabled = true;
+    const attempt = checkSolution ? (exerciseAttempts.get(exercise.id) || 0) + 1 : 0;
+    if (checkSolution) {
+      exerciseAttempts.set(exercise.id, attempt);
+    }
     setConsole("Python arbeitet ...");
     try {
       const check = exercise.check;
@@ -1416,7 +1696,16 @@
       if (combinedError) {
         setConsole(combinedError, true);
         if (checkSolution) {
-          showResult(false, "Noch nicht ganz", "Lies die letzte Zeile der Fehlermeldung und prüfe die genannte Codezeile.");
+          const diagnostic = pythonDiagnostic(combinedError);
+          lastExerciseReview = { exerciseId: exercise.id, passed: false, error: combinedError, diagnostic };
+          showResult(false, "Noch nicht ganz", diagnostic);
+          showCoachFeedback(
+            "Die Prüfung hat eine konkrete Spur gefunden",
+            diagnostic,
+            buildExerciseHints(exercise, editor.value, combinedError, attempt),
+            "warning",
+            "Automatisch aus Python-Fehler und Aufgabentests ermittelt."
+          );
         }
         return;
       }
@@ -1436,17 +1725,56 @@
       }
 
       if (passed) {
-        const firstCompletion = award("exercise", exercise.id, exercise.xp);
-        showResult(true, "Aufgabe gelöst", firstCompletion
-          ? `Starke Arbeit. ${exercise.xp} XP wurden gutgeschrieben.`
-          : "Deine Lösung besteht die Prüfung weiterhin.");
+        const lesson = lessonById(exercise.lessonId);
+        const firstExerciseCompletion = award("exercise", exercise.id, exercise.xp);
+        const firstLessonCompletion = lesson ? award("lesson", lesson.id, lesson.xp) : false;
+        const gainedXp = (firstExerciseCompletion ? exercise.xp : 0) + (firstLessonCompletion ? lesson.xp : 0);
+        lastExerciseReview = { exerciseId: exercise.id, passed: true, error: "", diagnostic: "Alle automatischen Prüfungen bestanden." };
+        showResult(
+          true,
+          firstLessonCompletion ? "Aufgabe und Lektion abgeschlossen" : "Aufgabe gelöst",
+          gainedXp
+            ? `Dein Code besteht die Prüfung. ${gainedXp} XP wurden gutgeschrieben.`
+            : "Deine Lösung besteht die Prüfung weiterhin."
+        );
+        showCoachFeedback(
+          "Prüfung bestanden",
+          "Dein Programm läuft und erfüllt die überprüfbaren Anforderungen.",
+          [
+            "Die Aufgabe wurde mit den vorgesehenen Testwerten geprüft.",
+            "Du kannst den Code jetzt noch mit eigenen Werten ausführen oder zur nächsten Lektion gehen."
+          ],
+          "success",
+          "Der Abschluss basiert ausschließlich auf reproduzierbaren Tests – nicht auf einer KI-Einschätzung."
+        );
       } else {
-        showResult(false, "Noch nicht ganz", "Vergleiche Aufgabe und Ausgabe genau. Prüfe auch Reihenfolge, Schreibweise und Grenzwerte.");
+        const diagnostic = check.type === "output"
+          ? "Die erzeugten Ausgabezeilen stimmen noch nicht vollständig mit der Aufgabe überein."
+          : check.type === "outputNumber"
+            ? "Der letzte ausgegebene Zahlenwert ist noch nicht das erwartete Ergebnis."
+            : "Mindestens eine überprüfte Anforderung ist noch nicht erfüllt.";
+        lastExerciseReview = { exerciseId: exercise.id, passed: false, error: "", diagnostic };
+        showResult(false, "Noch nicht ganz", diagnostic);
+        showCoachFeedback(
+          "Nächster sinnvoller Schritt",
+          diagnostic,
+          buildExerciseHints(exercise, editor.value, "", attempt),
+          "warning",
+          "Die Hinweise werden stufenweise konkreter, wenn du erneut prüfst."
+        );
       }
     } catch (error) {
       setConsole(error.message, true);
       if (checkSolution) {
+        lastExerciseReview = { exerciseId: exercise.id, passed: false, error: error.message, diagnostic: "Python konnte die Prüfung nicht abschließen." };
         showResult(false, "Python ist gerade nicht bereit", "Prüfe die Internetverbindung und versuche es erneut.");
+        showCoachFeedback(
+          "Technischer Hinweis",
+          "Die Prüfung konnte nicht vollständig ausgeführt werden.",
+          ["Dein Lernstand wurde dadurch nicht verändert. Starte den Code nach einem Moment erneut."],
+          "warning",
+          "Die lokale Python-Laufzeit wird beim nächsten Versuch neu verwendet."
+        );
       }
     } finally {
       runButton.disabled = false;
@@ -1563,6 +1891,12 @@
     const filterButton = event.target.closest("[data-filter]");
     const runnerTab = event.target.closest("[data-runner-tab]");
     const orderButton = event.target.closest("[data-order-action]");
+    const lessonExampleButton = event.target.closest("[data-run-example]");
+
+    if (lessonExampleButton) {
+      runLessonExample(Number(lessonExampleButton.dataset.runExample), lessonExampleButton);
+      return;
+    }
 
     if (routeButton) {
       event.preventDefault();
@@ -1600,6 +1934,12 @@
     if (event.target.closest("#checkCodeButton")) {
       runExercise(true);
     }
+    if (event.target.closest("#hintCodeButton")) {
+      showExerciseHint();
+    }
+    if (event.target.closest("#aiFeedbackButton")) {
+      requestAiFeedback();
+    }
     if (event.target.closest("#checkStructureButton")) {
       checkStructogramExercise();
     }
@@ -1616,8 +1956,14 @@
         editor.value = exercise.starter;
         delete state.drafts[exercise.id];
         saveState();
+        exerciseAttempts.delete(exercise.id);
+        lastExerciseReview = null;
         setConsole("Die Aufgabe wurde zurückgesetzt.");
         document.querySelector("#resultBanner").className = "result-banner";
+        const coachFeedback = document.querySelector("#coachFeedback");
+        if (coachFeedback) {
+          coachFeedback.hidden = true;
+        }
       }
     }
     if (event.target.closest("#resetStructureButton")) {

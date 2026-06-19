@@ -1,7 +1,7 @@
 # PythonLab Tasks und Projektstand
 
-Stand: 18. Juni 2026
-Aktuelle Version: 0.8.1
+Stand: 19. Juni 2026
+Aktuelle Version: 0.10.0
 Live: `https://jakobsawazki.github.io/PythonLab/`
 
 ## Leitentscheidung
@@ -35,11 +35,23 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 - 2026-06-18: Struktogrammer-Web-Link oben rechts als einheitlichen Icon-Button gestaltet.
 - 2026-06-18: Ausgabeprüfung toleranter für Leerzeilen, Zeilenabstände und Zahlen in Textausgaben gemacht.
 - 2026-06-18: Konzept für robustere Codeprüfung und optionale KI-Hilfe unter `docs/KI_CODEPRUEFUNG_KONZEPT.md` dokumentiert.
+- 2026-06-19: Etappe 04 zu einem eigenen Funktionsabschnitt mit drei aufeinander aufbauenden Lektionen erweitert.
+- 2026-06-19: Zwei neue geprüfte Aufgaben zu Funktionen ohne Parameter und Funktionen mit Parametern ergänzt.
+- 2026-06-19: Fahrtkostenaufgabe als Transfer zu Parametern und Rückgabewerten eingeordnet.
+- 2026-06-19: Hover-Kontrast der linken Navigation im Dark Mode verbessert.
+- 2026-06-19: Vertiefung und Plus auf blaue Farbabstufungen umgestellt und Lektionsseiten entsprechend akzentuiert.
+- 2026-06-19: Alle 34 Codebeispiele auf Lektionsseiten direkt ausführbar gemacht; Eingabebeispiele erhalten veränderbare Testdaten.
+- 2026-06-19: Aufgabenbutton freundlicher gestaltet und Dark Mode als Standard für neue Browserprofile festgelegt.
+- 2026-06-19: Versionsparameter für CSS, Inhalte, App und Python-Worker ergänzt.
+- 2026-06-19: Dynamische Prüfung mit konkreten Python-Diagnosen und drei gestuften Hinweisen je Aufgabe ergänzt.
+- 2026-06-19: Funktionsaufgaben um mehrere Testwerte sowie AST- und Signaturprüfungen erweitert.
+- 2026-06-19: Erfolgreiche Programmierprüfung mit dem Abschluss der zugehörigen Lektion verbunden.
+- 2026-06-19: Freiwilligen Gemini-Lerncoach samt sicherem Cloudflare-Worker und lokalem Fallback vorbereitet.
 
 ## Offen Priorisiert
 
-1. Codeprüfung weiter robuster machen: mehrere Testfälle, Teilpunkte, genauere Fehlhinweise und AST-Prüfung für zentrale Konzepte.
-2. KI-Hilfe nur optional über Serverless-Proxy planen, niemals mit sichtbarem API-Key im Browser.
+1. Optionalen KI-Worker in Cloudflare und Gemini AI Studio einrichten, Endpoint in `config.js` eintragen und schulische Datenschutzfreigabe klären.
+2. Teilpunkte und Kompetenz-Rubriken für längere Transferaufgaben entwickeln.
 3. Befehlsbibliothek ausbauen: Fehlermeldungen, String-Methoden, Listenmethoden, `len()`, `range()`-Varianten und Mini-Quizze ergänzen.
 4. Kompetenzansicht erstellen: BPE5-Ich-kann-Ziele in verständlicher Sprache anzeigen und mit Lektionen, Übungen, Befehlen und Struktogrammen verknüpfen.
 5. Weitere BPE5-Transferaufgaben entwickeln, besonders zu Alternativen, Schleifen, Funktionen und Struktogramm-Übersetzung.

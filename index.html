@@ -9,14 +9,16 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%23173f35%22/><text x=%2250%22 y=%2264%22 font-size=%2254%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22>Py</text></svg>">
   <script>
     (() => {
+      let theme = "dark";
       try {
-        if (localStorage.getItem("pythonlab-theme-v1") === "dark") {
-          document.documentElement.dataset.theme = "dark";
-        }
+        theme = localStorage.getItem("pythonlab-theme-v1") === "light" ? "light" : "dark";
       } catch {}
+      if (theme === "dark") {
+        document.documentElement.dataset.theme = "dark";
+      }
     })();
   </script>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=0.10.0">
 </head>
 <body>
   <a class="skip-link" href="#mainContent">Zum Inhalt springen</a>
@@ -185,7 +187,8 @@
   <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
 
   <script src="https://unpkg.com/lucide@1.16.0/dist/umd/lucide.js"></script>
-  <script src="content.js"></script>
-  <script src="app.js"></script>
+  <script src="config.js?v=0.10.0"></script>
+  <script src="content.js?v=0.10.0"></script>
+  <script src="app.js?v=0.10.0"></script>
 </body>
 </html>

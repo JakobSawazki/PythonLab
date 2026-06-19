@@ -21,7 +21,17 @@ für Wiederholung während des Übens, ohne den Lernpfad zu verlassen.
 
 ## Datenschutz
 
-Die Anwendung besitzt kein Backend. Name oder Kürzel, Fortschritt und Codeentwürfe werden ausschließlich im lokalen Browserspeicher abgelegt.
+Die Kernanwendung besitzt kein Backend. Name oder Kürzel, Fortschritt und
+Codeentwürfe werden ausschließlich im lokalen Browserspeicher abgelegt.
+
+Optional kann ein Gemini-Lerncoach über einen getrennten Cloudflare Worker
+aktiviert werden. Erst nach einem bewussten Klick und einem Hinweis vor der
+ersten Übertragung gehen Aufgabenbeschreibung, aktueller Code und das lokale
+Testergebnis an diesen Dienst. Profilname, Lernstandsdatei und Eingabefeld
+werden nicht übertragen. Da Google Inhalte der kostenlosen Gemini-Stufe zur
+Produktverbesserung verwenden kann, dürfen Lernende keine personenbezogenen
+oder vertraulichen Angaben in den Code schreiben. Die schulische Freigabe ist
+vor einer Aktivierung separat zu klären.
 
 - Es werden keine Konten angelegt.
 - Es werden keine Namen an einen eigenen Server übertragen.
@@ -69,11 +79,17 @@ verschoben werden.
 
 ### Darstellung
 
-PythonLab unterstützt Light- und Dark-Mode. Die Auswahl wird unter
-`pythonlab-theme-v1` im lokalen Browserspeicher abgelegt und nicht in die
-Lernstandsdatei geschrieben. Die Umschaltung verändert CSS-Variablen und einige
-gezielte Kontrastregeln; die Struktogramm-Arbeitsflächen bleiben bewusst hell,
-damit die Nassi-Shneiderman-Blöcke auch im Dark-Mode eindeutig lesbar bleiben.
+PythonLab startet für neue Browserprofile im Dark Mode und unterstützt weiterhin
+den Light Mode. Die Auswahl wird unter `pythonlab-theme-v1` im lokalen
+Browserspeicher abgelegt und nicht in die Lernstandsdatei geschrieben. Die
+Umschaltung verändert CSS-Variablen und einige gezielte Kontrastregeln; die
+Struktogramm-Arbeitsflächen bleiben bewusst hell, damit die
+Nassi-Shneiderman-Blöcke auch im Dark-Mode eindeutig lesbar bleiben.
+
+Codebeispiele in Lektionen lassen sich direkt über den vorhandenen
+Pyodide-Web-Worker ausführen. Die Ausgabe erscheint unmittelbar unter dem
+Beispiel. Abschnitte mit `input()` bieten vorbelegte, veränderbare
+Beispieleingaben mit einer Eingabe pro Zeile.
 
 ## Technische Architektur
 
@@ -86,6 +102,17 @@ Die Aufgabenprüfung verwendet je nach Lernziel:
 - erwartete Standardausgabe,
 - numerische Ausgabe mit Toleranz,
 - Python-Assertions gegen Variablen oder Funktionen.
+
+Assertion-Meldungen sowie häufige Syntax- und Laufzeitfehler werden in
+verständliche Diagnosen übersetzt. Jede Aufgabe besitzt mehrere gestufte
+Hinweise. Die Funktionsaufgaben prüfen zusätzlich Signaturen, mehrere Testwerte
+und ausgewählte AST-Merkmale. Nur diese reproduzierbare lokale Prüfung kann
+Aufgabe, Lektion und XP freigeben.
+
+Der optionale KI-Worker ergänzt einen kurzen Lernhinweis und gibt strukturiertes
+JSON zurück. Der API-Schlüssel liegt ausschließlich als Worker-Secret vor.
+CORS, Größenbegrenzung, einfache Ratenbegrenzung und ein vollständiger lokaler
+Fallback begrenzen Missbrauch und Ausfälle.
 
 ## Quellen
 

@@ -24,9 +24,9 @@ window.PYLAB_CONTENT = {
     {
       id: "bausteine",
       number: "04",
-      title: "Programme strukturieren",
-      description: "Funktionen mit Parametern und Rückgabewerten.",
-      lessonIds: ["funktionen"]
+      title: "Funktionen bauen",
+      description: "Teilaufgaben auslagern, Werte übergeben und Ergebnisse zurückgeben.",
+      lessonIds: ["funktionen", "funktionen-parameter", "funktionen-rueckgabe"]
     },
     {
       id: "plus",
@@ -190,7 +190,8 @@ window.PYLAB_CONTENT = {
             "`input()` wartet auf eine Eingabe. Der eingegebene Wert ist zunächst immer Text, selbst wenn jemand 12 eintippt.",
             "Für eine Rechnung wandelst du den Text mit `int()` oder `float()` um."
           ],
-          code: `name = input("Wie heißt du? ")\nalter = int(input("Wie alt bist du? "))\nprint("Hallo", name)\nprint("Nächstes Jahr bist du", alter + 1)`
+          code: `name = input("Wie heißt du? ")\nalter = int(input("Wie alt bist du? "))\nprint("Hallo", name)\nprint("Nächstes Jahr bist du", alter + 1)`,
+          exampleInput: "Mia\n16"
         },
         {
           title: "Ganzzahl oder Dezimalzahl?",
@@ -199,6 +200,7 @@ window.PYLAB_CONTENT = {
             "Wähle die Umwandlung passend zum fachlichen Inhalt, nicht nur passend zu einem einzelnen Beispiel."
           ],
           code: `anzahl = int(input("Anzahl: "))\npreis = float(input("Preis pro Stück: "))\ngesamt = anzahl * preis\nprint("Gesamt:", gesamt, "Euro")`,
+          exampleInput: "4\n2.5",
           warning: "Eine Eingabe wie zwölf kann nicht mit int() umgewandelt werden. Für den Einstieg gehen wir davon aus, dass die Eingaben passend erfolgen."
         }
       ],
@@ -430,59 +432,187 @@ window.PYLAB_CONTENT = {
       id: "funktionen",
       module: "bausteine",
       index: "10",
-      title: "Funktionen",
-      subtitle: "Funktionen bündeln eine Teilaufgabe und machen Programme übersichtlicher.",
-      duration: 25,
+      title: "Funktionen ohne Parameter",
+      subtitle: "Ein benannter Programmbaustein kann an beliebigen Stellen aufgerufen werden.",
+      duration: 22,
       xp: 50,
-      difficulty: "medium",
+      difficulty: "easy",
       objectives: [
-        "Funktionen definieren und aufrufen",
-        "Parameter als Eingabewerte einer Funktion verstehen",
-        "Rückgabewerte weiterverwenden"
+        "eine Funktion mit def definieren und aufrufen",
+        "Funktionsdefinition und Hauptprogramm unterscheiden",
+        "Einrückung, Klammern und Doppelpunkt sicher setzen"
       ],
       sections: [
         {
-          title: "Ein benannter Baustein",
+          title: "Eine Teilaufgabe bekommt einen Namen",
           body: [
-            "Mit `def` definierst du eine Funktion. Der eingerückte Block beschreibt, was die Funktion erledigt.",
-            "Eine Definition führt den Block noch nicht aus. Erst ein Funktionsaufruf startet ihn."
+            "Eine Funktion ist ein ausgelagerter Programmteil für eine klar benannte Aufgabe. Statt dieselben Anweisungen mehrfach zu schreiben, definierst du sie einmal und rufst sie danach beliebig oft auf.",
+            "Das macht längere Programme übersichtlicher: Im Hauptprogramm ist sofort zu erkennen, welche Teilaufgabe gerade ausgeführt wird."
           ],
-          code: `def begruessung():\n    print("Willkommen in PythonLab!")\n\nbegruessung()`
+          code: `def zeige_startmeldung():\n    print("PythonLab startet")\n    print("Viel Erfolg!")\n\nzeige_startmeldung()\nzeige_startmeldung()`
         },
         {
-          title: "Parameter",
+          title: "Definition und Aufruf sind verschieden",
           body: [
-            "Parameter sind Platzhalter in der Funktionsdefinition. Beim Aufruf werden konkrete Argumente eingesetzt.",
-            "So kann derselbe Baustein mit unterschiedlichen Werten arbeiten."
+            "Die Zeile mit `def` legt fest, was die Funktion später tun soll. Python merkt sich diese Definition, führt den eingerückten Funktionskörper aber noch nicht aus.",
+            "Erst der Aufruf `zeige_startmeldung()` springt in die Funktion. Nach der letzten eingerückten Anweisung geht es im Hauptprogramm direkt hinter dem Aufruf weiter."
           ],
-          code: `def begruessung(name):\n    print("Hallo", name)\n\nbegruessung("Mia")\nbegruessung("Noah")`
+          code: `def signal():\n    print("Start")\n\nprint("A")\nsignal()\nprint("B")`,
+          tip: "Verfolge den Ablauf mit dem Finger: Definition merken, A ausgeben, Funktion aufrufen, Start ausgeben, B ausgeben."
         },
         {
-          title: "Rückgabewerte",
+          title: "Die Syntax im Blick",
           body: [
-            "`return` gibt ein Ergebnis an die aufrufende Stelle zurück. Dort kann es gespeichert, ausgegeben oder weiterverarbeitet werden.",
-            "Ein Rückgabewert ist flexibler als eine Ausgabe direkt in der Funktion."
+            "Nach `def` folgen ein sinnvoller Funktionsname, leere runde Klammern und ein Doppelpunkt. Die zugehörigen Anweisungen stehen eingerückt darunter.",
+            "Beim Aufruf schreibst du nur den Namen und die Klammern. `def` und Doppelpunkt gehören nicht zum Aufruf."
           ],
-          code: `def rechteck_flaeche(breite, hoehe):\n    flaeche = breite * hoehe\n    return flaeche\n\nergebnis = rechteck_flaeche(4, 6)\nprint(ergebnis)`,
-          tip: "Eine Funktion sollte möglichst eine klar beschreibbare Teilaufgabe erledigen."
+          code: `def zeige_hinweis():\n    print("Bitte Eingaben prüfen")\n\nzeige_hinweis()`,
+          warning: "Fehlt die Einrückung, der Doppelpunkt oder eines der Klammerpaare, kann Python die Funktion nicht richtig verarbeiten."
+        },
+        {
+          title: "Gute Namen und eine klare Reihenfolge",
+          body: [
+            "Funktionsnamen sollten die Aufgabe als Tätigkeit beschreiben, zum Beispiel `zeige_menue()`, `drucke_ticket()` oder `berechne_preis()`. In Python werden mehrere Wörter üblicherweise mit Unterstrichen verbunden.",
+            "Definiere eine Funktion, bevor sie im Programm aufgerufen wird. Python arbeitet von oben nach unten und muss die Definition beim Aufruf bereits kennen."
+          ],
+          code: `def drucke_trennlinie():\n    print("-" * 24)\n\nprint("Tagesübersicht")\ndrucke_trennlinie()\nprint("Drei Aufgaben sind offen")`,
+          tip: "Ein guter Funktionsname lässt den Aufruf fast wie einen deutschen Arbeitsauftrag lesen."
         }
       ],
       quiz: {
-        question: "Was bewirkt return in einer Funktion?",
+        question: "Was geschieht, wenn eine Funktion nur definiert, aber nirgends aufgerufen wird?",
         options: [
-          "Es startet das gesamte Programm neu",
-          "Es gibt einen Wert an die aufrufende Stelle zurück",
-          "Es schreibt immer etwas auf den Bildschirm"
+          "Der Funktionskörper wird einmal ausgeführt",
+          "Der Funktionskörper wird nicht ausgeführt",
+          "Python führt die Funktion automatisch am Programmende aus"
         ],
         correct: 1,
-        explanation: "return liefert ein Ergebnis zurück. Eine Ausgabe erfolgt nur, wenn du es zusätzlich mit print() ausgibst."
+        explanation: "Die Definition legt die Funktion nur an. Erst ein Aufruf mit ihrem Namen und den Klammern führt den Funktionskörper aus."
+      },
+      practiceId: "pausensignal-funktion"
+    },
+    {
+      id: "funktionen-parameter",
+      module: "bausteine",
+      index: "11",
+      title: "Funktionen mit Parametern",
+      subtitle: "Parameter machen aus einem festen Baustein ein Werkzeug für unterschiedliche Werte.",
+      duration: 25,
+      xp: 45,
+      difficulty: "medium",
+      objectives: [
+        "Parameter und Argumente voneinander unterscheiden",
+        "einer Funktion einen oder mehrere Werte übergeben",
+        "Reihenfolge und Verwendung der Parameter nachvollziehen"
+      ],
+      sections: [
+        {
+          title: "Platzhalter in der Definition",
+          body: [
+            "Ein Parameter ist ein Platzhalter in der Funktionsdefinition. Die Funktion kann ihn wie eine Variable verwenden, obwohl der konkrete Wert erst beim Aufruf feststeht.",
+            "So erledigt derselbe Programmbaustein eine Aufgabe mit immer neuen Daten."
+          ],
+          code: `def begruesse(name):\n    print("Hallo", name)\n\nbegruesse("Mia")\nbegruesse("Noah")`
+        },
+        {
+          title: "Parameter und Argument",
+          body: [
+            "In `def begruesse(name):` heißt `name` Parameter. Beim Aufruf `begruesse(\"Mia\")` ist `\"Mia\"` das konkrete Argument.",
+            "Bei jedem Aufruf erhält der Parameter für die Dauer dieses Aufrufs den übergebenen Wert. Danach kann dieselbe Funktion mit einem anderen Argument erneut starten."
+          ],
+          code: `def zeige_preis(preis):\n    print("Preis:", preis, "Euro")\n\nzeige_preis(4.5)\nzeige_preis(7.0)`,
+          tip: "Merksatz: Der Parameter steht in der Definition, das Argument steht im Aufruf."
+        },
+        {
+          title: "Mehrere Werte übergeben",
+          body: [
+            "Mehrere Parameter werden durch Kommas getrennt. Beim normalen Aufruf zählt ihre Reihenfolge: Das erste Argument gehört zum ersten Parameter, das zweite zum zweiten Parameter.",
+            "Wähle Namen, die die Bedeutung der Werte deutlich machen. Dann lässt sich der Funktionsaufruf leichter kontrollieren."
+          ],
+          code: `def zeige_strecke(start, ziel):\n    print("Von", start, "nach", ziel)\n\nzeige_strecke("Ulm", "Freiburg")`,
+          warning: "Anzahl und Reihenfolge der Argumente müssen zur Definition passen. Sonst erhältst du einen Fehler oder die Funktion verarbeitet vertauschte Werte."
+        },
+        {
+          title: "Parameter gelten innerhalb der Funktion",
+          body: [
+            "Parameter stehen der Funktion während eines Aufrufs als eigene Namen zur Verfügung. Änderungen an einer einfachen Zahl oder Zeichenkette innerhalb der Funktion verändern die ursprüngliche Variable im Hauptprogramm nicht.",
+            "Das Präfix `p_` kann Parameter sichtbar kennzeichnen, ist in Python aber keine Pflicht. Wichtiger sind verständliche Namen und eine einheitliche Schreibweise."
+          ],
+          code: `def zeige_doppelten_wert(zahl):\n    zahl = zahl * 2\n    print("In der Funktion:", zahl)\n\nwert = 7\nzeige_doppelten_wert(wert)\nprint("Im Hauptprogramm:", wert)`,
+          tip: "Im Beispiel ist der Parameter zahl nur innerhalb der Funktion 14. Die Variable wert bleibt außerhalb bei 7."
+        }
+      ],
+      quiz: {
+        question: "Was sind in rechteck(4, 6) die Werte 4 und 6?",
+        options: ["Funktionsnamen", "Argumente", "Rückgabewerte"],
+        correct: 1,
+        explanation: "Die konkreten Werte beim Aufruf heißen Argumente. In der Definition werden sie von Parametern entgegengenommen."
+      },
+      practiceId: "begruessung-parameter"
+    },
+    {
+      id: "funktionen-rueckgabe",
+      module: "bausteine",
+      index: "12",
+      title: "Funktionen mit Rückgabewert",
+      subtitle: "Mit return liefert eine Funktion ein Ergebnis an die aufrufende Stelle zurück.",
+      duration: 28,
+      xp: 50,
+      difficulty: "medium",
+      objectives: [
+        "ein berechnetes Ergebnis mit return zurückgeben",
+        "einen Rückgabewert speichern und weiterverwenden",
+        "Ausgabe mit print() und Rückgabe mit return unterscheiden"
+      ],
+      sections: [
+        {
+          title: "Ein Ergebnis kommt zurück",
+          body: [
+            "Parameter bringen Werte in eine Funktion hinein. `return` transportiert ein Ergebnis zurück an die Stelle, an der die Funktion aufgerufen wurde.",
+            "Der Aufruf verhält sich dann wie ein Wert. Du kannst ihn einer Variablen zuweisen, direkt ausgeben oder in einer weiteren Rechnung verwenden."
+          ],
+          code: `def quadrat(zahl):\n    ergebnis = zahl * zahl\n    return ergebnis\n\nquadrat_von_fuenf = quadrat(5)\nprint(quadrat_von_fuenf)`
+        },
+        {
+          title: "print() oder return?",
+          body: [
+            "`print()` zeigt etwas auf dem Bildschirm. Das ist eine Ausgabe, aber noch kein Ergebnis, mit dem das Hauptprogramm weiterrechnen kann.",
+            "`return` gibt einen Wert an den Aufruf zurück. Über die sichtbare Ausgabe entscheidet anschließend das Hauptprogramm. Dadurch bleibt die Funktion vielseitig."
+          ],
+          code: `def netto(brutto, rabatt):\n    return brutto * (1 - rabatt)\n\npreis = netto(80, 0.25)\nprint("Endpreis:", preis)`,
+          tip: "Frage dich: Soll die Funktion nur etwas anzeigen oder soll das Ergebnis später noch gebraucht werden? Für Berechnungen ist return meist die bessere Wahl."
+        },
+        {
+          title: "Der Weg des Wertes",
+          body: [
+            "Beim Aufruf werden zuerst die Argumente an die Parameter übergeben. Die Funktion berechnet daraus ihr Ergebnis. `return` beendet den Aufruf und setzt das Ergebnis an seiner Stelle ein.",
+            "Im Beispiel wird der Rückgabewert zuerst in `kosten` gespeichert und danach ausgegeben. Mit anderen Argumenten kann dieselbe Funktion weitere Fahrten berechnen."
+          ],
+          code: `def fahrtkosten(strecke, verbrauch, literpreis):\n    liter = strecke * verbrauch / 100\n    return liter * literpreis\n\nkosten = fahrtkosten(250, 6.5, 1.80)\nprint("Fahrtkosten:", kosten, "Euro")`,
+          warning: "Sobald Python return ausführt, endet der aktuelle Funktionsaufruf. Anweisungen darunter werden in diesem Durchlauf nicht mehr erreicht."
+        },
+        {
+          title: "Wenn return fehlt",
+          body: [
+            "Eine Python-Funktion ohne ausdrückliches `return` liefert automatisch den besonderen Wert `None`. Das bedeutet: Es wurde kein verwendbares Ergebnis zurückgegeben.",
+            "Darum kann eine Funktion zwar etwas mit `print()` anzeigen, aber das Hauptprogramm erhält dadurch noch keinen berechneten Wert."
+          ],
+          code: `def nur_ausgeben(text):\n    print(text)\n\nrueckgabe = nur_ausgeben("Hallo aus der Funktion")\nprint("Rückgabewert:", rueckgabe)`,
+          tip: "Führe das Beispiel aus und beobachte: Die erste Zeile ist die Ausgabe der Funktion, danach wird None als fehlender Rückgabewert sichtbar."
+        }
+      ],
+      quiz: {
+        question: "Welchen Wert erhält ergebnis nach ergebnis = doppelt(7), wenn doppelt den Ausdruck zahl * 2 zurückgibt?",
+        options: ["7", "14", "Keinen Wert"],
+        correct: 1,
+        explanation: "Beim Aufruf ist zahl gleich 7. return gibt 7 * 2 zurück, deshalb wird 14 in ergebnis gespeichert."
       },
       practiceId: "fahrtkosten-funktion"
     },
     {
       id: "listen",
       module: "plus",
-      index: "11",
+      index: "13",
       title: "Listen als Sammlung",
       subtitle: "Listen speichern mehrere zusammengehörige Werte in einer geordneten Sammlung.",
       duration: 24,
@@ -523,7 +653,7 @@ window.PYLAB_CONTENT = {
     {
       id: "debugging",
       module: "plus",
-      index: "12",
+      index: "14",
       title: "Fehler finden und Lösungen planen",
       subtitle: "Fehler sind Hinweise. Mit einer festen Strategie werden sie beherrschbar.",
       duration: 22,
@@ -576,6 +706,11 @@ window.PYLAB_CONTENT = {
         "Gib danach den Text Ich übe selbst! aus.",
         "Gib in der dritten Zeile das Ergebnis von 6 + 4 aus."
       ],
+      hints: [
+        "Nutze für jede geforderte Ausgabe einen eigenen print()-Aufruf.",
+        "Text braucht Anführungszeichen; die Rechnung 6 + 4 dagegen nicht.",
+        "Prüfe, ob genau drei nichtleere Ausgabezeilen in der geforderten Reihenfolge entstehen."
+      ],
       starter: `# Schreibe deine drei Ausgaben hier\n`,
       check: {
         type: "output",
@@ -593,6 +728,11 @@ window.PYLAB_CONTENT = {
         "Speichere 35 in einer Variable namens punkte.",
         "Erhöhe punkte um 15.",
         "Gib den neuen Punktestand aus."
+      ],
+      hints: [
+        "Verwende die vorhandene Variable punkte auf der rechten Seite einer neuen Zuweisung.",
+        "Erhöhe den bisherigen Wert mit punkte = punkte + 15.",
+        "Gib am Ende die Variable aus, nicht den fest eingetippten Ergebniswert."
       ],
       starter: `punkte = 35\n\n# Erhöhe den Punktestand\n\n# Gib ihn aus\n`,
       check: {
@@ -613,6 +753,11 @@ window.PYLAB_CONTENT = {
         "Berechne umfang = 2 * (breite + hoehe).",
         "Gib zuerst die Fläche, danach den Umfang aus."
       ],
+      hints: [
+        "Lege für Fläche und Umfang zwei unterschiedlich benannte Variablen an.",
+        "Die Fläche ist breite * hoehe; beim Umfang wird die Summe aus Breite und Höhe verdoppelt.",
+        "Die Tests suchen die Variablen flaeche und umfang und erwarten die Werte 40 und 26."
+      ],
       starter: `breite = 8\nhoehe = 5\n\n# Berechne Fläche und Umfang\n`,
       check: {
         type: "tests",
@@ -630,6 +775,11 @@ window.PYLAB_CONTENT = {
         "Lies eine Celsius-Temperatur als Dezimalzahl ein.",
         "Berechne Fahrenheit mit celsius * 1.8 + 32.",
         "Gib das Ergebnis aus."
+      ],
+      hints: [
+        "input() liefert Text. Wandle die Eingabe vor der Rechnung mit float() um.",
+        "Setze die Umwandlung direkt um input(), zum Beispiel float(input()).",
+        "Berechne fahrenheit aus celsius * 1.8 + 32 und gib diese Variable aus."
       ],
       starter: `# Eingabe als float einlesen\ncelsius = \n\n# Fahrenheit berechnen\nfahrenheit = \n\nprint(fahrenheit)\n`,
       input: "20",
@@ -652,6 +802,11 @@ window.PYLAB_CONTENT = {
         "Ab 5 Stück wird gesamt mit 0.9 multipliziert.",
         "Gib gesamt aus."
       ],
+      hints: [
+        "Prüfe die Stückzahl mit einer if-Bedingung.",
+        "Der Rabattblock soll nur für anzahl >= 5 ausgeführt werden.",
+        "Innerhalb des eingerückten Blocks wird gesamt mit 0.9 multipliziert."
+      ],
       starter: `preis = 12\nanzahl = 6\n\ngesamt = preis * anzahl\n\n# Rabatt nur ab 5 Stück\n\nprint(gesamt)\n`,
       check: {
         type: "tests",
@@ -672,6 +827,11 @@ window.PYLAB_CONTENT = {
         "Weniger als 50 Punkte: Starter",
         "Speichere die Stufe in der Variable stufe und gib sie aus."
       ],
+      hints: [
+        "Prüfe die Grenzwerte mit if, elif und else von oben nach unten.",
+        "Beginne mit dem höchsten Grenzwert 90 und prüfe danach 70 und 50.",
+        "Jeder Zweig weist der Variablen stufe genau einen Text zu."
+      ],
       starter: `punkte = 76\n\n# Bestimme die Variable stufe\n\nprint(stufe)\n`,
       check: {
         type: "tests",
@@ -690,6 +850,11 @@ window.PYLAB_CONTENT = {
         "Speichere True oder False in zugang.",
         "Gib zugang aus."
       ],
+      hints: [
+        "Formuliere zuerst zwei einzelne Vergleiche: Alter ausreichend und Unterweisung abgeschlossen.",
+        "Beide Bedingungen müssen zugleich wahr sein; verbinde sie deshalb mit and.",
+        "Speichere den gesamten Wahrheitsausdruck direkt in zugang."
+      ],
       starter: `alter = 17\nunterweisung = True\n\n# Verknüpfe beide Bedingungen\nzugang = \n\nprint(zugang)\n`,
       check: {
         type: "tests",
@@ -707,6 +872,11 @@ window.PYLAB_CONTENT = {
         "Nutze eine for-Schleife für die Zahlen 1 bis 10.",
         "Gib in jeder Runde 7 * zahl aus.",
         "Die Ausgabe beginnt mit 7 und endet mit 70."
+      ],
+      hints: [
+        "Nutze range() so, dass die Laufvariable die Zahlen 1 bis 10 annimmt.",
+        "Da der Endwert von range() nicht enthalten ist, lautet der Bereich range(1, 11).",
+        "Rücke print(7 * zahl) in den Schleifenblock ein."
       ],
       starter: `# Schreibe die for-Schleife\n`,
       check: {
@@ -728,6 +898,11 @@ window.PYLAB_CONTENT = {
         "Wiederhole, bis mindestens 130 Euro erreicht sind.",
         "Gib monate und guthaben aus."
       ],
+      hints: [
+        "Die Schleife läuft, solange guthaben noch kleiner als 130 ist.",
+        "Verändere innerhalb jedes Durchlaufs sowohl guthaben als auch monate.",
+        "Addiere pro Runde 15 zum Guthaben und 1 zu den Monaten."
+      ],
       starter: `guthaben = 40\nmonate = 0\n\n# Ergänze die while-Schleife\n\nprint(monate)\nprint(guthaben)\n`,
       check: {
         type: "tests",
@@ -735,8 +910,54 @@ window.PYLAB_CONTENT = {
       }
     },
     {
-      id: "fahrtkosten-funktion",
+      id: "pausensignal-funktion",
       lessonId: "funktionen",
+      title: "Pausensignal wiederverwenden",
+      description: "Definiere eine Funktion ohne Parameter und rufe sie mehrfach auf.",
+      difficulty: "easy",
+      xp: 40,
+      instructions: [
+        "Definiere eine Funktion namens pausensignal ohne Parameter.",
+        "Die Funktion soll zuerst Pause beginnt und danach Bitte lüften ausgeben.",
+        "Rufe die Funktion im Hauptprogramm genau zweimal auf."
+      ],
+      hints: [
+        "Ersetze pass innerhalb der Funktion durch zwei eingerückte print()-Anweisungen.",
+        "Unterhalb der Definition startest du die Funktion mit pausensignal().",
+        "Der Aufruf soll zweimal im Hauptprogramm stehen; die Definition selbst wird nur einmal geschrieben."
+      ],
+      starter: `def pausensignal():\n    # Ergänze die beiden Ausgaben\n    pass\n\n# Rufe die Funktion zweimal auf\n`,
+      check: {
+        type: "tests",
+        code: `import ast\nimport contextlib\nimport inspect\nimport io\n\nassert callable(pausensignal), "Definiere eine Funktion namens pausensignal."\nassert len(inspect.signature(pausensignal).parameters) == 0, "Die Funktion soll keine Parameter besitzen."\n_testausgabe = io.StringIO()\nwith contextlib.redirect_stdout(_testausgabe):\n    pausensignal()\nassert _testausgabe.getvalue().strip().splitlines() == ["Pause beginnt", "Bitte lüften"], "Prüfe die beiden Ausgaben und ihre Reihenfolge."\n_baum = ast.parse(__pylab_source__)\n_aufrufe = [knoten for knoten in ast.walk(_baum) if isinstance(knoten, ast.Call) and isinstance(knoten.func, ast.Name) and knoten.func.id == "pausensignal"]\nassert len(_aufrufe) == 2, "Rufe pausensignal im Hauptprogramm genau zweimal auf."\nprint("__PYLAB_TESTS_OK__")`
+      }
+    },
+    {
+      id: "begruessung-parameter",
+      lessonId: "funktionen-parameter",
+      title: "Persönlich begrüßen",
+      description: "Übergib Vor- und Nachname als zwei Parameter.",
+      difficulty: "medium",
+      xp: 50,
+      instructions: [
+        "Definiere begruesse(vorname, nachname) mit genau zwei Parametern.",
+        "Gib in der Funktion Hallo gefolgt von Vor- und Nachname aus.",
+        "Lass den vorgegebenen Beispielaufruf unverändert."
+      ],
+      hints: [
+        "Ersetze pass durch eine eingerückte Ausgabe innerhalb der Funktion.",
+        "print() kann mehrere Werte durch Kommas getrennt mit Leerzeichen ausgeben.",
+        "Verwende beide Parameter vorname und nachname; schreibe nicht die Beispielnamen fest in die Funktion."
+      ],
+      starter: `def begruesse(vorname, nachname):\n    # Persönliche Begrüßung ausgeben\n    pass\n\nbegruesse("Mia", "Koch")\n`,
+      check: {
+        type: "tests",
+        code: `import ast\nimport contextlib\nimport inspect\nimport io\n\nassert callable(begruesse), "Definiere eine Funktion namens begruesse."\nassert len(inspect.signature(begruesse).parameters) == 2, "Die Funktion benötigt genau zwei Parameter."\n_testausgabe = io.StringIO()\nwith contextlib.redirect_stdout(_testausgabe):\n    begruesse("Noah", "Yilmaz")\nassert _testausgabe.getvalue().strip() == "Hallo Noah Yilmaz", "Verwende beide übergebenen Namen in der Begrüßung."\n_baum = ast.parse(__pylab_source__)\n_beispiel = [knoten for knoten in ast.walk(_baum) if isinstance(knoten, ast.Call) and isinstance(knoten.func, ast.Name) and knoten.func.id == "begruesse" and len(knoten.args) == 2]\nassert any(isinstance(knoten.args[0], ast.Constant) and knoten.args[0].value == "Mia" and isinstance(knoten.args[1], ast.Constant) and knoten.args[1].value == "Koch" for knoten in _beispiel), "Lass den Beispielaufruf begruesse(\"Mia\", \"Koch\") unverändert."\nprint("__PYLAB_TESTS_OK__")`
+      }
+    },
+    {
+      id: "fahrtkosten-funktion",
+      lessonId: "funktionen-rueckgabe",
       title: "Fahrtkosten als Funktion",
       description: "Kapsele eine Berechnung mit Parametern und Rückgabewert.",
       difficulty: "medium",
@@ -747,10 +968,15 @@ window.PYLAB_CONTENT = {
         "Gib die Gesamtkosten mit return zurück.",
         "Verändere den vorgegebenen Beispielaufruf nicht."
       ],
+      hints: [
+        "Berechne innerhalb der Funktion zuerst liter = strecke * verbrauch / 100.",
+        "Die Gesamtkosten ergeben sich aus den benötigten Litern mal literpreis.",
+        "Gib das berechnete Ergebnis mit return zurück; print() allein ist kein Rückgabewert."
+      ],
       starter: `def kosten(strecke, verbrauch, literpreis):\n    # Berechnung ergänzen\n    pass\n\nbeispiel = kosten(250, 6.5, 1.80)\nprint(beispiel)\n`,
       check: {
         type: "tests",
-        code: `assert abs(kosten(250, 6.5, 1.80) - 29.25) < 0.001, "Prüfe Literverbrauch und Kosten."\nassert abs(kosten(100, 5, 2) - 10) < 0.001, "Die Funktion soll mit verschiedenen Werten arbeiten."\nprint("__PYLAB_TESTS_OK__")`
+        code: `import ast\nimport inspect\n\nassert callable(kosten), "Definiere eine Funktion namens kosten."\nassert len(inspect.signature(kosten).parameters) == 3, "Die Funktion benötigt genau drei Parameter."\nassert abs(kosten(250, 6.5, 1.80) - 29.25) < 0.001, "Prüfe Literverbrauch und Kosten."\nassert abs(kosten(100, 5, 2) - 10) < 0.001, "Die Funktion soll mit verschiedenen Werten arbeiten."\nassert abs(kosten(420, 7.2, 1.65) - 49.896) < 0.001, "Verwende alle drei Parameter in der Berechnung."\n_baum = ast.parse(__pylab_source__)\n_beispiel = [knoten for knoten in ast.walk(_baum) if isinstance(knoten, ast.Call) and isinstance(knoten.func, ast.Name) and knoten.func.id == "kosten" and len(knoten.args) == 3]\nassert any([isinstance(argument, ast.Constant) for argument in knoten.args] == [True, True, True] and [argument.value for argument in knoten.args] == [250, 6.5, 1.8] for knoten in _beispiel), "Lass den vorgegebenen Beispielaufruf unverändert."\nprint("__PYLAB_TESTS_OK__")`
       }
     },
     {
@@ -765,6 +991,11 @@ window.PYLAB_CONTENT = {
         "Addiere alle Werte in summe.",
         "Berechne mittelwert mit summe / len(messwerte).",
         "Gib den Mittelwert aus."
+      ],
+      hints: [
+        "Durchlaufe messwerte mit for wert in messwerte:.",
+        "Addiere im eingerückten Schleifenblock jeden wert zu summe.",
+        "Berechne nach der Schleife mittelwert = summe / len(messwerte)."
       ],
       starter: `messwerte = [18, 21, 19, 22, 20]\nsumme = 0\n\n# Liste durchlaufen und Summe bilden\n\n# Mittelwert berechnen\n\nprint(mittelwert)\n`,
       check: {
@@ -783,6 +1014,11 @@ window.PYLAB_CONTENT = {
         "Das Programm soll ab 4 Tickets 20 Prozent Rabatt geben.",
         "Für 5 Tickets zu je 10 Euro muss der Endpreis 40 Euro sein.",
         "Repariere alle Fehler und behalte die Ausgabe bei."
+      ],
+      hints: [
+        "Behebe zuerst den Syntaxfehler: Nach einer if-Bedingung steht ein Doppelpunkt.",
+        "Alle Anweisungen des if-Blocks müssen gleich weit eingerückt sein.",
+        "Der Gesamtpreis entsteht durch Multiplikation von preis und anzahl, nicht durch Addition."
       ],
       starter: `preis = 10\nanzahl = 5\ngesamt = preis + anzahl\n\nif anzahl >= 4\nprint("Rabatt wird angewendet")\n    gesamt = gesamt * 0.8\n\nprint(gesamt)\n`,
       check: {
@@ -1450,9 +1686,9 @@ window.PYLAB_CONTENT = {
     {
       id: "builder",
       title: "Bausteinbauer",
-      description: "Schließe die Funktionslektion und ihre Aufgabe ab.",
+      description: "Schließe die gesamte Funktionsetappe ab.",
       icon: "wrench",
-      condition: { type: "lessonExercise", value: "funktionen" }
+      condition: { type: "module", value: "bausteine" }
     },
     {
       id: "collector",

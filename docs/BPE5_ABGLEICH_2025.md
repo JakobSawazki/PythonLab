@@ -1,6 +1,6 @@
 # Abgleich mit BPE 5: Grundlagen der Programmierung
 
-Stand des Abgleichs: 18. Juni 2026
+Stand des Abgleichs: 19. Juni 2026
 Referenzmaterial: Version mit Python, Stand 31. Juli 2025
 
 ## Verbindliche Referenz
@@ -61,10 +61,17 @@ beziehungsweise Greenfoot ist nicht Bestandteil des browserbasierten Portals.
 | Variablen, Datentypen und kombinierte Ausgaben | 02 Variablen und Datentypen | vollständig |
 | Rechenoperatoren | 03 Rechnen mit Python | vollständig |
 | Benutzereingaben und Typumwandlung | 04 Eingaben und Umwandlung | vollständig |
-| Funktionen, Parameter und Rückgabewerte | 10 Funktionen | vollständig |
+| Funktionen ohne Parameter | 10 Funktionen ohne Parameter | vollständig |
+| Funktionen mit Parametern | 11 Funktionen mit Parametern | vollständig |
+| Funktionen mit Rückgabewert | 12 Funktionen mit Rückgabewert | vollständig |
 | zentrale Syntax wiederholen | Reiter Befehle | als kompakte Nachschlage- und Übungskarten umgesetzt |
 | Programme als Struktogramm dokumentieren | Struktogramm-Labor | als geführte Übungen umgesetzt |
 | Grafische Benutzeroberflächen | Zusatzinhalt | noch nicht umgesetzt |
+
+Der Funktionsabschnitt orientiert sich in seiner Progression an den drei
+Informationsblättern `L2_5_1_1` bis `L2_5_1_3`, formuliert Erklärungen und
+Aufgaben jedoch eigenständig. Zwei kurze Aufbauaufgaben und die
+Fahrtkosten-Transferaufgabe machen jeden Schritt unmittelbar prüfbar.
 
 **Bewertung:** Der verpflichtende Python-Kern ist sehr gut abgedeckt. Thonny
 ist für das browserbasierte Portal technisch nicht erforderlich. Die

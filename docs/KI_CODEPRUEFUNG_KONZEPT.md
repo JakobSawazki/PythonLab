@@ -1,6 +1,6 @@
 # Konzept: Dynamische Codeprüfung und optionale KI-Hilfe
 
-Stand: 18. Juni 2026
+Stand: 19. Juni 2026 – Hybridlösung in Version 0.10.0 umgesetzt
 
 ## Ausgangspunkt
 
@@ -103,16 +103,18 @@ Fallback.
 }
 ```
 
-## Umsetzungsschritte
+## Umsetzungsstand
 
-1. Aufgabenmodell in `content.js` um Rubriken und mehrere Testfälle erweitern.
-2. Prüfengine in `app.js` um Teilpunkte und detaillierte Hinweise ergänzen.
-3. AST-Prüfungen für zentrale BPE5-Konzepte einführen.
-4. Optionale KI-Schaltfläche `Hinweis prüfen lassen` ergänzen.
-5. Serverless-Proxy erstellen und API-Key nur dort speichern.
-6. KI-Antwort strikt als JSON validieren.
-7. XP-Vergabe konservativ halten: volle XP nur bei deterministisch bestandenen
-   Kernkriterien oder bei klarer Rubrikfreigabe.
+1. Alle Aufgaben besitzen drei gestufte lokale Hinweise.
+2. Python- und Assertion-Fehler werden verständlich ausgewertet.
+3. Die drei Funktionsaufgaben nutzen zusätzliche AST-, Signatur- und Testwertprüfungen.
+4. Die Oberfläche bietet einen freiwilligen KI-Tipp, sobald ein Endpoint konfiguriert ist.
+5. `services/ai-feedback-worker/` enthält den getrennten Serverless-Proxy; der API-Key bleibt als Secret dort.
+6. KI-Antworten werden als festes JSON-Schema angefordert und serverseitig bereinigt.
+7. Nur die deterministische Prüfung vergibt XP und schließt Aufgabe und Lektion ab.
+
+Offen bleiben die tatsächliche Einrichtung des Cloudflare- und Gemini-Projekts,
+die schulische Datenschutzfreigabe sowie spätere Teilpunkte und Kompetenz-Rubriken.
 
 ## Einbindung der KA-Webarbeit
 

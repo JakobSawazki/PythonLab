@@ -42,7 +42,7 @@ Orientierung verwendet und als eigene, webgeeignete Inhalte formuliert.
 
 Aktuell umgesetzt:
 
-- Lernpfad zu BPE5-Grundlagen der Programmierung mit zwölf Lektionen
+- Lernpfad zu BPE5-Grundlagen der Programmierung mit vierzehn Lektionen
 - automatische Python-Übungen im Browser
 - Struktogramm-Labor und Struktogrammer-Web-Verlinkung
 - Reiter **Befehle** für zentrale Python-Syntax mit Detailseiten und

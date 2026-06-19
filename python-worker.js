@@ -35,6 +35,7 @@ self.onmessage = async (event) => {
 
   try {
     globals = pyodide.runPython("dict()");
+    globals.set("__pylab_source__", String(code));
     await pyodide.runPythonAsync(String(code), { globals });
 
     if (testCode) {

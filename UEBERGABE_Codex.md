@@ -1,6 +1,6 @@
 # Übergabeprotokoll: PythonLab
 
-Stand: 18. Juni 2026
+Stand: 19. Juni 2026
 
 ## Projektziel
 
@@ -34,14 +34,19 @@ Verbindliche fachliche Referenz:
 ## Aktueller Funktionsumfang
 
 - Übersicht mit persönlichem nächsten Schritt und Lernstatistik
-- fünf Lernetappen mit zwölf Lektionen
-- zwölf Aufgaben mit editierbarem Python-Code
+- fünf Lernetappen mit vierzehn Lektionen
+- vierzehn Aufgaben mit editierbarem Python-Code
+- eigener Funktionsabschnitt mit drei Lektionen: ohne Parameter, mit Parametern und mit Rückgabewert
 - Reiter **Befehle** mit zehn Python-Basiselementen, Detailseiten und XP-Miniaufgaben
 - Struktogramm-Labor mit fünf Grundformen und fünf interaktiven Aufgaben
 - direkter Kopfzeilen-Link zum Struktogrammer Web
 - einheitlicher Icon-Button für den Struktogrammer-Web-Link
-- umschaltbarer Light- und Dark-Mode
+- Dark Mode als Standard für neue Browserprofile und weiterhin umschaltbarer Light Mode
+- alle Erklärungsbeispiele direkt in den Lektionen mit Pyodide ausführbar
 - automatische Prüfung von Ausgabe, Variablen und Funktionen
+- konkrete Python-Diagnosen und drei gestufte lokale Hinweise je Programmieraufgabe
+- erfolgreiche Programmierprüfung schließt die zugehörige Lektion ab
+- optionaler Gemini-Lerncoach über einen separaten Cloudflare Worker; nie maßgeblich für XP
 - Pyodide 0.29.4 in einem Web Worker
 - Abbruch sehr langer Programme nach zehn Sekunden
 - lokaler Name beziehungsweise Kürzel, XP, Level, Erfolge und Entwürfe
@@ -58,6 +63,8 @@ Verbindliche fachliche Referenz:
 | `content.js` | Module, Lektionen, Aufgaben, Erfolge, Nachschlagekarten |
 | `app.js` | Routing, Rendern, Lernstand, XP, Aufgabenprüfung |
 | `python-worker.js` | Laden und Ausführen von Pyodide |
+| `config.js` | öffentliche Konfiguration des optionalen KI-Endpunkts ohne Secret |
+| `services/ai-feedback-worker/` | optionaler, getrennt zu veröffentlichender Gemini-Proxy |
 | `assets/python-lernraum.png` | Titelbild der Übersicht |
 | `assets/struktogrammer-mark.png` | Icon für den Struktogrammer-Web-Link |
 | `TASKS.md` | zentrale Aufgabenliste, Versionshistorie, offene Punkte und Ideen |
@@ -82,7 +89,8 @@ Der aktuelle Schlüssel im Browser lautet `pythonlab-v1`. Gespeichert werden:
 - `lastLessonId`
 
 Die gewählte Darstellung wird getrennt davon unter `pythonlab-theme-v1`
-gespeichert. Zulässige Werte sind `light` und `dark`.
+gespeichert. Zulässige Werte sind `light` und `dark`; ohne gespeicherte Auswahl
+startet PythonLab im Dark Mode.
 
 Es gibt kein Backend und keine automatische Synchronisation zwischen Geräten.
 Das ist für die datenschutzarme Version beabsichtigt. Über das
@@ -95,11 +103,26 @@ werden beim Import verworfen beziehungsweise neu berechnet.
 
 Neue Inhalte möglichst nur in `content.js` ergänzen. Jede Lektion verweist mit `practiceId` auf eine Aufgabe. Jede Aufgabe verweist mit `lessonId` zurück. Befehlsseiten liegen im Array `commands`; jede Befehls-Miniaufgabe vergibt XP über `completedCommands`.
 
+Die Etappe `bausteine` bildet Funktionen jetzt in drei Schritten ab. Die alte
+Lektions-ID `funktionen` bezeichnet den Einstieg ohne Parameter und bleibt aus
+Kompatibilitätsgründen erhalten. Darauf folgen `funktionen-parameter` und
+`funktionen-rueckgabe`; die bestehende Fahrtkostenaufgabe schließt den Abschnitt
+als Transferaufgabe ab.
+
 Prüfarten:
 
 - `output`: normalisierte Textausgabe muss exakt passen.
 - `outputNumber`: letzte Ausgabezeile wird als Zahl verglichen.
 - `tests`: zusätzlicher Python-Testcode prüft Variablen oder Funktionen.
+
+Fehler aus Python-Assertions und häufige Syntax- beziehungsweise Laufzeitfehler
+werden in verständliche Diagnosen übersetzt. Die Hinweise in `content.js`
+werden über mehrere Prüfversuche schrittweise konkreter. Bei erfolgreicher
+Aufgabenprüfung werden Aufgabe und zugehörige Lektion abgeschlossen.
+
+Der optionale KI-Lerncoach wird über `config.js` aktiviert. Der Gemini-Schlüssel
+liegt ausschließlich als `GEMINI_API_KEY`-Secret im Cloudflare Worker. Ohne
+konfigurierten Endpoint bleibt die Oberfläche vollständig lokal funktionsfähig.
 
 XP werden pro Lektion und Aufgabe nur einmal vergeben.
 
@@ -107,7 +130,7 @@ XP werden pro Lektion und Aufgabe nur einmal vergeben.
 
 1. Weitere Struktogramm-Transferaufgaben ergänzen.
 2. Weitere Befehlsseiten und Übungen aus BPE5 ergänzen, insbesondere zu häufigen Fehlermeldungen und Programmentwurf.
-3. Codeprüfung robuster machen: mehr Testfälle, AST-/Strukturchecks, Teilpunkte und optional KI-gestützte Hinweise.
+3. Teilpunkte und Kompetenz-Rubriken für längere Transferaufgaben ergänzen.
 4. Die KA-Webarbeit aus `implementations/KA` als nicht benotete Übungsvorbereitung in PythonLab integrieren.
 5. Die Verzahnung mit Struktogrammer Web bei Bedarf ausbauen.
 6. Den ikonischen Einstieg aus Lernfortschritt 1 bei Bedarf didaktisch übertragen.

@@ -1,0 +1,8 @@
+name = "pythonlab-ai-feedback"
+main = "worker.js"
+compatibility_date = "2026-06-19"
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGINS = "https://jakobsawazki.github.io,http://127.0.0.1:4187,http://localhost:4187"
+GEMINI_MODEL = "gemini-2.5-flash-lite"
