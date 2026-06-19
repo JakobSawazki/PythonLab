@@ -18,7 +18,7 @@
       }
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=0.11.0">
+  <link rel="stylesheet" href="styles.css?v=0.12.0">
 </head>
 <body>
   <a class="skip-link" href="#mainContent">Zum Inhalt springen</a>
@@ -96,7 +96,7 @@
         <div class="topbar-actions">
           <a class="icon-button structogrammer-link" href="https://jakobsawazki.github.io/struktogrammer-web/" target="_blank" rel="noopener"
             title="Struktogrammer Web öffnen" aria-label="Struktogrammer Web öffnen">
-            <img src="assets/struktogrammer-mark.png" alt="" aria-hidden="true">
+            <i data-lucide="workflow"></i>
           </a>
           <button class="icon-button theme-toggle-button" id="themeToggleButton" type="button"
             title="Dark Mode aktivieren" aria-label="Dark Mode aktivieren" aria-pressed="false">
@@ -110,10 +110,11 @@
             <span class="status-dot"></span>
             <span id="runtimeText">Python wird vorbereitet</span>
           </div>
-          <div class="points-chip" title="Deine Erfahrungspunkte">
+          <button class="points-chip" id="pointsInfoButton" type="button"
+            title="Was bringen deine Punkte?" aria-haspopup="dialog">
             <i data-lucide="sparkles"></i>
             <strong id="topXp">0 XP</strong>
-          </div>
+          </button>
         </div>
       </header>
 
@@ -174,9 +175,9 @@
         </button>
         <input class="sr-only" id="progressFileInput" type="file" accept=".json,application/json">
       </div>
-      <div class="callout is-warning backup-note">
+      <div class="callout backup-note">
         <i data-lucide="info"></i>
-        <p>Der Browser darf den Desktop nicht automatisch wählen. Nutze im Speicherdialog „Desktop“ oder deinen Informatik-Stick. Bei automatischen Downloads liegt die Datei meist im Ordner „Downloads“.</p>
+        <p>Speichere die Datei in deinem persönlichen Bereich, am besten im Ordner „Informatik“. So findest du deinen Lernstand beim nächsten Mal schnell wieder.</p>
       </div>
       <div class="dialog-actions">
         <button class="button button-secondary" value="cancel" type="button" id="backupCloseButton">Schließen</button>
@@ -184,11 +185,39 @@
     </form>
   </dialog>
 
+  <dialog class="profile-dialog points-dialog" id="pointsDialog">
+    <form method="dialog">
+      <div class="dialog-heading">
+        <span class="dialog-icon"><i data-lucide="sparkles"></i></span>
+        <div>
+          <p class="eyebrow">Punkte und Note</p>
+          <h2>Was bringen deine Punkte?</h2>
+        </div>
+      </div>
+      <p>Für jede abgeschlossene Lektion, jede gelöste Aufgabe, jeden geübten Befehl und jedes geplante Struktogramm bekommst du XP. Insgesamt kannst du so <strong>6000 Punkte</strong> sammeln.</p>
+      <ul class="points-list">
+        <li><i data-lucide="check"></i> Je mehr du übst und sammelst, desto besser wirkt es sich auf deine Note aus.</li>
+        <li><i data-lucide="check"></i> Es gibt <strong>keine feste Umrechnung</strong> wie „so viele Punkte = Note X“. Entscheidend ist, dass du dranbleibst und viel ausprobierst.</li>
+        <li><i data-lucide="check"></i> Hauptsache, du hast Freude am Programmieren und lernst Python Schritt für Schritt kennen.</li>
+      </ul>
+      <div class="callout points-callout">
+        <i data-lucide="sparkles"></i>
+        <p>Tipp: Sichere deinen Lernstand regelmäßig über das Disketten-Symbol, damit deine Punkte erhalten bleiben.</p>
+      </div>
+      <div class="dialog-actions">
+        <button class="button button-primary" value="ok" type="submit">
+          <i data-lucide="check"></i>
+          Alles klar
+        </button>
+      </div>
+    </form>
+  </dialog>
+
   <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
 
   <script src="https://unpkg.com/lucide@1.16.0/dist/umd/lucide.js"></script>
-  <script src="config.js?v=0.11.0"></script>
-  <script src="content.js?v=0.11.0"></script>
-  <script src="app.js?v=0.11.0"></script>
+  <script src="config.js?v=0.12.0"></script>
+  <script src="content.js?v=0.12.0"></script>
+  <script src="app.js?v=0.12.0"></script>
 </body>
 </html>

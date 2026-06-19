@@ -2,6 +2,8 @@
 
 Stand: 19. Juni 2026
 
+Aktueller Release-Stand: 0.12.0. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
+
 ## Projektziel
 
 Öffentliches Lernportal für Schülerinnen und Schüler des nichtgewerblichen beruflichen Gymnasiums. Schwerpunkt ist BPE 5 „Grundlagen der Programmierung“ mit Python. Die Lernenden sollen verständliche Erklärungen lesen, unmittelbar selbst programmieren und über XP sowie Erfolge zum Weiterarbeiten motiviert werden.
@@ -39,7 +41,7 @@ Verbindliche fachliche Referenz:
 - eigener Funktionsabschnitt mit drei Lektionen: ohne Parameter, mit Parametern und mit Rückgabewert
 - Modul Python Plus mit Listen, Listen erweitern, Text bearbeiten und Fehlersuche
 - Reiter **Befehle** mit neunzehn Python-Basiselementen, Detailseiten und XP-Miniaufgaben
-- Struktogramm-Labor mit fünf Grundformen und fünf interaktiven Aufgaben
+- Struktogramm-Labor mit fünf Grundformen und fünf interaktiven Aufgaben; zweiseitige Alternativen verwenden gemeinsame SVG-Mittelpunkte, Bedingungen mit `?` und die Zweigbeschriftungen `Ja`/`Nein`
 - direkter Kopfzeilen-Link zum Struktogrammer Web
 - einheitlicher Icon-Button für den Struktogrammer-Web-Link
 - Dark Mode als Standard für neue Browserprofile und weiterhin umschaltbarer Light Mode
@@ -56,6 +58,7 @@ Verbindliche fachliche Referenz:
 - versionierter JSON-Export und -Import des vollständigen Lernstands
 - Nachschlagebereich mit kompakten Syntaxmustern
 - responsive Navigation und Tastaturbedienung
+- insgesamt exakt 6000 erreichbare XP mit erweiterten Levelgrenzen und erklärender Punkteanzeige
 
 ## Dateistruktur
 
@@ -74,6 +77,7 @@ Verbindliche fachliche Referenz:
 | `docs/TECHNIK_UND_DIDAKTIK.md` | Quellen, Datenschutz und didaktische Entscheidungen |
 | `docs/BPE5_ABGLEICH_2025.md` | Abdeckung des offiziellen Kompetenzrasters und offene Ausbauschritte |
 | `docs/KI_CODEPRUEFUNG_KONZEPT.md` | Konzept für dynamischere Codeprüfung und optionale KI-Auswertung |
+| `docs/ZUSAMMENARBEIT.md` | Arbeits- und Übergaberegeln für Mensch, Claude Code und Codex |
 | `references/bpe5/README.md` | lokale BPE5-Quellenstruktur und Veröffentlichungsgrenze |
 
 ## Zustandsmodell
@@ -155,4 +159,4 @@ XP werden pro Lektion und Aufgabe nur einmal vergeben.
 
 Empfohlener Startauftrag:
 
-> Öffne `UEBERGABE_Codex.md`, `README.md`, `TASKS.md`, `docs/BPE5_ABGLEICH_2025.md`, `docs/KI_CODEPRUEFUNG_KONZEPT.md` und `references/bpe5/README.md`. Prüfe anschließend `git status`, `content.js` und `app.js`. Das Projekt ist PythonLab, das öffentliche Lernportal für BPE 5. Arbeite mit dem vorhandenen Stil weiter und veröffentliche Änderungen nach Prüfung wieder über GitHub Pages. `resources/` und `implementations/` sind lokale Referenzablagen und dürfen nicht ungeprüft veröffentlicht werden.
+> Öffne `UEBERGABE_Codex.md`, `README.md`, `TASKS.md`, `docs/ZUSAMMENARBEIT.md`, `docs/BPE5_ABGLEICH_2025.md`, `docs/KI_CODEPRUEFUNG_KONZEPT.md` und `references/bpe5/README.md`. Prüfe anschließend `git status`, `git log -5`, `content.js` und `app.js`. Das Projekt ist PythonLab, das öffentliche Lernportal für BPE 5. Arbeite mit dem vorhandenen Stil weiter und veröffentliche Änderungen nach Prüfung wieder über GitHub Pages. `resources/` und `implementations/` sind lokale Referenzablagen und dürfen nicht ungeprüft veröffentlicht werden.

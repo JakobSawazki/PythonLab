@@ -138,7 +138,8 @@ Der detaillierte Soll-Ist-Abgleich ist in
 
 ## Struktogramm-Labor
 
-Das Labor rendert Nassi-Shneiderman-Strukturen direkt mit HTML und CSS. Es
+Das Labor rendert Nassi-Shneiderman-Strukturen direkt mit HTML, CSS und kleinen
+SVG-Liniengrafiken. Es
 benötigt weder Java noch ein Browser-Plugin. Enthalten sind:
 
 - Sequenz
@@ -147,8 +148,15 @@ benötigt weder Java noch ein Browser-Plugin. Enthalten sind:
 - kopfgesteuerte Schleife
 - geschachtelte Alternative
 
-Fünf Übungen prüfen Reihenfolge oder ausgewählte Operatoren automatisch. Auf
-kleinen Bildschirmen werden J- und N-Zweig untereinander dargestellt, damit
+Fünf Übungen prüfen Reihenfolge oder ausgewählte Operatoren automatisch. Bei
+einer zweiseitigen Alternative laufen zwei SVG-Diagonalen von den oberen Ecken
+in exakt denselben unteren Mittelpunkt. Bedingungen erhalten entsprechend der
+schulischen Darstellung ein abschließendes `?`; die Zweige sind mit `Ja` und
+`Nein` ausgeschrieben. Dieses Verfahren entspricht auch dem Renderer des
+lokalen Schwesterprojekts Struktogrammer Web und vermeidet Rundungsfehler durch
+gedrehte CSS-Linien.
+
+Auf kleinen Bildschirmen werden Ja- und Nein-Zweig untereinander dargestellt, damit
 auch geschachtelte Strukturen vollständig lesbar bleiben. Für umfangreichere
 freie Zeichnungen verweist das Portal oben rechts und im Nachschlagebereich auf
 den lokal eingebundenen Struktogrammer Web.

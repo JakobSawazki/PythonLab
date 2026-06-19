@@ -45,7 +45,7 @@ window.PYLAB_CONTENT = {
       title: "Sequenz und Ausgabe",
       subtitle: "Ein Programm arbeitet Anweisungen in einer festen Reihenfolge ab.",
       duration: 12,
-      xp: 20,
+      xp: 60,
       difficulty: "easy",
       objectives: [
         "Anweisungen in der richtigen Reihenfolge lesen",
@@ -86,7 +86,7 @@ window.PYLAB_CONTENT = {
       title: "Variablen und Datentypen",
       subtitle: "Variablen geben gespeicherten Werten einen verständlichen Namen.",
       duration: 16,
-      xp: 25,
+      xp: 75,
       difficulty: "easy",
       objectives: [
         "Werte in Variablen speichern und wieder auslesen",
@@ -135,7 +135,7 @@ window.PYLAB_CONTENT = {
       title: "Rechnen mit Python",
       subtitle: "Python verbindet Variablen und Rechenoperatoren zu nachvollziehbaren Berechnungen.",
       duration: 16,
-      xp: 25,
+      xp: 75,
       difficulty: "easy",
       objectives: [
         "Die wichtigsten Rechenoperatoren verwenden",
@@ -176,7 +176,7 @@ window.PYLAB_CONTENT = {
       title: "Eingaben und Umwandlung",
       subtitle: "Mit input() können Nutzerinnen und Nutzer Werte an ein Programm übergeben.",
       duration: 18,
-      xp: 30,
+      xp: 90,
       difficulty: "easy",
       objectives: [
         "Benutzereingaben mit input() einlesen",
@@ -223,7 +223,7 @@ window.PYLAB_CONTENT = {
       title: "Vergleiche und if",
       subtitle: "Eine einseitige Verzweigung führt Code nur dann aus, wenn eine Bedingung wahr ist.",
       duration: 18,
-      xp: 30,
+      xp: 90,
       difficulty: "easy",
       objectives: [
         "Vergleichsoperatoren sicher lesen",
@@ -264,7 +264,7 @@ window.PYLAB_CONTENT = {
       title: "if, elif und else",
       subtitle: "Mehrere Fälle werden in einer sinnvollen Reihenfolge geprüft.",
       duration: 20,
-      xp: 35,
+      xp: 105,
       difficulty: "medium",
       objectives: [
         "Zweiseitige und mehrseitige Verzweigungen entwickeln",
@@ -308,7 +308,7 @@ window.PYLAB_CONTENT = {
       title: "Logische Operatoren",
       subtitle: "Mit and, or und not lassen sich mehrere Bedingungen verständlich verbinden.",
       duration: 20,
-      xp: 35,
+      xp: 105,
       difficulty: "medium",
       objectives: [
         "and, or und not fachlich unterscheiden",
@@ -349,7 +349,7 @@ window.PYLAB_CONTENT = {
       title: "for-Schleifen",
       subtitle: "Eine Zählerschleife wiederholt einen Block für eine bekannte Anzahl von Durchläufen.",
       duration: 22,
-      xp: 40,
+      xp: 120,
       difficulty: "medium",
       objectives: [
         "range() mit Start, Ende und Schrittweite lesen",
@@ -390,7 +390,7 @@ window.PYLAB_CONTENT = {
       title: "while-Schleifen",
       subtitle: "Eine while-Schleife läuft so lange, wie ihre Bedingung wahr ist.",
       duration: 24,
-      xp: 45,
+      xp: 135,
       difficulty: "medium",
       objectives: [
         "Startwert, Bedingung und Veränderung bestimmen",
@@ -435,7 +435,7 @@ window.PYLAB_CONTENT = {
       title: "Funktionen ohne Parameter",
       subtitle: "Ein benannter Programmbaustein kann an beliebigen Stellen aufgerufen werden.",
       duration: 22,
-      xp: 50,
+      xp: 150,
       difficulty: "easy",
       objectives: [
         "eine Funktion mit def definieren und aufrufen",
@@ -498,7 +498,7 @@ window.PYLAB_CONTENT = {
       title: "Funktionen mit Parametern",
       subtitle: "Parameter machen aus einem festen Baustein ein Werkzeug für unterschiedliche Werte.",
       duration: 25,
-      xp: 45,
+      xp: 135,
       difficulty: "medium",
       objectives: [
         "Parameter und Argumente voneinander unterscheiden",
@@ -557,7 +557,7 @@ window.PYLAB_CONTENT = {
       title: "Funktionen mit Rückgabewert",
       subtitle: "Mit return liefert eine Funktion ein Ergebnis an die aufrufende Stelle zurück.",
       duration: 28,
-      xp: 50,
+      xp: 150,
       difficulty: "medium",
       objectives: [
         "ein berechnetes Ergebnis mit return zurückgeben",
@@ -616,7 +616,7 @@ window.PYLAB_CONTENT = {
       title: "Listen als Sammlung",
       subtitle: "Listen speichern mehrere zusammengehörige Werte in einer geordneten Sammlung.",
       duration: 24,
-      xp: 50,
+      xp: 150,
       difficulty: "plus",
       objectives: [
         "Listen erstellen und einzelne Elemente lesen",
@@ -657,7 +657,7 @@ window.PYLAB_CONTENT = {
       title: "Listen erweitern",
       subtitle: "Listen lassen sich gezielt füllen, verkleinern und durchsuchen.",
       duration: 18,
-      xp: 35,
+      xp: 105,
       difficulty: "medium",
       objectives: [
         "Werte mit append() und insert() hinzufügen",
@@ -707,7 +707,7 @@ window.PYLAB_CONTENT = {
       title: "Text bearbeiten",
       subtitle: "Strings lassen sich zusammensetzen, umformen und Zeichen für Zeichen untersuchen.",
       duration: 20,
-      xp: 35,
+      xp: 105,
       difficulty: "medium",
       objectives: [
         "Werte mit f-Strings übersichtlich in Text einsetzen",
@@ -757,7 +757,7 @@ window.PYLAB_CONTENT = {
       title: "Fehler finden und Lösungen planen",
       subtitle: "Fehler sind Hinweise. Mit einer festen Strategie werden sie beherrschbar.",
       duration: 22,
-      xp: 50,
+      xp: 150,
       difficulty: "plus",
       objectives: [
         "Syntax-, Laufzeit- und Logikfehler unterscheiden",
@@ -800,7 +800,7 @@ window.PYLAB_CONTENT = {
       title: "Dein erster Werkstattgruß",
       description: "Erzeuge drei Ausgaben in der richtigen Reihenfolge.",
       difficulty: "easy",
-      xp: 25,
+      xp: 75,
       instructions: [
         "Gib zuerst den Text PythonLab aus.",
         "Gib danach den Text Ich übe selbst! aus.",
@@ -823,7 +823,7 @@ window.PYLAB_CONTENT = {
       title: "Punkte sammeln",
       description: "Speichere und verändere einen Punktestand.",
       difficulty: "easy",
-      xp: 25,
+      xp: 75,
       instructions: [
         "Speichere 35 in einer Variable namens punkte.",
         "Erhöhe punkte um 15.",
@@ -846,7 +846,7 @@ window.PYLAB_CONTENT = {
       title: "Fläche und Umfang",
       description: "Berechne zwei Ergebnisse mit denselben Ausgangswerten.",
       difficulty: "easy",
-      xp: 30,
+      xp: 90,
       instructions: [
         "Die Variablen breite und hoehe sind bereits gesetzt.",
         "Berechne flaeche = breite * hoehe.",
@@ -870,7 +870,7 @@ window.PYLAB_CONTENT = {
       title: "Temperatur umrechnen",
       description: "Lies eine Zahl ein und verwende sie in einer Formel.",
       difficulty: "easy",
-      xp: 35,
+      xp: 105,
       instructions: [
         "Lies eine Celsius-Temperatur als Dezimalzahl ein.",
         "Berechne Fahrenheit mit celsius * 1.8 + 32.",
@@ -895,7 +895,7 @@ window.PYLAB_CONTENT = {
       title: "Mengenrabatt",
       description: "Wende einen Rabatt nur ab einer bestimmten Stückzahl an.",
       difficulty: "easy",
-      xp: 35,
+      xp: 105,
       instructions: [
         "preis und anzahl sind vorgegeben.",
         "Berechne zunächst gesamt = preis * anzahl.",
@@ -919,7 +919,7 @@ window.PYLAB_CONTENT = {
       title: "Leistungsstufe bestimmen",
       description: "Ordne einen Punktwert genau einer Stufe zu.",
       difficulty: "medium",
-      xp: 40,
+      xp: 120,
       instructions: [
         "90 oder mehr Punkte: Gold",
         "70 bis 89 Punkte: Silber",
@@ -944,7 +944,7 @@ window.PYLAB_CONTENT = {
       title: "Zugang zur Werkstatt",
       description: "Verbinde Alter und Sicherheitsunterweisung.",
       difficulty: "medium",
-      xp: 40,
+      xp: 120,
       instructions: [
         "Der Zugang ist erlaubt, wenn die Person mindestens 16 Jahre alt ist und die Unterweisung abgeschlossen hat.",
         "Speichere True oder False in zugang.",
@@ -967,7 +967,7 @@ window.PYLAB_CONTENT = {
       title: "Das Siebener-Einmaleins",
       description: "Erzeuge mit einer Schleife eine Folge von Ergebnissen.",
       difficulty: "medium",
-      xp: 45,
+      xp: 135,
       instructions: [
         "Nutze eine for-Schleife für die Zahlen 1 bis 10.",
         "Gib in jeder Runde 7 * zahl aus.",
@@ -990,7 +990,7 @@ window.PYLAB_CONTENT = {
       title: "Bis zum Sparziel",
       description: "Ermittle eine unbekannte Anzahl von Monaten.",
       difficulty: "medium",
-      xp: 50,
+      xp: 150,
       instructions: [
         "Das Guthaben startet bei 40 Euro.",
         "Jeden Monat kommen 15 Euro hinzu.",
@@ -1015,7 +1015,7 @@ window.PYLAB_CONTENT = {
       title: "Pausensignal wiederverwenden",
       description: "Definiere eine Funktion ohne Parameter und rufe sie mehrfach auf.",
       difficulty: "easy",
-      xp: 40,
+      xp: 120,
       instructions: [
         "Definiere eine Funktion namens pausensignal ohne Parameter.",
         "Die Funktion soll zuerst Pause beginnt und danach Bitte lüften ausgeben.",
@@ -1038,7 +1038,7 @@ window.PYLAB_CONTENT = {
       title: "Persönlich begrüßen",
       description: "Übergib Vor- und Nachname als zwei Parameter.",
       difficulty: "medium",
-      xp: 50,
+      xp: 150,
       instructions: [
         "Definiere begruesse(vorname, nachname) mit genau zwei Parametern.",
         "Gib in der Funktion Hallo gefolgt von Vor- und Nachname aus.",
@@ -1061,7 +1061,7 @@ window.PYLAB_CONTENT = {
       title: "Fahrtkosten als Funktion",
       description: "Kapsele eine Berechnung mit Parametern und Rückgabewert.",
       difficulty: "medium",
-      xp: 55,
+      xp: 165,
       instructions: [
         "Definiere kosten(strecke, verbrauch, literpreis).",
         "Berechne zuerst die benötigten Liter: strecke * verbrauch / 100.",
@@ -1085,7 +1085,7 @@ window.PYLAB_CONTENT = {
       title: "Messwerte auswerten",
       description: "Berechne den Mittelwert einer Liste ohne fertige sum-Funktion.",
       difficulty: "plus",
-      xp: 60,
+      xp: 180,
       instructions: [
         "Durchlaufe die Liste messwerte mit einer for-Schleife.",
         "Addiere alle Werte in summe.",
@@ -1109,7 +1109,7 @@ window.PYLAB_CONTENT = {
       title: "Rabattprogramm reparieren",
       description: "Finde Syntax- und Logikfehler in einem kurzen Programm.",
       difficulty: "plus",
-      xp: 60,
+      xp: 180,
       instructions: [
         "Das Programm soll ab 4 Tickets 20 Prozent Rabatt geben.",
         "Für 5 Tickets zu je 10 Euro muss der Endpreis 40 Euro sein.",
@@ -1132,7 +1132,7 @@ window.PYLAB_CONTENT = {
       title: "Temperaturhinweis",
       description: "Ordne eine Temperatur genau einer Empfehlung zu.",
       difficulty: "medium",
-      xp: 40,
+      xp: 120,
       instructions: [
         "30 Grad oder mehr: Hitze",
         "20 bis 29 Grad: angenehm",
@@ -1157,7 +1157,7 @@ window.PYLAB_CONTENT = {
       title: "Gerade Zahlen summieren",
       description: "Verbinde Schleife und Rest-Operator.",
       difficulty: "medium",
-      xp: 45,
+      xp: 135,
       instructions: [
         "Durchlaufe mit einer for-Schleife die Zahlen 1 bis 20.",
         "Addiere nur die geraden Zahlen zur Variable summe.",
@@ -1180,7 +1180,7 @@ window.PYLAB_CONTENT = {
       title: "Countdown zum Start",
       description: "Zähle mit einer while-Schleife rückwärts.",
       difficulty: "easy",
-      xp: 35,
+      xp: 105,
       instructions: [
         "Beginne bei 5 und gib in jeder Runde die aktuelle Zahl aus.",
         "Verringere die Zahl in jedem Durchlauf um 1.",
@@ -1203,7 +1203,7 @@ window.PYLAB_CONTENT = {
       title: "Den größeren Wert zurückgeben",
       description: "Schreibe eine Funktion, die zwei Werte vergleicht.",
       difficulty: "medium",
-      xp: 50,
+      xp: 150,
       instructions: [
         "Definiere groesser(a, b) mit genau zwei Parametern.",
         "Gib den größeren der beiden Werte mit return zurück.",
@@ -1226,7 +1226,7 @@ window.PYLAB_CONTENT = {
       title: "Einkaufsliste pflegen",
       description: "Erweitere und verkleinere eine Liste gezielt.",
       difficulty: "medium",
-      xp: 40,
+      xp: 120,
       instructions: [
         "Die Liste einkauf ist bereits vorhanden.",
         "Füge \"Käse\" am Ende hinzu.",
@@ -1250,7 +1250,7 @@ window.PYLAB_CONTENT = {
       title: "Namensschild gestalten",
       description: "Setze Werte mit einem f-String zusammen und forme sie um.",
       difficulty: "medium",
-      xp: 40,
+      xp: 120,
       instructions: [
         "vorname und nachname sind vorgegeben.",
         "Baue mit einem f-String den Text aus Vor- und Nachname, getrennt durch ein Leerzeichen.",
@@ -1274,7 +1274,7 @@ window.PYLAB_CONTENT = {
       title: "Vokale zählen",
       description: "Untersuche einen Text Zeichen für Zeichen.",
       difficulty: "plus",
-      xp: 55,
+      xp: 165,
       instructions: [
         "Definiere vokale(wort) mit einem Parameter.",
         "Zähle, wie viele Vokale (a, e, i, o, u) im Wort stecken.",
@@ -1298,7 +1298,7 @@ window.PYLAB_CONTENT = {
       title: "Sternentreppe bauen",
       description: "Erzeuge ein wachsendes Muster mit einer Schleife.",
       difficulty: "plus",
-      xp: 55,
+      xp: 165,
       instructions: [
         "Gib eine Treppe aus Sternen mit vier Stufen aus.",
         "Die erste Stufe hat einen Stern, die vierte Stufe vier Sterne.",
@@ -1336,7 +1336,7 @@ window.PYLAB_CONTENT = {
         "Vergiss die schließende Klammer nicht."
       ],
       relatedLesson: "sequenz",
-      xp: 10,
+      xp: 30,
       exercise: {
         question: "Welche Zeile gibt das berechnete Ergebnis 8 aus?",
         options: ["print(\"5 + 3\")", "print(5 + 3)", "print = 5 + 3"],
@@ -1362,7 +1362,7 @@ window.PYLAB_CONTENT = {
         "In PythonLab werden input()-Werte im Aufgabenbereich über vorbereitete Eingabezeilen simuliert."
       ],
       relatedLesson: "eingaben",
-      xp: 10,
+      xp: 30,
       exercise: {
         question: "Welchen Datentyp liefert input() zuerst?",
         options: ["int", "float", "str"],
@@ -1388,7 +1388,7 @@ window.PYLAB_CONTENT = {
         "str() ist nützlich, wenn Werte zu Text zusammengesetzt werden sollen."
       ],
       relatedLesson: "eingaben",
-      xp: 10,
+      xp: 30,
       exercise: {
         question: "Welche Umwandlung passt zu einer eingegebenen Anzahl von Tickets?",
         options: ["int(input(...))", "float(input(...))", "str(input(...))"],
@@ -1414,7 +1414,7 @@ window.PYLAB_CONTENT = {
         "Achte bei Grenzen darauf, ob der Grenzwert selbst dazugehören soll."
       ],
       relatedLesson: "if",
-      xp: 10,
+      xp: 30,
       exercise: {
         question: "Welcher Ausdruck prüft, ob alter mindestens 16 ist?",
         options: ["alter = 16", "alter >= 16", "alter < 16"],
@@ -1440,7 +1440,7 @@ window.PYLAB_CONTENT = {
         "else hat keine eigene Bedingung."
       ],
       relatedLesson: "elif",
-      xp: 15,
+      xp: 45,
       exercise: {
         question: "Warum steht bei mehreren Notengrenzen meist die höchste Grenze zuerst?",
         options: [
@@ -1470,7 +1470,7 @@ window.PYLAB_CONTENT = {
         "Klammern helfen bei längeren Bedingungen."
       ],
       relatedLesson: "logik",
-      xp: 10,
+      xp: 30,
       exercise: {
         question: "Wann ist A and B wahr?",
         options: ["Wenn A oder B wahr ist", "Nur wenn A und B wahr sind", "Nie"],
@@ -1496,7 +1496,7 @@ window.PYLAB_CONTENT = {
         "range(5) startet bei 0 und endet vor 5."
       ],
       relatedLesson: "for",
-      xp: 15,
+      xp: 45,
       exercise: {
         question: "Welche Werte durchläuft i bei range(2, 5)?",
         options: ["2, 3, 4", "2, 3, 4, 5", "0, 1, 2, 3, 4"],
@@ -1522,7 +1522,7 @@ window.PYLAB_CONTENT = {
         "Teste mit kleinen Startwerten, ob die Schleife endet."
       ],
       relatedLesson: "while",
-      xp: 15,
+      xp: 45,
       exercise: {
         question: "Welcher Baustein verhindert typischerweise eine Endlosschleife?",
         options: ["Eine Veränderung der Bedingungsvariable", "Mehr Leerzeilen", "Ein längerer Variablenname"],
@@ -1548,7 +1548,7 @@ window.PYLAB_CONTENT = {
         "Der Funktionskörper muss eingerückt sein."
       ],
       relatedLesson: "funktionen",
-      xp: 15,
+      xp: 45,
       exercise: {
         question: "Was macht return in einer Funktion?",
         options: ["Es beendet PythonLab", "Es gibt einen Wert an den Aufrufer zurück", "Es druckt immer automatisch"],
@@ -1574,7 +1574,7 @@ window.PYLAB_CONTENT = {
         "append() verändert die Liste und gibt keinen neuen Listenwert zurück."
       ],
       relatedLesson: "listen",
-      xp: 15,
+      xp: 45,
       exercise: {
         question: "Was liefert len([4, 7, 2])?",
         options: ["2", "3", "13"],
@@ -1600,7 +1600,7 @@ window.PYLAB_CONTENT = {
         "Zu viele selbstverständliche Kommentare machen Code unübersichtlicher, nicht klarer."
       ],
       relatedLesson: "sequenz",
-      xp: 10,
+      xp: 30,
       exercise: {
         question: "Was passiert mit dem Text nach einem # in einer Codezeile?",
         options: ["Er wird ausgegeben", "Python führt ihn nicht aus", "Er löst einen Fehler aus"],
@@ -1626,7 +1626,7 @@ window.PYLAB_CONTENT = {
         "Die geschweiften Klammern dürfen nicht vergessen werden: f\"{punkte}\" statt f\"punkte\"."
       ],
       relatedLesson: "strings",
-      xp: 15,
+      xp: 45,
       exercise: {
         question: "Welche Zeile gibt Hallo Mia aus, wenn name = \"Mia\" ist?",
         options: ["print(\"Hallo {name}\")", "print(f\"Hallo {name}\")", "print(f\"Hallo name\")"],
@@ -1652,7 +1652,7 @@ window.PYLAB_CONTENT = {
         "Bei / entsteht meist eine Dezimalzahl, bei // dagegen eine Ganzzahl."
       ],
       relatedLesson: "rechnen",
-      xp: 15,
+      xp: 45,
       exercise: {
         question: "Womit prüfst du am einfachsten, ob zahl gerade ist?",
         options: ["zahl // 2 == 0", "zahl % 2 == 0", "zahl / 2 == 0"],
@@ -1678,7 +1678,7 @@ window.PYLAB_CONTENT = {
         "round(2.5) kann je nach Zahl kaufmännisch zur geraden Ziffer runden; für reine Anzeige reicht das aus."
       ],
       relatedLesson: "rechnen",
-      xp: 10,
+      xp: 30,
       exercise: {
         question: "Was ergibt round(7.456, 1)?",
         options: ["7.4", "7.5", "8.0"],
@@ -1704,7 +1704,7 @@ window.PYLAB_CONTENT = {
         "Vergiss die Klammern nicht: text.upper ohne () ist nur die Methode selbst, nicht ihr Ergebnis."
       ],
       relatedLesson: "strings",
-      xp: 15,
+      xp: 45,
       exercise: {
         question: "Was liefert \"  Hallo \".strip()?",
         options: ["\"hallo\"", "\"Hallo\"", "\"  Hallo \""],
@@ -1730,7 +1730,7 @@ window.PYLAB_CONTENT = {
         "Beim Teilstück ist die zweite Zahl ausgeschlossen: [0:3] liefert drei Zeichen."
       ],
       relatedLesson: "strings",
-      xp: 15,
+      xp: 45,
       exercise: {
         question: "Welches Zeichen liefert \"Lernen\"[1]?",
         options: ["L", "e", "n"],
@@ -1756,7 +1756,7 @@ window.PYLAB_CONTENT = {
         ".remove(wert) entfernt nur das erste Vorkommen und meldet einen Fehler, wenn der Wert fehlt."
       ],
       relatedLesson: "listen-methoden",
-      xp: 15,
+      xp: 45,
       exercise: {
         question: "Womit hängst du einen Wert am Ende einer Liste an?",
         options: ["liste.add(wert)", "liste.append(wert)", "liste.insert(wert)"],
@@ -1782,7 +1782,7 @@ window.PYLAB_CONTENT = {
         "Eine Schrittweite von 0 ist nicht erlaubt und löst einen Fehler aus."
       ],
       relatedLesson: "for",
-      xp: 15,
+      xp: 45,
       exercise: {
         question: "Welche Werte durchläuft range(1, 10, 3)?",
         options: ["1, 4, 7", "1, 4, 7, 10", "1, 3, 6, 9"],
@@ -1808,7 +1808,7 @@ window.PYLAB_CONTENT = {
         "Die genannte Zeilennummer zeigt, wo Python stolpert – der eigentliche Fehler kann eine Zeile davor liegen."
       ],
       relatedLesson: "debugging",
-      xp: 15,
+      xp: 45,
       exercise: {
         question: "Welcher Fehler entsteht typischerweise bei \"3\" + 4?",
         options: ["NameError", "TypeError", "SyntaxError"],
@@ -1959,7 +1959,7 @@ window.PYLAB_CONTENT = {
         title: "Flächenberechnung ordnen",
         description: "Bringe Einlesen, Berechnung und Ausgabe in eine sinnvolle Sequenz.",
         difficulty: "easy",
-        xp: 30,
+        xp: 90,
         type: "order",
         instructions: [
           "Lies zuerst Breite und Höhe ein.",
@@ -1980,12 +1980,12 @@ window.PYLAB_CONTENT = {
         title: "Eintritt entscheiden",
         description: "Vervollständige eine zweiseitige Alternative mit passenden Operatoren.",
         difficulty: "easy",
-        xp: 35,
+        xp: 105,
         type: "slots",
         instructions: [
           "Ab 18 Jahren gilt eine Person als volljährig.",
-          "Der J-Zweig wird bei einer wahren Bedingung ausgeführt.",
-          "Der N-Zweig wird bei einer falschen Bedingung ausgeführt."
+          "Der Ja-Zweig wird bei einer wahren Bedingung ausgeführt.",
+          "Der Nein-Zweig wird bei einer falschen Bedingung ausgeführt."
         ],
         slots: {
           condition: {
@@ -1994,12 +1994,12 @@ window.PYLAB_CONTENT = {
             answer: "alter >= 18"
           },
           yes: {
-            label: "J-Zweig wählen",
+            label: "Ja-Zweig wählen",
             options: ["Ausgabe: \"minderjährig\"", "Ausgabe: \"volljährig\"", "Zuweisung: alter = 18"],
             answer: "Ausgabe: \"volljährig\""
           },
           no: {
-            label: "N-Zweig wählen",
+            label: "Nein-Zweig wählen",
             options: ["Ausgabe: \"minderjährig\"", "Ausgabe: \"volljährig\"", "Einlesen: alter"],
             answer: "Ausgabe: \"minderjährig\""
           }
@@ -2020,7 +2020,7 @@ window.PYLAB_CONTENT = {
         title: "Fünferreihe wiederholen",
         description: "Plane eine zählergesteuerte Schleife für zehn Ausgaben.",
         difficulty: "medium",
-        xp: 40,
+        xp: 120,
         type: "slots",
         instructions: [
           "Die Zahlen 1 bis einschließlich 10 werden benötigt.",
@@ -2057,7 +2057,7 @@ window.PYLAB_CONTENT = {
         title: "Sparziel erreichen",
         description: "Vervollständige eine kopfgesteuerte Schleife mit sicherem Ende.",
         difficulty: "medium",
-        xp: 45,
+        xp: 135,
         type: "slots",
         instructions: [
           "Das Guthaben startet bei 40 Euro.",
@@ -2101,7 +2101,7 @@ window.PYLAB_CONTENT = {
         title: "Ergebnis abgestuft ausgeben",
         description: "Baue eine geschachtelte Alternative für drei mögliche Ergebnisse.",
         difficulty: "plus",
-        xp: 50,
+        xp: 150,
         type: "slots",
         instructions: [
           "Unter 50 Punkten lautet die Ausgabe nicht bestanden.",
@@ -2120,7 +2120,7 @@ window.PYLAB_CONTENT = {
             answer: "punkte >= 80"
           },
           excellent: {
-            label: "J-Zweig innen wählen",
+            label: "Ja-Zweig innen wählen",
             prefix: "Ausgabe:",
             options: [
               "\"nicht bestanden\"",
@@ -2130,7 +2130,7 @@ window.PYLAB_CONTENT = {
             answer: "\"sehr gut\""
           },
           passed: {
-            label: "N-Zweig innen wählen",
+            label: "Nein-Zweig innen wählen",
             prefix: "Ausgabe:",
             options: [
               "\"bestanden\"",
@@ -2140,7 +2140,7 @@ window.PYLAB_CONTENT = {
             answer: "\"bestanden\""
           },
           failed: {
-            label: "N-Zweig außen wählen",
+            label: "Nein-Zweig außen wählen",
             prefix: "Ausgabe:",
             options: [
               "\"bestanden\"",
@@ -2216,9 +2216,16 @@ window.PYLAB_CONTENT = {
     {
       id: "collector",
       title: "Sammler",
-      description: "Erreiche mindestens 300 XP.",
+      description: "Erreiche mindestens 1000 XP.",
       icon: "gem",
-      condition: { type: "xp", value: 300 }
+      condition: { type: "xp", value: 1000 }
+    },
+    {
+      id: "point-hunter",
+      title: "Punktejäger",
+      description: "Erreiche mindestens 3000 XP.",
+      icon: "rocket",
+      condition: { type: "xp", value: 3000 }
     },
     {
       id: "command-starter",

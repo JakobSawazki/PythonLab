@@ -473,17 +473,21 @@ h4 {
   background: var(--surface-soft);
 }
 
-.structogrammer-link img {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-}
-
 .points-chip {
   color: #5c4100;
   background: var(--yellow-soft);
   border-color: #ecd88f;
-  transition: transform var(--transition), box-shadow var(--transition);
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.points-chip:hover {
+  border-color: var(--yellow);
+  box-shadow: 0 6px 16px rgba(241, 187, 57, 0.28);
+}
+
+.points-chip:active {
+  transform: translateY(1px);
 }
 
 .points-chip.is-bumped {
@@ -955,34 +959,13 @@ h4 {
   transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
 }
 
-.module-card::before,
-.lesson-card::before,
-.exercise-card::before,
-.command-card::before {
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 3px;
-  content: "";
-  border-radius: var(--radius-md) var(--radius-md) 0 0;
-  background: var(--green-grad);
-  opacity: 0;
-  transition: opacity var(--transition);
-}
-
 .module-card:hover,
 .lesson-card:hover,
 .exercise-card:hover,
 .command-card:hover {
-  border-color: var(--green-500);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-}
-
-.module-card:hover::before,
-.lesson-card:hover::before,
-.exercise-card:hover::before,
-.command-card:hover::before {
-  opacity: 1;
+  border-color: color-mix(in srgb, var(--green-500) 78%, var(--line));
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md), 0 0 0 1px color-mix(in srgb, var(--green-500) 28%, transparent);
 }
 
 .module-number {
@@ -1167,8 +1150,11 @@ h4 {
 
 .objectives-band {
   padding: 18px 20px;
-  border-left: 5px solid var(--yellow);
-  background: var(--yellow-soft);
+  border: 1px solid #b8d7c8;
+  border-left: 5px solid var(--green-500);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, #edf7f2 0%, #e3f1ea 100%);
+  box-shadow: var(--shadow-sm);
 }
 
 .objectives-band h3 {
@@ -1182,11 +1168,13 @@ h4 {
 }
 
 .lesson-detail.difficulty-page-medium .objectives-band {
+  border-color: #b5d4e9;
   border-left-color: #4b9bd3;
   background: var(--medium-blue-soft);
 }
 
 .lesson-detail.difficulty-page-plus .objectives-band {
+  border-color: #a8dce5;
   border-left-color: #12b7d6;
   background: var(--plus-blue-soft);
 }
@@ -2179,31 +2167,37 @@ code {
   font-weight: 700;
 }
 
-.stg-diagonal {
+.stg-decision-lines {
   position: absolute;
-  bottom: 17px;
-  width: 54%;
-  height: 1px;
-  border-top: 1px solid #26332e;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
-.stg-diagonal.is-left {
-  left: -2%;
-  transform: rotate(12deg);
-  transform-origin: right center;
+.stg-decision-lines line {
+  fill: none;
+  stroke: #26332e;
+  stroke-width: 1.2px;
+  vector-effect: non-scaling-stroke;
 }
 
-.stg-diagonal.is-right {
-  right: -2%;
-  transform: rotate(-12deg);
-  transform-origin: left center;
+.stg-condition {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+}
+
+.stg-question-mark {
+  flex: 0 0 auto;
 }
 
 .stg-branch-label {
   position: absolute;
   z-index: 2;
   bottom: 2px;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 800;
 }
 
@@ -2509,6 +2503,38 @@ code {
   margin-top: 22px;
 }
 
+.points-dialog {
+  width: min(540px, calc(100vw - 28px));
+  max-height: calc(100dvh - 28px);
+  overflow-y: auto;
+}
+
+.points-list {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0 4px;
+  padding: 0;
+  list-style: none;
+}
+
+.points-list li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.points-list li svg {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  color: var(--success);
+}
+
+.points-callout {
+  margin-top: 16px;
+}
+
 .backup-dialog {
   width: min(600px, calc(100vw - 28px));
   max-height: calc(100dvh - 28px);
@@ -2798,17 +2824,24 @@ code {
   color: #d8d4ff;
 }
 
-:root[data-theme="dark"] .objectives-band,
 :root[data-theme="dark"] .callout.is-warning {
   background: #362d17;
 }
 
+:root[data-theme="dark"] .objectives-band {
+  border-color: #315f4b;
+  border-left-color: #56bf91;
+  background: linear-gradient(135deg, #17362a 0%, #142c24 100%);
+}
+
 :root[data-theme="dark"] .lesson-detail.difficulty-page-medium .objectives-band {
+  border-color: #315f7c;
   border-left-color: #5ba8df;
   background: var(--medium-blue-soft);
 }
 
 :root[data-theme="dark"] .lesson-detail.difficulty-page-plus .objectives-band {
+  border-color: #28788a;
   border-left-color: #31c9e4;
   background: var(--plus-blue-soft);
 }
@@ -3086,14 +3119,14 @@ code {
     border-bottom: 1px solid #b7c2bd;
     background: #eef3f0;
     color: var(--green-700);
-    content: "J-Zweig";
+    content: "Ja";
     font-size: 0.64rem;
     font-weight: 800;
     text-transform: uppercase;
   }
 
   .stg-branch:nth-child(2)::before {
-    content: "N-Zweig";
+    content: "Nein";
   }
 
   .structure-slot select {
