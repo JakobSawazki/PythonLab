@@ -1,7 +1,7 @@
 # PythonLab Tasks und Projektstand
 
 Stand: 19. Juni 2026
-Aktuelle Version: 0.11.0
+Aktuelle Version: 0.12.0
 Live: `https://jakobsawazki.github.io/PythonLab/`
 
 ## Leitentscheidung
@@ -55,6 +55,10 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 - 2026-06-19: Vier neue Nachschlagekarten zu f-Strings, Textbearbeitung, Listen und Rest/Teilen ergänzt.
 - 2026-06-19: Design veredelt – Verlaufs- und Schattensystem, Hover-Lifts, animierte Fortschrittsbalken, Inhaltseinblendung und XP-Hervorhebung bei erhaltener Grünidentität; `prefers-reduced-motion` respektiert.
 - 2026-06-19: Stand auf Desktop (1280) und Mobil (390) sowie in Light und Dark Mode geprüft; neue Aufgaben real über Pyodide bestanden, keine Konsolenfehler.
+- 2026-06-19: XP-System auf exakt 6000 erreichbare Punkte skaliert, Levelgrenzen erweitert und eine anklickbare Punkteerklärung ergänzt.
+- 2026-06-19: Lernzielkästen in ein ruhiges Grünsystem überführt und Karten-Hover ohne unruhigen oberen Farbstreifen veredelt.
+- 2026-06-19: Zweiseitige Struktogramm-Alternativen mit exakt zusammentreffenden SVG-Diagonalen, Fragezeichen sowie ausgeschriebenen Zweigen `Ja` und `Nein` an den hus-Stil angenähert.
+- 2026-06-19: Gemeinsame Arbeitsregeln für Mensch, Claude Code und Codex unter `docs/ZUSAMMENARBEIT.md` festgehalten.
 
 ## Offen Priorisiert
 
@@ -68,7 +72,7 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 8. GUI-Inhalte aus Lernfortschritt 2 als Python-Plus-Modul prüfen.
 9. Struktogrammer Web stärker verzahnen, zum Beispiel durch konkrete Aufgabenlinks oder Import-/Export-Hinweise.
 10. Teilpunkte und Kompetenz-Rubriken für längere Transferaufgaben entwickeln.
-11. Screenshots nach den 0.11.0-UI-Änderungen erneuern (Preview-Screenshots in der aktuellen Umgebung nicht verfügbar; lokal nachholen).
+11. Screenshots nach den 0.12.0-UI-Änderungen erneuern.
 12. GitHub-Pages-Liveprüfung nach jedem Push dokumentieren.
 
 ## Ideen

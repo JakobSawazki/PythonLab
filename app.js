@@ -13,6 +13,7 @@
   const profileForm = document.querySelector("#profileForm");
   const profileName = document.querySelector("#profileName");
   const backupDialog = document.querySelector("#backupDialog");
+  const pointsDialog = document.querySelector("#pointsDialog");
   const progressFileInput = document.querySelector("#progressFileInput");
   const runtimeChip = document.querySelector("#runtimeChip");
   const runtimeText = document.querySelector("#runtimeText");
@@ -35,11 +36,14 @@
 
   const levels = [
     { min: 0, title: "Starter" },
-    { min: 100, title: "Code-Entdecker" },
-    { min: 250, title: "Pfadfinder" },
-    { min: 450, title: "Problemlöser" },
-    { min: 700, title: "Python-Profi" },
-    { min: 1000, title: "Werkstattmeister" }
+    { min: 250, title: "Code-Entdecker" },
+    { min: 700, title: "Pfadfinder" },
+    { min: 1300, title: "Schleifen-Fuchs" },
+    { min: 2100, title: "Problemlöser" },
+    { min: 3000, title: "Bausteinmeister" },
+    { min: 4000, title: "Funktions-Architekt" },
+    { min: 5000, title: "Python-Profi" },
+    { min: 5800, title: "Werkstattmeister" }
   ];
 
   let state = loadState();
@@ -473,6 +477,11 @@
       </label>`;
   }
 
+  function renderStructureCondition(value, exercise, answers = {}) {
+    const alreadyHasQuestionMark = typeof value === "string" && value.trim().endsWith("?");
+    return `${renderStructureValue(value, exercise, answers)}${alreadyHasQuestionMark ? "" : '<span class="stg-question-mark" aria-hidden="true">?</span>'}`;
+  }
+
   function renderStructureNodes(nodes, exercise = null, answers = {}) {
     return nodes.map((node) => {
       if (node.type === "statement") {
@@ -483,11 +492,13 @@
         return `
           <div class="stg-decision ${hasNoBranch ? "" : "is-one-sided"}">
             <div class="stg-decision-head">
-              <strong>${renderStructureValue(node.condition, exercise, answers)}</strong>
-              <span class="stg-diagonal is-left"></span>
-              <span class="stg-diagonal is-right"></span>
-              <span class="stg-branch-label is-yes">J</span>
-              <span class="stg-branch-label is-no">N</span>
+              <svg class="stg-decision-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <line x1="0" y1="0" x2="50" y2="100"></line>
+                <line x1="100" y1="0" x2="50" y2="100"></line>
+              </svg>
+              <strong class="stg-condition">${renderStructureCondition(node.condition, exercise, answers)}</strong>
+              <span class="stg-branch-label is-yes">Ja</span>
+              <span class="stg-branch-label is-no">Nein</span>
             </div>
             <div class="stg-branches ${hasNoBranch ? "" : "is-one-sided"}">
               <div class="stg-branch">${renderStructureNodes(node.yes || [], exercise, answers)}</div>
@@ -566,7 +577,7 @@
           <p>Plane Sequenzen, Entscheidungen und Schleifen zunächst unabhängig von Python. Fünf interaktive Aufgaben führen von der Grundform bis zur geschachtelten Alternative.</p>
           <div class="lesson-meta">
             <span class="meta-pill"><i data-lucide="workflow"></i>${state.completedStructograms.length} / ${content.structograms.exercises.length} gelöst</span>
-            <span class="meta-pill"><i data-lucide="sparkles"></i>bis zu 200 XP</span>
+            <span class="meta-pill"><i data-lucide="sparkles"></i>bis zu 600 XP</span>
           </div>
           <button class="button button-primary" type="button" data-route="structograms">
             <i data-lucide="arrow-right"></i>
@@ -798,6 +809,17 @@
           <span>${done} von ${total} Aufgaben gelöst</span>
         </div>
       </section>
+
+      <div class="callout abitur-note">
+        <i data-lucide="graduation-cap"></i>
+        <div>
+          <p><strong>Abiturrelevant.</strong> Struktogramme gehören fest zum Bildungsplan und werden im Abitur Informatik – schriftlich wie mündlich – immer wieder verlangt. An unserer Schule arbeiten wir mit dem <strong>hus Struktogrammer</strong>. Für konkrete Prüfungen gelten die jeweils aktuellen schulischen Vorgaben.</p>
+          <a class="text-button" href="https://struktogrammer.ch/Web_files/page1_JavaVersion.html" target="_blank" rel="noreferrer">
+            <i data-lucide="external-link"></i>
+            hus Struktogrammer öffnen
+          </a>
+        </div>
+      </div>
 
       <section class="content-section">
         <div class="section-heading">
@@ -1098,6 +1120,18 @@
               ${section.warning ? `<div class="callout is-warning"><i data-lucide="triangle-alert"></i><p>${inlineCode(section.warning)}</p></div>` : ""}
             </div>
           </section>`).join("")}
+
+        ${lesson.structogram ? `
+          <section class="lesson-section lesson-structogram">
+            <h3>Als Struktogramm gedacht</h3>
+            <div class="lesson-copy">
+              <p>Im Bildungsplan und im Abitur Informatik werden Abläufe oft als Struktogramm dargestellt. So sieht der Ablauf dieser Lektion als Nassi-Shneiderman-Struktogramm aus:</p>
+              ${renderStructogram(lesson.structogram)}
+              <p class="lesson-structogram-link">
+                <a class="text-button" href="#structograms" data-route="structograms"><i data-lucide="workflow"></i> Im Struktogramm-Labor üben</a>
+              </p>
+            </div>
+          </section>` : ""}
 
         <section class="quick-check">
           <p class="eyebrow">Kurz prüfen</p>
@@ -1576,7 +1610,7 @@
     pendingRuns = new Map();
     setRuntime("loading", "Python wird vorbereitet");
 
-    worker = new Worker("python-worker.js?v=0.10.0", { type: "module" });
+    worker = new Worker("python-worker.js?v=0.12.0", { type: "module" });
     workerReady = new Promise((resolve, reject) => {
       const readyTimeout = window.setTimeout(() => reject(new Error("Python konnte nicht geladen werden.")), 30000);
       worker.addEventListener("message", function onReady(event) {
@@ -2076,6 +2110,10 @@
   document.querySelector("#backupButton").addEventListener("click", () => {
     updateBackupSummary();
     backupDialog.showModal();
+  });
+  document.querySelector("#pointsInfoButton")?.addEventListener("click", () => {
+    pointsDialog?.showModal();
+    renderIcons();
   });
   themeToggleButton?.addEventListener("click", toggleTheme);
   document.querySelector("#backupCloseButton").addEventListener("click", () => backupDialog.close());

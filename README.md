@@ -1,6 +1,6 @@
 # PythonLab
 
-**Aktuelle Version:** 0.11.0
+**Aktuelle Version:** 0.12.0
 **Dokumentationsstand:** 19. Juni 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
@@ -56,7 +56,7 @@ Repository übernommen.
   Detailseiten und kleinen XP-Aufgaben
 - Struktogramm-Labor mit fünf Grundformen und fünf geprüften Übungen
 - echter Python-Interpreter im Browser über Pyodide
-- XP, Level, Lernfortschritt und sechzehn Erfolge inklusive Serien-Erfolg
+- insgesamt 6000 erreichbare XP, feinere Levelstufen, Lernfortschritt und sechzehn Erfolge inklusive Serien-Erfolg
 - lokales Lernprofil mit Name oder Kürzel
 - Speicherung von Code- und Struktogramm-Entwürfen
 - Export und Import des vollständigen Lernstands als JSON-Datei
@@ -218,6 +218,17 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - abschließender Abruf der GitHub-Pages-Version
 
 ## Versionsverlauf
+
+### 0.12.0 – 19. Juni 2026
+
+- XP aller Lernaktivitäten auf ein transparentes Gesamtsystem mit exakt 6000 erreichbaren Punkten skaliert und Levelgrenzen entsprechend erweitert
+- anklickbare XP-Anzeige mit einer kurzen, schülergerechten Erklärung ergänzt
+- Lernzielkasten „Danach kannst du ...“ von Gelb auf ein ruhiges, hochwertiges Grünsystem umgestellt
+- Karten-Hover ohne aufgesetzten oberen Farbstreifen gestaltet; stattdessen ein gleichmäßiger Rahmen, Schatten und dezenter Lift
+- zweiseitige Alternativen hus-näher gezeichnet: beide Diagonalen treffen sich exakt im unteren Mittelpunkt, Bedingungen enden mit `?`, Zweige heißen `Ja` und `Nein`
+- Struktogramm-Hinweis fachlich präzisiert: Für konkrete Prüfungen gelten die jeweils aktuellen schulischen Vorgaben
+- Desktop- und Mobilansicht sowie Syntax, Inhaltsbeziehungen, XP-Summe und Browserkonsole geprüft
+- gemeinsame Arbeits- und Übergaberegeln für Mensch, Claude Code und Codex in `docs/ZUSAMMENARBEIT.md` dokumentiert
 
 ### 0.11.0 – 19. Juni 2026
 
