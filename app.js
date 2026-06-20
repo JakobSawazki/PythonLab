@@ -1273,19 +1273,36 @@
       return "";
     }
     const paragraphs = Array.isArray(story.paragraphs) ? story.paragraphs : [];
+    const facts = Array.isArray(story.facts) ? story.facts : [];
+    const visual = story.image
+      ? `<div class="exercise-story-illustration exercise-story-illustration--image">
+          <img src="${escapeHtml(story.image)}" alt="${escapeHtml(story.illustrationAlt || "Illustration")}" loading="lazy" decoding="async">
+        </div>`
+      : story.illustration
+        ? `<div class="exercise-story-illustration" role="img" aria-label="${escapeHtml(story.illustrationAlt || "Illustration")}">${story.illustration}</div>`
+        : "";
     return `
-      <section class="exercise-story">
+      <section class="exercise-story ${story.image ? "exercise-story--image" : ""}">
         <div class="exercise-story-text">
           ${story.eyebrow ? `<p class="eyebrow">${escapeHtml(story.eyebrow)}</p>` : ""}
           ${story.heading ? `<h2>${escapeHtml(story.heading)}</h2>` : ""}
           ${paragraphs.map((paragraph) => `<p>${inlineCode(paragraph)}</p>`).join("")}
+          ${facts.length ? `
+            <ul class="exercise-story-facts" aria-label="Primzahlen auf einen Blick">
+              ${facts.map((fact) => `<li><strong>${escapeHtml(fact.value)}</strong><span>${escapeHtml(fact.label)}</span></li>`).join("")}
+            </ul>` : ""}
           ${story.video?.url ? `
             <a class="button button-secondary exercise-story-video" href="${escapeHtml(story.video.url)}" target="_blank" rel="noreferrer">
               <i data-lucide="play"></i>
               ${escapeHtml(story.video.label || "Video ansehen")}
             </a>` : ""}
+          ${story.source?.url ? `
+            <a class="text-button exercise-story-source" href="${escapeHtml(story.source.url)}" target="_blank" rel="noreferrer">
+              <i data-lucide="external-link"></i>
+              ${escapeHtml(story.source.label || "Quelle und Weiterlesen")}
+            </a>` : ""}
         </div>
-        ${story.illustration ? `<div class="exercise-story-illustration" role="img" aria-label="${escapeHtml(story.illustrationAlt || "Illustration")}">${story.illustration}</div>` : ""}
+        ${visual}
       </section>`;
   }
 
@@ -1746,7 +1763,7 @@
     pendingRuns = new Map();
     setRuntime("loading", "Python wird vorbereitet");
 
-    worker = new Worker("python-worker.js?v=0.15.0", { type: "module" });
+    worker = new Worker("python-worker.js?v=0.16.0", { type: "module" });
     workerReady = new Promise((resolve, reject) => {
       const readyTimeout = window.setTimeout(() => reject(new Error("Python konnte nicht geladen werden.")), 30000);
       worker.addEventListener("message", function onReady(event) {
