@@ -1,7 +1,7 @@
 # PythonLab Tasks und Projektstand
 
 Stand: 20. Juni 2026
-Aktuelle Version: 0.15.0
+Aktuelle Version: 0.16.0
 Live: `https://jakobsawazki.github.io/PythonLab/`
 
 ## Leitentscheidung
@@ -72,6 +72,8 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 - 2026-06-20: Fibonacci nach OneNote-Aufbau ausgebaut – Einstieg ohne Funktion plus Funktionsaufbau, beide in Kategorie Anwendung; neuer optionaler `exercise.story`-Block mit Motivation, SVG-Illustration und Erklärvideo. Gesamt-XP auf 6950.
 - 2026-06-20: Lokalen Lerncoach erweitert (fehlender Doppelpunkt, `print` ohne Klammern, AttributeError/ModuleNotFoundError/RecursionError/EOFError) und Abschnitt „KI-Lerncoach aktivieren“ in README ergänzt.
 - 2026-06-20: Integritätsprüfung (eindeutige IDs, Bezüge, XP-Summe) sowie alle Ansichten, beide Themes und 390/1280 px im Browser geprüft; beide Fibonacci-Lösungen real über Pyodide bestanden.
+- 2026-06-20: **Primzahlen-Werkstatt** als dritte Aufgabe der Kategorie Anwendung ergänzt: Teil 1 ohne Parameter, Teil 2 mit Parameter und booleschem Rückgabewert, Prüfung der Zahlen 1 bis 50; mit eigener Illustration, Wikipedia-Weiterlesen und 250 XP. Gesamtumfang: 29 Aufgaben und 7200 XP.
+- 2026-06-20: Optionalen Aufgaben-Storyblock um Rasterbilder, kompakte Faktenkarten und Quellenlinks erweitert.
 
 ## Offen Priorisiert
 
@@ -83,7 +85,7 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 6. Den ikonischen Einstieg aus Lernfortschritt 1 didaktisch prüfen und bei Bedarf als optionales Einstiegsmodul umsetzen.
 7. GUI-Inhalte aus Lernfortschritt 2 als optionales Python-Plus-Modul prüfen.
 8. Struktogrammer Web stärker verzahnen, zum Beispiel durch konkrete Aufgabenlinks oder Import-/Export-Hinweise.
-9. Kategorie **Anwendung** ausbauen: weitere alltags- und anwendungsnahe Aufgaben aus dem J1-Unterricht (Quelle: OneNote „5. Grundlagen der Programmierung“) ergänzen, die zeigen, wofür Python eingesetzt wird. Fibonacci ist der erste Eintrag.
+9. Kategorie **Anwendung** weiter ausbauen: Nach Fibonacci und Primzahlen weitere alltags- und anwendungsnahe Aufgaben aus dem J1-Unterricht (Quelle: OneNote „5. Grundlagen der Programmierung“) ergänzen, die zeigen, wofür Python eingesetzt wird.
 10. Screenshots nach den UI-Änderungen ab 0.12.0 erneuern (Preview-Screenshots in der aktuellen Agent-Umgebung nicht verfügbar; lokal nachholen).
 
 ## Ideen

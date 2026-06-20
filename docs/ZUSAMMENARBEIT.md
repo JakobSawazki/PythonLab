@@ -1,6 +1,6 @@
 # Zusammenarbeit in PythonLab
 
-Stand: 19. Juni 2026
+Stand: 20. Juni 2026
 
 PythonLab wird gemeinsam von Jakob Sawazki als fachlichem und gestalterischem
 Entscheider sowie Claude Code und Codex als umsetzenden Agenten weiterentwickelt.
@@ -33,9 +33,9 @@ pauschal gestagt oder veröffentlicht werden.
 
 - JavaScript-Syntax von `app.js`, `content.js` und `python-worker.js` prüfen.
 - Beziehungen zwischen Lektionen und Aufgaben sowie eindeutige IDs prüfen.
-- XP aus Lektionen, Aufgaben, Befehlen und Struktogrammen summieren; seit 0.15.0
-  muss die Summe exakt 6950 ergeben (die beiden Fibonacci-Anwendungsaufgaben
-  bringen zusammen 350 XP). Der Wert im Punktedialog wird zusätzlich zur Laufzeit
+- XP aus Lektionen, Aufgaben, Befehlen und Struktogrammen summieren; seit 0.16.0
+  muss die Summe exakt 7200 ergeben (Fibonacci und Primzahlen bilden die ersten
+  drei Aufgaben der Kategorie Anwendung). Der Wert im Punktedialog wird zusätzlich zur Laufzeit
   aus den Inhalten berechnet (`totalAvailableXp()`); bei neuen Aufgaben diesen
   Zielwert hier mitführen.
 - `git diff --check` ausführen.
@@ -63,6 +63,28 @@ Tests, offene Punkte und Git-Status. Nach einem Push wird die GitHub-Pages-Seite
 mit einem Cache-Buster geöffnet und auf die aktuelle Asset-Version geprüft.
 
 ## Letzte Übergaben
+
+### 0.16.0 – Codex
+
+- **Geänderte Dateien:** `content.js` (Aufgabe `primzahlen-werkstatt`, Story und
+  Kompetenzbezüge), `app.js` (Rasterbilder, Fakten und Quellen im Storyblock),
+  `styles.css` (responsive Bild- und Faktenansicht), `index.html` (Version und
+  XP-Fallback), `assets/primzahlen-anwendung.png` sowie Projektdokumentation.
+- **Fachliche Entscheidung:** Eine gemeinsame, zweistufige Anwendungsaufgabe führt
+  von `teste_primzahl()` mit festgelegter 29 zu `ist_primzahl(n)` mit booleschem
+  Rückgabewert. Die Schleife berichtet für jede Zahl von 1 bis 50 den Status, da
+  die gewünschte Beispielausgabe ausdrücklich auch zusammengesetzte Zahlen zeigt.
+- **Quellen:** Definition, eindeutige Primfaktorzerlegung, unendlich viele
+  Primzahlen und Kryptografiebezug wurden über die offizielle MediaWiki-API des
+  deutschsprachigen Wikipedia-Artikels „Primzahl“ abgeglichen; im Storyblock ist
+  der Artikel als freiwillige Vertiefung verlinkt.
+- **Tests:** Musterlösung real über Pyodide bestanden (inklusive
+  Funktionssignaturen, boolescher Rückgaben, Grenzwerte, AST-Nachweis für Schleife
+  und Modulo sowie aller 50 Ausgabezeilen); Integritätsprüfung mit 0 Problemen,
+  29 Aufgaben und 7200 XP; Desktop und 390 Pixel, Light und Dark ohne Überlauf;
+  Illustration geladen und Browserkonsole fehlerfrei.
+- **Offene Punkte:** Kategorie Anwendung mit weiteren J1-Beispielen ausbauen;
+  optionalen Gemini-Coach schulisch freigeben und deployen; Screenshots erneuern.
 
 ### 0.15.0 – Claude Code (Opus 4.8)
 

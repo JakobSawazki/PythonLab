@@ -116,7 +116,7 @@ window.PYLAB_CONTENT = {
           id: "functions",
           title: "Ich kann Funktionen definieren, Parameter übergeben und Rückgabewerte nutzen.",
           lessonIds: ["funktionen", "funktionen-parameter", "funktionen-rueckgabe"],
-          exerciseIds: ["pausensignal-funktion", "begruessung-parameter", "fahrtkosten-funktion"],
+          exerciseIds: ["pausensignal-funktion", "begruessung-parameter", "fahrtkosten-funktion", "primzahlen-werkstatt"],
           commandIds: ["functions"],
           route: "lesson/funktionen"
         }
@@ -157,7 +157,7 @@ window.PYLAB_CONTENT = {
           id: "for-loops",
           title: "Ich kann eine for-Schleife für eine bekannte Anzahl von Wiederholungen einsetzen.",
           lessonIds: ["for"],
-          exerciseIds: ["einmaleins", "gerade-summe", "sternentreppe", "taschengeld-tabelle"],
+          exerciseIds: ["einmaleins", "gerade-summe", "sternentreppe", "taschengeld-tabelle", "primzahlen-werkstatt"],
           commandIds: ["for-range", "range-steps"],
           structogramIds: ["stg-for"],
           route: "lesson/for"
@@ -1681,6 +1681,53 @@ window.PYLAB_CONTENT = {
       check: {
         type: "tests",
         code: `import inspect\nassert callable(fibonacci), "Definiere eine Funktion namens fibonacci."\nassert len(inspect.signature(fibonacci).parameters) == 1, "Die Funktion erwartet genau einen Parameter."\nassert fibonacci(0) == [], "Bei 0 angeforderten Zahlen ist die Liste leer."\nassert fibonacci(1) == [0], "Die Folge beginnt mit 0."\nassert fibonacci(2) == [0, 1], "Die ersten beiden Zahlen sind 0 und 1."\nassert fibonacci(10) == [0, 1, 1, 2, 3, 5, 8, 13, 21, 34], "Prüfe die ersten zehn Fibonacci-Zahlen."\nprint("__PYLAB_TESTS_OK__")`
+      }
+    },
+    {
+      id: "primzahlen-werkstatt",
+      lessonId: "funktionen-rueckgabe",
+      title: "Primzahlen-Werkstatt",
+      description: "Entwickle eine Primzahlprüfung von der festen Zahl 29 bis zur wiederverwendbaren Funktion.",
+      difficulty: "extra",
+      xp: 250,
+      story: {
+        eyebrow: "Anwendung · Mathematik & Kryptografie",
+        heading: "Unteilbar – und erstaunlich wichtig",
+        paragraphs: [
+          "Eine Primzahl ist eine natürliche Zahl größer als 1, die genau zwei positive Teiler hat: `1` und sich selbst. Deshalb sind 2, 3, 5 und 7 Primzahlen – die 1 dagegen nicht.",
+          "Primzahlen sind die Bausteine der natürlichen Zahlen: Jede Zahl größer als 1 lässt sich eindeutig in Primfaktoren zerlegen. Außerdem gibt es unendlich viele Primzahlen.",
+          "Große Primzahlen spielen in der modernen Kryptografie eine wichtige Rolle. Verfahren wie RSA nutzen Aufgaben mit Primfaktoren, die Computer bei sehr großen Zahlen nicht einfach rückwärts lösen können.",
+          "Mit Python untersuchst du dieselbe Grundidee im Kleinen: Gibt es zwischen 2 und der Zahl einen Teiler ohne Rest?"
+        ],
+        facts: [
+          { value: "2", label: "kleinste und einzige gerade Primzahl" },
+          { value: "∞", label: "es gibt unendlich viele Primzahlen" },
+          { value: "RSA", label: "ein Einsatzgebiet in der Kryptografie" }
+        ],
+        image: "assets/primzahlen-anwendung.png",
+        illustrationAlt: "Illustration eines Zahlensiebs: zusammengesetzte Gruppen werden als Punktfelder aussortiert, einzelne Bausteine führen zu einem digitalen Schloss.",
+        source: {
+          url: "https://de.wikipedia.org/wiki/Primzahl",
+          label: "Mehr über Primzahlen bei Wikipedia"
+        }
+      },
+      instructions: [
+        "Teil 1 – ohne Parameter: Vervollständige `teste_primzahl()`. Die Zahl 29 bleibt fest in der Funktion gespeichert.",
+        "Prüfe mit einer Schleife und dem Modulo-Operator `%`, ob 29 einen Teiler hat. Beende die Suche bei einem Treffer mit `break`.",
+        "Gib genau `29 ist eine Primzahl.` oder `29 ist keine Primzahl.` aus.",
+        "Teil 2 – mit Parameter: Vervollständige `ist_primzahl(n)` und gib immer einen booleschen Wert zurück: `True` oder `False`.",
+        "Beachte den Sonderfall: Zahlen kleiner als 2 sind keine Primzahlen.",
+        "Prüfe anschließend in einer Schleife jede Zahl von 1 bis 50 und gib für jede Zahl aus, ob sie eine Primzahl ist."
+      ],
+      hints: [
+        "Eine Zahl ist zusammengesetzt, sobald `zahl % teiler == 0` gilt. Mögliche Teiler kannst du mit `range(2, zahl)` prüfen.",
+        "In `ist_primzahl(n)` kannst du bei `n < 2` sofort `False` zurückgeben. Findest du später einen Teiler, gib ebenfalls `False` zurück.",
+        "Erst wenn die Schleife keinen Teiler gefunden hat, ist `return True` richtig. Nutze diesen Rückgabewert anschließend in der Schleife von 1 bis 50."
+      ],
+      starter: `# Teil 1: Funktion ohne Parameter\ndef teste_primzahl():\n    zahl = 29\n    ist_prim = True\n\n    if zahl < 2:\n        ist_prim = False\n    else:\n        # Prüfe mögliche Teiler von 2 bis zahl - 1\n        pass\n\n    if ist_prim:\n        print(f"{zahl} ist eine Primzahl.")\n    else:\n        print(f"{zahl} ist keine Primzahl.")\n\n\n# Teil 2: Funktion mit Parameter und Rückgabewert\ndef ist_primzahl(n):\n    # Zahlen kleiner als 2 sind keine Primzahlen\n    pass\n\n\nteste_primzahl()\n\n# Prüfe jede Zahl von 1 bis 50\nfor zahl in range(1, 51):\n    if ist_primzahl(zahl):\n        print(f"{zahl} ist eine Primzahl.")\n    else:\n        print(f"{zahl} ist keine Primzahl.")\n`,
+      check: {
+        type: "tests",
+        code: `import ast\nimport contextlib\nimport inspect\nimport io\n\nassert callable(teste_primzahl), "Definiere eine Funktion namens teste_primzahl."\nassert len(inspect.signature(teste_primzahl).parameters) == 0, "teste_primzahl() darf noch keinen Parameter haben."\n_teil1_ausgabe = io.StringIO()\nwith contextlib.redirect_stdout(_teil1_ausgabe):\n    teste_primzahl()\nassert _teil1_ausgabe.getvalue().strip() == "29 ist eine Primzahl.", "Teil 1 soll genau ausgeben: 29 ist eine Primzahl."\n\nassert callable(ist_primzahl), "Definiere eine Funktion namens ist_primzahl."\nassert len(inspect.signature(ist_primzahl).parameters) == 1, "ist_primzahl(n) erwartet genau einen Parameter."\n_testwerte = {-3: False, 0: False, 1: False, 2: True, 3: True, 4: False, 17: True, 29: True, 49: False, 50: False}\nfor _zahl, _erwartet in _testwerte.items():\n    _ergebnis = ist_primzahl(_zahl)\n    assert type(_ergebnis) is bool, f"ist_primzahl({_zahl}) muss True oder False zurückgeben."\n    assert _ergebnis is _erwartet, f"Prüfe die Primzahl-Logik für {_zahl}."\n\n_baum = ast.parse(__pylab_source__)\n_funktionen = {knoten.name: knoten for knoten in ast.walk(_baum) if isinstance(knoten, ast.FunctionDef)}\nfor _name in ("teste_primzahl", "ist_primzahl"):\n    _funktion = _funktionen.get(_name)\n    assert _funktion is not None, f"Die Funktion {_name} fehlt."\n    assert any(isinstance(knoten, ast.For) for knoten in ast.walk(_funktion)), f"Verwende in {_name} eine for-Schleife zur Teilersuche."\n    assert any(isinstance(knoten, ast.BinOp) and isinstance(knoten.op, ast.Mod) for knoten in ast.walk(_funktion)), f"Verwende in {_name} den Modulo-Operator %."\n\n_programm_ausgabe = io.StringIO()\nwith contextlib.redirect_stdout(_programm_ausgabe):\n    exec(compile(__pylab_source__, "<primzahlen-werkstatt>", "exec"), {})\n_zeilen = {zeile.strip() for zeile in _programm_ausgabe.getvalue().splitlines() if zeile.strip()}\nfor _zahl in range(1, 51):\n    _status = "eine Primzahl" if ist_primzahl(_zahl) else "keine Primzahl"\n    _erwartete_zeile = f"{_zahl} ist {_status}."\n    assert _erwartete_zeile in _zeilen, f"In der Ausgabe fehlt: {_erwartete_zeile}"\n\nprint("__PYLAB_TESTS_OK__")`
       }
     }
   ],

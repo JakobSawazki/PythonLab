@@ -1,8 +1,8 @@
 # Übergabeprotokoll: PythonLab
 
-Stand: 19. Juni 2026
+Stand: 20. Juni 2026
 
-Aktueller Release-Stand: 0.13.0. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
+Aktueller Release-Stand: 0.16.0. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
 
 ## Projektziel
 
@@ -37,8 +37,8 @@ Verbindliche fachliche Referenz:
 
 - Übersicht mit persönlichem nächsten Schritt und Lernstatistik
 - fünf Lernetappen mit sechzehn Lektionen
-- achtundzwanzig Aufgaben mit editierbarem Python-Code, davon mehrere freie Transferaufgaben sowie die Kategorie **Anwendung** mit zwei Fibonacci-Aufgaben (Einstieg ohne Funktion und Aufbau als Funktion)
-- optionaler Story-Block je Aufgabe (`exercise.story`) mit Motivationstext, Inline-SVG-Illustration und Video-Link; eingebettete Struktogramme in den Kontrollstruktur-Lektionen (`lesson.structogram`)
+- neunundzwanzig Aufgaben mit editierbarem Python-Code, davon mehrere freie Transferaufgaben sowie die Kategorie **Anwendung** mit zwei Fibonacci-Aufgaben und der zweistufigen Primzahlen-Werkstatt
+- optionaler Story-Block je Aufgabe (`exercise.story`) mit Motivationstext, Inline-SVG oder Rasterbild, Faktenkarten, Quellen- und Video-Link; eingebettete Struktogramme in den Kontrollstruktur-Lektionen (`lesson.structogram`)
 - eigener Funktionsabschnitt mit drei Lektionen: ohne Parameter, mit Parametern und mit Rückgabewert
 - Modul Python Plus mit Listen, Listen erweitern, Text bearbeiten und Fehlersuche
 - Reiter **Befehle** mit neunzehn Python-Basiselementen, Detailseiten und XP-Miniaufgaben
@@ -60,7 +60,7 @@ Verbindliche fachliche Referenz:
 - Nachschlagebereich mit kompakten Syntaxmustern
 - responsive Navigation und Tastaturbedienung
 - Kompetenzansicht mit drei BPE5-Bereichen, vierzehn Ich-kann-Zielen und verknüpften Lernaktivitäten
-- insgesamt exakt 6950 erreichbare XP mit erweiterten Levelgrenzen und erklärender Punkteanzeige (`totalAvailableXp()` berechnet die Summe zur Laufzeit)
+- insgesamt exakt 7200 erreichbare XP mit erweiterten Levelgrenzen und erklärender Punkteanzeige (`totalAvailableXp()` berechnet die Summe zur Laufzeit)
 - lokaler Lerncoach erkennt zusätzlich fehlende Doppelpunkte, `print` ohne Klammern sowie weitere Fehlertypen; optionaler Gemini-Coach in README unter „KI-Lerncoach aktivieren“ dokumentiert
 
 ## Dateistruktur
@@ -76,6 +76,7 @@ Verbindliche fachliche Referenz:
 | `services/ai-feedback-worker/` | optionaler, getrennt zu veröffentlichender Gemini-Proxy |
 | `assets/python-lernraum.png` | Titelbild der Übersicht |
 | `assets/struktogrammer-mark.png` | Icon für den Struktogrammer-Web-Link |
+| `assets/primzahlen-anwendung.png` | Illustration der Primzahlen-Werkstatt |
 | `TASKS.md` | zentrale Aufgabenliste, Versionshistorie, offene Punkte und Ideen |
 | `docs/TECHNIK_UND_DIDAKTIK.md` | Quellen, Datenschutz und didaktische Entscheidungen |
 | `docs/BPE5_ABGLEICH_2025.md` | Abdeckung des offiziellen Kompetenzrasters und offene Ausbauschritte |

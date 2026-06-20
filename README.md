@@ -1,6 +1,6 @@
 # PythonLab
 
-**Aktuelle Version:** 0.15.0
+**Aktuelle Version:** 0.16.0
 **Dokumentationsstand:** 20. Juni 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
@@ -50,15 +50,14 @@ Repository übernommen.
 ## Aktueller Funktionsumfang
 
 - fünf Etappen mit insgesamt sechzehn Python-Lektionen, in den Kontrollstruktur-Lektionen jeweils mit eingebettetem Struktogramm
-- achtundzwanzig automatisch prüfbare Programmieraufgaben, davon mehrere
-  freie Transferaufgaben sowie eine eigene Kategorie **Anwendung** mit zwei
-  Fibonacci-Aufgaben (Einstieg und Funktion) inklusive Motivationstext,
-  Illustration und Erklärvideo
+- neunundzwanzig automatisch prüfbare Programmieraufgaben, davon mehrere
+  freie Transferaufgaben sowie eine eigene Kategorie **Anwendung** mit
+  Fibonacci- und Primzahlwerkstatt inklusive Motivationstexten und Illustrationen
 - eigener Reiter **Befehle** mit neunzehn Python-Basiselementen, Beispielen,
   Detailseiten und kleinen XP-Aufgaben
 - Struktogramm-Labor mit fünf Grundformen und fünf geprüften Übungen
 - echter Python-Interpreter im Browser über Pyodide
-- insgesamt 6950 erreichbare XP, feinere Levelstufen, Lernfortschritt und siebzehn Erfolge inklusive Serien-Erfolg
+- insgesamt 7200 erreichbare XP, feinere Levelstufen, Lernfortschritt und siebzehn Erfolge inklusive Serien-Erfolg
 - eigene Kompetenzansicht mit vierzehn verständlichen BPE5-Ich-kann-Zielen und automatisch berechnetem Übungsstand
 - lokales Lernprofil mit Name oder Kürzel
 - Speicherung von Code- und Struktogramm-Entwürfen
@@ -252,6 +251,18 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - abschließender Abruf der GitHub-Pages-Version
 
 ## Versionsverlauf
+
+### 0.16.0 – 20. Juni 2026
+
+- neue Anwendungsaufgabe **Primzahlen-Werkstatt** mit zwei aufeinander aufbauenden
+  Teilen: feste Zahl ohne Parameter sowie `ist_primzahl(n)` mit booleschem
+  Rückgabewert und vollständiger Ausgabe von 1 bis 50
+- robuste automatische Prüfung für Funktionssignaturen, `True`/`False`, Grenzfälle,
+  Schleife, Modulo-Logik und die geforderten Ausgabezeilen
+- motivierender Primzahl-Einstieg mit eigener Illustration, Merkkarten und
+  weiterführendem Wikipedia-Link; Bedeutung als Zahlbausteine und für Kryptografie
+- Story-Komponente um Rasterbilder, Faktenkarten und Quellenlinks erweitert
+- Gesamtumfang auf 29 Programmieraufgaben und 7200 erreichbare XP erhöht
 
 ### 0.15.0 – 20. Juni 2026
 
