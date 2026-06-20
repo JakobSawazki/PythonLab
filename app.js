@@ -1268,6 +1268,27 @@
       </article>`;
   }
 
+  function renderExerciseStory(story) {
+    if (!story || typeof story !== "object") {
+      return "";
+    }
+    const paragraphs = Array.isArray(story.paragraphs) ? story.paragraphs : [];
+    return `
+      <section class="exercise-story">
+        <div class="exercise-story-text">
+          ${story.eyebrow ? `<p class="eyebrow">${escapeHtml(story.eyebrow)}</p>` : ""}
+          ${story.heading ? `<h2>${escapeHtml(story.heading)}</h2>` : ""}
+          ${paragraphs.map((paragraph) => `<p>${inlineCode(paragraph)}</p>`).join("")}
+          ${story.video?.url ? `
+            <a class="button button-secondary exercise-story-video" href="${escapeHtml(story.video.url)}" target="_blank" rel="noreferrer">
+              <i data-lucide="play"></i>
+              ${escapeHtml(story.video.label || "Video ansehen")}
+            </a>` : ""}
+        </div>
+        ${story.illustration ? `<div class="exercise-story-illustration" role="img" aria-label="${escapeHtml(story.illustrationAlt || "Illustration")}">${story.illustration}</div>` : ""}
+      </section>`;
+  }
+
   function renderExercise(id) {
     const exercise = exerciseById(id);
     if (!exercise) {
@@ -1282,6 +1303,7 @@
     activateNav("practice");
     main.innerHTML = `
       <button class="text-button back-button" type="button" data-route="practice"><i data-lucide="arrow-left"></i> Zu allen Aufgaben</button>
+      ${renderExerciseStory(exercise.story)}
       <div class="exercise-workspace">
         <aside class="exercise-brief">
           <div class="exercise-meta">
@@ -1453,7 +1475,11 @@
       ["TypeError", "Hier werden Werte oder Funktionsaufrufe in einer unpassenden Form verbunden."],
       ["ValueError", "Ein Wert lässt sich nicht wie vorgesehen umwandeln oder verarbeiten."],
       ["ZeroDivisionError", "Eine Rechnung teilt durch 0. Prüfe den Nenner."],
-      ["IndexError", "Ein Listenplatz liegt außerhalb der vorhandenen Elemente."]
+      ["IndexError", "Ein Listenplatz liegt außerhalb der vorhandenen Elemente."],
+      ["AttributeError", "Auf diesem Wert gibt es die aufgerufene Methode nicht. Prüfe den Datentyp und die Schreibweise der Methode."],
+      ["ModuleNotFoundError", "Ein importiertes Modul ist nicht verfügbar. Für diese Aufgaben brauchst du meist keine zusätzlichen Importe."],
+      ["RecursionError", "Die Funktion ruft sich endlos selbst auf. Prüfe, ob es einen Abbruchfall gibt."],
+      ["EOFError", "Das Programm wartet auf eine Eingabe, es sind aber keine vorbereiteten Eingabezeilen mehr da. Ergänze sie im Reiter „Eingabe“."]
     ];
     return namedErrors.find(([name]) => text.includes(name))?.[1]
       || "Lies die letzte Zeile der Fehlermeldung und prüfe anschließend die dort genannte Codezeile.";
@@ -1470,6 +1496,12 @@
     }
     if (/=\s*(?:#.*)?$/m.test(code)) {
       hints.push("Mindestens eine Zuweisung endet direkt nach dem Gleichheitszeichen. Rechts davon fehlt noch ein Wert oder Ausdruck.");
+    }
+    if (/^[ \t]*(?:if|elif|for|while|def)\b.*[^:\s][ \t]*$/m.test(code)) {
+      hints.push("Nach einer Bedingung oder einem Schleifen- bzw. Funktionskopf (if, elif, for, while, def) muss ein Doppelpunkt stehen.");
+    }
+    if (/\bprint[ \t]+[^([\t =]/.test(code)) {
+      hints.push("In Python 3 braucht `print` immer Klammern: schreibe print(...) statt print ...");
     }
     if (errorText) {
       hints.push(pythonDiagnostic(errorText));
@@ -1714,7 +1746,7 @@
     pendingRuns = new Map();
     setRuntime("loading", "Python wird vorbereitet");
 
-    worker = new Worker("python-worker.js?v=0.14.0", { type: "module" });
+    worker = new Worker("python-worker.js?v=0.15.0", { type: "module" });
     workerReady = new Promise((resolve, reject) => {
       const readyTimeout = window.setTimeout(() => reject(new Error("Python konnte nicht geladen werden.")), 30000);
       worker.addEventListener("message", function onReady(event) {

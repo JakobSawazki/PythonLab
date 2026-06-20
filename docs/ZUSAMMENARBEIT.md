@@ -33,11 +33,11 @@ pauschal gestagt oder veröffentlicht werden.
 
 - JavaScript-Syntax von `app.js`, `content.js` und `python-worker.js` prüfen.
 - Beziehungen zwischen Lektionen und Aufgaben sowie eindeutige IDs prüfen.
-- XP aus Lektionen, Aufgaben, Befehlen und Struktogrammen summieren; seit 0.14.0
-  muss die Summe exakt 6800 ergeben (die Fibonacci-Anwendungsaufgabe bringt
-  200 XP). Der Wert im Punktedialog wird zusätzlich zur Laufzeit aus den
-  Inhalten berechnet (`totalAvailableXp()`); bei neuen Aufgaben diesen Zielwert
-  hier mitführen.
+- XP aus Lektionen, Aufgaben, Befehlen und Struktogrammen summieren; seit 0.15.0
+  muss die Summe exakt 6950 ergeben (die beiden Fibonacci-Anwendungsaufgaben
+  bringen zusammen 350 XP). Der Wert im Punktedialog wird zusätzlich zur Laufzeit
+  aus den Inhalten berechnet (`totalAvailableXp()`); bei neuen Aufgaben diesen
+  Zielwert hier mitführen.
 - `git diff --check` ausführen.
 - betroffene Ansichten im Browser in Dark Mode prüfen; bei Designänderungen
   zusätzlich Light Mode sowie Desktop und 390 Pixel Breite testen.
@@ -63,6 +63,36 @@ Tests, offene Punkte und Git-Status. Nach einem Push wird die GitHub-Pages-Seite
 mit einem Cache-Buster geöffnet und auf die aktuelle Asset-Version geprüft.
 
 ## Letzte Übergaben
+
+### 0.15.0 – Claude Code (Opus 4.8)
+
+- **Geänderte Dateien:** `content.js` (Lektions-Struktogramme für sequenz, if,
+  elif, logik, for, while; neue Einstiegsaufgabe `fibonacci-folge` mit
+  Story-Block; Funktionsaufgabe `fibonacci` retitelt + Story), `app.js`
+  (`renderExerciseStory`, Aufruf in `renderExercise`; erweiterte lokale Diagnose
+  in `pythonDiagnostic`/`buildExerciseHints`; Worker-Verweis `?v=0.15.0`),
+  `styles.css` (`.exercise-story` hell/dunkel + mobil), `index.html`
+  (XP-Fallback 6950, `?v=0.15.0`); Doku in `README.md`, `TASKS.md`,
+  `UEBERGABE_Codex.md`, dieser Datei.
+- **Neue Datenmodell-Felder:** `lesson.structogram` (Node-Array im hus-Format,
+  in renderLesson als „Als Struktogramm gedacht“ gerendert) und `exercise.story`
+  (`{ eyebrow, heading, paragraphs[], video:{url,label}, illustration:<svg>,
+  illustrationAlt }`). Beide sind optional und abwärtskompatibel.
+- **Fachliche Entscheidung:** Fibonacci nach dem OneNote-Aufbau des Lehrers
+  umgesetzt – Aufgabe 1 (ohne Funktion, drei Variablen a/b/c, for-Schleife,
+  Ausgabe der ersten zehn Zahlen) als motivierender Einstieg mit Bio,
+  Goldenes-Rechteck-Illustration und Erklärvideo; Funktionsversion als Aufbau.
+  Struktogramme in den Kontrollstruktur-Lektionen stärken den Abiturbezug.
+- **Tests:** beide Fibonacci-Musterlösungen real über Pyodide bestanden; alle
+  sechs Lektions-Struktogramme rendern; neue lokale Hinweise (Doppelpunkt,
+  `print`-Klammern) greifen; Integritätsprüfung 0 Probleme, 28 Aufgaben,
+  XP-Summe 6950; kein Überlauf bei 1280 und 390 px; Light und Dark geprüft;
+  Browserkonsole fehlerfrei.
+- **Offene Punkte:** Kategorie Anwendung mit weiteren J1-Aufgaben füllen;
+  optionalen Gemini-Coach gemäß README-Abschnitt „KI-Lerncoach aktivieren“
+  schulisch freigeben und deployen; Screenshots erneuern.
+- **Git-Status bei Übergabe:** `main`, ein Release-Commit 0.15.0, nach
+  `origin/main` gepusht, GitHub-Pages-Build geprüft.
 
 ### 0.14.0 – Claude Code (Opus 4.8)
 

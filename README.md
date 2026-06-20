@@ -1,7 +1,7 @@
 # PythonLab
 
-**Aktuelle Version:** 0.14.0
-**Dokumentationsstand:** 19. Juni 2026
+**Aktuelle Version:** 0.15.0
+**Dokumentationsstand:** 20. Juni 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
 
@@ -49,15 +49,16 @@ Repository übernommen.
 
 ## Aktueller Funktionsumfang
 
-- fünf Etappen mit insgesamt sechzehn Python-Lektionen
-- siebenundzwanzig automatisch prüfbare Programmieraufgaben, davon mehrere
-  freie Transferaufgaben sowie eine eigene Kategorie **Anwendung** mit der
-  Fibonacci-Aufgabe als motivierendem Praxisbeispiel
+- fünf Etappen mit insgesamt sechzehn Python-Lektionen, in den Kontrollstruktur-Lektionen jeweils mit eingebettetem Struktogramm
+- achtundzwanzig automatisch prüfbare Programmieraufgaben, davon mehrere
+  freie Transferaufgaben sowie eine eigene Kategorie **Anwendung** mit zwei
+  Fibonacci-Aufgaben (Einstieg und Funktion) inklusive Motivationstext,
+  Illustration und Erklärvideo
 - eigener Reiter **Befehle** mit neunzehn Python-Basiselementen, Beispielen,
   Detailseiten und kleinen XP-Aufgaben
 - Struktogramm-Labor mit fünf Grundformen und fünf geprüften Übungen
 - echter Python-Interpreter im Browser über Pyodide
-- insgesamt 6800 erreichbare XP, feinere Levelstufen, Lernfortschritt und siebzehn Erfolge inklusive Serien-Erfolg
+- insgesamt 6950 erreichbare XP, feinere Levelstufen, Lernfortschritt und siebzehn Erfolge inklusive Serien-Erfolg
 - eigene Kompetenzansicht mit vierzehn verständlichen BPE5-Ich-kann-Zielen und automatisch berechnetem Übungsstand
 - lokales Lernprofil mit Name oder Kürzel
 - Speicherung von Code- und Struktogramm-Entwürfen
@@ -68,7 +69,8 @@ Repository übernommen.
 - alle 40 Erklärungsbeispiele direkt auf der Lektionsseite ausführbar
 - dynamische Aufgabenprüfung mit konkreten Python-Diagnosen und gestuften Lernhinweisen
 - bestandene Programmieraufgabe schließt die zugehörige Lektion zuverlässig ab
-- vorbereiteter, freiwilliger Gemini-Lerncoach über einen geschützten Cloudflare Worker
+- lokaler Lerncoach, der häufige Anfängerfehler (fehlender Doppelpunkt, `print` ohne Klammern, Fehlertypen wie NameError oder TypeError) verständlich erklärt – ganz ohne Backend und Datenübertragung
+- optional zuschaltbarer, freiwilliger Gemini-Lerncoach über einen geschützten Cloudflare Worker (siehe „KI-Lerncoach aktivieren“)
 - kompakter Nachschlagebereich
 - schlichter Footer-Hinweis `Designed by Sawazki Electronics`
 - responsive Oberfläche für Computer, Tablet und Smartphone
@@ -170,6 +172,36 @@ Speicherdialog; andernfalls landet die Datei üblicherweise im Download-Ordner.
 Die gewählte Darstellung wird separat unter `pythonlab-theme-v1` im Browser
 gespeichert.
 
+## KI-Lerncoach aktivieren
+
+PythonLab hilft Lernenden beim Programmieren auf zwei Ebenen:
+
+1. **Lokaler Lerncoach (immer aktiv, ohne Backend).** Bei einem Klick auf
+   „Lernhinweis anzeigen“ oder nach einer fehlgeschlagenen Prüfung analysiert
+   die App den Code und die Fehlermeldung direkt im Browser und gibt gestufte,
+   verständliche Hinweise – ohne dass Daten das Gerät verlassen. Das ist für den
+   Schulbetrieb der datenschutzfreundliche Standard.
+2. **Optionaler Gemini-Lerncoach (muss einmalig eingerichtet werden).** Zusätzlich
+   kann ein freiwilliger KI-Tipp über Google Gemini angeboten werden. Der
+   API-Schlüssel liegt dabei ausschließlich als Secret im Cloudflare Worker und
+   niemals im Browser oder im Repository.
+
+Einrichtung des optionalen Gemini-Coaches:
+
+1. Im Worker-Ordner `services/ai-feedback-worker/` den Cloudflare Worker
+   deployen (Anleitung in dessen `README.md`).
+2. Den Gemini-Schlüssel als Worker-Secret `GEMINI_API_KEY` hinterlegen
+   (`wrangler secret put GEMINI_API_KEY`).
+3. Die öffentliche `/feedback`-URL des Workers in `config.js` unter
+   `aiFeedbackEndpoint` eintragen.
+4. Vor dem Einsatz die schulische Datenschutzfreigabe klären; bis dahin bleibt
+   der lokale Lerncoach maßgeblich.
+
+Sobald der Endpoint gesetzt ist, erscheint im Aufgabenbereich der Button
+„Freiwilligen KI-Tipp anfragen“. Die KI entscheidet nie über XP oder den
+Abschluss einer Aufgabe – das übernimmt ausschließlich die lokale, reproduzierbare
+Prüfung.
+
 ## Schulisch bereitgestellte Hilfsmittel
 
 Für die Arbeit am Schul-PC stehen folgende Programme bereit:
@@ -220,6 +252,21 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - abschließender Abruf der GitHub-Pages-Version
 
 ## Versionsverlauf
+
+### 0.15.0 – 20. Juni 2026
+
+- Fibonacci-Aufgabe ausgebaut: eigener motivierender Einstieg ohne Funktion (drei
+  Variablen, for-Schleife) plus aufbauende Funktionsaufgabe; beide in der Kategorie
+  **Anwendung** und mit Musterlösung real über Pyodide geprüft
+- neuer optionaler Aufgaben-Block mit Motivationstext, Fibonacci-Illustration
+  (Goldenes-Rechteck-Struktogramm aus den Zahlen 1, 1, 2, 3, 5, 8) und Erklärvideo
+- in den Kontrollstruktur-Lektionen (Sequenz, Verzweigungen, Schleifen) jeweils ein
+  passendes Struktogramm direkt in der Lektion eingebettet – als Brücke zum Abitur
+- prominenter Hinweis im Struktogramm-Bereich auf den im Abitur zugelassenen hus Struktogrammer
+- lokaler Lerncoach erweitert: erkennt zusätzlich fehlende Doppelpunkte, `print` ohne
+  Klammern sowie AttributeError, ModuleNotFoundError, RecursionError und EOFError
+- erreichbare Gesamt-XP auf 6950 erhöht; Punkteanzeige berechnet die Summe weiterhin zur Laufzeit
+- Abschnitt „KI-Lerncoach aktivieren“ ergänzt; Desktop und Mobil, Light und Dark sowie Browserkonsole geprüft
 
 ### 0.14.0 – 19. Juni 2026
 

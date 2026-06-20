@@ -1,7 +1,7 @@
 # PythonLab Tasks und Projektstand
 
-Stand: 19. Juni 2026
-Aktuelle Version: 0.14.0
+Stand: 20. Juni 2026
+Aktuelle Version: 0.15.0
 Live: `https://jakobsawazki.github.io/PythonLab/`
 
 ## Leitentscheidung
@@ -68,6 +68,10 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 - 2026-06-19: Erste Anwendungsaufgabe **Fibonacci-Folge** ergänzt, Musterlösung real über Pyodide bestanden; Gesamt-XP auf 6800 angehoben.
 - 2026-06-19: Kopfzeilen-Icon für den Struktogrammer Web durch ein eigenes grünes SVG (Struktogramm-Marke) im einheitlichen Stroke-Stil ersetzt.
 - 2026-06-19: Bestätigt, dass der Lernzielkasten „Danach kannst du ...“ in Light und Dark Mode grün dargestellt wird (frühere gelbe Darstellung war ein veralteter Browserstand).
+- 2026-06-20: Lektions-Struktogramme (`lesson.structogram`) für Sequenz, Verzweigungen und Schleifen ergänzt; zuvor versehentlich ohne Daten ausgelieferten Rendercode damit funktional gemacht.
+- 2026-06-20: Fibonacci nach OneNote-Aufbau ausgebaut – Einstieg ohne Funktion plus Funktionsaufbau, beide in Kategorie Anwendung; neuer optionaler `exercise.story`-Block mit Motivation, SVG-Illustration und Erklärvideo. Gesamt-XP auf 6950.
+- 2026-06-20: Lokalen Lerncoach erweitert (fehlender Doppelpunkt, `print` ohne Klammern, AttributeError/ModuleNotFoundError/RecursionError/EOFError) und Abschnitt „KI-Lerncoach aktivieren“ in README ergänzt.
+- 2026-06-20: Integritätsprüfung (eindeutige IDs, Bezüge, XP-Summe) sowie alle Ansichten, beide Themes und 390/1280 px im Browser geprüft; beide Fibonacci-Lösungen real über Pyodide bestanden.
 
 ## Offen Priorisiert
 

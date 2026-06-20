@@ -215,7 +215,12 @@ window.PYLAB_CONTENT = {
         correct: 1,
         explanation: "Die Anführungszeichen machen den Inhalt zu Text. Python rechnet deshalb nicht."
       },
-      practiceId: "hallo-python"
+      practiceId: "hallo-python",
+      structogram: [
+        { type: "statement", text: "Ausgabe: \"Willkommen!\"" },
+        { type: "statement", text: "Ausgabe: \"Heute üben wir Python.\"" },
+        { type: "statement", text: "Ausgabe: 2 + 3" }
+      ]
     },
     {
       id: "variablen",
@@ -393,7 +398,18 @@ window.PYLAB_CONTENT = {
         correct: 1,
         explanation: "Mit == vergleichst du auf Gleichheit. Ein einzelnes = ist eine Zuweisung."
       },
-      practiceId: "rabatt-if"
+      practiceId: "rabatt-if",
+      structogram: [
+        { type: "statement", text: "Deklaration und Einlesen: anzahl als Ganzzahl" },
+        { type: "statement", text: "Zuweisung: gesamt = preis * anzahl" },
+        {
+          type: "if",
+          condition: "anzahl >= 5",
+          yes: [{ type: "statement", text: "Zuweisung: gesamt = gesamt * 0.9" }],
+          no: []
+        },
+        { type: "statement", text: "Ausgabe: gesamt" }
+      ]
     },
     {
       id: "elif",
@@ -437,7 +453,23 @@ window.PYLAB_CONTENT = {
         correct: 1,
         explanation: "Python nimmt den ersten passenden Zweig. Deshalb werden hohe Grenzen zuerst geprüft."
       },
-      practiceId: "notenstufe"
+      practiceId: "notenstufe",
+      structogram: [
+        { type: "statement", text: "Deklaration und Einlesen: punkte als Ganzzahl" },
+        {
+          type: "if",
+          condition: "punkte >= 90",
+          yes: [{ type: "statement", text: "Ausgabe: \"Gold\"" }],
+          no: [
+            {
+              type: "if",
+              condition: "punkte >= 50",
+              yes: [{ type: "statement", text: "Ausgabe: \"bestanden\"" }],
+              no: [{ type: "statement", text: "Ausgabe: \"noch üben\"" }]
+            }
+          ]
+        }
+      ]
     },
     {
       id: "logik",
@@ -478,7 +510,16 @@ window.PYLAB_CONTENT = {
         correct: 1,
         explanation: "Bei and müssen beide Teilbedingungen wahr sein."
       },
-      practiceId: "zugang-logik"
+      practiceId: "zugang-logik",
+      structogram: [
+        { type: "statement", text: "Deklaration und Einlesen: alter, unterweisung" },
+        {
+          type: "if",
+          condition: "alter >= 16 und unterweisung",
+          yes: [{ type: "statement", text: "Ausgabe: \"Zugang erlaubt\"" }],
+          no: [{ type: "statement", text: "Ausgabe: \"Zugang verweigert\"" }]
+        }
+      ]
     },
     {
       id: "for",
@@ -519,7 +560,15 @@ window.PYLAB_CONTENT = {
         correct: 0,
         explanation: "Der Startwert ist enthalten, der Endwert nicht."
       },
-      practiceId: "einmaleins"
+      practiceId: "einmaleins",
+      structogram: [
+        {
+          type: "loop",
+          loopType: "for",
+          header: "Zähle zahl von 1 bis 10, Schrittweite 1",
+          body: [{ type: "statement", text: "Ausgabe: 7 * zahl" }]
+        }
+      ]
     },
     {
       id: "while",
@@ -564,7 +613,22 @@ window.PYLAB_CONTENT = {
         correct: 0,
         explanation: "while ist ideal, wenn bis zu einem Ziel oder solange eine Bedingung gilt wiederholt wird."
       },
-      practiceId: "sparziel"
+      practiceId: "sparziel",
+      structogram: [
+        { type: "statement", text: "Deklaration und Initialisierung: guthaben = 40" },
+        { type: "statement", text: "Deklaration und Initialisierung: monate = 0" },
+        {
+          type: "loop",
+          loopType: "while",
+          header: "Wiederhole solange guthaben < 130",
+          body: [
+            { type: "statement", text: "Zuweisung: guthaben = guthaben + 15" },
+            { type: "statement", text: "Zuweisung: monate = monate + 1" }
+          ]
+        },
+        { type: "statement", text: "Ausgabe: monate" },
+        { type: "statement", text: "Ausgabe: guthaben" }
+      ]
     },
     {
       id: "funktionen",
@@ -1550,12 +1614,58 @@ window.PYLAB_CONTENT = {
       }
     },
     {
+      id: "fibonacci-folge",
+      lessonId: "for",
+      title: "Die Fibonacci-Zahlen",
+      description: "Eine berühmte Zahlenfolge aus Natur und Mathematik – berechne die ersten zehn ganz ohne Funktion.",
+      difficulty: "extra",
+      xp: 150,
+      story: {
+        eyebrow: "Anwendung · Einstieg",
+        heading: "Wofür ist das gut?",
+        paragraphs: [
+          "Die Fibonacci-Folge beginnt mit 0 und 1. Jede weitere Zahl ist die Summe der beiden vorherigen: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34 …",
+          "Benannt ist sie nach Leonardo von Pisa, genannt Fibonacci (um 1170–1240). Er machte die Zahlenfolge im mittelalterlichen Europa bekannt – ursprünglich an einem Beispiel mit sich vermehrenden Kaninchen.",
+          "Das Spannende: Diese Zahlen tauchen überall in der Natur auf – in Sonnenblumen, Tannenzapfen und Schneckenhäusern. Sie hängen eng mit dem „Goldenen Schnitt“ zusammen.",
+          "Mit nur wenigen Zeilen Python erzeugst du die Folge selbst. Genau das ist die Stärke des Programmierens: Aus einer einfachen Regel entsteht ein ganzes Muster."
+        ],
+        video: { url: "https://www.youtube.com/watch?v=R8w4l3f3g58&t=337s", label: "Erklärvideo ansehen" },
+        illustration: `<svg viewBox="0 0 130 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><g stroke="#2d8a68" stroke-width="1.2"><rect x="0" y="0" width="80" height="80" fill="#d7ece1"/><rect x="80" y="0" width="50" height="50" fill="#c2e1d1"/><rect x="80" y="50" width="30" height="30" fill="#a6d4bc"/><rect x="110" y="50" width="20" height="20" fill="#88c6a3"/><rect x="110" y="70" width="10" height="10" fill="#64b48b"/><rect x="120" y="70" width="10" height="10" fill="#64b48b"/></g><g fill="#16432f" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle"><text x="40" y="48" font-size="24">8</text><text x="105" y="31" font-size="16">5</text><text x="95" y="69" font-size="11">3</text><text x="120" y="64" font-size="8">2</text><text x="115" y="78" font-size="6">1</text><text x="125" y="78" font-size="6">1</text></g></svg>`,
+        illustrationAlt: "Fibonacci-Zahlen als ineinander geschachtelte Quadrate: 1, 1, 2, 3, 5, 8"
+      },
+      instructions: [
+        "Die Variablen a = 0 und b = 1 sind der Anfang der Folge.",
+        "Gib mit einer for-Schleife die ersten 10 Zahlen nacheinander aus.",
+        "Berechne in jedem Durchlauf die nächste Zahl in einer Hilfsvariable c = a + b.",
+        "Rücke danach a und b um eine Stelle weiter: a = b und b = c.",
+        "Es entstehen die Zahlen 0, 1, 1, 2, 3, 5, 8, 13, 21, 34."
+      ],
+      hints: [
+        "Gib zuerst a aus, bevor du a und b veränderst.",
+        "Die nächste Zahl ist die Summe der beiden aktuellen: c = a + b.",
+        "Schiebe danach weiter: a bekommt den Wert von b, b den Wert von c."
+      ],
+      starter: `a = 0\nb = 1\n\n# Gib die ersten 10 Fibonacci-Zahlen aus\nfor i in range(10):\n    print(a)\n    # Berechne die nächste Zahl c und rücke a und b weiter\n`,
+      check: {
+        type: "output",
+        expected: "0\n1\n1\n2\n3\n5\n8\n13\n21\n34"
+      }
+    },
+    {
       id: "fibonacci",
       lessonId: "for",
-      title: "Fibonacci-Folge erzeugen",
-      description: "Eine berühmte Zahlenfolge aus Natur und Mathematik – Schritt für Schritt mit Python.",
+      title: "Fibonacci als Funktion",
+      description: "Verpacke die Fibonacci-Berechnung in eine wiederverwendbare Funktion mit Parameter.",
       difficulty: "extra",
       xp: 200,
+      story: {
+        eyebrow: "Anwendung · Aufbau",
+        paragraphs: [
+          "Im Einstieg hast du die Fibonacci-Zahlen direkt ausgegeben. Jetzt verpackst du die Berechnung in eine Funktion mit dem Parameter `anzahl` – so kannst du sie beliebig oft und für verschiedene Längen wiederverwenden.",
+          "Zusatzfrage zum Nachdenken: Welchen Vorteil hat es, eine Berechnung in eine Funktion auszulagern, statt den Code jedes Mal neu zu schreiben?"
+        ],
+        video: { url: "https://www.youtube.com/watch?v=R8w4l3f3g58&t=337s", label: "Erklärvideo: Funktionen & Struktogramm" }
+      },
       instructions: [
         "Definiere fibonacci(anzahl) mit einem Parameter.",
         "Die Folge beginnt mit 0 und 1; jede weitere Zahl ist die Summe der beiden vorherigen.",

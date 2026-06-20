@@ -37,7 +37,8 @@ Verbindliche fachliche Referenz:
 
 - Übersicht mit persönlichem nächsten Schritt und Lernstatistik
 - fünf Lernetappen mit sechzehn Lektionen
-- siebenundzwanzig Aufgaben mit editierbarem Python-Code, davon mehrere freie Transferaufgaben sowie die Kategorie **Anwendung** (Fibonacci)
+- achtundzwanzig Aufgaben mit editierbarem Python-Code, davon mehrere freie Transferaufgaben sowie die Kategorie **Anwendung** mit zwei Fibonacci-Aufgaben (Einstieg ohne Funktion und Aufbau als Funktion)
+- optionaler Story-Block je Aufgabe (`exercise.story`) mit Motivationstext, Inline-SVG-Illustration und Video-Link; eingebettete Struktogramme in den Kontrollstruktur-Lektionen (`lesson.structogram`)
 - eigener Funktionsabschnitt mit drei Lektionen: ohne Parameter, mit Parametern und mit Rückgabewert
 - Modul Python Plus mit Listen, Listen erweitern, Text bearbeiten und Fehlersuche
 - Reiter **Befehle** mit neunzehn Python-Basiselementen, Detailseiten und XP-Miniaufgaben
@@ -59,7 +60,8 @@ Verbindliche fachliche Referenz:
 - Nachschlagebereich mit kompakten Syntaxmustern
 - responsive Navigation und Tastaturbedienung
 - Kompetenzansicht mit drei BPE5-Bereichen, vierzehn Ich-kann-Zielen und verknüpften Lernaktivitäten
-- insgesamt exakt 6800 erreichbare XP mit erweiterten Levelgrenzen und erklärender Punkteanzeige (`totalAvailableXp()` berechnet die Summe zur Laufzeit)
+- insgesamt exakt 6950 erreichbare XP mit erweiterten Levelgrenzen und erklärender Punkteanzeige (`totalAvailableXp()` berechnet die Summe zur Laufzeit)
+- lokaler Lerncoach erkennt zusätzlich fehlende Doppelpunkte, `print` ohne Klammern sowie weitere Fehlertypen; optionaler Gemini-Coach in README unter „KI-Lerncoach aktivieren“ dokumentiert
 
 ## Dateistruktur
 
