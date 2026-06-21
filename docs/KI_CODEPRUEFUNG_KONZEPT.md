@@ -31,6 +31,11 @@ JavaScript-Code wäre für alle sichtbar. Das ist für Gemini, OpenAI, Claude od
 ähnliche Dienste ungeeignet, weil der Key missbraucht werden kann und Kosten,
 Kontingente und Datenschutz nicht kontrollierbar wären.
 
+Das gilt auch dann, wenn die Homepage einer einzelnen Person gehört und nicht
+auf einem Schulserver liegt: Entscheidend ist, dass GitHub Pages den
+clientseitigen Quelltext öffentlich an die Browser ausliefert. Die
+Eigentümerschaft der Seite schützt keinen darin eingebauten Schlüssel.
+
 Eine KI-Anbindung braucht deshalb einen kleinen Server oder Serverless-Proxy,
 der den API-Key geheim hält, Rate-Limits setzt und nur die minimal nötigen
 Daten weitergibt.

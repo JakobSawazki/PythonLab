@@ -67,6 +67,9 @@ Repository übernommen.
 - Dark Mode als Standard und weiterhin umschaltbarer Light Mode
 - alle 40 Erklärungsbeispiele direkt auf der Lektionsseite ausführbar
 - dynamische Aufgabenprüfung mit konkreten Python-Diagnosen und gestuften Lernhinweisen
+- tolerante Ausgabeprüfung: unterschiedliche sinnvolle Formatierungen,
+  unwichtige Satzzeichen und beschriftete Zahlen werden akzeptiert; echte
+  Abweichungen nennen direkt die betroffene Ausgabezeile
 - bestandene Programmieraufgabe schließt die zugehörige Lektion zuverlässig ab
 - lokaler Lerncoach, der häufige Anfängerfehler (fehlender Doppelpunkt, `print` ohne Klammern, Fehlertypen wie NameError oder TypeError) verständlich erklärt – ganz ohne Backend und Datenübertragung
 - freiwillig aktivierbarer Gemini-Lerncoach: Nach Zustimmung gibt er nach fehlgeschlagenen Prüfungen automatisch kleine Denkimpulse; identische Anfragen werden für die Sitzung zwischengespeichert (siehe „KI-Lerncoach aktivieren“)
@@ -190,6 +193,13 @@ PythonLab hilft Lernenden beim Programmieren auf zwei Ebenen:
    API-Schlüssel liegt ausschließlich als Secret im Cloudflare Worker und
    niemals im Browser oder im Repository.
 
+Auch wenn PythonLab privat verwaltet wird, ist ein Gemini-Schlüssel direkt in
+GitHub Pages nicht sicher: Die ausgelieferten HTML- und JavaScript-Dateien sind
+für jeden Browser lesbar. Google warnt ausdrücklich davor, API-Schlüssel in
+produktiven clientseitigen Anwendungen fest einzubauen. Der Worker ist daher
+kein Schulserver, sondern lediglich der kleine sichere Schlüssel-Tresor und
+Anfragefilter vor Gemini.
+
 Einrichtung des optionalen Gemini-Coaches:
 
 1. Im Worker-Ordner `services/ai-feedback-worker/` den Cloudflare Worker
@@ -272,6 +282,12 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - unveränderte Anfragen werden in der Sitzung zwischengespeichert, parallele
   Anfragen verhindert und veraltete Antworten nach Code- oder Seitenwechsel
   nicht mehr eingeblendet
+- Ausgabeprüfungen semantisch toleranter gestaltet: Das im Screenshot fehlende
+  Ausrufezeichen, verschiedene Groß-/Kleinschreibung und sinnvoll beschriftete
+  Zahlenausgaben führen nicht mehr fälschlich zum Abbruch; bei echten Fehlern
+  wird die konkrete Ausgabezeile genannt
+- stark vorgezeichnete Startcodes bei Fibonacci und Primzahlen auf offene,
+  lernförderliche Gerüste reduziert
 - Gemini-Worker auf strukturiertes, lösungsvermeidendes Feedback mit Stärke,
   ein bis zwei nächsten Schritten, Denkimpuls und Reflexionsfrage ausgerichtet
 - schulfreundliche Begrenzung pro anonymer Sitzung und zusätzlich pro IP,

@@ -80,6 +80,13 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 - 2026-06-21: Gemini-Worker auf `gemini-3.1-flash-lite`, strukturiertes
   lösungsvermeidendes Feedback, 15-Sekunden-Zeitlimit sowie kombinierte
   Sitzungs- und IP-Begrenzung aktualisiert; Browser- und Mock-Worker-Ablauf geprüft.
+- 2026-06-21: Ausgabeprüfung für alternative korrekte Lösungen toleranter
+  gemacht. Satzzeichen, Schreibweise, Dezimaldarstellung und beschriftete
+  Zahlenausgaben werden sinnvoll normalisiert; Abweichungen nennen die erste
+  betroffene Zeile.
+- 2026-06-21: Zu stark vorgezeichnete Startcodes der Fibonacci- und
+  Primzahlen-Aufgaben auf knappe Funktions- beziehungsweise Schleifengerüste
+  reduziert.
 
 ## Offen Priorisiert
 

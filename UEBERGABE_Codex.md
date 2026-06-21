@@ -50,6 +50,8 @@ Verbindliche fachliche Referenz:
   Fortschrittsbalken und Inhaltseinblendung; respektiert `prefers-reduced-motion`
 - alle Erklärungsbeispiele direkt in den Lektionen mit Pyodide ausführbar
 - automatische Prüfung von Ausgabe, Variablen und Funktionen
+- semantisch tolerante Ausgabeprüfung mit zeilengenauer Rückmeldung; unwichtige
+  Satzzeichen und beschriftete, numerisch richtige Ausgaben werden akzeptiert
 - konkrete Python-Diagnosen und drei gestufte lokale Hinweise je Programmieraufgabe
 - erfolgreiche Programmierprüfung schließt die zugehörige Lektion ab
 - freiwilliger Gemini-KI-Modus über einen separaten Cloudflare Worker:

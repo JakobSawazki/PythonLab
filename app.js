@@ -2059,6 +2059,70 @@
       .join("\n");
   }
 
+  function outputLines(value) {
+    const normalized = normalizeOutput(value);
+    return normalized ? normalized.split("\n") : [];
+  }
+
+  function outputNumbers(line) {
+    return (String(line).match(/-?\d+(?:[.,]\d+)?/g) || [])
+      .map((value) => Number(value.replace(",", ".")));
+  }
+
+  function outputText(line) {
+    return String(line)
+      .normalize("NFKC")
+      .toLocaleLowerCase("de-DE")
+      .replace(/-?\d+(?:[.,]\d+)?/g, " ")
+      .replace(/[.!?,;:]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function sameNumber(actual, expected) {
+    return Number.isFinite(actual) && Number.isFinite(expected) && Math.abs(actual - expected) < 0.001;
+  }
+
+  function outputLineMatches(actual, expected) {
+    const actualNumbers = outputNumbers(actual);
+    const expectedNumbers = outputNumbers(expected);
+    const actualText = outputText(actual);
+    const expectedText = outputText(expected);
+
+    if (!expectedNumbers.length) {
+      return actualText === expectedText;
+    }
+    if (expectedNumbers.length === 1 && !expectedText) {
+      return sameNumber(actualNumbers.at(-1), expectedNumbers[0]);
+    }
+    if (actualNumbers.length !== expectedNumbers.length
+      || !expectedNumbers.every((value, index) => sameNumber(actualNumbers[index], value))) {
+      return false;
+    }
+    return !expectedText || actualText === expectedText || actualText.includes(expectedText);
+  }
+
+  function outputMatches(actual, expected) {
+    const actualLines = outputLines(actual);
+    const expectedLines = outputLines(expected);
+    return actualLines.length === expectedLines.length
+      && expectedLines.every((line, index) => outputLineMatches(actualLines[index], line));
+  }
+
+  function outputMismatchDiagnostic(actual, expected) {
+    const actualLines = outputLines(actual);
+    const expectedLines = outputLines(expected);
+    if (actualLines.length !== expectedLines.length) {
+      return `Erwartet werden ${expectedLines.length} nichtleere Ausgabezeilen, dein Programm erzeugt ${actualLines.length}.`;
+    }
+    const mismatchIndex = expectedLines.findIndex((line, index) => !outputLineMatches(actualLines[index], line));
+    if (mismatchIndex >= 0) {
+      const actualLine = actualLines[mismatchIndex] || "(leer)";
+      return `Prüfe Ausgabezeile ${mismatchIndex + 1}: Erwartet wird sinngemäß „${expectedLines[mismatchIndex]}“, ausgegeben wurde „${actualLine}“.`;
+    }
+    return "Die Ausgabe enthält noch eine Abweichung von der Aufgabenstellung.";
+  }
+
   function lastOutputNumber(value) {
     const lines = normalizeOutput(value).split("\n").filter(Boolean);
     const lastLine = lines.at(-1) || "";
@@ -2119,7 +2183,7 @@
       if (check.type === "tests") {
         passed = result.testsPassed;
       } else if (check.type === "output") {
-        passed = normalizeOutput(result.stdout) === normalizeOutput(check.expected);
+        passed = outputMatches(result.stdout, check.expected);
       } else if (check.type === "outputNumber") {
         passed = Math.abs(lastOutputNumber(result.stdout) - check.expected) < 0.001;
       }
@@ -2149,7 +2213,7 @@
         );
       } else {
         const diagnostic = check.type === "output"
-          ? "Die erzeugten Ausgabezeilen stimmen noch nicht vollständig mit der Aufgabe überein."
+          ? outputMismatchDiagnostic(result.stdout, check.expected)
           : check.type === "outputNumber"
             ? "Der letzte ausgegebene Zahlenwert ist noch nicht das erwartete Ergebnis."
             : "Mindestens eine überprüfte Anforderung ist noch nicht erfüllt.";

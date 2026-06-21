@@ -113,6 +113,14 @@ Die Aufgabenprüfung verwendet je nach Lernziel:
 - numerische Ausgabe mit Toleranz,
 - Python-Assertions gegen Variablen oder Funktionen.
 
+Textausgaben werden nicht mehr als rohe Zeichenkette verglichen. PythonLab
+ignoriert leere Zeilen, überflüssige Abstände, Groß-/Kleinschreibung und
+abschließende Satzzeichen. Zahlen werden numerisch mit kleiner Toleranz
+verglichen; erläuternde Beschriftungen wie `Alter 6: 10 Euro` sind zulässig,
+wenn Zahlen, Reihenfolge und Zeilenzahl stimmen. Bei einer echten Abweichung
+nennt die Rückmeldung die erste betroffene Zeile statt nur eines allgemeinen
+Fehlertexts.
+
 Assertion-Meldungen sowie häufige Syntax- und Laufzeitfehler werden in
 verständliche Diagnosen übersetzt. Jede Aufgabe besitzt mehrere gestufte
 Hinweise. Die Funktionsaufgaben prüfen zusätzlich Signaturen, mehrere Testwerte

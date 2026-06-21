@@ -67,7 +67,9 @@ mit einem Cache-Buster geöffnet und auf die aktuelle Asset-Version geprüft.
 ### 0.17.0 – Codex
 
 - **Geänderte Dateien:** `app.js` (Sitzungsmodus, automatische KI-Hilfe,
-  Zwischenspeicher und Schutz vor veralteten Antworten), `index.html`
+  Zwischenspeicher, Schutz vor veralteten Antworten und tolerantere
+  Ausgabeprüfung mit zeilengenauer Diagnose), `content.js` (offenere Starter
+  für Fibonacci und Primzahlen), `index.html`
   (Einwilligungsdialog), `styles.css` (KI-Schalter und Dialog), `config.js`
   (öffentliche Konfiguration), `services/ai-feedback-worker/` (Prompt, Modell,
   Schema, Zeit- und Ratenbegrenzung) sowie Projektdokumentation.
@@ -84,7 +86,8 @@ mit einem Cache-Buster geöffnet und auf die aktuelle Asset-Version geprüft.
   gemocktem Gemini auf Origin-Schutz, JSON-Schema, Modell, Weitergabegrenzen und
   429-Sitzungslimit; Browserablauf mit Einwilligung, automatischer Rückmeldung,
   Cache-Treffer bei unverändertem Code, neuer Anfrage nach Codeänderung und
-  Abschalten des Modus.
+  Abschalten des Modus; im Browser die Screenshot-Variante ohne Ausrufezeichen,
+  eine echte Textabweichung und beschriftete Taschengeld-Ausgaben geprüft.
 - **Offene Punkte:** Freigegebenen Gemini-Tarif wählen, Cloudflare/Gemini
   außerhalb des Repositories einrichten, Secret hinterlegen, Endpoint setzen
   und vor einer Veröffentlichung mit nicht personenbezogenen Testdaten prüfen.
