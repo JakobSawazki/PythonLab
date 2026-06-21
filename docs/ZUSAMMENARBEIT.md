@@ -64,6 +64,24 @@ mit einem Cache-Buster geöffnet und auf die aktuelle Asset-Version geprüft.
 
 ## Letzte Übergaben
 
+### 0.17.1 – Claude Code (Opus 4.8)
+
+- **Entscheidung KI-Aktivierung:** Auf Wunsch des Lehrers den kostenlosen,
+  schlüssellosen Direkt-Dienst (pollinations.ai) geprüft und wieder verworfen –
+  der Browser-Aufruf scheitert (CORS) und das Senden von Schülercode an einen
+  nicht benannten Drittanbieter ist für die Schule datenschutzrechtlich heikel.
+  Maßgeblich bleibt Codex' sicherer eigener Gemini-Worker.
+- **Geänderte Dateien:** `services/ai-feedback-worker/README.md` (neue
+  CLI-freie Deployment-Variante über das Cloudflare-Dashboard + Funktionstest),
+  `README.md` (Hinweis auf beide Deploy-Varianten), `.gitignore`
+  (`node_modules/`). Kein App-Code geändert, daher keine neue Cache-Bust-Version.
+- **Status KI-Modus:** vollständig implementiert (Codex 0.16/0.17). Aktivierung
+  = Worker deployen und `aiFeedbackEndpoint` in `config.js` setzen. Solange leer,
+  zeigt die Oberfläche ehrlich „KI-Modus noch nicht freigeschaltet“; lokaler
+  Coach und Prüfung bleiben voll funktionsfähig.
+- **Offen:** Worker-Deployment (nur vom Schul-/Lehrer-Konto möglich) und
+  schulische Datenschutzfreigabe.
+
 ### 0.17.0 – Codex
 
 - **Geänderte Dateien:** `app.js` (Sitzungsmodus, automatische KI-Hilfe,

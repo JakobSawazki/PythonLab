@@ -1,7 +1,7 @@
 # PythonLab Tasks und Projektstand
 
 Stand: 21. Juni 2026
-Aktuelle Version: 0.17.0
+Aktuelle Version: 0.17.1
 Live: `https://jakobsawazki.github.io/PythonLab/`
 
 ## Leitentscheidung
@@ -87,6 +87,10 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 - 2026-06-21: Zu stark vorgezeichnete Startcodes der Fibonacci- und
   Primzahlen-Aufgaben auf knappe Funktions- beziehungsweise Schleifengerüste
   reduziert.
+- 2026-06-21: KI-Modus-Aktivierung erleichtert – CLI-freie Worker-Deployment-
+  Variante über das Cloudflare-Dashboard samt Funktionstest dokumentiert; den
+  kostenlosen Direkt-Dienst (pollinations.ai) nach CORS-/Datenschutzprüfung
+  verworfen; `node_modules/` aus dem Repo ausgeschlossen.
 
 ## Offen Priorisiert
 

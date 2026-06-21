@@ -4,6 +4,7 @@ Thumbs.db
 .vscode/
 .claude/
 *.log
+node_modules/
 references/bpe5/original/
 references/bpe5/source/
 resources/

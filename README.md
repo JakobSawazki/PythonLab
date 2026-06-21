@@ -1,6 +1,6 @@
 # PythonLab
 
-**Aktuelle Version:** 0.17.0
+**Aktuelle Version:** 0.17.1
 **Dokumentationsstand:** 21. Juni 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
@@ -202,10 +202,13 @@ Anfragefilter vor Gemini.
 
 Einrichtung des optionalen Gemini-Coaches:
 
-1. Im Worker-Ordner `services/ai-feedback-worker/` den Cloudflare Worker
-   deployen (Anleitung in dessen `README.md`).
-2. Den Gemini-Schlüssel als Worker-Secret `GEMINI_API_KEY` hinterlegen
-   (`wrangler secret put GEMINI_API_KEY`).
+1. Den Cloudflare Worker aus `services/ai-feedback-worker/` veröffentlichen –
+   wahlweise **ohne Installation über das Cloudflare-Dashboard** (Variante A, für
+   Lehrkräfte empfohlen) oder mit der wrangler-CLI (Variante B). Beide Wege sind
+   Schritt für Schritt in der `README.md` des Worker-Ordners beschrieben.
+2. Den Gemini-Schlüssel ausschließlich als Worker-Secret `GEMINI_API_KEY`
+   hinterlegen (im Dashboard unter „Variables and Secrets“ oder per
+   `wrangler secret put GEMINI_API_KEY`).
 3. Die öffentliche `/feedback`-URL des Workers in `config.js` unter
    `aiFeedbackEndpoint` eintragen.
 4. Vor dem Einsatz die schulische Datenschutzfreigabe und den geeigneten
@@ -271,6 +274,18 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - abschließender Abruf der GitHub-Pages-Version
 
 ## Versionsverlauf
+
+### 0.17.1 – 21. Juni 2026
+
+- KI-Modus-Aktivierung erleichtert: zusätzliche Deployment-Variante des Workers
+  **ohne CLI direkt im Cloudflare-Dashboard** sowie ein kurzer Funktionstest in
+  `services/ai-feedback-worker/README.md`; Haupt-README auf beide Wege verwiesen
+- kostenlosen schlüssellosen Direkt-Dienst (pollinations.ai) geprüft und bewusst
+  verworfen (Browser-CORS und Datenschutz beim Senden von Schülercode an einen
+  Drittanbieter); maßgeblich bleibt der eigene, sichere Gemini-Worker
+- `node_modules/` in `.gitignore` aufgenommen (Worker-Abhängigkeiten gehören nicht ins Repo)
+- reine Dokumentations- und Hygieneänderung; kein App-Code und keine
+  Cache-Bust-Version verändert
 
 ### 0.17.0 – 21. Juni 2026
 

@@ -7,24 +7,57 @@ Die KI ergänzt nur einen kurzen Lernimpuls.
 
 ## Einrichten
 
-Voraussetzungen sind ein eigenes Cloudflare-Konto, ein Google-AI-Projekt und
-eine schulische Datenschutzfreigabe. API-Schlüssel niemals in einen Chat,
-`config.js`, HTML, JavaScript oder Git kopieren.
+Voraussetzungen sind ein eigenes Cloudflare-Konto (kostenlos), ein
+Google-AI-Projekt und eine schulische Datenschutzfreigabe. API-Schlüssel niemals
+in einen Chat, `config.js`, HTML, JavaScript oder Git kopieren.
 
-1. In Google AI Studio einen Gemini-API-Schlüssel für das vorgesehene Projekt
-   anlegen.
-2. In diesem Ordner bei Cloudflare anmelden: `npx wrangler login`
-3. Den Schlüssel ausschließlich als Worker-Secret eingeben:
+Zuerst in [Google AI Studio](https://aistudio.google.com/app/apikey) einen
+Gemini-API-Schlüssel anlegen. Danach den Worker entweder ohne Installation über
+das Cloudflare-Dashboard (Variante A, für Lehrkräfte empfohlen) oder mit der
+wrangler-CLI (Variante B) veröffentlichen.
+
+### Variante A – ohne Installation (Cloudflare-Dashboard)
+
+1. Bei [dash.cloudflare.com](https://dash.cloudflare.com) anmelden und links
+   **Workers & Pages → Create application → Create Worker** wählen, einen Namen
+   wie `pythonlab-ai-feedback` vergeben und **Deploy** klicken.
+2. **Edit code** öffnen, den gesamten Inhalt von `worker.js` aus diesem Ordner
+   einfügen (vorhandenen Beispielcode ersetzen) und erneut **Deploy** klicken.
+3. Im Worker **Settings → Variables and Secrets** öffnen und eintragen:
+   - **Secret** `GEMINI_API_KEY` = dein Gemini-Schlüssel (Typ „Secret“/verschlüsselt).
+   - **Variable** `ALLOWED_ORIGINS` = `https://jakobsawazki.github.io` (für lokale
+     Tests zusätzlich, kommagetrennt, `http://localhost:4173`).
+   - **Variable** `GEMINI_MODEL` = `gemini-3.1-flash-lite` (oder ein aktuell
+     gültiges Modell).
+   - Speichern und neu deployen.
+4. Die Worker-Adresse (Form `https://NAME.DEINKONTO.workers.dev`) kopieren und mit
+   `/feedback` ergänzt in `config.js` unter `aiFeedbackEndpoint` eintragen,
+   z. B. `https://pythonlab-ai-feedback.deinname.workers.dev/feedback`.
+5. `config.js` committen und nach `main` pushen. Nach dem GitHub-Pages-Build
+   erscheint im Aufgabenbereich der KI-Modus-Schalter.
+
+### Variante B – mit wrangler-CLI (für Entwickler)
+
+1. In diesem Ordner bei Cloudflare anmelden: `npx wrangler login`
+2. Den Schlüssel ausschließlich als Worker-Secret eingeben:
    `npx wrangler secret put GEMINI_API_KEY`
-4. `ALLOWED_ORIGINS` in `wrangler.toml` auf die tatsächlich erlaubten Seiten
-   begrenzen.
-5. Veröffentlichen: `npx wrangler deploy`
-6. Die ausgegebene Worker-Adresse mit `/feedback` in `config.js` unter
+3. `ALLOWED_ORIGINS` in `wrangler.toml` auf die tatsächlich erlaubten Seiten
+   begrenzen (Live-Adresse, optional localhost).
+4. Veröffentlichen: `npx wrangler deploy`
+5. Die ausgegebene Worker-Adresse mit `/feedback` in `config.js` unter
    `aiFeedbackEndpoint` eintragen.
 
 Das voreingestellte Modell ist `gemini-3.1-flash-lite`. Vor einem späteren
 Modellwechsel die offizielle Modellliste, Preise und strukturierte Ausgabe
 erneut prüfen.
+
+### Schneller Funktionstest
+
+Nach dem Eintragen der URL eine Aufgabe öffnen, den KI-Modus-Schalter
+aktivieren, die Einwilligung bestätigen und „KI jetzt um Hilfe bitten“ klicken.
+Erscheint eine kurze Rückmeldung, läuft der Dienst. Bleibt es bei „KI-Tipp
+derzeit nicht verfügbar“, zuerst `ALLOWED_ORIGINS` (exakte Live-Adresse ohne
+abschließenden Schrägstrich), das Secret und den Modellnamen prüfen.
 
 ## Übertragene Daten
 
