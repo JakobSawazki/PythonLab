@@ -1,7 +1,7 @@
 # PythonLab Tasks und Projektstand
 
-Stand: 20. Juni 2026
-Aktuelle Version: 0.16.0
+Stand: 21. Juni 2026
+Aktuelle Version: 0.17.0
 Live: `https://jakobsawazki.github.io/PythonLab/`
 
 ## Leitentscheidung
@@ -74,10 +74,26 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 - 2026-06-20: Integritätsprüfung (eindeutige IDs, Bezüge, XP-Summe) sowie alle Ansichten, beide Themes und 390/1280 px im Browser geprüft; beide Fibonacci-Lösungen real über Pyodide bestanden.
 - 2026-06-20: **Primzahlen-Werkstatt** als dritte Aufgabe der Kategorie Anwendung ergänzt: Teil 1 ohne Parameter, Teil 2 mit Parameter und booleschem Rückgabewert, Prüfung der Zahlen 1 bis 50; mit eigener Illustration, Wikipedia-Weiterlesen und 250 XP. Gesamtumfang: 29 Aufgaben und 7200 XP.
 - 2026-06-20: Optionalen Aufgaben-Storyblock um Rasterbilder, kompakte Faktenkarten und Quellenlinks erweitert.
+- 2026-06-21: Freiwilligen KI-Modus als Sitzungsschalter umgesetzt: transparenter
+  Zustimmungsdialog, automatische Denkimpulse nach fehlgeschlagenen Prüfungen,
+  manueller Abruf, Sitzungscache und konsequent lokale XP-Entscheidung.
+- 2026-06-21: Gemini-Worker auf `gemini-3.1-flash-lite`, strukturiertes
+  lösungsvermeidendes Feedback, 15-Sekunden-Zeitlimit sowie kombinierte
+  Sitzungs- und IP-Begrenzung aktualisiert; Browser- und Mock-Worker-Ablauf geprüft.
+- 2026-06-21: Ausgabeprüfung für alternative korrekte Lösungen toleranter
+  gemacht. Satzzeichen, Schreibweise, Dezimaldarstellung und beschriftete
+  Zahlenausgaben werden sinnvoll normalisiert; Abweichungen nennen die erste
+  betroffene Zeile.
+- 2026-06-21: Zu stark vorgezeichnete Startcodes der Fibonacci- und
+  Primzahlen-Aufgaben auf knappe Funktions- beziehungsweise Schleifengerüste
+  reduziert.
 
 ## Offen Priorisiert
 
-1. Optionalen KI-Worker in Cloudflare und Gemini AI Studio einrichten, Endpoint in `config.js` eintragen und schulische Datenschutzfreigabe klären. Bis zur Freigabe bleibt der lokale Prüfer maßgeblich.
+1. Schulische Datenschutz- und Tariffreigabe für den vorbereiteten KI-Modus
+   klären. Danach Cloudflare Worker und Gemini-Projekt einrichten, Secret sicher
+   hinterlegen, Endpoint in `config.js` eintragen und den öffentlichen Ablauf
+   kontrolliert pilotieren. Bis dahin bleibt der Endpoint leer.
 2. Teilpunkte und visuelle Kompetenz-Rubriken für längere Transferaufgaben entwickeln.
 3. Weitere Struktogramm-Transferaufgaben ergänzen, besonders alltagsnahe und geschachtelte Abläufe.
 4. Befehlsbibliothek bei didaktischem Bedarf um `enumerate()` und Wörterbücher erweitern; beides liegt außerhalb des engsten BPE5-Kerns.

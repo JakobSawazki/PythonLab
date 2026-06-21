@@ -1,6 +1,6 @@
 # Zusammenarbeit in PythonLab
 
-Stand: 20. Juni 2026
+Stand: 21. Juni 2026
 
 PythonLab wird gemeinsam von Jakob Sawazki als fachlichem und gestalterischem
 Entscheider sowie Claude Code und Codex als umsetzenden Agenten weiterentwickelt.
@@ -63,6 +63,34 @@ Tests, offene Punkte und Git-Status. Nach einem Push wird die GitHub-Pages-Seite
 mit einem Cache-Buster geöffnet und auf die aktuelle Asset-Version geprüft.
 
 ## Letzte Übergaben
+
+### 0.17.0 – Codex
+
+- **Geänderte Dateien:** `app.js` (Sitzungsmodus, automatische KI-Hilfe,
+  Zwischenspeicher, Schutz vor veralteten Antworten und tolerantere
+  Ausgabeprüfung mit zeilengenauer Diagnose), `content.js` (offenere Starter
+  für Fibonacci und Primzahlen), `index.html`
+  (Einwilligungsdialog), `styles.css` (KI-Schalter und Dialog), `config.js`
+  (öffentliche Konfiguration), `services/ai-feedback-worker/` (Prompt, Modell,
+  Schema, Zeit- und Ratenbegrenzung) sowie Projektdokumentation.
+- **Fachliche Entscheidung:** Die KI ist ein freiwilliger Lerncoach, keine
+  Bewertungsinstanz. Sie soll in kleinen Schritten zum Weiterdenken anregen und
+  keine vollständige Lösung liefern. Aufgabe, Lektion und XP werden weiterhin
+  ausschließlich durch lokale reproduzierbare Tests abgeschlossen.
+- **Datenschutz:** Modus standardmäßig aus; Zustimmung und Aktivierung nur für
+  die aktuelle Browsersitzung. Übertragen werden Aufgabe, Code, lokale Diagnose
+  und Versuchszähler, nicht aber Profil, XP, Lernstandsdatei oder Eingabefeld.
+  Der öffentliche Endpoint bleibt bis zur schulischen Datenschutz- und
+  Tariffreigabe leer.
+- **Tests:** Syntax aller JavaScript-Dateien und `git diff --check`; Worker mit
+  gemocktem Gemini auf Origin-Schutz, JSON-Schema, Modell, Weitergabegrenzen und
+  429-Sitzungslimit; Browserablauf mit Einwilligung, automatischer Rückmeldung,
+  Cache-Treffer bei unverändertem Code, neuer Anfrage nach Codeänderung und
+  Abschalten des Modus; im Browser die Screenshot-Variante ohne Ausrufezeichen,
+  eine echte Textabweichung und beschriftete Taschengeld-Ausgaben geprüft.
+- **Offene Punkte:** Freigegebenen Gemini-Tarif wählen, Cloudflare/Gemini
+  außerhalb des Repositories einrichten, Secret hinterlegen, Endpoint setzen
+  und vor einer Veröffentlichung mit nicht personenbezogenen Testdaten prüfen.
 
 ### 0.16.0 – Codex
 

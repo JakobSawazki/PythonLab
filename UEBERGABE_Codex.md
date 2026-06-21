@@ -1,8 +1,8 @@
 # Übergabeprotokoll: PythonLab
 
-Stand: 20. Juni 2026
+Stand: 21. Juni 2026
 
-Aktueller Release-Stand: 0.16.0. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
+Aktueller Arbeitsstand: 0.17.0. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
 
 ## Projektziel
 
@@ -50,9 +50,13 @@ Verbindliche fachliche Referenz:
   Fortschrittsbalken und Inhaltseinblendung; respektiert `prefers-reduced-motion`
 - alle Erklärungsbeispiele direkt in den Lektionen mit Pyodide ausführbar
 - automatische Prüfung von Ausgabe, Variablen und Funktionen
+- semantisch tolerante Ausgabeprüfung mit zeilengenauer Rückmeldung; unwichtige
+  Satzzeichen und beschriftete, numerisch richtige Ausgaben werden akzeptiert
 - konkrete Python-Diagnosen und drei gestufte lokale Hinweise je Programmieraufgabe
 - erfolgreiche Programmierprüfung schließt die zugehörige Lektion ab
-- optionaler Gemini-Lerncoach über einen separaten Cloudflare Worker; nie maßgeblich für XP
+- freiwilliger Gemini-KI-Modus über einen separaten Cloudflare Worker:
+  Sitzungsschalter mit Einwilligungsdialog, automatische kurze Hilfe nach
+  fehlgeschlagenen Prüfungen und manueller Abruf; nie maßgeblich für XP
 - Pyodide 0.29.4 in einem Web Worker
 - Abbruch sehr langer Programme nach zehn Sekunden
 - lokaler Name beziehungsweise Kürzel, XP, Level, Erfolge und Entwürfe
@@ -136,6 +140,11 @@ Aufgabenprüfung werden Aufgabe und zugehörige Lektion abgeschlossen.
 Der optionale KI-Lerncoach wird über `config.js` aktiviert. Der Gemini-Schlüssel
 liegt ausschließlich als `GEMINI_API_KEY`-Secret im Cloudflare Worker. Ohne
 konfigurierten Endpoint bleibt die Oberfläche vollständig lokal funktionsfähig.
+Im aktiven Modus werden nach fehlgeschlagenen Prüfungen automatisch kurze,
+lösungsvermeidende Hinweise angefordert. Die Zustimmung und Aktivierung gelten
+nur für die Browsersitzung; unveränderter Code nutzt einen Sitzungscache. Der
+Produktiv-Endpoint bleibt bis zur schulischen Datenschutz- und Tariffreigabe
+bewusst leer.
 
 XP werden pro Lektion und Aufgabe nur einmal vergeben.
 
