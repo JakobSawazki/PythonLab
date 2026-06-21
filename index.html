@@ -18,7 +18,7 @@
       }
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=0.16.0">
+  <link rel="stylesheet" href="styles.css?v=0.17.0">
 </head>
 <body>
   <a class="skip-link" href="#mainContent">Zum Inhalt springen</a>
@@ -195,6 +195,49 @@
     </form>
   </dialog>
 
+  <dialog class="profile-dialog ai-consent-dialog" id="aiConsentDialog">
+    <form method="dialog">
+      <div class="dialog-heading">
+        <span class="dialog-icon ai-dialog-icon"><i data-lucide="sparkles"></i></span>
+        <div>
+          <p class="eyebrow">Freiwillige Zusatzhilfe</p>
+          <h2>KI-Modus aktivieren?</h2>
+        </div>
+      </div>
+      <p>Wenn der KI-Modus aktiv ist, fragt PythonLab nach einer fehlgeschlagenen Prüfung automatisch einen externen Gemini-Lerncoach nach einem kleinen Hinweis.</p>
+      <div class="ai-consent-grid">
+        <section>
+          <h3><i data-lucide="cloud-upload"></i> Das wird gesendet</h3>
+          <ul>
+            <li>die aktuelle Aufgabenbeschreibung</li>
+            <li>dein momentaner Python-Code</li>
+            <li>die lokale Fehlermeldung und der Versuchszähler</li>
+          </ul>
+        </section>
+        <section>
+          <h3><i data-lucide="shield-check"></i> Das bleibt hier</h3>
+          <ul>
+            <li>dein Name oder Kürzel</li>
+            <li>deine Lernstandsdatei und XP</li>
+            <li>die Eingaben aus dem Eingabefeld</li>
+          </ul>
+        </section>
+      </div>
+      <div class="callout ai-consent-warning">
+        <i data-lucide="info"></i>
+        <p>Trage keine Namen oder persönlichen Daten in deinen Code ein. In der kostenlosen Gemini-Stufe können übermittelte Inhalte laut Google zur Verbesserung der Produkte verwendet werden. <a id="aiPrivacyLink" href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noreferrer">Hinweise von Google öffnen</a></p>
+      </div>
+      <p class="ai-consent-footnote">Die KI kann Fehler machen, verrät keine vollständige Musterlösung und entscheidet niemals über XP oder den Abschluss einer Aufgabe. Der Modus gilt nur für diese Browsersitzung und kann jederzeit ausgeschaltet werden.</p>
+      <div class="dialog-actions">
+        <button class="button button-secondary" value="cancel" type="submit">Nicht aktivieren</button>
+        <button class="button button-ai" value="activate" type="submit">
+          <i data-lucide="sparkles"></i>
+          KI-Modus aktivieren
+        </button>
+      </div>
+    </form>
+  </dialog>
+
   <dialog class="profile-dialog points-dialog" id="pointsDialog">
     <form method="dialog">
       <div class="dialog-heading">
@@ -226,8 +269,8 @@
   <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
 
   <script src="https://unpkg.com/lucide@1.16.0/dist/umd/lucide.js"></script>
-  <script src="config.js?v=0.16.0"></script>
-  <script src="content.js?v=0.16.0"></script>
-  <script src="app.js?v=0.16.0"></script>
+  <script src="config.js?v=0.17.0"></script>
+  <script src="content.js?v=0.17.0"></script>
+  <script src="app.js?v=0.17.0"></script>
 </body>
 </html>

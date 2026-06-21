@@ -14,12 +14,17 @@
   const profileName = document.querySelector("#profileName");
   const backupDialog = document.querySelector("#backupDialog");
   const pointsDialog = document.querySelector("#pointsDialog");
+  const aiConsentDialog = document.querySelector("#aiConsentDialog");
+  const aiPrivacyLink = document.querySelector("#aiPrivacyLink");
   const progressFileInput = document.querySelector("#progressFileInput");
   const runtimeChip = document.querySelector("#runtimeChip");
   const runtimeText = document.querySelector("#runtimeText");
   const themeToggleButton = document.querySelector("#themeToggleButton");
   const themeColorMeta = document.querySelector('meta[name="theme-color"]');
   const backupFormatVersion = 1;
+  const aiModeStorageKey = "pythonlab-ai-mode-v1";
+  const aiConsentStorageKey = "pythonlab-ai-consent-v2";
+  const aiSessionStorageKey = "pythonlab-ai-session-v1";
 
   const defaultState = {
     name: "",
@@ -53,7 +58,10 @@
   let pendingRuns = new Map();
   let requestCounter = 0;
   const exerciseAttempts = new Map();
+  const aiFeedbackCache = new Map();
   let lastExerciseReview = null;
+  let pendingAiFeedbackRequest = null;
+  let aiFeedbackInFlight = false;
   let lastShownXp = state.xp;
 
   function uniqueAllowedStrings(values, allowedIds) {
@@ -188,6 +196,50 @@
 
   function difficultyLabel(value) {
     return { easy: "Grundlage", medium: "Vertiefung", plus: "Plus", extra: "Anwendung" }[value] || value;
+  }
+
+  function sessionValue(key) {
+    try {
+      return sessionStorage.getItem(key) || "";
+    } catch {
+      return "";
+    }
+  }
+
+  function setSessionValue(key, value) {
+    try {
+      if (value) {
+        sessionStorage.setItem(key, value);
+      } else {
+        sessionStorage.removeItem(key);
+      }
+    } catch {
+      // Der lokale Lerncoach bleibt auch ohne Session Storage vollständig nutzbar.
+    }
+  }
+
+  function aiFeedbackEndpoint() {
+    return String(appConfig.aiFeedbackEndpoint || "").trim();
+  }
+
+  function aiFeedbackAvailable() {
+    return Boolean(aiFeedbackEndpoint());
+  }
+
+  function aiModeEnabled() {
+    return aiFeedbackAvailable() && sessionValue(aiModeStorageKey) === "1";
+  }
+
+  function aiSessionId() {
+    const saved = sessionValue(aiSessionStorageKey);
+    if (saved) {
+      return saved;
+    }
+    const generated = typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+      ? crypto.randomUUID()
+      : `session-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    setSessionValue(aiSessionStorageKey, generated);
+    return generated;
   }
 
   function lessonById(id) {
@@ -1315,7 +1367,9 @@
     const lesson = lessonById(exercise.lessonId);
     const savedDraft = state.drafts[exercise.id];
     const code = savedDraft ?? exercise.starter;
-    const aiFeedbackAvailable = Boolean(String(appConfig.aiFeedbackEndpoint || "").trim());
+    const hasAiFeedback = aiFeedbackAvailable();
+    const aiModeActive = aiModeEnabled();
+    const aiProvider = String(appConfig.aiProviderLabel || "externer KI-Dienst").trim();
     setHeading(`Aufgabe zu Lektion ${lesson.index}`, exercise.title);
     activateNav("practice");
     main.innerHTML = `
@@ -1376,20 +1430,38 @@
               <span class="local-check-badge"><i data-lucide="shield-check"></i> Prüfung im Browser</span>
             </div>
             <p>Die automatische Prüfung führt deinen Code aus und testet das Ergebnis. Hinweise helfen weiter, ohne die fertige Lösung vorwegzunehmen.</p>
+            ${hasAiFeedback ? `
+              <div class="ai-mode-switch ${aiModeActive ? "is-active" : ""}" id="aiModeSwitch">
+                <span class="ai-mode-symbol"><i data-lucide="sparkles"></i></span>
+                <div>
+                  <strong>KI-Modus <span id="aiModeStatus">${aiModeActive ? "aktiv" : "aus"}</span></strong>
+                  <small id="aiModeDescription">${aiModeActive
+                    ? `Nach einer fehlgeschlagenen Prüfung fragt PythonLab automatisch ${escapeHtml(aiProvider)} nach einem Lernhinweis.`
+                    : "Aktiviere den Modus freiwillig, wenn du nach Fehlversuchen zusätzliche Hinweise möchtest."}</small>
+                </div>
+                <button class="ai-mode-toggle" id="aiModeToggleButton" type="button" role="switch" aria-checked="${aiModeActive}" aria-label="KI-Modus ${aiModeActive ? "ausschalten" : "aktivieren"}">
+                  <span></span>
+                </button>
+              </div>` : `
+              <div class="ai-mode-switch is-unavailable">
+                <span class="ai-mode-symbol"><i data-lucide="cloud-off"></i></span>
+                <div><strong>KI-Modus noch nicht freigeschaltet</strong><small>Der lokale Lerncoach und die automatische Prüfung funktionieren vollständig.</small></div>
+              </div>`}
             <div class="learning-coach-actions">
               <button class="button button-secondary" type="button" id="hintCodeButton">
                 <i data-lucide="lightbulb"></i>
                 Lernhinweis anzeigen
               </button>
-              ${aiFeedbackAvailable ? `
+              ${hasAiFeedback ? `
                 <button class="button button-ai" type="button" id="aiFeedbackButton">
                   <i data-lucide="sparkles"></i>
-                  Freiwilligen KI-Tipp anfragen
-                </button>` : `
-                <span class="ai-setup-note"><i data-lucide="cloud-off"></i> KI-Tipps sind noch nicht freigeschaltet. Die lokale Prüfung funktioniert vollständig.</span>`}
+                  KI jetzt um Hilfe bitten
+                </button>` : ""}
             </div>
-            ${aiFeedbackAvailable ? `
-              <p class="ai-privacy-note"><i data-lucide="info"></i> Nur nach einem Klick wird der aktuelle Code an den eingerichteten Gemini-Dienst gesendet. Trage keine Namen oder persönlichen Daten in den Code ein.</p>` : ""}
+            ${hasAiFeedback ? `
+              <p class="ai-privacy-note"><i data-lucide="info"></i><span>${aiModeActive
+                ? "Im aktiven KI-Modus wird der aktuelle Code nach fehlgeschlagenen Prüfungen übertragen."
+                : "Ohne Aktivierung wird Code nur übertragen, wenn du ausdrücklich auf „KI jetzt um Hilfe bitten“ klickst."} Trage keine Namen oder persönlichen Daten in den Code ein.</span></p>` : ""}
             <div class="coach-feedback" id="coachFeedback" role="status" aria-live="polite" hidden></div>
           </section>
         </section>
@@ -1461,7 +1533,7 @@
       panel.append(paragraph);
     }
 
-    const cleanItems = items.filter(Boolean).slice(0, 4);
+    const cleanItems = items.filter(Boolean).slice(0, 6);
     if (cleanItems.length) {
       const list = document.createElement("ul");
       cleanItems.forEach((item) => {
@@ -1547,35 +1619,160 @@
     );
   }
 
-  async function requestAiFeedback() {
+  function updateAiModeControl() {
+    const active = aiModeEnabled();
+    const provider = String(appConfig.aiProviderLabel || "der KI").trim();
+    const container = document.querySelector("#aiModeSwitch");
+    const status = document.querySelector("#aiModeStatus");
+    const description = document.querySelector("#aiModeDescription");
+    const toggle = document.querySelector("#aiModeToggleButton");
+    const privacyNote = document.querySelector(".ai-privacy-note span");
+
+    container?.classList.toggle("is-active", active);
+    if (status) {
+      status.textContent = active ? "aktiv" : "aus";
+    }
+    if (description) {
+      description.textContent = active
+        ? `Nach einer fehlgeschlagenen Prüfung fragt PythonLab automatisch ${provider} nach einem Lernhinweis.`
+        : "Aktiviere den Modus freiwillig, wenn du nach Fehlversuchen zusätzliche Hinweise möchtest.";
+    }
+    if (toggle) {
+      toggle.setAttribute("aria-checked", String(active));
+      toggle.setAttribute("aria-label", `KI-Modus ${active ? "ausschalten" : "aktivieren"}`);
+    }
+    if (privacyNote) {
+      privacyNote.textContent = `${active
+        ? "Im aktiven KI-Modus wird der aktuelle Code nach fehlgeschlagenen Prüfungen übertragen."
+        : "Ohne Aktivierung wird Code nur übertragen, wenn du ausdrücklich auf „KI jetzt um Hilfe bitten“ klickst."} Trage keine Namen oder persönlichen Daten in den Code ein.`;
+    }
+  }
+
+  function activateAiMode() {
+    setSessionValue(aiConsentStorageKey, "1");
+    setSessionValue(aiModeStorageKey, "1");
+    updateAiModeControl();
+    showCoachFeedback(
+      "KI-Modus ist aktiv",
+      "Nach einer fehlgeschlagenen Prüfung erhältst du zusätzlich einen kleinen KI-Hinweis.",
+      ["Die lokale Prüfung bleibt maßgeblich.", "Du kannst den Modus über den Schalter jederzeit wieder ausschalten."],
+      "ai",
+      "Der Modus gilt nur für diese Browsersitzung."
+    );
+  }
+
+  function toggleAiMode() {
+    if (!aiFeedbackAvailable()) {
+      return;
+    }
+    if (aiModeEnabled()) {
+      setSessionValue(aiModeStorageKey, "");
+      updateAiModeControl();
+      showCoachFeedback(
+        "KI-Modus ist ausgeschaltet",
+        "Code wird jetzt nur noch übertragen, wenn du den KI-Button ausdrücklich anklickst.",
+        [],
+        "info",
+        "Lokale Prüfung und Lernhinweise bleiben aktiv."
+      );
+      return;
+    }
+    if (sessionValue(aiConsentStorageKey) === "1") {
+      activateAiMode();
+      return;
+    }
+    pendingAiFeedbackRequest = { activateOnly: true };
+    if (aiConsentDialog) {
+      aiConsentDialog.returnValue = "";
+      aiConsentDialog.showModal();
+    }
+  }
+
+  function aiFeedbackKey(exercise, code, localReview) {
+    return [exercise.id, code, localReview.passed, localReview.diagnostic, localReview.error].join("\n---\n");
+  }
+
+  function displayAiFeedback(feedback, cached = false) {
+    const observations = [
+      ...(Array.isArray(feedback.strengths) ? feedback.strengths.map((item) => `Das klappt schon: ${item}`) : []),
+      ...(Array.isArray(feedback.nextSteps) ? feedback.nextSteps : []),
+      feedback.hint ? `Denkimpuls: ${feedback.hint}` : "",
+      feedback.question ? `Frage an dich: ${feedback.question}` : ""
+    ].filter(Boolean);
+    showCoachFeedback(
+      "KI-Rückmeldung",
+      feedback.summary || "Hier ist ein zusätzlicher Blick auf deinen Lösungsweg.",
+      observations,
+      "ai",
+      `${cached ? "Gespeicherter " : ""}KI-generierter Lernhinweis – kann Fehler enthalten und ersetzt nicht die automatische Prüfung.`
+    );
+  }
+
+  async function requestAiFeedback(options = {}) {
+    const automatic = options.automatic === true;
     const exercise = exerciseById(parseRoute().id);
     const editor = document.querySelector("#codeEditor");
     const button = document.querySelector("#aiFeedbackButton");
-    const endpoint = String(appConfig.aiFeedbackEndpoint || "").trim();
-    if (!exercise || !editor || !button || !endpoint) {
+    const endpoint = aiFeedbackEndpoint();
+    if (!exercise || !editor || !endpoint || (automatic && !aiModeEnabled())) {
       return;
     }
 
-    if (!sessionStorage.getItem("pythonlab-ai-consent-v1")) {
-      const accepted = window.confirm(
-        "Für den freiwilligen KI-Tipp werden der aktuelle Code, die Aufgabenbeschreibung und das lokale Testergebnis an den eingerichteten Gemini-Dienst gesendet. " +
-        "In der kostenlosen Gemini-Stufe können Inhalte zur Verbesserung von Google-Produkten verwendet werden. Bitte verwende keine Namen oder persönlichen Daten. Jetzt senden?"
-      );
-      if (!accepted) {
-        return;
+    if (sessionValue(aiConsentStorageKey) !== "1") {
+      pendingAiFeedbackRequest = { automatic };
+      if (aiConsentDialog) {
+        aiConsentDialog.returnValue = "";
+        aiConsentDialog.showModal();
       }
-      sessionStorage.setItem("pythonlab-ai-consent-v1", "1");
+      return;
     }
 
-    button.disabled = true;
-    button.innerHTML = `<i data-lucide="loader-circle"></i> KI denkt nach ...`;
-    showCoachFeedback("KI-Lerncoach", "Dein Code wird analysiert ...", [], "ai", "Die KI ergänzt die lokale Prüfung, entscheidet aber nicht über den Abschluss.");
+    const localReview = lastExerciseReview?.exerciseId === exercise.id
+      ? {
+          passed: lastExerciseReview.passed,
+          diagnostic: lastExerciseReview.diagnostic,
+          error: String(lastExerciseReview.error || "").slice(0, 3000)
+        }
+      : { passed: null, diagnostic: "Noch nicht lokal geprüft.", error: "" };
+    const feedbackKey = aiFeedbackKey(exercise, editor.value, localReview);
+    const submittedCode = editor.value;
+    const feedbackStillRelevant = () => {
+      const currentEditor = document.querySelector("#codeEditor");
+      if (parseRoute().id !== exercise.id || currentEditor?.value !== submittedCode) {
+        return false;
+      }
+      const currentReview = lastExerciseReview?.exerciseId === exercise.id
+        ? {
+            passed: lastExerciseReview.passed,
+            diagnostic: lastExerciseReview.diagnostic,
+            error: String(lastExerciseReview.error || "").slice(0, 3000)
+          }
+        : { passed: null, diagnostic: "Noch nicht lokal geprüft.", error: "" };
+      return aiFeedbackKey(exercise, submittedCode, currentReview) === feedbackKey;
+    };
+    if (aiFeedbackCache.has(feedbackKey)) {
+      displayAiFeedback(aiFeedbackCache.get(feedbackKey), true);
+      return;
+    }
+    if (aiFeedbackInFlight) {
+      return;
+    }
+
+    aiFeedbackInFlight = true;
+    if (button) {
+      button.disabled = true;
+      button.innerHTML = `<i data-lucide="loader-circle"></i> KI denkt nach ...`;
+    }
+    showCoachFeedback(
+      "KI-Lerncoach",
+      automatic ? "Die lokale Prüfung hat einen Lernpunkt gefunden. Die KI formuliert einen passenden Denkimpuls ..." : "Dein Code wird analysiert ...",
+      [],
+      "ai",
+      "Die KI ergänzt die lokale Prüfung, entscheidet aber nicht über den Abschluss."
+    );
     renderIcons();
 
     try {
-      const localReview = lastExerciseReview?.exerciseId === exercise.id
-        ? { passed: lastExerciseReview.passed, diagnostic: lastExerciseReview.diagnostic }
-        : { passed: null, diagnostic: "Noch nicht lokal geprüft." };
       const response = await fetch(endpoint, {
         method: "POST",
         mode: "cors",
@@ -1589,7 +1786,9 @@
             instructions: exercise.instructions
           },
           code: editor.value.slice(0, 12000),
-          localReview
+          localReview,
+          attempt: Math.max(1, exerciseAttempts.get(exercise.id) || 1),
+          sessionId: aiSessionId()
         })
       });
       const data = await response.json().catch(() => ({}));
@@ -1597,30 +1796,28 @@
         throw new Error(data.error || "Der KI-Dienst ist gerade nicht erreichbar.");
       }
       const feedback = data.feedback || {};
-      const observations = [
-        ...(Array.isArray(feedback.strengths) ? feedback.strengths : []),
-        ...(Array.isArray(feedback.nextSteps) ? feedback.nextSteps : []),
-        feedback.hint
-      ].filter(Boolean);
-      showCoachFeedback(
-        "KI-Rückmeldung",
-        feedback.summary || "Hier ist ein zusätzlicher Blick auf deinen Lösungsweg.",
-        observations,
-        "ai",
-        "KI-generierter Lernhinweis – kann Fehler enthalten und ersetzt nicht die automatische Prüfung."
-      );
+      if (aiFeedbackCache.size >= 25) {
+        aiFeedbackCache.delete(aiFeedbackCache.keys().next().value);
+      }
+      aiFeedbackCache.set(feedbackKey, feedback);
+      if (feedbackStillRelevant()) {
+        displayAiFeedback(feedback);
+      }
     } catch (error) {
-      showCoachFeedback(
-        "KI-Tipp derzeit nicht verfügbar",
-        error.message || "Der Dienst konnte nicht antworten.",
-        ["Nutze den lokalen Lernhinweis oder prüfe deinen Code erneut. Die Aufgabe kann weiterhin vollständig abgeschlossen werden."],
-        "warning",
-        "Es wurden keine Auswirkungen auf Prüfung, XP oder Lernfortschritt vorgenommen."
-      );
+      if (feedbackStillRelevant()) {
+        showCoachFeedback(
+          "KI-Tipp derzeit nicht verfügbar",
+          error.message || "Der Dienst konnte nicht antworten.",
+          ["Nutze den lokalen Lernhinweis oder prüfe deinen Code erneut. Die Aufgabe kann weiterhin vollständig abgeschlossen werden."],
+          "warning",
+          "Es wurden keine Auswirkungen auf Prüfung, XP oder Lernfortschritt vorgenommen."
+        );
+      }
     } finally {
-      if (button.isConnected) {
+      aiFeedbackInFlight = false;
+      if (button?.isConnected) {
         button.disabled = false;
-        button.innerHTML = `<i data-lucide="sparkles"></i> Weiteren KI-Tipp anfragen`;
+        button.innerHTML = `<i data-lucide="sparkles"></i> KI jetzt um Hilfe bitten`;
         renderIcons();
       }
     }
@@ -1763,7 +1960,7 @@
     pendingRuns = new Map();
     setRuntime("loading", "Python wird vorbereitet");
 
-    worker = new Worker("python-worker.js?v=0.16.0", { type: "module" });
+    worker = new Worker("python-worker.js?v=0.17.0", { type: "module" });
     workerReady = new Promise((resolve, reject) => {
       const readyTimeout = window.setTimeout(() => reject(new Error("Python konnte nicht geladen werden.")), 30000);
       worker.addEventListener("message", function onReady(event) {
@@ -1906,6 +2103,9 @@
             "warning",
             "Automatisch aus Python-Fehler und Aufgabentests ermittelt."
           );
+          if (aiModeEnabled()) {
+            void requestAiFeedback({ automatic: true });
+          }
         }
         return;
       }
@@ -1962,6 +2162,9 @@
           "warning",
           "Die Hinweise werden stufenweise konkreter, wenn du erneut prüfst."
         );
+        if (aiModeEnabled()) {
+          void requestAiFeedback({ automatic: true });
+        }
       }
     } catch (error) {
       setConsole(error.message, true);
@@ -2139,6 +2342,9 @@
     if (event.target.closest("#hintCodeButton")) {
       showExerciseHint();
     }
+    if (event.target.closest("#aiModeToggleButton")) {
+      toggleAiMode();
+    }
     if (event.target.closest("#aiFeedbackButton")) {
       requestAiFeedback();
     }
@@ -2270,6 +2476,21 @@
     pointsDialog?.showModal();
     renderIcons();
   });
+  aiConsentDialog?.addEventListener("close", () => {
+    const accepted = aiConsentDialog.returnValue === "activate";
+    const pendingRequest = pendingAiFeedbackRequest;
+    pendingAiFeedbackRequest = null;
+    if (!accepted) {
+      return;
+    }
+    activateAiMode();
+    if (pendingRequest && !pendingRequest.activateOnly) {
+      requestAiFeedback({ automatic: pendingRequest.automatic === true });
+    }
+  });
+  if (aiPrivacyLink && appConfig.aiPrivacyUrl) {
+    aiPrivacyLink.href = String(appConfig.aiPrivacyUrl);
+  }
   themeToggleButton?.addEventListener("click", toggleTheme);
   document.querySelector("#backupCloseButton").addEventListener("click", () => backupDialog.close());
   document.querySelector("#exportProgressButton").addEventListener("click", exportProgress);

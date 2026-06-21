@@ -32,13 +32,16 @@ Die Kernanwendung besitzt kein Backend. Name oder Kürzel, Fortschritt und
 Codeentwürfe werden ausschließlich im lokalen Browserspeicher abgelegt.
 
 Optional kann ein Gemini-Lerncoach über einen getrennten Cloudflare Worker
-aktiviert werden. Erst nach einem bewussten Klick und einem Hinweis vor der
-ersten Übertragung gehen Aufgabenbeschreibung, aktueller Code und das lokale
-Testergebnis an diesen Dienst. Profilname, Lernstandsdatei und Eingabefeld
-werden nicht übertragen. Da Google Inhalte der kostenlosen Gemini-Stufe zur
-Produktverbesserung verwenden kann, dürfen Lernende keine personenbezogenen
-oder vertraulichen Angaben in den Code schreiben. Die schulische Freigabe ist
-vor einer Aktivierung separat zu klären.
+aktiviert werden. Der Sitzungsschalter ist standardmäßig aus. Erst nach einem
+bewussten Klick und einem transparenten Dialog gehen Aufgabenbeschreibung,
+aktueller Code, lokales Testergebnis und Versuchszähler an diesen Dienst. Im
+aktiven Modus geschieht dies nach einer fehlgeschlagenen Prüfung automatisch;
+unveränderte Anfragen werden in der Sitzung zwischengespeichert. Profilname,
+XP, Lernstandsdatei und Eingabefeld werden nicht übertragen. Da Google Inhalte
+der kostenlosen Gemini-Stufe zur Produktverbesserung verwenden kann, dürfen
+Lernende keine personenbezogenen oder vertraulichen Angaben in den Code
+schreiben. Für den regulären Einsatz mit Minderjährigen sind schulische
+Freigabe, Tarif und Vertragsgrundlage vorab zu klären.
 
 - Es werden keine Konten angelegt.
 - Es werden keine Namen an einen eigenen Server übertragen.
@@ -117,9 +120,13 @@ und ausgewählte AST-Merkmale. Nur diese reproduzierbare lokale Prüfung kann
 Aufgabe, Lektion und XP freigeben.
 
 Der optionale KI-Worker ergänzt einen kurzen Lernhinweis und gibt strukturiertes
-JSON zurück. Der API-Schlüssel liegt ausschließlich als Worker-Secret vor.
-CORS, Größenbegrenzung, einfache Ratenbegrenzung und ein vollständiger lokaler
-Fallback begrenzen Missbrauch und Ausfälle.
+JSON mit höchstens einer Stärke, ein bis zwei nächsten Schritten, einem
+Denkimpuls und einer Rückfrage zurück. Der API-Schlüssel liegt ausschließlich
+als Worker-Secret vor. CORS, Größenbegrenzung, Zeitlimit, Sitzungs- und
+IP-Ratenbegrenzung sowie ein vollständiger lokaler Fallback begrenzen Missbrauch
+und Ausfälle. Die zufällige Sitzungs-ID verbleibt im Worker und wird nicht an
+Gemini weitergegeben. Die lokale Testlogik bleibt die einzige Instanz für XP
+und Abschluss.
 
 ## Quellen
 
@@ -132,6 +139,8 @@ Fallback begrenzen Missbrauch und Ausfälle.
 - hus Struktogrammer: [Offizielle Projektseite der Java-Version](https://struktogrammer.ch/Web_files/page1_JavaVersion.html)
 - Pyodide: [Using Pyodide in a web worker](https://pyodide.org/en/stable/usage/webworker.html)
 - Lucide: [Lucide Icons](https://lucide.dev/)
+- Google AI for Developers: [Gemini-Modelle](https://ai.google.dev/gemini-api/docs/models), [Preise und Datennutzung](https://ai.google.dev/gemini-api/docs/pricing), [strukturierte Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output) und [Nutzungsbedingungen](https://ai.google.dev/gemini-api/terms)
+- Cloudflare: [Secrets in Workers](https://developers.cloudflare.com/workers/configuration/secrets/)
 
 Die entpackte lokale Referenz liegt im Projektordner unter
 `G:\Meine Ablage\Codex\PythonLab\resources\bpe-5-grundlagen-der-programmierung-version-mit-python\bpe-5-gdp_python`.

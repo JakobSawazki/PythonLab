@@ -1,6 +1,6 @@
 # Konzept: Dynamische Codeprüfung und optionale KI-Hilfe
 
-Stand: 19. Juni 2026 – Hybridlösung in Version 0.10.0 umgesetzt
+Stand: 21. Juni 2026 – KI-Modus in Version 0.17.0 umgesetzt, Produktivfreigabe offen
 
 ## Ausgangspunkt
 
@@ -39,13 +39,13 @@ Daten weitergibt.
 
 ```text
 Browser / PythonLab
-  -> sendet Aufgabe, Code, Ausgabe, Fehlermeldung, anonyme Rubrikdaten
+  -> sendet nach Zustimmung Aufgabe, Code, Fehlermeldung und Versuchszähler
 Serverless-Proxy
-  -> prüft Rate-Limits, entfernt unnötige Daten, hält API-Key geheim
+  -> prüft Origin, Größe und Rate-Limits, hält den API-Key geheim
 KI-Modell
-  -> gibt JSON mit Hinweisen, Teilpunkten und Begründung zurück
+  -> gibt JSON mit Stärke, nächsten Schritten, Denkimpuls und Rückfrage zurück
 PythonLab
-  -> zeigt Feedback an und vergibt nur freigegebene XP
+  -> zeigt den Lernhinweis; lokale Tests allein vergeben XP
 ```
 
 Mögliche Proxy-Orte:
@@ -83,23 +83,15 @@ Entscheidend ist daher nicht nur das Modell, sondern die Architektur:
 kein Key im Browser, klare Rate-Limits, JSON-Ausgabe und deterministischer
 Fallback.
 
-## Mögliche Rubrik-Ausgabe
+## Struktur der KI-Rückmeldung
 
 ```json
 {
-  "score": 7,
-  "maxScore": 10,
-  "passed": false,
-  "hints": [
-    "Die erste Ausgabe stimmt.",
-    "Die zweite Ausgabe fehlt noch.",
-    "Berechne 6 + 4 als Ausdruck oder gib den Wert 10 aus."
-  ],
-  "concepts": {
-    "print": true,
-    "order": false,
-    "calculation": true
-  }
+  "summary": "Deine Funktion wird schon aufgerufen, gibt aber noch keinen Wahrheitswert zurück.",
+  "strengths": ["Du hast die verlangte Funktion angelegt."],
+  "nextSteps": ["Behandle zuerst Zahlen kleiner als 2.", "Prüfe danach mögliche Teiler."],
+  "hint": "Eine Funktion kann eine Entscheidung mit return zurückgeben.",
+  "question": "Welchen Wert soll ist_primzahl(1) liefern?"
 }
 ```
 
@@ -108,13 +100,23 @@ Fallback.
 1. Alle Aufgaben besitzen drei gestufte lokale Hinweise.
 2. Python- und Assertion-Fehler werden verständlich ausgewertet.
 3. Die drei Funktionsaufgaben nutzen zusätzliche AST-, Signatur- und Testwertprüfungen.
-4. Die Oberfläche bietet einen freiwilligen KI-Tipp, sobald ein Endpoint konfiguriert ist.
+4. Sobald ein Endpoint konfiguriert ist, bietet die Oberfläche einen freiwilligen
+   KI-Modus. Nach transparenter Zustimmung gilt er nur für die aktuelle Sitzung
+   und fragt nach fehlgeschlagenen Prüfungen automatisch nach einem Lernhinweis.
 5. `services/ai-feedback-worker/` enthält den getrennten Serverless-Proxy; der API-Key bleibt als Secret dort.
-6. KI-Antworten werden als festes JSON-Schema angefordert und serverseitig bereinigt.
+6. KI-Antworten werden als festes JSON-Schema angefordert und serverseitig
+   bereinigt. Vollständige Musterlösungen und Ersatzcode sind im Systemauftrag
+   ausdrücklich ausgeschlossen.
 7. Nur die deterministische Prüfung vergibt XP und schließt Aufgabe und Lektion ab.
+8. Identische Anfragen werden pro Browsersitzung zwischengespeichert. Eine
+   anonyme Sitzungs-ID ermöglicht ein klassenfreundliches Rate-Limit, wird aber
+   nicht an Gemini weitergegeben.
+9. Antworten werden nicht mehr angezeigt, wenn Code, Testergebnis oder Seite
+   während der Anfrage gewechselt wurden.
 
 Offen bleiben die tatsächliche Einrichtung des Cloudflare- und Gemini-Projekts,
-die schulische Datenschutzfreigabe sowie spätere Teilpunkte und Kompetenz-Rubriken.
+die schulische Datenschutzfreigabe und Tarifentscheidung sowie spätere
+Teilpunkte und Kompetenz-Rubriken. Bis dahin bleibt `aiFeedbackEndpoint` leer.
 
 ## Einbindung der KA-Webarbeit
 
@@ -125,6 +127,9 @@ Notenlogik und keinen Klassenarbeitscharakter betonen, sondern Begriffe wie
 
 ## Quellen zur API-Einschätzung
 
-- Google AI for Developers: `https://ai.google.dev/gemini-api/docs/api-key`
-- Google AI for Developers: `https://ai.google.dev/gemini-api/docs/rate-limits`
+- Google AI for Developers: `https://ai.google.dev/gemini-api/docs/models`
+- Google AI for Developers: `https://ai.google.dev/gemini-api/docs/pricing`
+- Google AI for Developers: `https://ai.google.dev/gemini-api/docs/structured-output`
+- Google AI for Developers: `https://ai.google.dev/gemini-api/terms`
+- Cloudflare Docs: `https://developers.cloudflare.com/workers/configuration/secrets/`
 - GitHub Docs: `https://docs.github.com/copilot/using-github-copilot/code-review/using-copilot-code-review`

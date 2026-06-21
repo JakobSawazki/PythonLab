@@ -1,7 +1,7 @@
 # PythonLab
 
-**Aktuelle Version:** 0.16.0
-**Dokumentationsstand:** 20. Juni 2026
+**Aktuelle Version:** 0.17.0
+**Dokumentationsstand:** 21. Juni 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
 
@@ -69,7 +69,7 @@ Repository übernommen.
 - dynamische Aufgabenprüfung mit konkreten Python-Diagnosen und gestuften Lernhinweisen
 - bestandene Programmieraufgabe schließt die zugehörige Lektion zuverlässig ab
 - lokaler Lerncoach, der häufige Anfängerfehler (fehlender Doppelpunkt, `print` ohne Klammern, Fehlertypen wie NameError oder TypeError) verständlich erklärt – ganz ohne Backend und Datenübertragung
-- optional zuschaltbarer, freiwilliger Gemini-Lerncoach über einen geschützten Cloudflare Worker (siehe „KI-Lerncoach aktivieren“)
+- freiwillig aktivierbarer Gemini-Lerncoach: Nach Zustimmung gibt er nach fehlgeschlagenen Prüfungen automatisch kleine Denkimpulse; identische Anfragen werden für die Sitzung zwischengespeichert (siehe „KI-Lerncoach aktivieren“)
 - kompakter Nachschlagebereich
 - schlichter Footer-Hinweis `Designed by Sawazki Electronics`
 - responsive Oberfläche für Computer, Tablet und Smartphone
@@ -152,14 +152,16 @@ Zwischenstände aus der Entwicklungsphase werden nicht mehr als offizielles
 Importformat geführt.
 
 Die lokale Prüfung, der Lernstand und alle Kernfunktionen benötigen kein
-Backend und kein zentrales Schülerkonto. Erst wenn der optionale KI-Dienst
-konfiguriert ist und ein Lernender ausdrücklich auf „KI-Tipp“ klickt, werden
-Aufgabenbeschreibung, aktueller Code und lokales Testergebnis an den
-eingerichteten Proxy und Gemini übertragen. Profilname, Lernstandsdatei und
-Eingabefeld werden nicht mitgesendet. Die kostenlose Gemini-Stufe kann Inhalte
-laut Google zur Produktverbesserung verwenden; die Oberfläche weist deshalb
-vor der ersten Übertragung darauf hin. Personenbezogene Daten gehören nicht in
-den Code.
+Backend und kein zentrales Schülerkonto. Der optionale KI-Modus ist zunächst
+ausgeschaltet und gilt nach einer bewussten Zustimmung nur für die aktuelle
+Browsersitzung. Im aktiven Modus werden nach fehlgeschlagenen Prüfungen
+Aufgabenbeschreibung, aktueller Code, lokales Testergebnis und Versuchszähler
+an den eingerichteten Proxy und Gemini übertragen. Profilname, Lernstandsdatei,
+XP und Eingabefeld werden nicht mitgesendet. Unveränderter Code wird in der
+Sitzung aus einem lokalen Rückmeldungscache bedient. Die kostenlose
+Gemini-Stufe kann Inhalte laut Google zur Produktverbesserung verwenden; die
+Oberfläche weist deshalb vor der ersten Übertragung darauf hin.
+Personenbezogene Daten gehören nicht in den Code.
 
 Browserdaten können durch
 Schulrichtlinien, Profilbereinigung oder einen Gerätewechsel verloren gehen.
@@ -180,9 +182,12 @@ PythonLab hilft Lernenden beim Programmieren auf zwei Ebenen:
    die App den Code und die Fehlermeldung direkt im Browser und gibt gestufte,
    verständliche Hinweise – ohne dass Daten das Gerät verlassen. Das ist für den
    Schulbetrieb der datenschutzfreundliche Standard.
-2. **Optionaler Gemini-Lerncoach (muss einmalig eingerichtet werden).** Zusätzlich
-   kann ein freiwilliger KI-Tipp über Google Gemini angeboten werden. Der
-   API-Schlüssel liegt dabei ausschließlich als Secret im Cloudflare Worker und
+2. **Optionaler Gemini-Lerncoach (muss einmalig eingerichtet werden).** Nach
+   einer transparenten Zustimmung können Lernende den KI-Modus für die aktuelle
+   Browsersitzung einschalten. Nach einer fehlgeschlagenen lokalen Prüfung
+   erscheint dann automatisch ein kurzer Denkimpuls mit nächsten Schritten und
+   einer Rückfrage. Die vollständige Lösung wird bewusst nicht ausgegeben. Der
+   API-Schlüssel liegt ausschließlich als Secret im Cloudflare Worker und
    niemals im Browser oder im Repository.
 
 Einrichtung des optionalen Gemini-Coaches:
@@ -193,13 +198,18 @@ Einrichtung des optionalen Gemini-Coaches:
    (`wrangler secret put GEMINI_API_KEY`).
 3. Die öffentliche `/feedback`-URL des Workers in `config.js` unter
    `aiFeedbackEndpoint` eintragen.
-4. Vor dem Einsatz die schulische Datenschutzfreigabe klären; bis dahin bleibt
-   der lokale Lerncoach maßgeblich.
+4. Vor dem Einsatz die schulische Datenschutzfreigabe und den geeigneten
+   Gemini-Tarif klären. Laut aktueller Google-Preisseite können Inhalte der
+   kostenlosen Stufe zur Produktverbesserung verwendet werden; für einen
+   regulären Schülerbetrieb ist deshalb ein freigegebener, entsprechend
+   konfigurierter Bezahlzugang die vorzugswürdige Variante.
 
-Sobald der Endpoint gesetzt ist, erscheint im Aufgabenbereich der Button
-„Freiwilligen KI-Tipp anfragen“. Die KI entscheidet nie über XP oder den
-Abschluss einer Aufgabe – das übernimmt ausschließlich die lokale, reproduzierbare
-Prüfung.
+Sobald der Endpoint gesetzt ist, erscheinen im Aufgabenbereich der
+Sitzungsschalter „KI-Modus“ und die manuelle Schaltfläche „KI jetzt um Hilfe
+bitten“. Die KI entscheidet nie über XP oder den Abschluss einer Aufgabe – das
+übernimmt ausschließlich die lokale, reproduzierbare Prüfung. Die konkrete
+Worker-Einrichtung, Grenzen und offiziellen Quellen stehen unter
+`services/ai-feedback-worker/README.md`.
 
 ## Schulisch bereitgestellte Hilfsmittel
 
@@ -251,6 +261,23 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - abschließender Abruf der GitHub-Pages-Version
 
 ## Versionsverlauf
+
+### 0.17.0 – 21. Juni 2026
+
+- freiwilligen KI-Modus als Sitzungsschalter in den Lerncoach integriert; vor
+  der ersten Übertragung erklärt ein eigener Dialog verständlich, welche Daten
+  gesendet werden und welche lokal bleiben
+- automatische, kurze KI-Hilfe nach fehlgeschlagenen lokalen Prüfungen ergänzt;
+  XP und Aufgabenabschluss bleiben ausschließlich bei den reproduzierbaren Tests
+- unveränderte Anfragen werden in der Sitzung zwischengespeichert, parallele
+  Anfragen verhindert und veraltete Antworten nach Code- oder Seitenwechsel
+  nicht mehr eingeblendet
+- Gemini-Worker auf strukturiertes, lösungsvermeidendes Feedback mit Stärke,
+  ein bis zwei nächsten Schritten, Denkimpuls und Reflexionsfrage ausgerichtet
+- schulfreundliche Begrenzung pro anonymer Sitzung und zusätzlich pro IP,
+  Zeitlimit sowie aktuelles Modell `gemini-3.1-flash-lite` ergänzt
+- Einrichtungs-, Datenschutz- und Übergabedokumentation aktualisiert; der
+  öffentliche Endpoint bleibt bis zur schulischen Freigabe bewusst leer
 
 ### 0.16.0 – 20. Juni 2026
 
