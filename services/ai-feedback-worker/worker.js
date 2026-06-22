@@ -143,7 +143,8 @@ export default {
           }],
           generationConfig: {
             temperature: 0.15,
-            maxOutputTokens: 700,
+            maxOutputTokens: 1024,
+            thinkingConfig: { thinkingBudget: 0 },
             responseMimeType: "application/json",
             responseSchema: {
               type: "OBJECT",
