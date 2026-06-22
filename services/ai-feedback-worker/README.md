@@ -47,7 +47,12 @@ wrangler-CLI (Variante B) veröffentlichen.
 5. Die ausgegebene Worker-Adresse mit `/feedback` in `config.js` unter
    `aiFeedbackEndpoint` eintragen.
 
-Das voreingestellte Modell ist `gemini-3.1-flash-lite`. Vor einem späteren
+Das voreingestellte Modell ist `gemini-3.1-flash-lite` (am 22. Juni 2026 gegen
+die offizielle Modellliste als gültiges, kostenfreies Stable-Modell geprüft).
+Wer den Worker einmal einrichten und nicht mehr anfassen möchte, kann
+`GEMINI_MODEL` stattdessen auf den Alias `gemini-flash-lite-latest` setzen; er
+zeigt automatisch auf das jeweils aktuelle Flash-Lite-Modell und vermeidet, dass
+der Dienst bei einem späteren Modellwechsel ins Leere läuft. Vor einem manuellen
 Modellwechsel die offizielle Modellliste, Preise und strukturierte Ausgabe
 erneut prüfen.
 
