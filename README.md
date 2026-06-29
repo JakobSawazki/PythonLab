@@ -306,9 +306,10 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - Gemini-Worker auf strukturiertes, lösungsvermeidendes Feedback mit Stärke,
   ein bis zwei nächsten Schritten, Denkimpuls und Reflexionsfrage ausgerichtet
 - schulfreundliche Begrenzung pro anonymer Sitzung und zusätzlich pro IP,
-  Zeitlimit sowie aktuelles Modell `gemini-3.1-flash-lite` ergänzt
+  Zeitlimit sowie Flash-Lite-Modell ergänzt
 - Einrichtungs-, Datenschutz- und Übergabedokumentation aktualisiert; der
-  öffentliche Endpoint bleibt bis zur schulischen Freigabe bewusst leer
+  öffentliche Endpoint wird erst nach Cloudflare-Deploy und bewusster Freigabe
+  in `config.js` aktiviert
 
 ### 0.16.0 – 20. Juni 2026
 

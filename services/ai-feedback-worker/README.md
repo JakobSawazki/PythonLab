@@ -27,8 +27,8 @@ wrangler-CLI (Variante B) veröffentlichen.
    - **Secret** `GEMINI_API_KEY` = dein Gemini-Schlüssel (Typ „Secret“/verschlüsselt).
    - **Variable** `ALLOWED_ORIGINS` = `https://jakobsawazki.github.io` (für lokale
      Tests zusätzlich, kommagetrennt, `http://localhost:4173`).
-   - **Variable** `GEMINI_MODEL` = `gemini-3.1-flash-lite` (oder ein aktuell
-     gültiges Modell).
+   - **Variable** `GEMINI_MODEL` = `gemini-flash-lite-latest` (schneller
+     Flash-Lite-Alias; beide Hilfestufen nutzen dieses Modell).
    - Speichern und neu deployen.
 4. Die Worker-Adresse (Form `https://NAME.DEINKONTO.workers.dev`) kopieren und mit
    `/feedback` ergänzt in `config.js` unter `aiFeedbackEndpoint` eintragen,
@@ -47,14 +47,13 @@ wrangler-CLI (Variante B) veröffentlichen.
 5. Die ausgegebene Worker-Adresse mit `/feedback` in `config.js` unter
    `aiFeedbackEndpoint` eintragen.
 
-Das voreingestellte Modell ist `gemini-3.1-flash-lite` (am 22. Juni 2026 gegen
-die offizielle Modellliste als gültiges, kostenfreies Stable-Modell geprüft).
-Wer den Worker einmal einrichten und nicht mehr anfassen möchte, kann
-`GEMINI_MODEL` stattdessen auf den Alias `gemini-flash-lite-latest` setzen; er
-zeigt automatisch auf das jeweils aktuelle Flash-Lite-Modell und vermeidet, dass
-der Dienst bei einem späteren Modellwechsel ins Leere läuft. Vor einem manuellen
-Modellwechsel die offizielle Modellliste, Preise und strukturierte Ausgabe
-erneut prüfen.
+Das voreingestellte Modell ist `gemini-flash-lite-latest`. Der Alias zeigt auf
+das jeweils aktuelle Flash-Lite-Modell und vermeidet, dass der Dienst bei einem
+späteren Modellwechsel ins Leere läuft. Die Schaltfläche **Vertiefende Hilfe**
+verwendet ebenfalls dieses schnelle Modell, aber mit ausführlicherem Prompt und
+größerem Antwortbudget; so bleibt die Hilfe im Unterricht deutlich zuverlässiger
+als mit dem langsameren großen Flash-Modell. Vor einem manuellen Modellwechsel
+die offizielle Modellliste, Preise und strukturierte Ausgabe erneut prüfen.
 
 ### Schneller Funktionstest
 
@@ -97,7 +96,7 @@ Browsersitzung; unveränderte Anfragen werden dort zwischengespeichert.
 - Diese Speicherbegrenzung gilt pro laufender Worker-Instanz. Für einen
   öffentlichen Produktivbetrieb zusätzlich eine Rate-Limiting-Regel im
   Cloudflare-Dashboard einrichten und Nutzung sowie Kosten beobachten.
-- Gemini-Anfragen brechen nach 15 Sekunden ab; bei Ausfall bleibt der lokale
+- Gemini-Anfragen brechen nach 25 Sekunden ab; bei Ausfall bleibt der lokale
   Lerncoach vollständig verfügbar.
 
 ## Offizielle Quellen, geprüft am 21. Juni 2026

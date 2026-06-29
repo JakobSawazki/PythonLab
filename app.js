@@ -1688,11 +1688,11 @@
     }
   }
 
-  function aiFeedbackKey(exercise, code, localReview) {
-    return [exercise.id, code, localReview.passed, localReview.diagnostic, localReview.error].join("\n---\n");
+  function aiFeedbackKey(exercise, code, localReview, depth = "standard") {
+    return [exercise.id, depth, code, localReview.passed, localReview.diagnostic, localReview.error].join("\n---\n");
   }
 
-  function displayAiFeedback(feedback, cached = false) {
+  function displayAiFeedback(feedback, cached = false, deep = false) {
     const observations = [
       ...(Array.isArray(feedback.strengths) ? feedback.strengths.map((item) => `Das klappt schon: ${item}`) : []),
       ...(Array.isArray(feedback.nextSteps) ? feedback.nextSteps : []),
@@ -1700,16 +1700,37 @@
       feedback.question ? `Frage an dich: ${feedback.question}` : ""
     ].filter(Boolean);
     showCoachFeedback(
-      "KI-Rückmeldung",
+      deep ? "Vertiefte KI-Rückmeldung" : "KI-Rückmeldung",
       feedback.summary || "Hier ist ein zusätzlicher Blick auf deinen Lösungsweg.",
       observations,
       "ai",
-      `${cached ? "Gespeicherter " : ""}KI-generierter Lernhinweis – kann Fehler enthalten und ersetzt nicht die automatische Prüfung.`
+      `${cached ? "Gespeicherter " : ""}${deep ? "Ausführlichere Analyse mit mehr Erklärungstiefe. " : ""}KI-generierter Lernhinweis – kann Fehler enthalten und ersetzt nicht die automatische Prüfung.`
     );
+    if (!deep && aiFeedbackAvailable()) {
+      const panel = document.querySelector("#coachFeedback");
+      if (panel) {
+        const actions = document.createElement("div");
+        actions.className = "coach-actions";
+        const deepButton = document.createElement("button");
+        deepButton.type = "button";
+        deepButton.id = "aiDeepButton";
+        deepButton.className = "button button-secondary button-small";
+        deepButton.setAttribute("data-ai-deep", "1");
+        deepButton.innerHTML = `<i data-lucide="search"></i> Vertiefende Hilfe`;
+        const note = document.createElement("small");
+        note.className = "coach-actions-note";
+        note.textContent = "Reicht der Tipp noch nicht? Hol dir eine ausführlichere Analyse mit mehr Erklärungstiefe.";
+        actions.append(deepButton, note);
+        panel.append(actions);
+        renderIcons();
+      }
+    }
   }
 
   async function requestAiFeedback(options = {}) {
     const automatic = options.automatic === true;
+    const deep = options.deep === true;
+    const depth = deep ? "deep" : "standard";
     const exercise = exerciseById(parseRoute().id);
     const editor = document.querySelector("#codeEditor");
     const button = document.querySelector("#aiFeedbackButton");
@@ -1719,7 +1740,7 @@
     }
 
     if (sessionValue(aiConsentStorageKey) !== "1") {
-      pendingAiFeedbackRequest = { automatic };
+      pendingAiFeedbackRequest = { automatic, deep };
       if (aiConsentDialog) {
         aiConsentDialog.returnValue = "";
         aiConsentDialog.showModal();
@@ -1734,7 +1755,7 @@
           error: String(lastExerciseReview.error || "").slice(0, 3000)
         }
       : { passed: null, diagnostic: "Noch nicht lokal geprüft.", error: "" };
-    const feedbackKey = aiFeedbackKey(exercise, editor.value, localReview);
+    const feedbackKey = aiFeedbackKey(exercise, editor.value, localReview, depth);
     const submittedCode = editor.value;
     const feedbackStillRelevant = () => {
       const currentEditor = document.querySelector("#codeEditor");
@@ -1748,10 +1769,10 @@
             error: String(lastExerciseReview.error || "").slice(0, 3000)
           }
         : { passed: null, diagnostic: "Noch nicht lokal geprüft.", error: "" };
-      return aiFeedbackKey(exercise, submittedCode, currentReview) === feedbackKey;
+      return aiFeedbackKey(exercise, submittedCode, currentReview, depth) === feedbackKey;
     };
     if (aiFeedbackCache.has(feedbackKey)) {
-      displayAiFeedback(aiFeedbackCache.get(feedbackKey), true);
+      displayAiFeedback(aiFeedbackCache.get(feedbackKey), true, deep);
       return;
     }
     if (aiFeedbackInFlight) {
@@ -1764,8 +1785,12 @@
       button.innerHTML = `<i data-lucide="loader-circle"></i> KI denkt nach ...`;
     }
     showCoachFeedback(
-      "KI-Lerncoach",
-      automatic ? "Die lokale Prüfung hat einen Lernpunkt gefunden. Die KI formuliert einen passenden Denkimpuls ..." : "Dein Code wird analysiert ...",
+      deep ? "Vertiefende KI-Hilfe" : "KI-Lerncoach",
+      deep
+        ? "Die KI sieht sich deinen Code jetzt ausführlicher an. Das dauert einen Moment ..."
+        : automatic
+          ? "Die lokale Prüfung hat einen Lernpunkt gefunden. Die KI formuliert einen passenden Denkimpuls ..."
+          : "Dein Code wird analysiert ...",
       [],
       "ai",
       "Die KI ergänzt die lokale Prüfung, entscheidet aber nicht über den Abschluss."
@@ -1788,6 +1813,7 @@
           code: editor.value.slice(0, 12000),
           localReview,
           attempt: Math.max(1, exerciseAttempts.get(exercise.id) || 1),
+          depth,
           sessionId: aiSessionId()
         })
       });
@@ -1801,7 +1827,7 @@
       }
       aiFeedbackCache.set(feedbackKey, feedback);
       if (feedbackStillRelevant()) {
-        displayAiFeedback(feedback);
+        displayAiFeedback(feedback, false, deep);
       }
     } catch (error) {
       if (feedbackStillRelevant()) {
@@ -1960,7 +1986,7 @@
     pendingRuns = new Map();
     setRuntime("loading", "Python wird vorbereitet");
 
-    worker = new Worker("python-worker.js?v=0.17.0", { type: "module" });
+    worker = new Worker("python-worker.js?v=0.18.0", { type: "module" });
     workerReady = new Promise((resolve, reject) => {
       const readyTimeout = window.setTimeout(() => reject(new Error("Python konnte nicht geladen werden.")), 30000);
       worker.addEventListener("message", function onReady(event) {
@@ -2412,6 +2438,9 @@
     if (event.target.closest("#aiFeedbackButton")) {
       requestAiFeedback();
     }
+    if (event.target.closest("#aiDeepButton")) {
+      requestAiFeedback({ deep: true });
+    }
     if (event.target.closest("#checkStructureButton")) {
       checkStructogramExercise();
     }
@@ -2549,7 +2578,7 @@
     }
     activateAiMode();
     if (pendingRequest && !pendingRequest.activateOnly) {
-      requestAiFeedback({ automatic: pendingRequest.automatic === true });
+      requestAiFeedback({ automatic: pendingRequest.automatic === true, deep: pendingRequest.deep === true });
     }
   });
   if (aiPrivacyLink && appConfig.aiPrivacyUrl) {
