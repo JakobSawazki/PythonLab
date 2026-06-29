@@ -1,8 +1,8 @@
 # Übergabeprotokoll: PythonLab
 
-Stand: 21. Juni 2026
+Stand: 29. Juni 2026
 
-Aktueller Arbeitsstand: 0.17.0. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
+Aktueller Arbeitsstand: 0.18.0 in Vorbereitung. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
 
 ## Projektziel
 
@@ -143,8 +143,11 @@ konfigurierten Endpoint bleibt die Oberfläche vollständig lokal funktionsfähi
 Im aktiven Modus werden nach fehlgeschlagenen Prüfungen automatisch kurze,
 lösungsvermeidende Hinweise angefordert. Die Zustimmung und Aktivierung gelten
 nur für die Browsersitzung; unveränderter Code nutzt einen Sitzungscache. Der
-Produktiv-Endpoint bleibt bis zur schulischen Datenschutz- und Tariffreigabe
-bewusst leer.
+Produktiv-Endpoint zeigt auf den Cloudflare Worker
+`https://pythonlab-ai-feedback.jakob-sawazki.workers.dev/feedback`. Die
+Schaltfläche **Vertiefende Hilfe** nutzt aus Zuverlässigkeitsgründen dasselbe
+schnelle Flash-Lite-Modell mit ausführlicherem Prompt statt eines langsameren
+Deep-Modells.
 
 XP werden pro Lektion und Aufgabe nur einmal vergeben.
 

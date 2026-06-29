@@ -1,6 +1,6 @@
 # Konzept: Dynamische Codeprüfung und optionale KI-Hilfe
 
-Stand: 21. Juni 2026 – KI-Modus in Version 0.17.0 umgesetzt, Produktivfreigabe offen
+Stand: 29. Juni 2026 – KI-Modus vorbereitet; Cloudflare Worker produktiv erreichbar, Website-Verknüpfung in Arbeit
 
 ## Ausgangspunkt
 
@@ -119,9 +119,11 @@ Fallback.
 9. Antworten werden nicht mehr angezeigt, wenn Code, Testergebnis oder Seite
    während der Anfrage gewechselt wurden.
 
-Offen bleiben die tatsächliche Einrichtung des Cloudflare- und Gemini-Projekts,
-die schulische Datenschutzfreigabe und Tarifentscheidung sowie spätere
-Teilpunkte und Kompetenz-Rubriken. Bis dahin bleibt `aiFeedbackEndpoint` leer.
+Das Cloudflare-/Gemini-Projekt ist produktiv erreichbar. `aiFeedbackEndpoint`
+zeigt auf den Worker-Endpunkt; der Gemini-Schlüssel bleibt ausschließlich als
+Worker-Secret gespeichert. Offen bleiben die schulische Datenschutzfreigabe,
+Tarifentscheidung, spätere Teilpunkte und Kompetenz-Rubriken sowie die
+regelmäßige Kontrolle von Nutzung und Kosten.
 
 ## Einbindung der KA-Webarbeit
 

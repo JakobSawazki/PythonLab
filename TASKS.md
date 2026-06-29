@@ -77,8 +77,8 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 - 2026-06-21: Freiwilligen KI-Modus als Sitzungsschalter umgesetzt: transparenter
   Zustimmungsdialog, automatische Denkimpulse nach fehlgeschlagenen Prüfungen,
   manueller Abruf, Sitzungscache und konsequent lokale XP-Entscheidung.
-- 2026-06-21: Gemini-Worker auf `gemini-3.1-flash-lite`, strukturiertes
-  lösungsvermeidendes Feedback, 15-Sekunden-Zeitlimit sowie kombinierte
+- 2026-06-21: Gemini-Worker auf Flash-Lite, strukturiertes
+  lösungsvermeidendes Feedback, Zeitlimit sowie kombinierte
   Sitzungs- und IP-Begrenzung aktualisiert; Browser- und Mock-Worker-Ablauf geprüft.
 - 2026-06-21: Ausgabeprüfung für alternative korrekte Lösungen toleranter
   gemacht. Satzzeichen, Schreibweise, Dezimaldarstellung und beschriftete
