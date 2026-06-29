@@ -1320,12 +1320,12 @@ window.PYLAB_CONTENT = {
       hints: [
         "Behebe zuerst den Syntaxfehler: Nach einer if-Bedingung steht ein Doppelpunkt.",
         "Alle Anweisungen des if-Blocks müssen gleich weit eingerückt sein.",
-        "Der Gesamtpreis entsteht durch Multiplikation von preis und anzahl, nicht durch Addition."
+        "Der Gesamtpreis entsteht durch Multiplikation von preis und anzahl, nicht durch Addition. Am Ende soll als letzte Ausgabe 40 erscheinen."
       ],
       starter: `preis = 10\nanzahl = 5\ngesamt = preis + anzahl\n\nif anzahl >= 4\nprint("Rabatt wird angewendet")\n    gesamt = gesamt * 0.8\n\nprint(gesamt)\n`,
       check: {
-        type: "tests",
-        code: `assert gesamt == 40, "Für 5 Tickets zu 10 Euro sind nach Rabatt 40 Euro fällig."\nprint("__PYLAB_TESTS_OK__")`
+        type: "outputNumber",
+        expected: 40
       }
     },
     {

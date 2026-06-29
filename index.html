@@ -18,7 +18,7 @@
       }
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=0.18.0">
+  <link rel="stylesheet" href="styles.css?v=0.18.1">
 </head>
 <body>
   <a class="skip-link" href="#mainContent">Zum Inhalt springen</a>
@@ -204,30 +204,13 @@
           <h2>KI-Modus aktivieren?</h2>
         </div>
       </div>
-      <p>Wenn der KI-Modus aktiv ist, fragt PythonLab nach einer fehlgeschlagenen Prüfung automatisch einen externen Gemini-Lerncoach nach einem kleinen Hinweis.</p>
-      <div class="ai-consent-grid">
-        <section>
-          <h3><i data-lucide="cloud-upload"></i> Das wird gesendet</h3>
-          <ul>
-            <li>die aktuelle Aufgabenbeschreibung</li>
-            <li>dein momentaner Python-Code</li>
-            <li>die lokale Fehlermeldung und der Versuchszähler</li>
-          </ul>
-        </section>
-        <section>
-          <h3><i data-lucide="shield-check"></i> Das bleibt hier</h3>
-          <ul>
-            <li>dein Name oder Kürzel</li>
-            <li>deine Lernstandsdatei und XP</li>
-            <li>die Eingaben aus dem Eingabefeld</li>
-          </ul>
-        </section>
-      </div>
-      <div class="callout ai-consent-warning">
-        <i data-lucide="info"></i>
-        <p>Trage keine Namen oder persönlichen Daten in deinen Code ein. In der kostenlosen Gemini-Stufe können übermittelte Inhalte laut Google zur Verbesserung der Produkte verwendet werden. <a id="aiPrivacyLink" href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noreferrer">Hinweise von Google öffnen</a></p>
-      </div>
-      <p class="ai-consent-footnote">Die KI kann Fehler machen, verrät keine vollständige Musterlösung und entscheidet niemals über XP oder den Abschluss einer Aufgabe. Der Modus gilt nur für diese Browsersitzung und kann jederzeit ausgeschaltet werden.</p>
+      <p>Die KI gibt dir nach Fehlversuchen zusätzliche Tipps. Dafür werden Aufgabe, Code und Fehlermeldung an Google Gemini übertragen.</p>
+      <ul class="compact-consent-list">
+        <li><i data-lucide="shield-check"></i><span>Dein Name, XP und Lernstand bleiben im Browser.</span></li>
+        <li><i data-lucide="circle-alert"></i><span>Schreibe keine Namen oder persönlichen Daten in deinen Code.</span></li>
+        <li><i data-lucide="badge-check"></i><span>Über Punkte entscheidet nur die automatische Prüfung, nicht die KI.</span></li>
+      </ul>
+      <p class="ai-consent-footnote">Der Modus gilt nur für diese Sitzung und kann jederzeit ausgeschaltet werden. <a id="aiPrivacyLink" href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noreferrer">Datenschutzhinweise öffnen</a></p>
       <div class="dialog-actions">
         <button class="button button-secondary" value="cancel" type="submit">Nicht aktivieren</button>
         <button class="button button-ai" value="activate" type="submit">
@@ -266,11 +249,45 @@
     </form>
   </dialog>
 
+  <dialog class="profile-dialog feedback-dialog" id="siteFeedbackDialog">
+    <form method="dialog" id="siteFeedbackForm">
+      <div class="dialog-heading">
+        <span class="dialog-icon feedback-dialog-icon"><i data-lucide="message-square"></i></span>
+        <div>
+          <p class="eyebrow">Rückmeldung</p>
+          <h2>Feedback zu PythonLab</h2>
+        </div>
+      </div>
+      <p>Was ist unklar, fehlerhaft oder besonders hilfreich? Deine Rückmeldung hilft, PythonLab besser zu machen.</p>
+      <label for="siteFeedbackText">Dein Feedback</label>
+      <textarea id="siteFeedbackText" maxlength="1200" rows="6" placeholder="Schreibe kurz, was dir aufgefallen ist. Bitte keine Namen oder persönlichen Daten eintragen."></textarea>
+      <p class="feedback-dialog-hint">Ohne eigenen Feedback-Server öffnet PythonLab ein vorbereitetes GitHub-Issue. Falls GitHub eine Anmeldung verlangt, kannst du den Text einfach kopieren.</p>
+      <div class="feedback-context" id="siteFeedbackContext"></div>
+      <p class="feedback-status" id="siteFeedbackStatus" role="status" hidden></p>
+      <div class="dialog-actions">
+        <button class="button button-secondary" value="cancel" type="button" id="siteFeedbackCancelButton">Abbrechen</button>
+        <button class="button button-secondary" value="copy" type="button" id="copySiteFeedbackButton">
+          <i data-lucide="copy"></i>
+          Kopieren
+        </button>
+        <button class="button button-primary" value="send" type="submit" id="sendSiteFeedbackButton">
+          <i data-lucide="send"></i>
+          Feedback öffnen
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <button class="site-feedback-button" id="siteFeedbackButton" type="button" aria-label="Feedback zu PythonLab geben">
+    <i data-lucide="message-square"></i>
+    <span>Feedback</span>
+  </button>
+
   <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
 
   <script src="https://unpkg.com/lucide@1.16.0/dist/umd/lucide.js"></script>
-  <script src="config.js?v=0.18.0"></script>
-  <script src="content.js?v=0.18.0"></script>
-  <script src="app.js?v=0.18.0"></script>
+  <script src="config.js?v=0.18.1"></script>
+  <script src="content.js?v=0.18.1"></script>
+  <script src="app.js?v=0.18.1"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 Stand: 29. Juni 2026
 
-Aktueller Arbeitsstand: 0.18.0 in Vorbereitung. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
+Aktueller Arbeitsstand: 0.18.1 in Vorbereitung. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
 
 ## Projektziel
 
@@ -57,6 +57,9 @@ Verbindliche fachliche Referenz:
 - freiwilliger Gemini-KI-Modus über einen separaten Cloudflare Worker:
   Sitzungsschalter mit Einwilligungsdialog, automatische kurze Hilfe nach
   fehlgeschlagenen Prüfungen und manueller Abruf; nie maßgeblich für XP
+- kleiner Feedback-Button unten rechts; ohne zusätzlichen Feedback-Server öffnet
+  er ein vorbereitetes GitHub-Issue, später kann über `config.js` ein geschützter
+  `feedbackEndpoint` ergänzt werden
 - Pyodide 0.29.4 in einem Web Worker
 - Abbruch sehr langer Programme nach zehn Sekunden
 - lokaler Name beziehungsweise Kürzel, XP, Level, Erfolge und Entwürfe
@@ -148,6 +151,12 @@ Produktiv-Endpoint zeigt auf den Cloudflare Worker
 Schaltfläche **Vertiefende Hilfe** nutzt aus Zuverlässigkeitsgründen dasselbe
 schnelle Flash-Lite-Modell mit ausführlicherem Prompt statt eines langsameren
 Deep-Modells.
+
+Der Feedback-Button nutzt ebenfalls `config.js`: `feedbackIssueUrl` zeigt auf
+das GitHub-Issue-Formular, `feedbackEndpoint` bleibt zunächst leer. Wenn später
+Feedback ohne GitHub-Anmeldung direkt gesammelt werden soll, sollte ein
+Serverless-Endpoint mit geheimem GitHub-Token oder ein schulisch freigegebenes
+Formular verwendet werden; ein GitHub-Token gehört niemals in Browsercode.
 
 XP werden pro Lektion und Aufgabe nur einmal vergeben.
 

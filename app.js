@@ -16,6 +16,13 @@
   const pointsDialog = document.querySelector("#pointsDialog");
   const aiConsentDialog = document.querySelector("#aiConsentDialog");
   const aiPrivacyLink = document.querySelector("#aiPrivacyLink");
+  const siteFeedbackButton = document.querySelector("#siteFeedbackButton");
+  const siteFeedbackDialog = document.querySelector("#siteFeedbackDialog");
+  const siteFeedbackForm = document.querySelector("#siteFeedbackForm");
+  const siteFeedbackText = document.querySelector("#siteFeedbackText");
+  const siteFeedbackContext = document.querySelector("#siteFeedbackContext");
+  const siteFeedbackStatus = document.querySelector("#siteFeedbackStatus");
+  const sendSiteFeedbackButton = document.querySelector("#sendSiteFeedbackButton");
   const progressFileInput = document.querySelector("#progressFileInput");
   const runtimeChip = document.querySelector("#runtimeChip");
   const runtimeText = document.querySelector("#runtimeText");
@@ -224,6 +231,18 @@
 
   function aiFeedbackAvailable() {
     return Boolean(aiFeedbackEndpoint());
+  }
+
+  function feedbackEndpoint() {
+    return String(appConfig.feedbackEndpoint || "").trim();
+  }
+
+  function feedbackIssueUrl() {
+    return String(appConfig.feedbackIssueUrl || "").trim();
+  }
+
+  function feedbackAvailable() {
+    return Boolean(feedbackEndpoint() || feedbackIssueUrl());
   }
 
   function aiModeEnabled() {
@@ -1986,7 +2005,7 @@
     pendingRuns = new Map();
     setRuntime("loading", "Python wird vorbereitet");
 
-    worker = new Worker("python-worker.js?v=0.18.0", { type: "module" });
+    worker = new Worker("python-worker.js?v=0.18.1", { type: "module" });
     workerReady = new Promise((resolve, reject) => {
       const readyTimeout = window.setTimeout(() => reject(new Error("Python konnte nicht geladen werden.")), 30000);
       worker.addEventListener("message", function onReady(event) {
@@ -2335,6 +2354,139 @@
     window.setTimeout(() => element.remove(), 3200);
   }
 
+  function currentFeedbackContext() {
+    const route = parseRoute();
+    const heading = document.querySelector(".topbar-title h1")?.textContent
+      || document.querySelector("main h1")?.textContent
+      || document.title
+      || "PythonLab";
+    return {
+      route: `${route.name}${route.id ? `/${route.id}` : ""}`,
+      title: heading.trim(),
+      url: window.location.href
+    };
+  }
+
+  function feedbackMarkdown(message) {
+    const context = currentFeedbackContext();
+    return [
+      "## Rückmeldung",
+      "",
+      message.trim(),
+      "",
+      "---",
+      `Seite: ${context.title}`,
+      `Route: ${context.route}`,
+      `URL: ${context.url}`,
+      `Zeitpunkt: ${new Date().toLocaleString("de-DE")}`
+    ].join("\n");
+  }
+
+  function setFeedbackStatus(message, type = "info") {
+    if (!siteFeedbackStatus) {
+      return;
+    }
+    siteFeedbackStatus.hidden = !message;
+    siteFeedbackStatus.textContent = message || "";
+    siteFeedbackStatus.className = `feedback-status is-${type}`;
+  }
+
+  function openSiteFeedbackDialog() {
+    if (!siteFeedbackDialog || !siteFeedbackText) {
+      return;
+    }
+    const context = currentFeedbackContext();
+    if (siteFeedbackContext) {
+      siteFeedbackContext.textContent = `Aktuelle Seite: ${context.title} (${context.route})`;
+    }
+    if (sendSiteFeedbackButton) {
+      sendSiteFeedbackButton.innerHTML = feedbackEndpoint()
+        ? `<i data-lucide="send"></i> Feedback senden`
+        : `<i data-lucide="github"></i> Auf GitHub öffnen`;
+    }
+    setFeedbackStatus("");
+    siteFeedbackDialog.showModal();
+    siteFeedbackText.focus();
+    renderIcons();
+  }
+
+  async function copySiteFeedback() {
+    if (!siteFeedbackText) {
+      return;
+    }
+    const message = siteFeedbackText.value.trim();
+    if (!message) {
+      setFeedbackStatus("Schreibe zuerst eine kurze Rückmeldung.", "error");
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(feedbackMarkdown(message));
+      setFeedbackStatus("Feedback wurde in die Zwischenablage kopiert.", "success");
+    } catch {
+      setFeedbackStatus("Kopieren hat nicht geklappt. Markiere den Text und kopiere ihn manuell.", "error");
+    }
+  }
+
+  async function submitSiteFeedback(event) {
+    event.preventDefault();
+    if (!siteFeedbackText) {
+      return;
+    }
+    const message = siteFeedbackText.value.trim();
+    if (!message) {
+      setFeedbackStatus("Schreibe zuerst eine kurze Rückmeldung.", "error");
+      return;
+    }
+
+    const endpoint = feedbackEndpoint();
+    if (endpoint) {
+      if (sendSiteFeedbackButton) {
+        sendSiteFeedbackButton.disabled = true;
+        sendSiteFeedbackButton.innerHTML = `<i data-lucide="loader-circle"></i> Senden ...`;
+        renderIcons();
+      }
+      try {
+        const context = currentFeedbackContext();
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            message: message.slice(0, 1200),
+            route: context.route,
+            title: context.title,
+            url: context.url
+          })
+        });
+        if (!response.ok) {
+          throw new Error("Feedback konnte nicht gesendet werden.");
+        }
+        siteFeedbackDialog?.close();
+        toast("Danke für dein Feedback");
+      } catch (error) {
+        setFeedbackStatus(error.message || "Feedback konnte nicht gesendet werden.", "error");
+      } finally {
+        if (sendSiteFeedbackButton) {
+          sendSiteFeedbackButton.disabled = false;
+          sendSiteFeedbackButton.innerHTML = `<i data-lucide="send"></i> Feedback senden`;
+          renderIcons();
+        }
+      }
+      return;
+    }
+
+    const issueUrl = feedbackIssueUrl();
+    if (issueUrl) {
+      const url = new URL(issueUrl);
+      url.searchParams.set("title", "[Feedback] PythonLab");
+      url.searchParams.set("body", feedbackMarkdown(message));
+      window.open(url.toString(), "_blank", "noopener,noreferrer");
+      setFeedbackStatus("GitHub wurde geöffnet. Dort kannst du das Feedback abschicken.", "success");
+      return;
+    }
+
+    await copySiteFeedback();
+  }
+
   function parseRoute() {
     const hash = window.location.hash.replace(/^#\/?/, "") || "home";
     const [name, id] = hash.split("/");
@@ -2569,6 +2721,13 @@
     pointsDialog?.showModal();
     renderIcons();
   });
+  if (!feedbackAvailable()) {
+    siteFeedbackButton?.setAttribute("hidden", "");
+  }
+  siteFeedbackButton?.addEventListener("click", openSiteFeedbackDialog);
+  document.querySelector("#siteFeedbackCancelButton")?.addEventListener("click", () => siteFeedbackDialog?.close());
+  document.querySelector("#copySiteFeedbackButton")?.addEventListener("click", copySiteFeedback);
+  siteFeedbackForm?.addEventListener("submit", submitSiteFeedback);
   aiConsentDialog?.addEventListener("close", () => {
     const accepted = aiConsentDialog.returnValue === "activate";
     const pendingRequest = pendingAiFeedbackRequest;
