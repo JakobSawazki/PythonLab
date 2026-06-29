@@ -2869,17 +2869,27 @@ code {
   font-weight: 750;
 }
 
-.profile-dialog input {
+.profile-dialog input,
+.profile-dialog textarea {
   width: 100%;
   min-height: 44px;
   padding: 9px 11px;
   border: 1px solid #aebbb4;
   border-radius: 6px;
+  font: inherit;
 }
 
-.profile-dialog input:focus {
+.profile-dialog textarea {
+  min-height: 132px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.profile-dialog input:focus,
+.profile-dialog textarea:focus {
   border-color: var(--blue);
   box-shadow: 0 0 0 3px rgba(53, 119, 168, 0.15);
+  outline: none;
 }
 
 .ai-consent-dialog {
@@ -2890,6 +2900,29 @@ code {
 
 .ai-dialog-icon {
   background: #ece9ff;
+  color: #5f55bb;
+}
+
+.compact-consent-list {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.compact-consent-list li {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 10px;
+  align-items: start;
+  color: var(--muted);
+}
+
+.compact-consent-list svg {
+  width: 19px;
+  height: 19px;
+  margin-top: 2px;
   color: #5f55bb;
 }
 
@@ -2991,6 +3024,55 @@ code {
   margin-top: 16px;
 }
 
+.feedback-dialog {
+  width: min(560px, calc(100vw - 28px));
+  max-height: calc(100dvh - 28px);
+  overflow-y: auto;
+}
+
+.feedback-dialog-icon {
+  background: #e4f5ef;
+  color: var(--green-700);
+}
+
+.feedback-dialog-hint {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.feedback-context {
+  margin-top: 12px;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface-soft);
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.feedback-status {
+  margin: 12px 0 0;
+  padding: 9px 11px;
+  border-radius: 7px;
+  font-size: 0.88rem;
+}
+
+.feedback-status.is-success {
+  background: #e7f8ef;
+  color: #226240;
+}
+
+.feedback-status.is-error {
+  background: #fff0f0;
+  color: #8f3030;
+}
+
+.feedback-status.is-info {
+  background: #eef7ff;
+  color: #275978;
+}
+
 .backup-dialog {
   width: min(600px, calc(100vw - 28px));
   max-height: calc(100dvh - 28px);
@@ -3083,10 +3165,43 @@ code {
   position: fixed;
   z-index: 100;
   right: 20px;
-  bottom: 20px;
+  bottom: 88px;
   width: min(380px, calc(100vw - 40px));
   display: grid;
   gap: 8px;
+}
+
+.site-feedback-button {
+  position: fixed;
+  z-index: 90;
+  right: 20px;
+  bottom: 20px;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  min-height: 46px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--green-600), #28788a);
+  color: #fff;
+  font-weight: 800;
+  box-shadow: 0 14px 32px rgba(13, 50, 41, 0.24);
+  cursor: pointer;
+}
+
+.site-feedback-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 38px rgba(13, 50, 41, 0.3);
+}
+
+.site-feedback-button svg {
+  width: 19px;
+  height: 19px;
+}
+
+.site-feedback-button[hidden] {
+  display: none;
 }
 
 .toast {
@@ -3364,10 +3479,37 @@ code {
 }
 
 :root[data-theme="dark"] .profile-dialog input,
+:root[data-theme="dark"] .profile-dialog textarea,
 :root[data-theme="dark"] .structure-slot select {
   border-color: var(--line);
   background: #111a17;
   color: var(--ink);
+}
+
+:root[data-theme="dark"] .compact-consent-list li,
+:root[data-theme="dark"] .feedback-dialog-hint,
+:root[data-theme="dark"] .feedback-context {
+  color: var(--muted);
+}
+
+:root[data-theme="dark"] .feedback-context {
+  border-color: var(--line);
+  background: var(--surface-soft);
+}
+
+:root[data-theme="dark"] .feedback-status.is-success {
+  background: #173625;
+  color: #a7efbd;
+}
+
+:root[data-theme="dark"] .feedback-status.is-error {
+  background: #3a1f1d;
+  color: #ffb7ad;
+}
+
+:root[data-theme="dark"] .feedback-status.is-info {
+  background: #132b3a;
+  color: #a8daf5;
 }
 
 :root[data-theme="dark"] .backup-summary > div,
@@ -3686,6 +3828,19 @@ code {
   .editor-actions .button,
   .learning-coach-actions .button {
     width: 100%;
+  }
+
+  .site-feedback-button {
+    right: 14px;
+    bottom: 14px;
+    min-height: 44px;
+    padding: 0 13px;
+  }
+
+  .toast-region {
+    right: 14px;
+    bottom: 76px;
+    width: min(360px, calc(100vw - 28px));
   }
 
   .learning-coach-heading {

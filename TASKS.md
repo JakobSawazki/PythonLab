@@ -1,7 +1,7 @@
 # PythonLab Tasks und Projektstand
 
-Stand: 21. Juni 2026
-Aktuelle Version: 0.17.1
+Stand: 29. Juni 2026
+Aktuelle Version: 0.18.1
 Live: `https://jakobsawazki.github.io/PythonLab/`
 
 ## Leitentscheidung
@@ -13,6 +13,9 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 
 ## Erledigt
 
+- 2026-06-29: KI-Aktivierungsdialog gekürzt, schwebenden Feedback-Button mit
+  vorbereitetem GitHub-Issue-Fallback ergänzt und Lektion 16 `debug-rabatt`
+  fairer auf letzte Ausgabe `40` geprüft.
 - 2026-06-09: Grundversion von PythonLab erstellt und über GitHub Pages veröffentlicht.
 - 2026-06-09: BPE5-Materialstand 31.07.2025 geprüft und fachlichen Abgleich dokumentiert.
 - 2026-06-09: Struktogramm-Labor mit Grundformen, Aufgaben, XP und Mobilansicht ergänzt.
@@ -94,10 +97,9 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 
 ## Offen Priorisiert
 
-1. Schulische Datenschutz- und Tariffreigabe für den vorbereiteten KI-Modus
-   klären. Danach Cloudflare Worker und Gemini-Projekt einrichten, Secret sicher
-   hinterlegen, Endpoint in `config.js` eintragen und den öffentlichen Ablauf
-   kontrolliert pilotieren. Bis dahin bleibt der Endpoint leer.
+1. Schulische Datenschutz- und Tariffreigabe für den KI-Modus weiter klären,
+   Nutzung/Kosten beobachten und den Cloudflare-/Gemini-Betrieb regelmäßig
+   kontrollieren.
 2. Teilpunkte und visuelle Kompetenz-Rubriken für längere Transferaufgaben entwickeln.
 3. Weitere Struktogramm-Transferaufgaben ergänzen, besonders alltagsnahe und geschachtelte Abläufe.
 4. Befehlsbibliothek bei didaktischem Bedarf um `enumerate()` und Wörterbücher erweitern; beides liegt außerhalb des engsten BPE5-Kerns.

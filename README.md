@@ -1,7 +1,7 @@
 # PythonLab
 
-**Aktuelle Version:** 0.17.1
-**Dokumentationsstand:** 21. Juni 2026
+**Aktuelle Version:** 0.18.1
+**Dokumentationsstand:** 29. Juni 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
 
@@ -73,6 +73,7 @@ Repository übernommen.
 - bestandene Programmieraufgabe schließt die zugehörige Lektion zuverlässig ab
 - lokaler Lerncoach, der häufige Anfängerfehler (fehlender Doppelpunkt, `print` ohne Klammern, Fehlertypen wie NameError oder TypeError) verständlich erklärt – ganz ohne Backend und Datenübertragung
 - freiwillig aktivierbarer Gemini-Lerncoach: Nach Zustimmung gibt er nach fehlgeschlagenen Prüfungen automatisch kleine Denkimpulse; identische Anfragen werden für die Sitzung zwischengespeichert (siehe „KI-Lerncoach aktivieren“)
+- schwebender Feedback-Button unten rechts: öffnet ohne zusätzliches Secret ein vorbereitetes GitHub-Issue und kann später über einen geschützten `feedbackEndpoint` direkt angebunden werden
 - kompakter Nachschlagebereich
 - schlichter Footer-Hinweis `Designed by Sawazki Electronics`
 - responsive Oberfläche für Computer, Tablet und Smartphone
@@ -165,6 +166,13 @@ Sitzung aus einem lokalen Rückmeldungscache bedient. Die kostenlose
 Gemini-Stufe kann Inhalte laut Google zur Produktverbesserung verwenden; die
 Oberfläche weist deshalb vor der ersten Übertragung darauf hin.
 Personenbezogene Daten gehören nicht in den Code.
+
+Der Feedback-Button übernimmt nur Rückmeldungstext, aktuelle Seite, Route, URL
+und Zeitpunkt in ein vorbereitetes GitHub-Issue. Ohne zusätzlichen
+Serverless-Endpoint wird nichts automatisch abgesendet. Für direkte
+GitHub-Erstellung ohne Anmeldung wäre ein Worker mit geheimem GitHub-Token oder
+alternativ ein schulisch freigegebenes Formular nötig; ein Token darf niemals in
+Browsercode oder `config.js` stehen.
 
 Browserdaten können durch
 Schulrichtlinien, Profilbereinigung oder einen Gerätewechsel verloren gehen.
@@ -274,6 +282,17 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - abschließender Abruf der GitHub-Pages-Version
 
 ## Versionsverlauf
+
+### 0.18.1 – 29. Juni 2026
+
+- KI-Aktivierungsdialog deutlich gekürzt: nur noch wichtigste Hinweise zu
+  Datenübertragung, personenbezogenen Daten und XP-Entscheidung.
+- schwebenden Feedback-Button unten rechts ergänzt; ohne zusätzlichen
+  Feedback-Server öffnet er ein vorbereitetes GitHub-Issue und bietet eine
+  Kopierfunktion als Fallback.
+- Aufgabe `debug-rabatt` aus Lektion 16 fairer geprüft: Entscheidend ist jetzt
+  der letzte ausgegebene Zahlenwert `40`, nicht zwingend die interne Variable
+  `gesamt`.
 
 ### 0.17.1 – 21. Juni 2026
 
