@@ -121,6 +121,7 @@ PythonWorkbook/
 | 07.07.2026 | 1.6 | Codex | Startseiten-Symbol „Struktogramme“ in `assets/style.css` neu gezeichnet: weiterhin blau, rote/irritierende Markierungen entfernt. Drei Zusatzübungen für BPE 7 ergänzt: Kapitel 4 „Laufzeiten auswerten“ (parallele Arrays, Minimum, Durchschnitt, Zählen), Kapitel 5 „Binäre Suche: nicht gefunden“ (Trace mit leerem Suchbereich), Kapitel 6 „Dateisystem als Baum“ (Wurzel, Blätter, Höhe, Binärbaum, Pfad). Stylesheet-Link auf `?v=1.6` aktualisiert. |
 | 07.07.2026 | 1.7 | Codex | Workbook-Kopie in `PythonLab/workbook/` integriert: alle Seiten erhielten in der Topnavigation den Rücklink `← PythonLab`; `assets/style.css` um die Klasse `.lab-ruecklink` erweitert. Die Originalquelle `D:\Google Drive\Codex\PythonWorkbook` bleibt als eigenständiger Arbeitsordner erhalten. |
 | 07.07.2026 | 1.8 | Codex | Eigenes fotorealistisches PNG-Logo (`assets/workbook-logo.png`) und daraus abgeleitete Favicons eingebunden; Topnavigation zeigt nun Bildmarke + Text. Startseite zeigt das Workbook-Logo im Hero. Offizielle SwissEduc-PythonKara-Seite in Werkzeugübersicht, Kapitel 1, Glossar und Spickzettel verlinkt. Stylesheet-/Script-Links auf `?v=1.8` aktualisiert. |
+| 07.07.2026 | 1.9 | Codex | Footer der Workbook-Startseite aufgeräumt: BPE-/Quellenhinweise stehen nun in einem kleinen Info-Button unten links (`details.footer-info`), rechts steht `Designed by Sawazki Electronics` mit Link auf die Sawazki-Electronics-Homepage. Startseite lädt `assets/style.css?v=1.9` und `assets/workbook.js?v=1.9`. |
 
 ---
 
@@ -134,10 +135,11 @@ PythonWorkbook/
 
 ---
 
-## 6. Verifikation (Stand v1.8)
+## 6. Verifikation (Stand v1.9)
 
 - Alle Seiten laden ohne Konsolenfehler und ohne fehlgeschlagene Netzwerk-Requests (getestet über lokalen `http.server`).
 - Interaktiv getestet: Quiz-Feedback, Syntax-Highlighting, Checklisten-Speicherung (übersteht Neuladen), Kara-Simulator (Schritt/Abspielen/Zurücksetzen), Struktogramm-Rendering (einfach + verschachtelt), neue Kapitel 4–6 inkl. Quiz und Grafiken (Array-Zellen, Listen-/Stack-/Queue-Diagramme, SVG-Bäume).
 - Statischer Link-/Ankercheck: alle lokalen HTML-Ziele und Sprungmarken vorhanden.
 - Browsercheck nach v1.6: `index.html` und Kapitel 4–6 auf Desktopbreite sowie mobil (390 × 844) geprüft; keine Konsolenfehler, kein horizontales Seiten-Overflow. Das Startseiten-Symbol `.mini-stg` rendert mit Blauwerten (`#344bb8`) und ohne Rotanteile; die drei neuen Übung-7-Blöcke sind sichtbar.
 - Browsercheck nach v1.8: PythonLab-Workbook-Route, Workbook-Startseite, Kapitel 1, Glossar und Spickzettel lokal geprüft; PNG-Favicons und Logo-Bilder laden, SwissEduc-PythonKara-Links sind vorhanden, Desktop-Topnav bleibt einzeilig, Mobilbreite 390 × 844 ohne Seiten-Overflow.
+- Browsercheck nach v1.9: Footer der Workbook-Startseite lokal geprüft; Info-Button öffnet die BPE-/Quellenhinweise, Sawazki-Electronics-Link ist sichtbar, Desktop- und Mobilbreite ohne Seiten-Overflow.

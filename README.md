@@ -1,6 +1,6 @@
 # PythonLab
 
-**Aktuelle Version:** 0.20.0
+**Aktuelle Version:** 0.20.1
 **Dokumentationsstand:** 7. Juli 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
@@ -287,6 +287,12 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - abschließender Abruf der GitHub-Pages-Version
 
 ## Versionsverlauf
+
+### 0.20.1 – 7. Juli 2026
+
+- Footer der Workbook-Startseite aufgeräumt: fachliche BPE-/Quellenhinweise liegen nun hinter einem kleinen Info-Button unten links
+- rechts im Workbook-Startseitenfooter `Designed by Sawazki Electronics` mit Link auf die Sawazki-Electronics-Homepage ergänzt
+- Workbook-Startseite auf `assets/style.css?v=1.9` und `assets/workbook.js?v=1.9` aktualisiert
 
 ### 0.20.0 – 7. Juli 2026
 

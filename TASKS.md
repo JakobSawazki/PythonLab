@@ -1,7 +1,7 @@
 # PythonLab Tasks und Projektstand
 
 Stand: 7. Juli 2026
-Aktuelle Version: 0.20.0
+Aktuelle Version: 0.20.1
 Live: `https://jakobsawazki.github.io/PythonLab/`
 
 ## Leitentscheidung
@@ -13,6 +13,7 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 
 ## Erledigt
 
+- 2026-07-07: Footer der Workbook-Startseite vereinfacht: kleiner Info-Button für BPE-/Quellenhinweise links, `Designed by Sawazki Electronics` rechts mit Link auf die Sawazki-Electronics-Homepage.
 - 2026-07-07: PythonLab und Workbook mit eigenen fotorealistischen PNG-Logos/Favicons ausgestattet, Workbook-Navigationsicon unterscheidbar gemacht und offizielle SwissEduc-PythonKara-Links im Workbook ergänzt.
 - 2026-07-07: HTML-Workbook zu BPE 5 und BPE 7 unter `workbook/` in PythonLab eingebunden, neuen Reiter **Workbook** mit Lesemodus-Übersicht ergänzt und Rücklinks vom Workbook zurück zu PythonLab gesetzt.
 - 2026-06-29: KI-Aktivierungsdialog gekürzt, schwebenden Feedback-Button mit

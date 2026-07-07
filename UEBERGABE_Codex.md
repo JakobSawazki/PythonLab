@@ -2,7 +2,7 @@
 
 Stand: 7. Juli 2026
 
-Aktueller Arbeitsstand: 0.20.0. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
+Aktueller Arbeitsstand: 0.20.1. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
 
 ## Projektziel
 
@@ -67,6 +67,7 @@ Verbindliche fachliche Referenz:
 - Nachschlagebereich mit kompakten Syntaxmustern
 - neuer Reiter **Workbook** mit eingebundenem HTML-Lehrbuch zu BPE 5 und BPE 7 (`workbook/`); die Workbook-Seiten behalten ihren helleren Lehrbuchcharakter und führen über `← PythonLab` zurück in die App
 - eigene PNG-Brandmarks statt SVG-Favicon: `assets/pythonlab-logo.png` für PythonLab und `workbook/assets/workbook-logo.png` für das Workbook; das Workbook nutzt außerdem eigene Favicons und verweist in Kapitel 1 auf die offizielle PythonKara-Seite von SwissEduc
+- Workbook-Startseitenfooter ist bewusst reduziert: links ein kleiner Info-Button für BPE-/Quellenhinweise, rechts `Designed by Sawazki Electronics` mit Link auf die Sawazki-Electronics-Homepage
 - responsive Navigation und Tastaturbedienung
 - Kompetenzansicht mit drei BPE5-Bereichen, vierzehn Ich-kann-Zielen und verknüpften Lernaktivitäten
 - insgesamt exakt 7200 erreichbare XP mit erweiterten Levelgrenzen und erklärender Punkteanzeige (`totalAvailableXp()` berechnet die Summe zur Laufzeit)
