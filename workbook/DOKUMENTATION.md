@@ -19,7 +19,7 @@
 | **Anrede** | Kapitel, Spickzettel und Checklisten nutzen überwiegend **„Sie“** wie die offiziellen Materialien; Startseite, Inhaltsverzeichnis und Glossar sind schülernah mit **„du“** formuliert. Vollständige Vereinheitlichung ist ein offener Redaktionspunkt. |
 | **Sprache** | Deutsch |
 | **Technik** | Reines HTML/CSS/Vanilla-JS, **keine Frameworks, keine CDN-Abhängigkeiten** – muss komplett **offline** funktionieren (Doppelklick auf `index.html` genügt) |
-| **Integration in PythonLab** | Diese Kopie liegt unter `PythonLab/workbook/` und wird über den PythonLab-Reiter **Workbook** geöffnet. Alle Workbook-Seiten enthalten oben den Rücklink `← PythonLab`. |
+| **Integration in PythonLab** | Diese Kopie liegt unter `PythonLab/workbook/` und wird über den PythonLab-Reiter **Workbook** geöffnet. Alle Workbook-Seiten enthalten oben den Rücklink `← PythonLab` und ein eigenes PNG-Logo/Favicon. |
 | **Auftraggeber** | Jakob Sawazki (Lehrer) |
 
 ### Inhaltliche Quellen (nicht verändern, nur lesen!)
@@ -33,6 +33,9 @@
 - **Materialien zur BPE 7** (Landesbildungsserver BW):
   `D:\Google Drive\Codex\PythonLab\resources\bpe-7-algorithmen-datenstrukturen-python`
   (Lernfortschritt 1 = Datenstrukturen/Arrays, Lernfortschritt 2 = Algorithmik: Bubble/Selection Sort + lineare/binäre Suche, Lernfortschritt 3 = verkettete Liste/Stack/Queue/Baum; jeweils Informationsmaterial / Arbeitsaufträge / Lösungen inkl. `.py`-Programme + Ich-Kann-Listen + Kompetenzraster)
+- **PythonKara** (SwissEduc):
+  <https://www.swisseduc.ch/informatik/karatojava/pythonkara/>
+  (offizielle Seite für Download und lokale Ausführung von PythonKara; im Workbook bei Kapitel 1, Glossar, Spickzettel und Werkzeugübersicht verlinkt)
 - Übungen im Workbook referenzieren die Original-Arbeitsblätter per Kürzel (z. B. „L3_2_2“ bzw. bei BPE 7 mit Zusatz „(BPE 7)“).
 
 ---
@@ -56,7 +59,10 @@ PythonWorkbook/
 └── assets/
     ├── style.css                     Zentrales Stylesheet (alle Bausteine, s. Abschnitt 3)
     ├── workbook.js                   Syntax-Highlighter, Quiz, Checklisten, Nach-oben-Button
-    └── kara.js                       Interaktiver Kara-Simulator (nur Kapitel 1)
+    ├── kara.js                       Interaktiver Kara-Simulator (nur Kapitel 1)
+    ├── workbook-logo.png             Fotorealistisches PNG-Logo für Startseite/Branding
+    ├── workbook-favicon.png          PNG-Favicon für Browser-Tabs
+    └── workbook-apple-touch.png      Touch-Icon aus dem Workbook-Logo
 ```
 
 ---
@@ -114,6 +120,7 @@ PythonWorkbook/
 | 07.07.2026 | 1.5 | Codex | **BPE-7-Abschlussrunde:** `glossar.html` um zentrale BPE-7-Begriffe erweitert (Array, Index, Datenstruktur, Bubble/Selection Sort, lineare/binäre Suche, verkettete Liste, Stack/LIFO, Queue/FIFO, Baum/Binärbaum, Knoten, Wurzel, Zeiger) und eine BPE-7-Befehlsübersicht ergänzt (`append()`, `insert()`, `pop()`, `remove()`, Indexzugriff, `len()`, Such-/Tauschmuster, Stack/Queue-Modellierung). Fußzeilen in `glossar.html`, `referenz.html`, `inhaltsverzeichnis.html` und `checklisten.html` auf BPE 5 + BPE 7 aktualisiert; mobile Tabellen/Code-Vergleiche gegen horizontales Überlaufen abgesichert; Stylesheet-Link mit `?v=1.5.1` cache-sicher gemacht; Dokumentation bereinigt. |
 | 07.07.2026 | 1.6 | Codex | Startseiten-Symbol „Struktogramme“ in `assets/style.css` neu gezeichnet: weiterhin blau, rote/irritierende Markierungen entfernt. Drei Zusatzübungen für BPE 7 ergänzt: Kapitel 4 „Laufzeiten auswerten“ (parallele Arrays, Minimum, Durchschnitt, Zählen), Kapitel 5 „Binäre Suche: nicht gefunden“ (Trace mit leerem Suchbereich), Kapitel 6 „Dateisystem als Baum“ (Wurzel, Blätter, Höhe, Binärbaum, Pfad). Stylesheet-Link auf `?v=1.6` aktualisiert. |
 | 07.07.2026 | 1.7 | Codex | Workbook-Kopie in `PythonLab/workbook/` integriert: alle Seiten erhielten in der Topnavigation den Rücklink `← PythonLab`; `assets/style.css` um die Klasse `.lab-ruecklink` erweitert. Die Originalquelle `D:\Google Drive\Codex\PythonWorkbook` bleibt als eigenständiger Arbeitsordner erhalten. |
+| 07.07.2026 | 1.8 | Codex | Eigenes fotorealistisches PNG-Logo (`assets/workbook-logo.png`) und daraus abgeleitete Favicons eingebunden; Topnavigation zeigt nun Bildmarke + Text. Startseite zeigt das Workbook-Logo im Hero. Offizielle SwissEduc-PythonKara-Seite in Werkzeugübersicht, Kapitel 1, Glossar und Spickzettel verlinkt. Stylesheet-/Script-Links auf `?v=1.8` aktualisiert. |
 
 ---
 
@@ -127,9 +134,10 @@ PythonWorkbook/
 
 ---
 
-## 6. Verifikation (Stand v1.6)
+## 6. Verifikation (Stand v1.8)
 
 - Alle Seiten laden ohne Konsolenfehler und ohne fehlgeschlagene Netzwerk-Requests (getestet über lokalen `http.server`).
 - Interaktiv getestet: Quiz-Feedback, Syntax-Highlighting, Checklisten-Speicherung (übersteht Neuladen), Kara-Simulator (Schritt/Abspielen/Zurücksetzen), Struktogramm-Rendering (einfach + verschachtelt), neue Kapitel 4–6 inkl. Quiz und Grafiken (Array-Zellen, Listen-/Stack-/Queue-Diagramme, SVG-Bäume).
 - Statischer Link-/Ankercheck: alle lokalen HTML-Ziele und Sprungmarken vorhanden.
 - Browsercheck nach v1.6: `index.html` und Kapitel 4–6 auf Desktopbreite sowie mobil (390 × 844) geprüft; keine Konsolenfehler, kein horizontales Seiten-Overflow. Das Startseiten-Symbol `.mini-stg` rendert mit Blauwerten (`#344bb8`) und ohne Rotanteile; die drei neuen Übung-7-Blöcke sind sichtbar.
+- Browsercheck nach v1.8: PythonLab-Workbook-Route, Workbook-Startseite, Kapitel 1, Glossar und Spickzettel lokal geprüft; PNG-Favicons und Logo-Bilder laden, SwissEduc-PythonKara-Links sind vorhanden, Desktop-Topnav bleibt einzeilig, Mobilbreite 390 × 844 ohne Seiten-Overflow.

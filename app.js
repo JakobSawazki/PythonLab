@@ -657,7 +657,7 @@
               Aufgaben öffnen
             </button>
             <button class="button button-secondary" type="button" data-route="workbook">
-              <i data-lucide="book-open-text"></i>
+              <i data-lucide="clipboard-list"></i>
               Workbook lesen
             </button>
           </div>

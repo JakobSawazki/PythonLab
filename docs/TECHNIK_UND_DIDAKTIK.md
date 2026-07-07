@@ -143,6 +143,7 @@ und Abschluss.
 - Landesbildungsserver Baden-Württemberg: [Grundlagen der Programmierung – Version mit Python, Stand 31.07.2025](https://www.schule-bw.de/resolveuid/4bf04e3081af47f9aa0a7455778f3cbe)
 - Landesbildungsserver Baden-Württemberg: [Operatorenliste für Struktogramme, Version 2.2 vom 01.09.2024](https://www.schule-bw.de/faecher-und-schularten/mathematisch-naturwissenschaftliche-faecher/informatik/material/materialien-zum-neuen-bildungsplan-informatik-an-den-nichtgewerblichen-beruflichen-gymnasien/operatorenliste-fuer-struktogramme-v2-2.pdf)
 - Schultasche Baden-Württemberg: [Informatikstick 2025, Download und Dokumentation](https://schultasche-bw.de/)
+- SwissEduc: [PythonKara – Programmieren mit Python](https://www.swisseduc.ch/informatik/karatojava/pythonkara/)
 - Struktogrammer Web: lokales Schwesterprojekt unter `G:\Meine Ablage\Codex\Struktogrammer`
 - hus Struktogrammer: [Offizielle Projektseite der Java-Version](https://struktogrammer.ch/Web_files/page1_JavaVersion.html)
 - Pyodide: [Using Pyodide in a web worker](https://pyodide.org/en/stable/usage/webworker.html)
@@ -217,6 +218,15 @@ eine freiwillige Übungsvorbereitung zur Selbstkontrolle.
 ## Bildnachweis
 
 `assets/python-lernraum.png` wurde am 9. Juni 2026 mit dem integrierten OpenAI-Bildgenerator eigens für dieses Projekt erzeugt.
+`assets/pythonlab-logo.png` sowie die daraus abgeleiteten Favicons wurden am
+7. Juli 2026 mit dem integrierten OpenAI-Bildgenerator eigens für PythonLab
+erzeugt. Bildidee: fotorealistischer, dunkelgrüner Glaskörper mit Code-Reflexen
+und goldenen Leiterbahn-Akzenten; kein Text, keine Logos, kein SVG.
+`workbook/assets/workbook-logo.png` sowie die daraus abgeleiteten Favicons
+wurden am 7. Juli 2026 mit dem integrierten OpenAI-Bildgenerator eigens für
+das Workbook erzeugt. Bildidee: fotorealistisches aufgeschlagenes Arbeitsheft
+auf blauem Untergrund mit Code-Anmutung, goldener Markierung und grünem
+Lernmaskottchen; kein Text, kein Rot, keine Logos, kein SVG.
 `assets/struktogrammer-mark.png` stammt aus dem lokalen Schwesterprojekt
 Struktogrammer Web.
 

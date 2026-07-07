@@ -1,6 +1,6 @@
 # PythonLab
 
-**Aktuelle Version:** 0.19.0
+**Aktuelle Version:** 0.20.0
 **Dokumentationsstand:** 7. Juli 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
@@ -76,6 +76,7 @@ Repository übernommen.
 - schwebender Feedback-Button unten rechts: öffnet ohne zusätzliches Secret ein vorbereitetes GitHub-Issue und kann später über einen geschützten `feedbackEndpoint` direkt angebunden werden
 - kompakter Nachschlagebereich
 - eigener Reiter **Workbook**: ruhiger Lesemodus mit dem eingebundenen HTML-Workbook zu BPE 5 und BPE 7 (`workbook/`), inklusive Rücklink zu PythonLab
+- eigene fotorealistische PNG-Brandmarks für PythonLab und Workbook: Browser-Favicons, PythonLab-Sidebarlogo und Workbook-Logo in der Workbook-Navigation
 - schlichter Footer-Hinweis `Designed by Sawazki Electronics`
 - responsive Oberfläche für Computer, Tablet und Smartphone
 - Tastaturbedienung und semantische Bedienelemente
@@ -242,6 +243,9 @@ Für die Arbeit am Schul-PC stehen folgende Programme bereit:
   Programme; Download, Dokumentation und Versionshinweise liegen auf der
   offiziellen Schultasche-BW-Seite.
 - **[Thonny](https://thonny.org/):** Python-Entwicklungsumgebung
+- **[PythonKara](https://www.swisseduc.ch/informatik/karatojava/pythonkara/):**
+  offizieller SwissEduc-Download für Kapitel 1; lokal ausführbar, z. B. mit der
+  Java-17-JAR von SwissEduc
 - **[Struktogrammer Web](https://jakobsawazki.github.io/struktogrammer-web/):**
   lokales Schwesterprojekt für freie Nassi-Shneiderman-Struktogramme
 - **[hus Struktogrammer](https://struktogrammer.ch/Web_files/page1_JavaVersion.html):**
@@ -283,6 +287,14 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - abschließender Abruf der GitHub-Pages-Version
 
 ## Versionsverlauf
+
+### 0.20.0 – 7. Juli 2026
+
+- eingebettetes SVG-Favicon von PythonLab durch eigene PNG-Assets ersetzt (`assets/pythonlab-logo.png`, `pythonlab-favicon.png`, `pythonlab-apple-touch.png`)
+- Workbook um eigenes fotorealistisches PNG-Logo und Tab-Icon ergänzt (`workbook/assets/workbook-logo.png`, `workbook-favicon.png`, `workbook-apple-touch.png`)
+- Workbook-Symbol in der PythonLab-Navigation auf `clipboard-list` geändert, damit es sich klar vom Nachschlagebereich unterscheidet
+- offizielle PythonKara-Seite von SwissEduc im Workbook an passenden Stellen verlinkt: Startseite/Werkzeuge, Kapitel 1, Glossar und Spickzettel
+- Cache-Bust-Versionen in PythonLab auf `0.20.0` und im Workbook auf `1.8` angehoben
 
 ### 0.19.0 – 7. Juli 2026
 

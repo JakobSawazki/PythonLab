@@ -2,7 +2,7 @@
 
 Stand: 7. Juli 2026
 
-Aktueller Arbeitsstand: 0.19.0. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
+Aktueller Arbeitsstand: 0.20.0. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
 
 ## Projektziel
 
@@ -66,6 +66,7 @@ Verbindliche fachliche Referenz:
 - versionierter JSON-Export und -Import des vollständigen Lernstands
 - Nachschlagebereich mit kompakten Syntaxmustern
 - neuer Reiter **Workbook** mit eingebundenem HTML-Lehrbuch zu BPE 5 und BPE 7 (`workbook/`); die Workbook-Seiten behalten ihren helleren Lehrbuchcharakter und führen über `← PythonLab` zurück in die App
+- eigene PNG-Brandmarks statt SVG-Favicon: `assets/pythonlab-logo.png` für PythonLab und `workbook/assets/workbook-logo.png` für das Workbook; das Workbook nutzt außerdem eigene Favicons und verweist in Kapitel 1 auf die offizielle PythonKara-Seite von SwissEduc
 - responsive Navigation und Tastaturbedienung
 - Kompetenzansicht mit drei BPE5-Bereichen, vierzehn Ich-kann-Zielen und verknüpften Lernaktivitäten
 - insgesamt exakt 7200 erreichbare XP mit erweiterten Levelgrenzen und erklärender Punkteanzeige (`totalAvailableXp()` berechnet die Summe zur Laufzeit)
@@ -83,6 +84,8 @@ Verbindliche fachliche Referenz:
 | `config.js` | öffentliche Konfiguration des optionalen KI-Endpunkts ohne Secret |
 | `services/ai-feedback-worker/` | optionaler, getrennt zu veröffentlichender Gemini-Proxy |
 | `assets/python-lernraum.png` | Titelbild der Übersicht |
+| `assets/pythonlab-logo.png` | fotorealistische PythonLab-Brandmark für Sidebar und Branding |
+| `assets/pythonlab-favicon.png` | PNG-Favicon für PythonLab |
 | `assets/struktogrammer-mark.png` | Icon für den Struktogrammer-Web-Link |
 | `assets/primzahlen-anwendung.png` | Illustration der Primzahlen-Werkstatt |
 | `workbook/` | eingebundenes HTML-Workbook als ruhiger Lesemodus zu BPE 5 und BPE 7 |
