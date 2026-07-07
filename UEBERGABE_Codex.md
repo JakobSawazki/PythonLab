@@ -1,8 +1,8 @@
 # Übergabeprotokoll: PythonLab
 
-Stand: 29. Juni 2026
+Stand: 7. Juli 2026
 
-Aktueller Arbeitsstand: 0.18.1 in Vorbereitung. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
+Aktueller Arbeitsstand: 0.19.0. Die Zusammenarbeit und die verbindliche Übergaberoutine für Mensch, Claude Code und Codex stehen zusätzlich in `docs/ZUSAMMENARBEIT.md`.
 
 ## Projektziel
 
@@ -65,6 +65,7 @@ Verbindliche fachliche Referenz:
 - lokaler Name beziehungsweise Kürzel, XP, Level, Erfolge und Entwürfe
 - versionierter JSON-Export und -Import des vollständigen Lernstands
 - Nachschlagebereich mit kompakten Syntaxmustern
+- neuer Reiter **Workbook** mit eingebundenem HTML-Lehrbuch zu BPE 5 und BPE 7 (`workbook/`); die Workbook-Seiten behalten ihren helleren Lehrbuchcharakter und führen über `← PythonLab` zurück in die App
 - responsive Navigation und Tastaturbedienung
 - Kompetenzansicht mit drei BPE5-Bereichen, vierzehn Ich-kann-Zielen und verknüpften Lernaktivitäten
 - insgesamt exakt 7200 erreichbare XP mit erweiterten Levelgrenzen und erklärender Punkteanzeige (`totalAvailableXp()` berechnet die Summe zur Laufzeit)
@@ -84,6 +85,7 @@ Verbindliche fachliche Referenz:
 | `assets/python-lernraum.png` | Titelbild der Übersicht |
 | `assets/struktogrammer-mark.png` | Icon für den Struktogrammer-Web-Link |
 | `assets/primzahlen-anwendung.png` | Illustration der Primzahlen-Werkstatt |
+| `workbook/` | eingebundenes HTML-Workbook als ruhiger Lesemodus zu BPE 5 und BPE 7 |
 | `TASKS.md` | zentrale Aufgabenliste, Versionshistorie, offene Punkte und Ideen |
 | `docs/TECHNIK_UND_DIDAKTIK.md` | Quellen, Datenschutz und didaktische Entscheidungen |
 | `docs/BPE5_ABGLEICH_2025.md` | Abdeckung des offiziellen Kompetenzrasters und offene Ausbauschritte |

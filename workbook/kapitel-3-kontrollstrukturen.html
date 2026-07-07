@@ -1,0 +1,982 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kapitel 3 · Kontrollstrukturen in Python – Python-Workbook</title>
+<link rel="stylesheet" href="assets/style.css?v=1.6">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">Python-Workbook</a>
+    <a class="lab-ruecklink" href="../index.html#workbook">← PythonLab</a>
+    <a href="index.html">Start</a>
+    <a href="inhaltsverzeichnis.html">Inhalt</a>
+    <a href="kapitel-1-kara.html">K1 Kara</a>
+    <a href="kapitel-2-python-grundlagen.html">K2 Python</a>
+    <a href="kapitel-3-kontrollstrukturen.html" class="aktiv">K3 Kontrolle</a>
+    <a href="kapitel-4-arrays.html">K4 Arrays</a>
+    <a href="kapitel-5-sortieren-suchen.html">K5 Algorithmen</a>
+    <a href="kapitel-6-datenstrukturen.html">K6 Datenstrukturen</a>
+    <a href="glossar.html">Glossar</a>
+    <a href="referenz.html">Spickzettel</a>
+    <a href="checklisten.html">Checklisten</a>
+  </div>
+</nav>
+
+<header class="seitenkopf">
+  <div class="kopf-inner">
+    <p class="dachzeile">Kapitel 3 · Lernfortschritt 3 · BPE 5.2</p>
+    <h1>Kontrollstrukturen in Python 🔀</h1>
+    <p class="untertitel">
+      Verzweigungen und Schleifen kennen Sie schon von Kara – jetzt setzen Sie sie in
+      „echten“ Python-Programmen ein: vom Abiball-Kartenverkauf über den Führerschein-Check
+      bis zum Zinsrechner.
+    </p>
+  </div>
+</header>
+
+<main>
+
+<div class="kapitel-toc">
+  <strong>In diesem Kapitel:</strong>
+  <ol>
+    <li><a href="#if">Die einseitige Verzweigung (if)</a></li>
+    <li><a href="#ifelse">Die zweiseitige Verzweigung (if–else)</a></li>
+    <li><a href="#geschachtelt">Geschachtelte Verzweigungen &amp; elif</a></li>
+    <li><a href="#logisch">Logische Operatoren (and, or, not)</a></li>
+    <li><a href="#for">Die for-Schleife mit range()</a></li>
+    <li><a href="#while">Die while-Schleife</a></li>
+    <li><a href="#uebungen">Übungsaufgaben</a></li>
+    <li><a href="#vertiefung">Vertiefungsaufgaben</a></li>
+  </ol>
+</div>
+
+<div class="box box-ziel">
+  <span class="box-titel">🎯 Das können Sie nach diesem Kapitel</span>
+  <ul>
+    <li>Programme mit ein-, zwei- und mehrseitigen Verzweigungen entwickeln,</li>
+    <li>Bedingungen mit <code>and</code>, <code>or</code> und <code>not</code> verknüpfen,</li>
+    <li>Wiederholungen mit for- und while-Schleifen programmieren,</li>
+    <li>entscheiden, welche Schleife zu welchem Problem passt,</li>
+    <li>alle Programme mit Struktogrammen dokumentieren.</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="if"><span class="knr">3.1</span>Die einseitige Verzweigung (if)</h2>
+
+<p>
+  Bisher liefen unsere Python-Programme einfach von oben nach unten durch. Mit einer
+  <strong>if-Anweisung</strong> kann ein Programm auf Situationen reagieren – genau wie
+  Kara mit seinen Sensoren, nur dass die Bedingungen jetzt aus Vergleichen bestehen.
+</p>
+
+<pre class="code">alter = int(input("Bitte geben Sie Ihr Alter in Jahren an: "))
+if alter &gt; 17:
+    print("Sie sind erwachsen!")
+print("Programmende!")</pre>
+
+<pre class="output">Bitte geben Sie Ihr Alter in Jahren an: <span class="eingabe">19</span>
+Sie sind erwachsen!
+Programmende!</pre>
+
+<div class="vergleich">
+  <div>
+    <h4>Struktogramm</h4>
+    <div class="stg">
+      <div class="stg-titel">Volljährigkeit prüfen</div>
+      <div class="stg-zeile">Eingabe: alter (Ganzzahl)</div>
+      <div class="stg-if">
+        <div class="stg-if-kopf">
+          <span class="bed">alter &gt; 17 ?</span>
+          <span class="ja">Ja</span><span class="nein">Nein</span>
+        </div>
+        <div class="stg-if-zweige">
+          <div><div class="stg-zeile">Ausgabe: "Sie sind erwachsen!"</div></div>
+          <div><div class="leer">∅</div></div>
+        </div>
+      </div>
+      <div class="stg-zeile">Ausgabe: "Programmende!"</div>
+    </div>
+  </div>
+  <div>
+    <h4>So funktioniert’s</h4>
+    <ul>
+      <li>Nach <code>if</code> steht die <strong>Bedingung</strong> (<code>alter &gt; 17</code>), abgeschlossen mit einem <strong>Doppelpunkt</strong>.</li>
+      <li>Alle Anweisungen für den Ja-Fall sind <strong>eingerückt</strong>.</li>
+      <li>Die erste <em>nicht</em> eingerückte Zeile (<code>print("Programmende!")</code>) gehört nicht mehr zum if-Block – sie wird <strong>immer</strong> ausgeführt.</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Vergleichsoperatoren</h3>
+
+<p>Als Erinnerung aus Kapitel 1 – diese Operatoren stehen für Bedingungen zur Verfügung:</p>
+
+<table class="tab">
+  <tr><th style="width:18%">Operator</th><th style="width:25%">Beispiel</th><th>Bedeutung</th></tr>
+  <tr><td><code>&lt;</code></td><td><code>a &lt; b</code></td><td>a ist kleiner als b</td></tr>
+  <tr><td><code>&lt;=</code></td><td><code>a &lt;= b</code></td><td>a ist kleiner oder gleich b</td></tr>
+  <tr><td><code>&gt;</code></td><td><code>a &gt; b</code></td><td>a ist größer als b</td></tr>
+  <tr><td><code>&gt;=</code></td><td><code>a &gt;= b</code></td><td>a ist größer oder gleich b</td></tr>
+  <tr><td><code>==</code></td><td><code>a == b</code></td><td>a ist gleich b</td></tr>
+  <tr><td><code>!=</code></td><td><code>a != b</code></td><td>a ist ungleich b</td></tr>
+</table>
+
+<div class="box box-info">
+  <span class="box-titel">ℹ️ Auch Texte lassen sich vergleichen</span>
+  <p>
+    Der Operator <code>==</code> funktioniert auch mit Zeichenketten:
+    <code>wohnort == "Stuttgart"</code> ist <code>True</code>, wenn die Variable genau
+    diesen Text enthält.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="ifelse"><span class="knr">3.2</span>Die zweiseitige Verzweigung (if–else)</h2>
+
+<p>
+  Bei der einseitigen Verzweigung passiert im Nein-Fall einfach nichts. Oft soll aber
+  <strong>in beiden Fällen</strong> etwas geschehen – dafür gibt es <code>else</code>:
+</p>
+
+<pre class="code">alter = int(input("Bitte geben Sie Ihr Alter in Jahren an: "))
+if alter &gt; 17:
+    print("Sie sind erwachsen!")
+else:
+    print("Sie sind minderjährig!")
+print("Programmende!")</pre>
+
+<pre class="output">Bitte geben Sie Ihr Alter in Jahren an: <span class="eingabe">15</span>
+Sie sind minderjährig!
+Programmende!</pre>
+
+<div class="vergleich">
+  <div>
+    <h4>Struktogramm</h4>
+    <div class="stg">
+      <div class="stg-titel">Volljährigkeit prüfen (zweiseitig)</div>
+      <div class="stg-zeile">Eingabe: alter (Ganzzahl)</div>
+      <div class="stg-if">
+        <div class="stg-if-kopf">
+          <span class="bed">alter &gt; 17 ?</span>
+          <span class="ja">Ja</span><span class="nein">Nein</span>
+        </div>
+        <div class="stg-if-zweige">
+          <div><div class="stg-zeile">Ausgabe: "Sie sind erwachsen!"</div></div>
+          <div><div class="stg-zeile">Ausgabe: "Sie sind minderjährig!"</div></div>
+        </div>
+      </div>
+      <div class="stg-zeile">Ausgabe: "Programmende!"</div>
+    </div>
+  </div>
+  <div>
+    <h4>So funktioniert’s</h4>
+    <p>
+      Nach dem Ja-Block folgt das Schlüsselwort <code>else:</code> (wieder mit
+      Doppelpunkt). Darunter stehen – eingerückt – die Anweisungen für den Nein-Fall.
+      Es wird <strong>immer genau einer</strong> der beiden Blöcke ausgeführt, nie beide.
+    </p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="geschachtelt"><span class="knr">3.3</span>Geschachtelte Verzweigungen &amp; elif</h2>
+
+<p>
+  Was, wenn es <strong>mehr als zwei Fälle</strong> gibt? Dann baut man in den
+  else-Block einfach eine weitere if-Anweisung ein – eine
+  <strong>geschachtelte Verzweigung</strong>:
+</p>
+
+<pre class="code">alter = int(input("Bitte Alter eingeben: "))
+if alter &gt; 17:
+    print("Sie sind ein Erwachsener!")
+else:
+    if alter &gt; 12:
+        print("Du bist ein Teenager!")
+    else:
+        if alter &gt;= 0:
+            print("Du bist ein Kind!")
+        else:
+            print("Sie haben einen falschen Wert eingegeben!")</pre>
+
+<pre class="output">Bitte Alter eingeben: <span class="eingabe">14</span>
+Du bist ein Teenager!</pre>
+
+<p>
+  Gelesen wird von oben nach unten: Ist <code>alter &gt; 17</code>? Nein → ist
+  <code>alter &gt; 12</code>? Ja → „Teenager“. Sind <em>alle</em> Bedingungen falsch,
+  muss die Eingabe negativ gewesen sein → Fehlermeldung.
+</p>
+
+<h3>Eleganter: elif</h3>
+
+<p>
+  Bei vielen Fällen rückt der Code immer weiter ein und wird unübersichtlich. Python
+  bietet deshalb <code>elif</code> (eine Zusammensetzung aus <em>else</em> und
+  <em>if</em>) – damit bleiben alle Fälle auf einer Ebene:
+</p>
+
+<pre class="code">alter = int(input("Alter in Jahren eingeben: "))
+if alter &gt; 17:
+    print("Sie sind ein Erwachsener!")
+elif alter &gt; 12:
+    print("Du bist ein Teenager!")
+elif alter &gt; 0:
+    print("Du bist ein Kind!")
+else:
+    print("Du bist ein Säugling!")</pre>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Merke</span>
+  <p>
+    Bei einer <code>if</code>-<code>elif</code>-<code>else</code>-Kette wird
+    <strong>von oben nach unten</strong> geprüft und nur der <strong>erste zutreffende
+    Block</strong> ausgeführt – alle weiteren werden übersprungen. Der
+    <code>else</code>-Block am Ende fängt alles Übrige auf.
+  </p>
+</div>
+
+<div class="quiz" data-erklaerung="Von oben nach unten: 25 > 17 ist wahr, also wird nur der erste Block ausgeführt.">
+  <span class="quiz-titel">🧠 Kurz-Check</span>
+  <p class="quiz-frage">Im elif-Beispiel oben wird <code>alter = 25</code> eingegeben. Was gibt das Programm aus?</p>
+  <button class="antwort" data-richtig>Sie sind ein Erwachsener!</button>
+  <button class="antwort">Sie sind ein Erwachsener! – und danach: Du bist ein Teenager!</button>
+  <button class="antwort">Alle vier Meldungen nacheinander</button>
+  <p class="quiz-feedback"></p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="logisch"><span class="knr">3.4</span>Logische Operatoren (and, or, not)</h2>
+
+<p>
+  Oft hängt eine Entscheidung von <strong>mehreren Bedingungen gleichzeitig</strong> ab.
+  Dann verknüpft man die Teilbedingungen mit logischen Operatoren:
+</p>
+
+<table class="tab">
+  <tr><th style="width:14%">Operator</th><th style="width:32%">Beispiel</th><th>Die Gesamtbedingung ist wahr (True), wenn …</th></tr>
+  <tr><td><code>and</code></td><td><code>alter &gt; 12 and alter &lt; 20</code></td><td><strong>beide</strong> Teilbedingungen zutreffen.</td></tr>
+  <tr><td><code>or</code></td><td><code>alter &lt; 10 or alter &gt; 20</code></td><td><strong>mindestens eine</strong> Teilbedingung zutrifft (oder beide).</td></tr>
+  <tr><td><code>not</code></td><td><code>not alter &lt; 18</code></td><td>die Bedingung <strong>nicht</strong> zutrifft – <code>not</code> dreht <code>True</code> und <code>False</code> um.</td></tr>
+</table>
+
+<pre class="code">alter = 21
+
+if alter &gt; 12 and alter &lt; 20:
+    print("Du bist ein Teenager!")
+
+if alter &lt; 10 or alter &gt; 20:
+    print("Dein Alter liegt unter 10 ODER über 20 Jahren!")
+
+if not alter &lt; 18:
+    print("Dein Alter liegt NICHT unter 18 Jahren =&gt; volljährig!")</pre>
+
+<pre class="output">Dein Alter liegt unter 10 ODER über 20 Jahren!
+Dein Alter liegt NICHT unter 18 Jahren =&gt; volljährig!</pre>
+
+<p>
+  Mit <code>alter = 21</code> ist die erste Bedingung falsch (21 ist nicht kleiner
+  als 20), die zweite wahr (21 &gt; 20) und die dritte ebenfalls wahr (21 ist nicht
+  kleiner als 18).
+</p>
+
+<div class="box box-tipp">
+  <span class="box-titel">💡 Denkaufgabe</span>
+  <p>
+    Was gibt das Programm aus, wenn <code>alter</code> zu Beginn auf <strong>17</strong>
+    gesetzt wird? Erst überlegen – dann im Programm ausprobieren!
+  </p>
+  <details class="hinweis">
+    <summary>Auflösung anzeigen</summary>
+    <p>
+      Nur <code>"Du bist ein Teenager!"</code> wird ausgegeben:
+      17 liegt zwischen 12 und 20 (wahr), 17 ist weder unter 10 noch über 20 (falsch),
+      und <code>not 17 &lt; 18</code> ist falsch, weil 17 sehr wohl kleiner als 18 ist.
+    </p>
+  </details>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="for"><span class="knr">3.5</span>Die for-Schleife mit range()</h2>
+
+<h3>Vorbereitung: Zahlenlisten mit range()</h3>
+
+<p>
+  Die for-Schleife arbeitet in Python eine <strong>Liste von Werten</strong> ab. Solche
+  Zahlenlisten erzeugt die Anweisung <code>range()</code> – Sie kennen sie schon aus
+  Kapitel 1. Hier die drei Formen im Überblick:
+</p>
+
+<pre class="code">zahlenliste = range(10)          # 0 bis 9
+print(list(zahlenliste))
+
+zahlenliste = range(3, 10)       # 3 bis 9  (eigener Startwert)
+print(list(zahlenliste))
+
+zahlenliste = range(1, 16, 2)    # 1, 3, 5, ... 15  (Schrittweite 2)
+print(list(zahlenliste))</pre>
+
+<pre class="output">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[3, 4, 5, 6, 7, 8, 9]
+[1, 3, 5, 7, 9, 11, 13, 15]</pre>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Merke: range(anfangswert, endwert, schrittweite)</span>
+  <ul>
+    <li>Ohne Angaben beginnt die Liste bei <strong>0</strong> und die Schrittweite ist <strong>1</strong>.</li>
+    <li>Die Liste endet immer <strong>eine Zahl vor dem Endwert</strong>: <code>range(10)</code> geht bis 9.</li>
+    <li>Mit negativer Schrittweite wird rückwärts gezählt: <code>range(10, 0, -1)</code> ergibt 10, 9, …, 1.</li>
+  </ul>
+</div>
+
+<div class="box box-tipp">
+  <span class="box-titel">💡 Probieren Sie es aus</span>
+  <p>Ändern Sie das Programm so ab, dass es folgende Listen erzeugt:</p>
+  <ol>
+    <li>eine Liste von 0 bis 15,</li>
+    <li>eine Liste von 8 bis 19,</li>
+    <li>eine Liste aller geraden Zahlen von 2 bis 20,</li>
+    <li>eine Liste in absteigender Reihenfolge von 10 bis 1.</li>
+  </ol>
+  <details class="hinweis">
+    <summary>Auflösung anzeigen</summary>
+    <p>
+      1. <code>range(16)</code> &nbsp; 2. <code>range(8, 20)</code> &nbsp;
+      3. <code>range(2, 21, 2)</code> &nbsp; 4. <code>range(10, 0, -1)</code>
+    </p>
+  </details>
+</div>
+
+<h3>Die for-Schleife</h3>
+
+<p>
+  Wenn schon vorher feststeht, <strong>wie oft</strong> wiederholt werden soll, ist die
+  for-Schleife die richtige Wahl. Die Schleifenvariable nimmt dabei der Reihe nach alle
+  Werte der Liste an:
+</p>
+
+<pre class="code">for zahl in range(10):
+    print(zahl)</pre>
+
+<pre class="output">0
+1
+2
+3
+4
+5
+6
+7
+8
+9</pre>
+
+<h3>Anwendungsbeispiel: die 5er-Reihe</h3>
+
+<p>Ein Programm soll die 5er-Reihe von 5 bis 50 ausgeben:</p>
+
+<div class="vergleich">
+  <div>
+    <h4>Python-Programm</h4>
+<pre class="code">for zahl in range(1, 11):
+    produkt = zahl * 5
+    print(zahl, "mal 5 =", produkt)</pre>
+  </div>
+  <div>
+    <h4>Struktogramm</h4>
+    <div class="stg">
+      <div class="stg-titel">5er-Reihe</div>
+      <div class="stg-schleife">
+        <div class="stg-schleife-kopf">wiederhole für zahl = 1 bis 10</div>
+        <div class="stg-schleife-koerper">
+          <div class="stg-zeile">produkt = zahl · 5</div>
+          <div class="stg-zeile">Ausgabe: zahl, "mal 5 =", produkt</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<pre class="output">1 mal 5 = 5
+2 mal 5 = 10
+3 mal 5 = 15
+...
+10 mal 5 = 50</pre>
+
+<p>
+  Die Variable <code>zahl</code> durchläuft die Werte 1 bis 10. In jedem Durchlauf wird
+  sie mit 5 multipliziert und das Ergebnis ausgegeben.
+</p>
+
+<!-- ============================================================ -->
+<h2 id="while"><span class="knr">3.6</span>Die while-Schleife</h2>
+
+<p>
+  Ist die Anzahl der Durchläufe <strong>vorher nicht bekannt</strong>, benutzt man die
+  while-Schleife: Sie wiederholt, <strong>solange ihre Bedingung erfüllt ist</strong>.
+</p>
+
+<h3>Beispiel: Würfeln bis zur 6</h3>
+
+<p>
+  Das folgende Programm simuliert einen Würfel und würfelt so lange, bis eine 6 fällt –
+  niemand weiß vorher, wie viele Versuche das braucht:
+</p>
+
+<pre class="code">from random import *
+
+zufallszahl = 0
+while zufallszahl != 6:
+    zufallszahl = randint(1, 6)
+    print("Wurf:", zufallszahl)</pre>
+
+<pre class="output">Wurf: 3
+Wurf: 1
+Wurf: 5
+Wurf: 6</pre>
+
+<div class="box box-info">
+  <span class="box-titel">ℹ️ Zufallszahlen (nicht abiturrelevant)</span>
+  <p>
+    <code>from random import *</code> bindet ein Modul mit Zufallsfunktionen ein.
+    <code>randint(1, 6)</code> liefert eine ganzzahlige Zufallszahl zwischen 1 und 6 –
+    wie ein Würfelwurf.
+  </p>
+</div>
+
+<h3>for und while im Vergleich</h3>
+
+<p>
+  Jede for-Schleife lässt sich auch als while-Schleife schreiben. Hier die 5er-Reihe
+  in beiden Varianten nebeneinander:
+</p>
+
+<div class="vergleich">
+  <div>
+    <h4>Mit for-Schleife</h4>
+<pre class="code">for zahl in range(1, 11):
+    produkt = zahl * 5
+    print(zahl, "mal 5 =", produkt)</pre>
+  </div>
+  <div>
+    <h4>Mit while-Schleife</h4>
+<pre class="code">zahl = 1
+while zahl &lt; 11:
+    produkt = zahl * 5
+    print(zahl, "mal 5 =", produkt)
+    zahl = zahl + 1</pre>
+  </div>
+</div>
+
+<p>Der wesentliche Unterschied: Bei der while-Schleife gibt es keine fertige Zahlenliste. Deshalb muss der Zähler</p>
+
+<ol>
+  <li><strong>vor der Schleife</strong> deklariert und initialisiert werden (<code>zahl = 1</code>) und</li>
+  <li><strong>im Schleifenkörper</strong> manuell verändert werden (<code>zahl = zahl + 1</code>).</li>
+</ol>
+
+<div class="box box-achtung">
+  <span class="box-titel">⚠️ Achtung: Endlosschleife!</span>
+  <p>
+    Vergisst man das Hochzählen (<code>zahl = zahl + 1</code>), bleibt die Bedingung
+    für immer wahr – das Programm läuft endlos. In Thonny hilft dann nur der
+    Stop-Knopf (oder Strg + C).
+  </p>
+</div>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Merke: Welche Schleife wann?</span>
+  <ul>
+    <li><strong>for-Schleife</strong> (zählergesteuert): Anzahl der Wiederholungen steht <em>vorher fest</em>. („Gib die 5er-Reihe aus“, „16 Jahrgänge durchlaufen“)</li>
+    <li><strong>while-Schleife</strong> (kopfgesteuert): Anzahl hängt von einer <em>Bedingung</em> ab. („Würfle, bis eine 6 fällt“, „Verdopple, bis der Zielwert erreicht ist“)</li>
+  </ul>
+</div>
+
+<div class="quiz" data-erklaerung="Die Anzahl der Durchläufe ist unbekannt – sie hängt vom eingegebenen Zielbestand ab. Also while.">
+  <span class="quiz-titel">🧠 Kurz-Check</span>
+  <p class="quiz-frage">
+    Ein Fischbestand verdoppelt sich jedes Jahr. Das Programm soll ermitteln, nach wie
+    vielen Jahren ein vom Benutzer eingegebener Zielbestand erreicht ist. Welche
+    Schleife passt?
+  </p>
+  <button class="antwort">for-Schleife – die Jahre lassen sich ja zählen</button>
+  <button class="antwort" data-richtig>while-Schleife – die Anzahl der Durchläufe ist vorher unbekannt</button>
+  <button class="antwort">Gar keine – das geht ohne Schleife</button>
+  <p class="quiz-feedback"></p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="uebungen"><span class="knr">3.7</span>Übungsaufgaben</h2>
+
+<p>
+  Wie immer gilt das Schema: <strong>Problemanalyse → Struktogramm → Programmcode</strong>.
+  Testen Sie jedes Programm mit mehreren Eingaben – auch mit „Grenzfällen“
+  (z.&nbsp;B. genau 3 Karten, genau 500&nbsp;Euro Miete …).
+</p>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 1 · Abiball-Karten (if) <span class="schwierigkeit">leicht</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Eine Karte für den Abiball kostet 30,00&nbsp;Euro. Ab drei Karten gibt es
+      20&nbsp;% Rabatt auf den Gesamtpreis. Schreiben Sie ein Programm, das nach der
+      Kartenanzahl fragt und den zu zahlenden Betrag ausgibt.
+    </p>
+    <p class="material">Original: L3_1_1 Aufgabe if Abiball</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">anzahl = int(input("Wie viele Karten möchten Sie kaufen? "))
+betrag = anzahl * 30.00
+
+if anzahl &gt;= 3:
+    betrag = betrag * 0.8   # 20 % Rabatt
+
+print("Zu zahlen:", betrag, "Euro")</pre>
+<pre class="output">Wie viele Karten möchten Sie kaufen? <span class="eingabe">4</span>
+Zu zahlen: 96.0 Euro</pre>
+      <p>
+        Einseitige Verzweigung: Nur wenn <code>anzahl &gt;= 3</code> ist, wird der
+        Betrag um den Rabatt reduziert – sonst bleibt er unverändert.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 2 · Preisvorschlag (if–else) <span class="schwierigkeit">leicht</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Für einen Artikel ist im Programm ein Mindestpreis von 24.99&nbsp;Euro hinterlegt.
+      Der Anwender gibt einen Preisvorschlag ab. Liegt er darunter, erscheint
+      „Ihr Angebotspreis liegt unterhalb des Mindestpreises!“ – andernfalls
+      „Herzlichen Glückwunsch, Sie haben den Artikel erworben!“.
+    </p>
+    <p class="material">Original: L3_1_2 Aufgabe if else Preisvorschlag</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">mindestpreis = 24.99
+angebot = float(input("Ihr Preisvorschlag in Euro: "))
+
+if angebot &lt; mindestpreis:
+    print("Ihr Angebotspreis liegt unterhalb des Mindestpreises!")
+else:
+    print("Herzlichen Glückwunsch, Sie haben den Artikel erworben!")</pre>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 3 · Mietzuschuss (geschachtelt) <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Ein Programm soll den Mietzuschuss abhängig vom Mietpreis berechnen:
+      unter 500&nbsp;Euro → 2&nbsp;% Zuschuss, von 500 bis unter 1000&nbsp;Euro →
+      5&nbsp;%, ab 1000&nbsp;Euro → 7&nbsp;%. Verwenden Sie eine geschachtelte
+      Verzweigung oder <code>elif</code>.
+    </p>
+    <p class="material">Original: L3_1_3 Aufgabe if geschachtelt Mietzuschuss</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">miete = float(input("Monatsmiete in Euro: "))
+
+if miete &lt; 500:
+    zuschuss = miete * 0.02
+elif miete &lt; 1000:
+    zuschuss = miete * 0.05
+else:
+    zuschuss = miete * 0.07
+
+print("Der Mietzuschuss beträgt:", round(zuschuss, 2), "Euro")</pre>
+<pre class="output">Monatsmiete in Euro: <span class="eingabe">750</span>
+Der Mietzuschuss beträgt: 37.5 Euro</pre>
+      <p>
+        Da die Fälle von oben nach unten geprüft werden, reicht bei <code>elif</code>
+        die Bedingung <code>miete &lt; 1000</code> – dass die Miete mindestens 500 Euro
+        beträgt, steht an dieser Stelle schon fest.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 4 · Führerscheinprüfung (and) <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Zur Führerscheinprüfung wird zugelassen, wer <strong>mindestens 17 Jahre</strong>
+      alt ist <strong>und mindestens 16 Theoriestunden</strong> absolviert hat.
+      Das Programm fragt beide Werte ab und gibt aus, ob die Anmeldung möglich ist.
+    </p>
+    <p class="material">Original: L3_1_4_1 Aufgabe if logische Operatoren Führerschein</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">alter = int(input("Alter in Jahren: "))
+theoriestunden = int(input("Anzahl der Theoriestunden: "))
+
+if alter &gt;= 17 and theoriestunden &gt;= 16:
+    print("Die Anmeldung zur Prüfung ist möglich.")
+else:
+    print("Die Anmeldung ist leider noch nicht möglich.")</pre>
+      <p>
+        Beide Teilbedingungen müssen erfüllt sein – deshalb <code>and</code>.
+        Testen Sie die Grenzfälle: genau 17 Jahre, genau 16 Stunden!
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 5 · Tierpark-Eintritt (or) <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Kinder (bis 12 Jahre) und Senioren (ab 60 Jahre) zahlen im Tierpark
+      8,00&nbsp;Euro Eintritt, alle anderen 12,00&nbsp;Euro. Das Programm fragt das
+      Alter ab und gibt den Eintrittspreis aus.
+    </p>
+    <p class="material">Original: L3_1_4_2 Aufgabe if logische Operatoren Eintritt</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">alter = int(input("Alter des Besuchers: "))
+
+if alter &lt;= 12 or alter &gt;= 60:
+    eintritt = 8.00
+else:
+    eintritt = 12.00
+
+print("Der Eintritt beträgt:", eintritt, "Euro")</pre>
+      <p>
+        Es reicht, wenn <em>eine</em> der beiden Bedingungen zutrifft – deshalb
+        <code>or</code>.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 6 · Autovermietung (not) <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Die Firma „Rent A Car“ in Stuttgart vermietet Oldtimer für 50,00&nbsp;Euro pro
+      Tag. Alle Kunden, die <strong>nicht in Stuttgart</strong> wohnen, erhalten
+      10&nbsp;% Sonderrabatt. Das Programm fragt Wohnort und Mietdauer ab und gibt die
+      Mietkosten aus.
+    </p>
+    <p class="material">Original: L3_1_4_3 Aufgabe if logische Operatoren Autovermietung</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">wohnort = input("Wohnort: ")
+tage = int(input("Mietdauer in Tagen: "))
+
+kosten = tage * 50.00
+
+if not wohnort == "Stuttgart":
+    kosten = kosten * 0.9   # 10 % Rabatt
+
+print("Die Mietkosten betragen:", round(kosten, 2), "Euro")</pre>
+      <p>
+        <code>not wohnort == "Stuttgart"</code> ist wahr, wenn der Kunde
+        <em>nicht</em> in Stuttgart wohnt. (Gleichwertig wäre
+        <code>wohnort != "Stuttgart"</code>.)
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 7 · Taschengeld (for) <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Taschengeld wird vom 6. bis zum 21. Lebensjahr ausgezahlt. Der Benutzer gibt den
+      Anfangsbetrag (mit 6 Jahren) und die jährliche Erhöhung ein. Das Programm gibt
+      für jedes Alter den jeweiligen Taschengeldbetrag aus.
+    </p>
+    <p class="material">Original: L3_2_1 Aufgabe for Taschengeld</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">betrag = float(input("Anfangsbetrag mit 6 Jahren (Euro): "))
+erhoehung = float(input("Jährliche Erhöhung (Euro): "))
+
+for alter in range(6, 22):
+    print("Mit", alter, "Jahren:", round(betrag, 2), "Euro")
+    betrag = betrag + erhoehung</pre>
+<pre class="output">Anfangsbetrag mit 6 Jahren (Euro): <span class="eingabe">5</span>
+Jährliche Erhöhung (Euro): <span class="eingabe">2.5</span>
+Mit 6 Jahren: 5.0 Euro
+Mit 7 Jahren: 7.5 Euro
+...
+Mit 21 Jahren: 42.5 Euro</pre>
+      <p>
+        <code>range(6, 22)</code> liefert die Jahre 6 bis 21 – der Endwert 22 gehört
+        nicht mehr dazu. Eine for-Schleife passt, weil die Anzahl der Durchläufe von
+        vornherein feststeht.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 8 · Fischteich (while) <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      In einem Teich leben zu Beginn 3 Fische. Jedes Jahr verdoppelt sich der Bestand.
+      Das Programm soll ermitteln, nach wie vielen Jahren ein vom Anwender eingegebener
+      Zielbestand erreicht oder überschritten wird.
+    </p>
+    <p class="material">Original: L3_2_2 Aufgabe while Fischteich</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">zielbestand = int(input("Gewünschter Fischbestand: "))
+
+bestand = 3
+jahre = 0
+
+while bestand &lt; zielbestand:
+    bestand = bestand * 2
+    jahre = jahre + 1
+
+print("Nach", jahre, "Jahren beträgt der Bestand", bestand, "Fische.")</pre>
+<pre class="output">Gewünschter Fischbestand: <span class="eingabe">100</span>
+Nach 6 Jahren beträgt der Bestand 192 Fische.</pre>
+      <p>
+        Eine while-Schleife passt, weil die Anzahl der Jahre vorher unbekannt ist.
+        Vor der Schleife werden <code>bestand</code> und <code>jahre</code>
+        initialisiert; im Schleifenkörper werden beide verändert.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 9 · Schreibtischtest: Was gibt das Programm aus? <span class="schwierigkeit">klausurtypisch</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      In Klassenarbeiten müssen Sie Programme oft <strong>im Kopf ablaufen lassen</strong>
+      („Schreibtischtest“), ohne Computer. Notieren Sie für beide Programme die exakte
+      Bildschirmausgabe – Zeile für Zeile. Tipp: Führen Sie eine kleine Tabelle, in der
+      Sie nach jedem Schritt die Werte aller Variablen festhalten.
+    </p>
+    <p><strong>Programm A:</strong></p>
+<pre class="code">summe = 0
+for zahl in range(1, 5):
+    summe = summe + zahl
+    print("zahl:", zahl, "summe:", summe)</pre>
+    <p><strong>Programm B:</strong></p>
+<pre class="code">wert = 40
+jahre = 0
+while wert &lt; 100:
+    wert = wert * 2
+    jahre = jahre + 1
+if jahre &gt; 1:
+    print("Es dauert", jahre, "Schritte.")
+else:
+    print("Es dauert nur einen Schritt.")</pre>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+      <p><strong>Programm A</strong> – <code>range(1, 5)</code> liefert 1, 2, 3, 4 (die 5 gehört nicht mehr dazu!):</p>
+<pre class="output">zahl: 1 summe: 1
+zahl: 2 summe: 3
+zahl: 3 summe: 6
+zahl: 4 summe: 10</pre>
+      <p><strong>Programm B</strong> – Schreibtischtest mit Variablentabelle:</p>
+      <table class="tab">
+        <tr><th>Prüfung <code>wert &lt; 100</code></th><th><code>wert</code> danach</th><th><code>jahre</code> danach</th></tr>
+        <tr><td>40 &lt; 100 → wahr</td><td>80</td><td>1</td></tr>
+        <tr><td>80 &lt; 100 → wahr</td><td>160</td><td>2</td></tr>
+        <tr><td>160 &lt; 100 → falsch → Schleife endet</td><td>–</td><td>–</td></tr>
+      </table>
+<pre class="output">Es dauert 2 Schritte.</pre>
+      <p>
+        Da <code>jahre</code> am Ende 2 ist, wird der Ja-Zweig der Verzweigung
+        ausgeführt. Häufiger Fehler: die Bedingung wird <em>vor</em> jedem Durchlauf
+        geprüft – nach dem zweiten Durchlauf (wert = 160) läuft der Schleifenkörper
+        nicht noch einmal.
+      </p>
+    </div>
+  </details>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="vertiefung"><span class="knr">3.8</span>Vertiefungsaufgaben</h2>
+
+<div class="uebung">
+  <div class="uebung-kopf">Vertiefung 1 · Finanzanlage mit Zinseszins (for) <span class="schwierigkeit">schwer</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Eine Finanzanlage wird zu einem bestimmten Zinssatz für eine bestimmte Dauer
+      (in Jahren) angelegt – mit Zinseszins. Das Programm fragt Anlagebetrag, Zinssatz
+      und Laufzeit ab und gibt für jedes Jahr den Wert am Jahresende aus.
+    </p>
+    <p class="material">Original: L3_3_1 Vertiefung for Finanzanlage</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">betrag = float(input("Anlagebetrag in Euro: "))
+zinssatz = float(input("Zinssatz in Prozent: "))
+jahre = int(input("Anlagedauer in Jahren: "))
+
+for jahr in range(1, jahre + 1):
+    betrag = betrag * (1 + zinssatz / 100)
+    print("Wert nach Jahr", jahr, ":", round(betrag, 2), "Euro")</pre>
+<pre class="output">Anlagebetrag in Euro: <span class="eingabe">1000</span>
+Zinssatz in Prozent: <span class="eingabe">3</span>
+Anlagedauer in Jahren: <span class="eingabe">5</span>
+Wert nach Jahr 1 : 1030.0 Euro
+Wert nach Jahr 2 : 1060.9 Euro
+Wert nach Jahr 3 : 1092.73 Euro
+Wert nach Jahr 4 : 1125.51 Euro
+Wert nach Jahr 5 : 1159.27 Euro</pre>
+      <p>
+        Der Zinseszins entsteht dadurch, dass <code>betrag</code> in jedem Durchlauf
+        mit dem Faktor <code>(1 + zinssatz/100)</code> multipliziert und
+        <em>überschrieben</em> wird – im nächsten Jahr wird also der neue, höhere
+        Betrag verzinst. <code>range(1, jahre + 1)</code> sorgt dafür, dass wirklich
+        bis zum letzten Jahr gezählt wird.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Vertiefung 2 · Sparziel erreichen (while) <span class="schwierigkeit">schwer</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Auf einem Sparbuch wird ein Geldbetrag zu einem festen Zinssatz angelegt.
+      Das Programm soll ermitteln, wie viele Jahre es dauert, bis ein bestimmter
+      Zielwert erreicht oder überschritten wird – die Jahresendwerte werden jeweils
+      ausgegeben. (Zinseszinsen nicht vergessen!)
+    </p>
+    <p class="material">Original: L3_3_2 Vertiefung while Zielwert Verzinsung</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">betrag = float(input("Anlagebetrag in Euro: "))
+zinssatz = float(input("Zinssatz in Prozent: "))
+zielwert = float(input("Zielwert in Euro: "))
+
+jahre = 0
+while betrag &lt; zielwert:
+    betrag = betrag * (1 + zinssatz / 100)
+    jahre = jahre + 1
+    print("Wert nach Jahr", jahre, ":", round(betrag, 2), "Euro")
+
+print("Der Zielwert ist nach", jahre, "Jahren erreicht.")</pre>
+      <p>
+        Gleiche Berechnung wie in Vertiefung 1 – aber die Schleife läuft nicht eine
+        feste Anzahl von Jahren, sondern <em>bis der Zielwert erreicht ist</em>.
+        Genau der Unterschied zwischen for und while!
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Vertiefung 3 · Anmeldung am Beruflichen Gymnasium <span class="schwierigkeit">schwer</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Für die Anmeldung am Beruflichen Gymnasium (mittlerer Bildungsabschluss) gelten
+      folgende Bedingungen: Der <strong>Notendurchschnitt</strong> aus Deutsch,
+      Mathematik und Englisch muss <strong>mindestens 3,0</strong> betragen und
+      <strong>kein</strong> dieser Fächer darf schlechter als „ausreichend“ (4) sein.
+    </p>
+    <p>
+      Das Programm fragt die drei Noten ab und gibt aus, ob die Anmeldung möglich ist.
+      Lösen Sie die Aufgabe <strong>zweimal</strong>: (a) mit geschachtelten
+      Verzweigungen, (b) mit logischen Operatoren.
+    </p>
+    <p class="material">Original: L3_3_3 / L3_3_4 Vertiefung Anmeldung BG</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+      <p><strong>(a) Mit geschachtelten Verzweigungen:</strong></p>
+<pre class="code">deutsch = float(input("Note in Deutsch: "))
+mathe = float(input("Note in Mathematik: "))
+englisch = float(input("Note in Englisch: "))
+
+durchschnitt = (deutsch + mathe + englisch) / 3
+
+if durchschnitt &lt;= 3.0:
+    if deutsch &lt;= 4:
+        if mathe &lt;= 4:
+            if englisch &lt;= 4:
+                print("Die Anmeldung ist möglich.")
+            else:
+                print("Anmeldung nicht möglich (Englisch schlechter als 4).")
+        else:
+            print("Anmeldung nicht möglich (Mathematik schlechter als 4).")
+    else:
+        print("Anmeldung nicht möglich (Deutsch schlechter als 4).")
+else:
+    print("Anmeldung nicht möglich (Durchschnitt schlechter als 3,0).")</pre>
+      <p><strong>(b) Mit logischen Operatoren – deutlich kürzer:</strong></p>
+<pre class="code">deutsch = float(input("Note in Deutsch: "))
+mathe = float(input("Note in Mathematik: "))
+englisch = float(input("Note in Englisch: "))
+
+durchschnitt = (deutsch + mathe + englisch) / 3
+
+if durchschnitt &lt;= 3.0 and deutsch &lt;= 4 and mathe &lt;= 4 and englisch &lt;= 4:
+    print("Die Anmeldung ist möglich.")
+else:
+    print("Die Anmeldung ist leider nicht möglich.")</pre>
+      <p>
+        Beachten Sie: Bei Schulnoten bedeutet „mindestens 3,0“ einen Durchschnitt, der
+        <em>kleiner oder gleich</em> 3,0 ist – kleinere Zahl = bessere Note!
+        Der Vergleich beider Lösungen zeigt, wie viel übersichtlicher verknüpfte
+        Bedingungen sein können.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="box box-tipp">
+  <span class="box-titel">💡 Geschafft?</span>
+  <p>
+    Glückwunsch – Sie haben die komplette BPE 5 durchgearbeitet! Haken Sie die
+    <a href="checklisten.html#lf3">Ich-kann-Checkliste zu Kapitel 3</a> ab und nutzen
+    Sie den <a href="referenz.html">Spickzettel</a> zur Wiederholung vor der
+    Klassenarbeit.
+  </p>
+</div>
+
+<div class="seiten-nav">
+  <a href="kapitel-2-python-grundlagen.html">← Kapitel 2: Python-Grundlagen</a>
+  <a href="referenz.html">Spickzettel →</a>
+</div>
+
+</main>
+
+<a class="nach-oben" href="#" title="Nach oben">↑</a>
+
+<footer class="fuss">
+  <div class="fuss-inner">
+    <p>Python-Workbook zur BPE 5 „Grundlagen der Programmierung“ · Kapitel 3</p>
+    <p>Inhaltlich orientiert an den offiziellen Materialien des Landesbildungsservers Baden-Württemberg (Lernfortschritt 3).</p>
+  </div>
+</footer>
+
+<script src="assets/workbook.js"></script>
+</body>
+</html>

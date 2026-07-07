@@ -1,0 +1,778 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kapitel 6 · Dynamische Datenstrukturen – Python-Workbook</title>
+<link rel="stylesheet" href="assets/style.css?v=1.6">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">Python-Workbook</a>
+    <a class="lab-ruecklink" href="../index.html#workbook">← PythonLab</a>
+    <a href="index.html">Start</a>
+    <a href="inhaltsverzeichnis.html">Inhalt</a>
+    <a href="kapitel-1-kara.html">K1 Kara</a>
+    <a href="kapitel-2-python-grundlagen.html">K2 Python</a>
+    <a href="kapitel-3-kontrollstrukturen.html">K3 Kontrolle</a>
+    <a href="kapitel-4-arrays.html">K4 Arrays</a>
+    <a href="kapitel-5-sortieren-suchen.html">K5 Algorithmen</a>
+    <a href="kapitel-6-datenstrukturen.html" class="aktiv">K6 Datenstrukturen</a>
+    <a href="glossar.html">Glossar</a>
+    <a href="referenz.html">Spickzettel</a>
+    <a href="checklisten.html">Checklisten</a>
+  </div>
+</nav>
+
+<header class="seitenkopf">
+  <div class="kopf-inner">
+    <p class="dachzeile">Kapitel 6 · Jahrgangsstufe 2 · BPE 7.3 · Lernfortschritt 3</p>
+    <h1>Dynamische Datenstrukturen 🔗</h1>
+    <p class="untertitel">
+      Verkettete Liste, Stapelspeicher, Warteschlange und Baum: vier Datenstrukturen,
+      die mitwachsen. Hier geht es ums Beschreiben und Modellieren – Sie lernen, wie
+      die Strukturen aufgebaut sind und wann welche die richtige Wahl ist.
+    </p>
+  </div>
+</header>
+
+<main>
+
+<div class="kapitel-toc">
+  <strong>In diesem Kapitel:</strong>
+  <ol>
+    <li><a href="#dynamisch">Was heißt „dynamisch“?</a></li>
+    <li><a href="#liste">Die verkettete Liste</a></li>
+    <li><a href="#stack">Der Stapelspeicher (Stack)</a></li>
+    <li><a href="#queue">Die Warteschlange (Queue)</a></li>
+    <li><a href="#baum">Der Baum</a></li>
+    <li><a href="#binaerbaum">Binärbäume und ihre Eigenschaften</a></li>
+    <li><a href="#uebungen">Übungsaufgaben</a></li>
+  </ol>
+</div>
+
+<div class="box box-ziel">
+  <span class="box-titel">🎯 Das können Sie nach diesem Kapitel</span>
+  <ul>
+    <li>die verkettete Liste mit Anker, Knoten, Daten und Zeigern erklären sowie das Einfügen und Löschen von Knoten beschreiben,</li>
+    <li>Stapelspeicher (push/pop, LIFO) und Warteschlange (enqueue/dequeue, FIFO) beschreiben und anwenden,</li>
+    <li>den Aufbau eines Baums beschreiben (Wurzel, Eltern, Kind, Blatt, Teilbaum, Höhe),</li>
+    <li>Binärbäume definieren und Bäume hinsichtlich „geordnet“, „voll“ und „vollständig“ bewerten,</li>
+    <li>zu einer Problemstellung die passende Datenstruktur wählen und modellieren.</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="dynamisch"><span class="knr">6.1</span>Was heißt „dynamisch“?</h2>
+
+<p>
+  Das Array aus Kapitel 4 hat eine Schwäche: Das Einfügen und Entfernen mitten im
+  Array ist aufwändig – viele Elemente müssen verschoben werden. Die vier
+  Datenstrukturen dieses Kapitels sind <strong>dynamisch</strong>: Sie sind auf keine
+  Größe festgelegt, können beliebig wachsen und schrumpfen und passen sich dem
+  Speicherbedarf an.
+</p>
+
+<div class="box box-info">
+  <span class="box-titel">ℹ️ Beschreiben und modellieren – nicht implementieren</span>
+  <p>
+    Laut Bildungsplan (BPE 7.3) sollen Sie diese Datenstrukturen
+    <strong>beschreiben und modellieren</strong> können – eine Implementierung in
+    Python ist hier nicht gefordert. In Klassenarbeiten sind daher Skizzen,
+    Fachbegriffe und Ablauf-Beschreibungen gefragt.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="liste"><span class="knr">6.2</span>Die verkettete Liste</h2>
+
+<p>
+  Eine <strong>verkettete Liste</strong> speichert Datenelemente geordnet – aber nicht
+  wie das Array in nummerierten Fächern, sondern als Kette von Elementen, die
+  aufeinander <strong>verweisen</strong>:
+</p>
+
+<div class="vkette">
+  <div class="anker">Anker</div>
+  <span class="pfeil">→</span>
+  <div class="knoten"><span class="daten">Daten</span><span class="zeiger">Zeiger</span></div>
+  <span class="pfeil">→</span>
+  <div class="knoten"><span class="daten">Daten</span><span class="zeiger">Zeiger</span></div>
+  <span class="pfeil">→</span>
+  <div class="knoten"><span class="daten">Daten</span><span class="zeiger">Zeiger</span></div>
+  <span class="pfeil">→</span>
+  <div class="nullm">NULL</div>
+</div>
+<p style="font-size:.85rem;color:var(--grau);margin-top:-.5rem;">
+  Listenkopf K1 · Knoten K2 · Knoten K3 – der Zeiger des letzten Knotens zeigt auf die Endmarke NULL.
+</p>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Merke: Bestandteile der verketteten Liste</span>
+  <ul>
+    <li>Der <strong>Anker</strong> enthält einen Verweis auf das erste Listenelement.</li>
+    <li>Der erste Knoten heißt auch <strong>Listenkopf</strong>.</li>
+    <li>Jeder <strong>Knoten</strong> besteht aus <strong>Daten</strong> und einem <strong>Zeiger</strong>, der auf den nächsten Knoten zeigt.</li>
+    <li>Der Zeiger des letzten Knotens zeigt auf die Endmarke <strong>NULL</strong>.</li>
+    <li>Listen können unterschiedliche Datentypen speichern und beliebig erweitert oder verringert werden.</li>
+  </ul>
+</div>
+
+<p>
+  Der Preis für diese Flexibilität: Jeder Knoten kennt nur seinen unmittelbaren
+  Nachfolger – der Zugriff erfolgt deshalb <strong>nur schrittweise</strong> entlang
+  der Zeiger, es gibt keinen direkten Index-Zugriff wie beim Array.
+</p>
+
+<h3>Operation: Einfügen</h3>
+
+<p>Beim Einfügen eines neuen Knotens K<sub>neu</sub> gibt es drei Fälle – in allen dreien werden nur <strong>Zeiger umgehängt</strong>, nichts wird verschoben:</p>
+
+<table class="tab">
+  <tr><th style="width:28%">Fall</th><th>Vorgehen</th></tr>
+  <tr>
+    <td><strong>Am Anfang</strong> (vor dem Listenkopf)</td>
+    <td>1. Neuen Knoten K<sub>neu</sub> erstellen. · 2. Zeiger von K<sub>neu</sub> auf den bisherigen ersten Knoten K1 richten. · 3. Der Anker verweist jetzt auf K<sub>neu</sub>.</td>
+  </tr>
+  <tr>
+    <td><strong>In der Mitte</strong> (z. B. zwischen K2 und K3)</td>
+    <td>1. K<sub>neu</sub> erstellen. · 2. Zeiger von K<sub>neu</sub> auf den gewünschten Nachfolger K3 richten. · 3. Zeiger des Vorgängers K2 auf K<sub>neu</sub> richten.</td>
+  </tr>
+  <tr>
+    <td><strong>Am Ende</strong></td>
+    <td>1. K<sub>neu</sub> erstellen. · 2. Zeiger von K<sub>neu</sub> erhält den Wert NULL. · 3. Zeiger des bisherigen letzten Knotens auf K<sub>neu</sub> richten.</td>
+  </tr>
+</table>
+
+<p>So sieht das Einfügen in der Mitte aus – der neue Knoten wird einfach „eingehängt“:</p>
+
+<div class="vkette">
+  <div class="anker">Anker</div>
+  <span class="pfeil">→</span>
+  <div class="knoten"><span class="daten">K1</span><span class="zeiger">→</span></div>
+  <span class="pfeil">→</span>
+  <div class="knoten"><span class="daten">K2</span><span class="zeiger">→</span></div>
+  <span class="pfeil">↘</span>
+  <div class="knoten neu"><span class="daten">K<sub>neu</sub></span><span class="zeiger">→</span></div>
+  <span class="pfeil">↗</span>
+  <div class="knoten"><span class="daten">K3</span><span class="zeiger">→</span></div>
+  <span class="pfeil">→</span>
+  <div class="nullm">NULL</div>
+</div>
+
+<div class="box box-achtung">
+  <span class="box-titel">⚠️ Achtung: Reihenfolge der Zeiger!</span>
+  <p>
+    Immer <strong>zuerst</strong> den Zeiger des neuen Knotens auf den Nachfolger
+    richten – <strong>erst danach</strong> den Zeiger des Vorgängers umhängen.
+    Andersherum ginge der Rest der Liste verloren, denn niemand würde mehr auf K3
+    zeigen!
+  </p>
+</div>
+
+<h3>Operation: Löschen</h3>
+
+<table class="tab">
+  <tr><th style="width:28%">Fall</th><th>Vorgehen</th></tr>
+  <tr><td><strong>Ersten Knoten löschen</strong></td><td>Der Anker übernimmt den Zeiger von K1 (verweist also jetzt auf K2).</td></tr>
+  <tr><td><strong>Knoten K<sub>x</sub> in der Mitte löschen</strong></td><td>Der Zeiger des Vorgängers K<sub>x−1</sub> erhält die Adresse aus dem Zeiger von K<sub>x</sub> (verweist also auf K<sub>x+1</sub>).</td></tr>
+  <tr><td><strong>Letzten Knoten löschen</strong></td><td>Der Zeiger des Vorgängers erhält den Wert NULL.</td></tr>
+</table>
+
+<p>
+  In allen Fällen bleibt der gelöschte Knoten zwar zunächst im Speicher, ist aber
+  <strong>nicht mehr erreichbar</strong> – das Aufräumen dieser „verwaisten“ Knoten
+  übernimmt das Betriebssystem.
+</p>
+
+<div class="box box-info">
+  <span class="box-titel">ℹ️ Liste oder Array?</span>
+  <p>
+    Soll <strong>mitten</strong> in den Daten eingefügt werden, müsste man im Array
+    etwa die Hälfte aller Elemente verschieben (vgl. Kapitel 4.7). In der verketteten
+    Liste genügt es, <strong>einen Knoten zu erzeugen und zwei Zeiger zu ändern</strong>.
+    Dafür bietet das Array den schnellen direkten Zugriff über den Index.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="stack"><span class="knr">6.3</span>Der Stapelspeicher (Stack)</h2>
+
+<p>
+  Ein <strong>Stapelspeicher</strong> (englisch <em>Stack</em>) funktioniert wie eine
+  Kiste, in die man Elemente nur <strong>von oben</strong> hineinlegen und
+  <strong>von oben</strong> herausnehmen kann. Zugriff gibt es also immer nur auf das
+  <strong>oberste</strong> Element.
+</p>
+
+<div class="stapel-wrap">
+  <div>
+    <div class="stapel">
+      <div class="element top">"Tom" ← oben</div>
+      <div class="element">"bin"</div>
+      <div class="element">"Ich"</div>
+      <div class="element">"Hallo"</div>
+    </div>
+    <p class="beschriftung">Nach 4× PUSH()</p>
+  </div>
+  <div>
+    <div class="stapel">
+      <div class="element top">"bin" ← oben</div>
+      <div class="element">"Ich"</div>
+      <div class="element">"Hallo"</div>
+    </div>
+    <p class="beschriftung">Nach POP() – "Tom" wurde entnommen</p>
+  </div>
+</div>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Merke: Stack = LIFO</span>
+  <ul>
+    <li><code>PUSH(wert)</code> legt ein Element <strong>oben auf</strong> den Stapel.</li>
+    <li><code>POP()</code> entnimmt das <strong>oberste</strong> Element.</li>
+    <li>Das zuletzt hineingelegte Element wird als erstes wieder entnommen: <strong>Last in – first out (LIFO)</strong>.</li>
+  </ul>
+</div>
+
+<h3>Anwendungen in der Informatik</h3>
+
+<ul>
+  <li><strong>Backspace-Taste:</strong> Das zu löschende Zeichen ist immer das zuletzt getippte – beim Text „Ferien“ liegt das „n“ oben auf dem Stapel und wird zuerst entfernt.</li>
+  <li><strong>Rücksprungadressen beim Surfen:</strong> Besuchte Seiten landen auf einem Stack; der Zurück-Button holt die oberste Adresse.</li>
+  <li><strong>Funktionsaufrufe:</strong> Ruft ein Programm ein Unterprogramm auf, verwaltet ein Stack, wohin es danach zurückkehren muss.</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2 id="queue"><span class="knr">6.4</span>Die Warteschlange (Queue)</h2>
+
+<p>
+  Eine <strong>Warteschlange</strong> (englisch <em>Queue</em>) funktioniert wie die
+  Schlange an der Supermarktkasse: Neue Elemente stellen sich <strong>hinten</strong>
+  an, entnommen wird <strong>vorn</strong> – in der Reihenfolge des Einfügens.
+</p>
+
+<div class="queue">
+  <span class="q-label">Entnahme (DEQUEUE) ←</span>
+  <div class="element vorn">133</div>
+  <div class="element">134</div>
+  <div class="element">135</div>
+  <div class="element">136</div>
+  <div class="element">137</div>
+  <span class="q-label">← Einfügen (ENQUEUE)</span>
+</div>
+<p style="font-size:.85rem;color:var(--grau);margin-top:-.5rem;">
+  Wartenummern in der Arztpraxis: Patient 133 wartet am längsten und ist als Erster dran.
+</p>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Merke: Queue = FIFO</span>
+  <ul>
+    <li><code>ENQUEUE(wert)</code> fügt ein Element <strong>hinten</strong> an die Warteschlange an.</li>
+    <li><code>DEQUEUE()</code> entnimmt das Element <strong>vorn</strong> in der Warteschlange.</li>
+    <li>Das zuerst eingefügte Element wird als erstes entnommen: <strong>First in – first out (FIFO)</strong>.</li>
+  </ul>
+</div>
+
+<h3>Anwendungen in der Informatik</h3>
+
+<ul>
+  <li><strong>Druckerwarteschlange:</strong> Programme reihen Druckaufträge ein; der Drucker arbeitet sie in Eingangs-Reihenfolge ab.</li>
+  <li><strong>Puffer:</strong> Daten werden zwischengespeichert und in derselben Reihenfolge weiterverarbeitet – Erzeuger und Verarbeiter werden zeitlich entkoppelt.</li>
+  <li><strong>Pipes:</strong> Verbindung zwischen zwei Programmen – Programm 1 schreibt seine Ausgabe in die Pipe, Programm 2 liest sie als Eingabe heraus.</li>
+</ul>
+
+<div class="quiz" data-erklaerung="Der Stack arbeitet nach LIFO: Zuletzt gepusht („C“) wird zuerst gepoppt.">
+  <span class="quiz-titel">🧠 Kurz-Check</span>
+  <p class="quiz-frage">
+    Auf einen leeren <strong>Stack</strong> wird nacheinander „A“, „B“, „C“ gelegt
+    (PUSH). Was liefert das erste <code>POP()</code>?
+  </p>
+  <button class="antwort">„A“ – das war zuerst da</button>
+  <button class="antwort" data-richtig>„C“ – das liegt oben</button>
+  <button class="antwort">„B“ – das liegt in der Mitte</button>
+  <p class="quiz-feedback"></p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="baum"><span class="knr">6.5</span>Der Baum</h2>
+
+<p>
+  Ein <strong>Baum</strong> organisiert Daten <strong>hierarchisch</strong>. Er
+  besteht aus <strong>Knoten</strong>, die durch <strong>Kanten</strong> verbunden
+  sind. Wichtig: Zwischen zwei beliebigen Knoten gibt es immer <strong>genau einen
+  Weg</strong> – sonst wäre es kein Baum. (In der Informatik wachsen Bäume übrigens
+  von oben nach unten: Die Wurzel ist ganz oben.)
+</p>
+
+<svg viewBox="0 0 460 240" style="max-width:460px;display:block;margin:1rem 0" role="img" aria-label="Baum mit Wurzel, inneren Knoten und Blättern">
+  <g stroke="#5a6470" stroke-width="2">
+    <line x1="230" y1="40" x2="120" y2="110"/>
+    <line x1="230" y1="40" x2="340" y2="110"/>
+    <line x1="120" y1="110" x2="60" y2="185"/>
+    <line x1="120" y1="110" x2="180" y2="185"/>
+    <line x1="340" y1="110" x2="300" y2="185"/>
+    <line x1="340" y1="110" x2="390" y2="185"/>
+  </g>
+  <g>
+    <circle cx="230" cy="40" r="26" fill="#ffd43b" stroke="#b9770e" stroke-width="2"/>
+    <circle cx="120" cy="110" r="24" fill="#e8f1fa" stroke="#1d5c99" stroke-width="2"/>
+    <circle cx="340" cy="110" r="24" fill="#e8f1fa" stroke="#1d5c99" stroke-width="2"/>
+    <circle cx="60"  cy="185" r="22" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/>
+    <circle cx="180" cy="185" r="22" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/>
+    <circle cx="300" cy="185" r="22" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/>
+    <circle cx="390" cy="185" r="22" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/>
+  </g>
+  <g font-size="14" font-family="Segoe UI, sans-serif" text-anchor="middle" fill="#26303a">
+    <text x="230" y="45">Wurzel</text>
+    <text x="120" y="115">Knoten</text>
+    <text x="340" y="115">Knoten</text>
+    <text x="60"  y="190">Blatt</text>
+    <text x="180" y="190">Blatt</text>
+    <text x="300" y="190">Blatt</text>
+    <text x="390" y="190">Blatt</text>
+  </g>
+</svg>
+
+<table class="tab">
+  <tr><th style="width:20%">Begriff</th><th>Bedeutung</th></tr>
+  <tr><td><strong>Wurzel</strong></td><td>Der Knoten ohne Eltern – der oberste Knoten des Baums.</td></tr>
+  <tr><td><strong>Eltern</strong></td><td>Der direkte Vorgänger eines Knotens.</td></tr>
+  <tr><td><strong>Kind</strong></td><td>Ein direkter Nachfolger eines Knotens.</td></tr>
+  <tr><td><strong>Blatt</strong></td><td>Ein Knoten ohne Kinder – die untersten Knoten.</td></tr>
+  <tr><td><strong>Teilbaum</strong></td><td>Ein Knoten mit allen seinen (direkten und indirekten) Nachfolgern.</td></tr>
+  <tr><td><strong>Höhe</strong></td><td>Die Länge des Pfades von der Wurzel zu einem Knoten (gezählt über die Knoten auf dem Weg).</td></tr>
+</table>
+
+<div class="box box-info">
+  <span class="box-titel">ℹ️ Geordnete Bäume</span>
+  <p>
+    Spielt die <strong>Anordnung</strong> der Knoten bzw. Teilbäume eine Rolle
+    (z.&nbsp;B. links vor rechts, A vor Z, aufsteigende Zahlen), heißt der Baum
+    <strong>geordnet</strong>. Zwei geordnete Bäume mit denselben Knoten sind
+    verschieden, wenn ein Kind einmal links und einmal rechts hängt – die
+    Ordnungsrelation muss dabei immer mit angegeben werden.
+  </p>
+</div>
+
+<h3>Wo Bäume überall stecken</h3>
+
+<ul>
+  <li>KO-System bei der Fußball-Weltmeisterschaft</li>
+  <li>Organigramm in Unternehmen (Geschäftsleitung → Abteilungen → Bereiche)</li>
+  <li>Ordner- und Dateistruktur im Rechner</li>
+  <li>Entscheidungsbäume und Stammbäume</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2 id="binaerbaum"><span class="knr">6.6</span>Binärbäume und ihre Eigenschaften</h2>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Merke: Binärbaum</span>
+  <p>Ein Baum ist ein <strong>Binärbaum</strong>, wenn</p>
+  <ul>
+    <li>alle Knoten <strong>maximal zwei Kinder</strong> haben und</li>
+    <li>zwischen dem <strong>linken</strong> und dem <strong>rechten</strong> Teilbaum unterschieden wird („geordnet“).</li>
+  </ul>
+</div>
+
+<h3>Besondere Binärbäume</h3>
+
+<table class="tab">
+  <tr><th style="width:26%">Eigenschaft</th><th>Bedingung</th></tr>
+  <tr>
+    <td><strong>sortiert</strong><br>(„binärer Suchbaum“)</td>
+    <td>Für jeden Knoten gilt: Der <strong>linke</strong> Teilbaum enthält nur kleinere, der <strong>rechte</strong> Teilbaum nur größere Werte als der Knoten selbst.</td>
+  </tr>
+  <tr>
+    <td><strong>voll</strong></td>
+    <td>Jeder Knoten ist entweder ein Blatt oder besitzt <strong>genau zwei</strong> Kinder.</td>
+  </tr>
+  <tr>
+    <td><strong>vollständig</strong></td>
+    <td>Der Baum ist voll <strong>und</strong> alle Blätter befinden sich auf derselben Höhe.</td>
+  </tr>
+</table>
+
+<div class="vergleich">
+  <div>
+    <h4>Voll (aber nicht vollständig)</h4>
+    <svg viewBox="0 0 300 200" style="max-width:300px" role="img" aria-label="Voller Binärbaum">
+      <g stroke="#5a6470" stroke-width="2">
+        <line x1="150" y1="35" x2="80" y2="95"/>
+        <line x1="150" y1="35" x2="220" y2="95"/>
+        <line x1="80" y1="95" x2="40" y2="160"/>
+        <line x1="80" y1="95" x2="120" y2="160"/>
+      </g>
+      <g font-size="14" font-family="Segoe UI, sans-serif" text-anchor="middle">
+        <circle cx="150" cy="35" r="20" fill="#ffd43b" stroke="#b9770e" stroke-width="2"/><text x="150" y="40">10</text>
+        <circle cx="80"  cy="95" r="20" fill="#e8f1fa" stroke="#1d5c99" stroke-width="2"/><text x="80" y="100">8</text>
+        <circle cx="220" cy="95" r="20" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/><text x="220" y="100">11</text>
+        <circle cx="40"  cy="160" r="20" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/><text x="40" y="165">7</text>
+        <circle cx="120" cy="160" r="20" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/><text x="120" y="165">9</text>
+      </g>
+    </svg>
+    <p style="font-size:.9rem">
+      {11, 9, 7} sind Blätter, {10, 8} haben zwei Kinder → <strong>voll</strong>.
+      Aber die Blätter liegen auf verschiedenen Höhen → nicht vollständig.
+    </p>
+  </div>
+  <div>
+    <h4>Vollständig</h4>
+    <svg viewBox="0 0 300 200" style="max-width:300px" role="img" aria-label="Vollständiger Binärbaum">
+      <g stroke="#5a6470" stroke-width="2">
+        <line x1="150" y1="35" x2="80" y2="95"/>
+        <line x1="150" y1="35" x2="220" y2="95"/>
+        <line x1="80" y1="95" x2="40" y2="160"/>
+        <line x1="80" y1="95" x2="120" y2="160"/>
+        <line x1="220" y1="95" x2="180" y2="160"/>
+        <line x1="220" y1="95" x2="260" y2="160"/>
+      </g>
+      <g font-size="14" font-family="Segoe UI, sans-serif" text-anchor="middle">
+        <circle cx="150" cy="35" r="20" fill="#ffd43b" stroke="#b9770e" stroke-width="2"/><text x="150" y="40">60</text>
+        <circle cx="80"  cy="95" r="20" fill="#e8f1fa" stroke="#1d5c99" stroke-width="2"/><text x="80" y="100">53</text>
+        <circle cx="220" cy="95" r="20" fill="#e8f1fa" stroke="#1d5c99" stroke-width="2"/><text x="220" y="100">81</text>
+        <circle cx="40"  cy="160" r="20" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/><text x="40" y="165">51</text>
+        <circle cx="120" cy="160" r="20" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/><text x="120" y="165">55</text>
+        <circle cx="180" cy="160" r="20" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/><text x="180" y="165">78</text>
+        <circle cx="260" cy="160" r="20" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/><text x="260" y="165">90</text>
+      </g>
+    </svg>
+    <p style="font-size:.9rem">
+      Voll <strong>und</strong> alle Blätter {51, 55, 78, 90} auf derselben Höhe →
+      <strong>vollständig</strong>. (Er ist außerdem sortiert – prüfen Sie es nach!)
+    </p>
+  </div>
+</div>
+
+<h3>Tabellarische Darstellung</h3>
+
+<p>
+  Bäume lassen sich auch als <strong>Tabelle</strong> beschreiben: Für jeden Knoten
+  werden Index, Inhalt sowie linkes und rechtes Kind notiert; fehlende Kinder erhalten
+  <strong>NULL</strong>.
+</p>
+
+<div class="vergleich">
+  <div>
+    <h4>Tabellarisch</h4>
+    <table class="tab">
+      <tr><th>Index</th><th>Inhalt</th><th>Linkes Kind</th><th>Rechtes Kind</th></tr>
+      <tr><td>0</td><td>W</td><td>1</td><td>2</td></tr>
+      <tr><td>1</td><td>X</td><td>3</td><td>NULL</td></tr>
+      <tr><td>2</td><td>Y</td><td>NULL</td><td>NULL</td></tr>
+      <tr><td>3</td><td>Z</td><td>NULL</td><td>NULL</td></tr>
+    </table>
+  </div>
+  <div>
+    <h4>Grafisch</h4>
+    <svg viewBox="0 0 260 200" style="max-width:260px" role="img" aria-label="Binärbaum W X Y Z">
+      <g stroke="#5a6470" stroke-width="2">
+        <line x1="130" y1="35" x2="70" y2="95"/>
+        <line x1="130" y1="35" x2="190" y2="95"/>
+        <line x1="70" y1="95" x2="40" y2="160"/>
+      </g>
+      <g font-size="14" font-family="Segoe UI, sans-serif" text-anchor="middle">
+        <circle cx="130" cy="35" r="20" fill="#ffd43b" stroke="#b9770e" stroke-width="2"/><text x="130" y="40">W</text>
+        <circle cx="70"  cy="95" r="20" fill="#e8f1fa" stroke="#1d5c99" stroke-width="2"/><text x="70" y="100">X</text>
+        <circle cx="190" cy="95" r="20" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/><text x="190" y="100">Y</text>
+        <circle cx="40"  cy="160" r="20" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/><text x="40" y="165">Z</text>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="uebungen"><span class="knr">6.7</span>Übungsaufgaben</h2>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 1 · Welche Datenstruktur passt? <span class="schwierigkeit">klausurtypisch</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Ordnen Sie jeder Situation die passende Datenstruktur zu (Array, verkettete
+      Liste, Stapelspeicher, Warteschlange, Baum) und <strong>begründen</strong> Sie
+      kurz:
+    </p>
+    <ol>
+      <li>Die Rückgängig-Funktion (Strg + Z) eines Grafikprogramms.</li>
+      <li>Die täglichen Körpertemperatur-Messwerte eines Patienten (feste Messreihe, direkte Auswertung).</li>
+      <li>Die Haltungsnoten eines Skisprung-Wettkampfs – beste und schlechteste Note werden gestrichen.</li>
+      <li>Die Anrufe in einer telefonischen Warteschleife.</li>
+      <li>Die Vereinsstruktur des Mühlberger SC (Verein → Abteilungen → Mannschaften).</li>
+    </ol>
+    <p class="material">Original: L1_1 Arbeitsauftrag Einführung Datenstrukturen (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+      <ol>
+        <li><strong>Stapelspeicher</strong> – die zuletzt ausgeführte Aktion wird zuerst rückgängig gemacht (LIFO).</li>
+        <li><strong>Array</strong> – gleichartige Werte, feste Reihe, direkter Index-Zugriff für die Auswertung.</li>
+        <li><strong>Verkettete Liste</strong> – die Anzahl der Einträge steht vorher nicht fest und Einträge müssen wieder entfernt werden; dazu werden nur Zeiger umgehängt.</li>
+        <li><strong>Warteschlange</strong> – wer zuerst anruft, wird zuerst verbunden (FIFO).</li>
+        <li><strong>Baum</strong> – hierarchische Beziehung (Eltern → Kinder), oben die Wurzel „Verein“.</li>
+      </ol>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 2 · Stapelspeicher anwenden <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>Auf einen leeren Stapelspeicher werden folgende Operationen angewendet:</p>
+<pre class="code">PUSH("Donau")
+PUSH("Rhein")
+POP()
+PUSH("Neckar")
+PUSH("Main")
+POP()
+POP()</pre>
+    <p>
+      Zeichnen Sie den Stapel nach jeder Operation. Welches Element liegt am Ende oben?
+      Welche Werte wurden insgesamt (in welcher Reihenfolge) entnommen?
+    </p>
+    <p class="material">Original: L3_2.2 Arbeitsauftrag Übung Stapelspeicher (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+      <table class="tab">
+        <tr><th>Operation</th><th>Stapel danach (oben zuerst)</th><th>Entnommen</th></tr>
+        <tr><td>PUSH("Donau")</td><td>Donau</td><td>–</td></tr>
+        <tr><td>PUSH("Rhein")</td><td>Rhein, Donau</td><td>–</td></tr>
+        <tr><td>POP()</td><td>Donau</td><td>Rhein</td></tr>
+        <tr><td>PUSH("Neckar")</td><td>Neckar, Donau</td><td>–</td></tr>
+        <tr><td>PUSH("Main")</td><td>Main, Neckar, Donau</td><td>–</td></tr>
+        <tr><td>POP()</td><td>Neckar, Donau</td><td>Main</td></tr>
+        <tr><td>POP()</td><td>Donau</td><td>Neckar</td></tr>
+      </table>
+      <p>
+        Am Ende liegt <strong>„Donau“</strong> (allein) auf dem Stapel. Entnommen wurden
+        in dieser Reihenfolge: <strong>Rhein, Main, Neckar</strong> – stets das jeweils
+        zuletzt eingefügte Element (LIFO).
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 3 · Warteschlange anwenden <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>Auf eine leere Warteschlange werden folgende Operationen angewendet:</p>
+<pre class="code">ENQUEUE("Anna")
+ENQUEUE("Ben")
+DEQUEUE()
+ENQUEUE("Carla")
+ENQUEUE("David")
+DEQUEUE()</pre>
+    <p>
+      Wie sieht die Warteschlange am Ende aus (vorn zuerst)? Wer wurde in welcher
+      Reihenfolge entnommen?
+    </p>
+    <p class="material">Original: L3_3.2 Arbeitsauftrag Übung Warteschlange (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+      <table class="tab">
+        <tr><th>Operation</th><th>Warteschlange danach (vorn zuerst)</th><th>Entnommen</th></tr>
+        <tr><td>ENQUEUE("Anna")</td><td>Anna</td><td>–</td></tr>
+        <tr><td>ENQUEUE("Ben")</td><td>Anna, Ben</td><td>–</td></tr>
+        <tr><td>DEQUEUE()</td><td>Ben</td><td>Anna</td></tr>
+        <tr><td>ENQUEUE("Carla")</td><td>Ben, Carla</td><td>–</td></tr>
+        <tr><td>ENQUEUE("David")</td><td>Ben, Carla, David</td><td>–</td></tr>
+        <tr><td>DEQUEUE()</td><td>Carla, David</td><td>Ben</td></tr>
+      </table>
+      <p>
+        Am Ende stehen <strong>Carla (vorn) und David</strong> in der Schlange.
+        Entnommen wurden <strong>Anna, dann Ben</strong> – genau in der Reihenfolge
+        des Einfügens (FIFO).
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 4 · Verkettete Liste: Knoten einfügen <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Eine verkettete Liste enthält die Knoten K1 („Montag“) → K2 („Mittwoch“) →
+      NULL. Beschreiben Sie <strong>Schritt für Schritt</strong> (mit Fachbegriffen),
+      wie ein neuer Knoten K<sub>neu</sub> („Dienstag“) zwischen K1 und K2 eingefügt
+      wird. Warum ist die Reihenfolge der Schritte entscheidend?
+    </p>
+    <p class="material">Original: L3_1.2 Arbeitsauftrag Übung verkettete Listen (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+      <ol>
+        <li>Einen neuen Knoten K<sub>neu</sub> mit den Daten „Dienstag“ erstellen.</li>
+        <li>Den <strong>Zeiger von K<sub>neu</sub></strong> auf den gewünschten Nachfolger K2 („Mittwoch“) richten.</li>
+        <li>Erst jetzt den <strong>Zeiger des Vorgängers K1</strong> („Montag“) auf K<sub>neu</sub> umhängen.</li>
+      </ol>
+      <p>
+        Würde man zuerst den Zeiger von K1 ändern, gäbe es keinen Verweis mehr auf K2 –
+        der Rest der Liste wäre <strong>unerreichbar verloren</strong>. Deshalb: immer
+        zuerst den neuen Knoten „anschließen“, dann den alten Zeiger umhängen.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 5 · Bäume bewerten <span class="schwierigkeit">klausurtypisch</span></div>
+  <div class="uebung-inhalt">
+    <p>Gegeben ist der folgende Baum in tabellarischer Form:</p>
+    <table class="tab">
+      <tr><th>Index</th><th>Inhalt</th><th>Linkes Kind</th><th>Rechtes Kind</th></tr>
+      <tr><td>0</td><td>50</td><td>1</td><td>2</td></tr>
+      <tr><td>1</td><td>30</td><td>3</td><td>4</td></tr>
+      <tr><td>2</td><td>70</td><td>NULL</td><td>NULL</td></tr>
+      <tr><td>3</td><td>20</td><td>NULL</td><td>NULL</td></tr>
+      <tr><td>4</td><td>40</td><td>NULL</td><td>NULL</td></tr>
+    </table>
+    <ol>
+      <li>Zeichnen Sie den Baum in grafischer Darstellung.</li>
+      <li>Benennen Sie Wurzel und Blätter.</li>
+      <li>Ist der Baum ein Binärbaum? Ist er sortiert, voll, vollständig? Begründen Sie jeweils.</li>
+    </ol>
+    <p class="material">Original: L3_4.2 Arbeitsauftrag Übung Baum (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+      <p><strong>1. Grafische Darstellung:</strong></p>
+      <svg viewBox="0 0 300 200" style="max-width:300px" role="img" aria-label="Baum 50-30-70-20-40">
+        <g stroke="#5a6470" stroke-width="2">
+          <line x1="150" y1="35" x2="80" y2="95"/>
+          <line x1="150" y1="35" x2="220" y2="95"/>
+          <line x1="80" y1="95" x2="40" y2="160"/>
+          <line x1="80" y1="95" x2="120" y2="160"/>
+        </g>
+        <g font-size="14" font-family="Segoe UI, sans-serif" text-anchor="middle">
+          <circle cx="150" cy="35" r="20" fill="#ffd43b" stroke="#b9770e" stroke-width="2"/><text x="150" y="40">50</text>
+          <circle cx="80"  cy="95" r="20" fill="#e8f1fa" stroke="#1d5c99" stroke-width="2"/><text x="80" y="100">30</text>
+          <circle cx="220" cy="95" r="20" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/><text x="220" y="100">70</text>
+          <circle cx="40"  cy="160" r="20" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/><text x="40" y="165">20</text>
+          <circle cx="120" cy="160" r="20" fill="#e9f6ee" stroke="#2e8b57" stroke-width="2"/><text x="120" y="165">40</text>
+        </g>
+      </svg>
+      <p><strong>2.</strong> Wurzel: 50 · Blätter: 20, 40, 70.</p>
+      <p><strong>3.</strong></p>
+      <ul>
+        <li><strong>Binärbaum: ja</strong> – jeder Knoten hat höchstens zwei Kinder, links und rechts werden unterschieden.</li>
+        <li><strong>Sortiert: ja</strong> – links von 50 stehen nur kleinere Werte (30, 20, 40), rechts nur größere (70); auch beim Teilbaum von 30 stimmt es (20 links, 40 rechts).</li>
+        <li><strong>Voll: ja</strong> – jeder Knoten ist Blatt (20, 40, 70) oder hat genau zwei Kinder (50, 30).</li>
+        <li><strong>Vollständig: nein</strong> – die Blätter liegen auf unterschiedlichen Höhen (70 auf Höhe 2, 20 und 40 auf Höhe 3).</li>
+      </ul>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 6 · Baum modellieren: Organigramm <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Die Holzwurm GmbH möchte ihre Unternehmensstruktur digital erfassen: Der
+      Geschäftsleitung sind die Abteilungen <em>Beschaffung</em>, <em>Vertrieb</em> und
+      <em>Verwaltung</em> direkt unterstellt. Die Beschaffung gliedert sich in
+      <em>Einkauf</em> und <em>Lagerhaltung</em>, der Vertrieb in <em>Marketing</em>
+      und <em>Verkauf</em>, die Verwaltung in <em>Rechnungswesen</em>,
+      <em>Personal</em> und <em>IT-Koordination</em>.
+    </p>
+    <p>
+      Modellieren Sie die Struktur als Baum: Skizze mit Wurzel, Knoten und Blättern.
+      Ist dieser Baum ein Binärbaum?
+    </p>
+    <p class="material">Original: L1_1 / L3_4.1 Arbeitsaufträge (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+      <ul>
+        <li><strong>Wurzel:</strong> Geschäftsleitung</li>
+        <li><strong>Ebene 2:</strong> Beschaffung, Vertrieb, Verwaltung (Kinder der Wurzel)</li>
+        <li><strong>Blätter:</strong> Einkauf, Lagerhaltung (unter Beschaffung) · Marketing, Verkauf (unter Vertrieb) · Rechnungswesen, Personal, IT-Koordination (unter Verwaltung)</li>
+      </ul>
+      <p>
+        <strong>Kein Binärbaum:</strong> Die Wurzel hat drei Kinder und die Verwaltung
+        ebenfalls drei – ein Binärbaum erlaubt höchstens zwei Kinder pro Knoten.
+        Für ein Organigramm ist das aber völlig in Ordnung: Bäume dürfen beliebig
+        viele Kinder pro Knoten haben, nur <em>Binär</em>bäume nicht.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 7 · Dateisystem als Baum <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Ein Schulordner ist so aufgebaut:
+    </p>
+<pre class="output">Schule
+├─ Informatik
+│  ├─ BPE5
+│  └─ BPE7
+├─ Mathematik
+└─ Verwaltung
+   ├─ Stundenplan
+   └─ Formulare</pre>
+    <ol>
+      <li>Benennen Sie Wurzel, innere Knoten und Blätter.</li>
+      <li>Bestimmen Sie die Höhe des Baums, wenn die Wurzel auf Höhe 1 liegt.</li>
+      <li>Entscheiden Sie, ob es sich um einen Binärbaum handelt.</li>
+      <li>Beschreiben Sie den Pfad von <code>Schule</code> zu <code>Formulare</code>.</li>
+    </ol>
+    <p class="material">Zusatzübung: Baumbegriffe am Dateisystem anwenden (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+      <ul>
+        <li><strong>Wurzel:</strong> Schule</li>
+        <li><strong>Innere Knoten:</strong> Schule, Informatik, Verwaltung</li>
+        <li><strong>Blätter:</strong> BPE5, BPE7, Mathematik, Stundenplan, Formulare</li>
+        <li><strong>Höhe:</strong> 3, weil der längste Weg von der Wurzel bis zu einem Blatt drei Knoten enthält.</li>
+        <li><strong>Kein Binärbaum:</strong> Die Wurzel hat drei Kinder; ein Binärbaum erlaubt höchstens zwei.</li>
+        <li><strong>Pfad:</strong> Schule → Verwaltung → Formulare</li>
+      </ul>
+      <p>
+        Dateisysteme sind ein sehr anschauliches Beispiel für Bäume: Jeder Ordner kann
+        Unterordner enthalten, und jeder Unterordner hat genau einen direkten Elternordner.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="box box-tipp">
+  <span class="box-titel">💡 Geschafft?</span>
+  <p>
+    Damit ist die BPE 7 komplett! Haken Sie die
+    <a href="checklisten.html#bpe7lf3">Ich-kann-Checkliste zu Kapitel 6</a> ab und
+    wiederholen Sie vor der Klassenarbeit mit dem
+    <a href="referenz.html">Spickzettel</a>.
+  </p>
+</div>
+
+<div class="seiten-nav">
+  <a href="kapitel-5-sortieren-suchen.html">← Kapitel 5: Sortieren &amp; Suchen</a>
+  <a href="referenz.html">Spickzettel →</a>
+</div>
+
+</main>
+
+<a class="nach-oben" href="#" title="Nach oben">↑</a>
+
+<footer class="fuss">
+  <div class="fuss-inner">
+    <p>Python-Workbook zur BPE 7 „Algorithmen und Datenstrukturen“ · Kapitel 6</p>
+    <p>Inhaltlich orientiert an den offiziellen Materialien des Landesbildungsservers Baden-Württemberg (Lernfortschritt 3).</p>
+  </div>
+</footer>
+
+<script src="assets/workbook.js"></script>
+</body>
+</html>

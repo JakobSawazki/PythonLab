@@ -1,0 +1,837 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kapitel 4 · Arrays – Python-Workbook</title>
+<link rel="stylesheet" href="assets/style.css?v=1.6">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">Python-Workbook</a>
+    <a class="lab-ruecklink" href="../index.html#workbook">← PythonLab</a>
+    <a href="index.html">Start</a>
+    <a href="inhaltsverzeichnis.html">Inhalt</a>
+    <a href="kapitel-1-kara.html">K1 Kara</a>
+    <a href="kapitel-2-python-grundlagen.html">K2 Python</a>
+    <a href="kapitel-3-kontrollstrukturen.html">K3 Kontrolle</a>
+    <a href="kapitel-4-arrays.html" class="aktiv">K4 Arrays</a>
+    <a href="kapitel-5-sortieren-suchen.html">K5 Algorithmen</a>
+    <a href="kapitel-6-datenstrukturen.html">K6 Datenstrukturen</a>
+    <a href="glossar.html">Glossar</a>
+    <a href="referenz.html">Spickzettel</a>
+    <a href="checklisten.html">Checklisten</a>
+  </div>
+</nav>
+
+<header class="seitenkopf">
+  <div class="kopf-inner">
+    <p class="dachzeile">Kapitel 4 · Jahrgangsstufe 2 · BPE 7.1 · Lernfortschritt 1</p>
+    <h1>Arrays – viele Werte in einer Struktur 📦</h1>
+    <p class="untertitel">
+      Bisher hat jede Variable genau einen Wert gespeichert. In der Jahrgangsstufe 2
+      wird es größer: Ganze Messreihen, Namenslisten und Losnummern wandern in
+      <strong>Arrays</strong> – die wichtigste Datenstruktur der Programmierung.
+    </p>
+  </div>
+</header>
+
+<main>
+
+<div class="kapitel-toc">
+  <strong>In diesem Kapitel:</strong>
+  <ol>
+    <li><a href="#datenstrukturen">Warum Datenstrukturen?</a></li>
+    <li><a href="#array">Das Array – ein Schrank mit Schubladen</a></li>
+    <li><a href="#anlegen">Arrays anlegen (Deklaration &amp; Initialisierung)</a></li>
+    <li><a href="#index">Zugriff mit dem Index</a></li>
+    <li><a href="#laenge">Die Länge eines Arrays: len()</a></li>
+    <li><a href="#schleife">Arrays mit der for-Schleife durchlaufen</a></li>
+    <li><a href="#operationen">Tauschen, Einfügen, Entfernen</a></li>
+    <li><a href="#uebungen">Übungsaufgaben</a></li>
+  </ol>
+</div>
+
+<div class="box box-ziel">
+  <span class="box-titel">🎯 Das können Sie nach diesem Kapitel</span>
+  <ul>
+    <li>erklären, was eine Datenstruktur ist, und die fünf wichtigsten Datenstrukturen unterscheiden,</li>
+    <li>Arrays deklarieren, initialisieren und mit dem Index auf Elemente zugreifen,</li>
+    <li>Arrays mit einer Schleife durchlaufen und dabei Größtes, Kleinstes und Durchschnitt ermitteln,</li>
+    <li>Elemente tauschen, an einer bestimmten Position einfügen und entfernen,</li>
+    <li>Schreibtischtests mit Arrays durchführen.</li>
+  </ul>
+</div>
+
+<div class="box box-info">
+  <span class="box-titel">ℹ️ Anknüpfung an BPE 5</span>
+  <p>
+    Alles aus den Kapiteln 1–3 wird hier gebraucht – besonders <a
+    href="kapitel-3-kontrollstrukturen.html#for">for-Schleifen</a>, <a
+    href="kapitel-3-kontrollstrukturen.html#if">Verzweigungen</a> und <a
+    href="kapitel-2-python-grundlagen.html#input">input()/print()</a>. Wenn etwas
+    davon nicht mehr sitzt: kurz zurückblättern, dann weiter.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="datenstrukturen"><span class="knr">4.1</span>Warum Datenstrukturen?</h2>
+
+<p>
+  Stellen Sie sich einen Kleiderschrank vor, in dem alle T-Shirts, Bücher und Hefte
+  wild durcheinanderliegen – jede Suche dauert ewig. Wer dagegen T-Shirts nach Farbe
+  und Bücher nach Fächern ordnet, findet alles mit einem Handgriff.
+  <strong>In der Informatik ist das genauso:</strong> Ohne Ordnung geht nichts.
+</p>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Merke: Datenstruktur</span>
+  <p>
+    Eine <strong>Datenstruktur</strong> ist ein Objekt zur Speicherung und Organisation
+    von Daten. Die Daten werden so angeordnet und verknüpft, dass der Zugriff auf sie
+    und ihre Verwaltung <strong>effizient</strong> möglich sind – mit kurzem
+    Programmcode, wenig Rechenzeit und geringem Speicherbedarf.
+  </p>
+</div>
+
+<p>Die fünf wichtigsten Datenstrukturen im Überblick – welche man wählt, hängt immer vom Zweck ab:</p>
+
+<table class="tab">
+  <tr><th style="width:22%">Datenstruktur</th><th>Kern-Merkmal</th><th style="width:30%">Typisches Beispiel</th></tr>
+  <tr>
+    <td><strong>Array</strong></td>
+    <td>Elemente gleichen Typs direkt hintereinander im Speicher; Zugriff über fortlaufende <strong>Index-Werte</strong> (0, 1, 2, …) – direkter Zugriff auf jedes Element.</td>
+    <td>Tägliche Temperaturmessungen im Krankenhaus</td>
+  </tr>
+  <tr>
+    <td><strong>Verkettete Liste</strong></td>
+    <td>Elemente (<strong>Knoten</strong>) verweisen mit <strong>Zeigern</strong> aufeinander; Einfügen und Entfernen jederzeit möglich, Zugriff nur schrittweise.</td>
+    <td>Haltungsnoten beim Skisprung-Wettkampf (beste/schlechteste wird gestrichen)</td>
+  </tr>
+  <tr>
+    <td><strong>Stapelspeicher</strong> (Stack)</td>
+    <td>Elemente werden nur <strong>oben</strong> aufgelegt und oben entnommen – <strong>LIFO</strong> (Last in, first out).</td>
+    <td>Backspace-Taste löscht das zuletzt getippte Zeichen</td>
+  </tr>
+  <tr>
+    <td><strong>Warteschlange</strong> (Queue)</td>
+    <td>Elemente werden <strong>hinten</strong> angefügt und <strong>vorn</strong> entnommen – <strong>FIFO</strong> (First in, first out).</td>
+    <td>Wartenummern in der Arztpraxis</td>
+  </tr>
+  <tr>
+    <td><strong>Baum</strong></td>
+    <td>Bildet <strong>hierarchische</strong> Strukturen ab: Knoten verweisen auf untergeordnete Knoten (Eltern → Kinder), oben steht die Wurzel.</td>
+    <td>Organigramm eines Unternehmens</td>
+  </tr>
+</table>
+
+<div class="box box-info">
+  <span class="box-titel">ℹ️ Fahrplan</span>
+  <p>
+    In diesem Kapitel implementieren Sie das <strong>Array</strong> in Python.
+    In <a href="kapitel-5-sortieren-suchen.html">Kapitel 5</a> sortieren und
+    durchsuchen Sie Arrays, in <a href="kapitel-6-datenstrukturen.html">Kapitel 6</a>
+    lernen Sie die übrigen vier (dynamischen) Datenstrukturen im Detail kennen.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="array"><span class="knr">4.2</span>Das Array – ein Schrank mit Schubladen</h2>
+
+<p>
+  Ein <strong>Array</strong> speichert nicht nur einen Wert, sondern eine ganze Reihe
+  von Werten. Das Bild dazu kennen Sie schon aus Kapitel 2 – nur größer: Ein Array
+  ist wie ein <strong>Schrank mit durchnummerierten Schubladen</strong>. In jeder
+  Schublade liegt ein Wert, und über die Nummer kommt man jederzeit direkt heran.
+</p>
+
+<div class="arr">
+  <span class="arr-name">namensliste =</span>
+  <div class="zelle"><div class="wert">"Uli"</div><div class="idx">0</div></div>
+  <div class="zelle"><div class="wert">"Anna"</div><div class="idx">1</div></div>
+  <div class="zelle"><div class="wert">"Emil"</div><div class="idx">2</div></div>
+  <div class="zelle"><div class="wert">"Sophia"</div><div class="idx">3</div></div>
+  <div class="zelle"><div class="wert">"Luise"</div><div class="idx">4</div></div>
+  <div class="zelle"><div class="wert">"Hans"</div><div class="idx">5</div></div>
+</div>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Merke: Der Index</span>
+  <ul>
+    <li>Die Nummerierung der „Schubladen“ heißt <strong>Index</strong> – die Speicherplätze sind <em>indiziert</em>.</li>
+    <li>Die Zählung beginnt <strong>immer bei 0</strong>: Die erste Schublade hat den Index 0, die sechste den Index 5.</li>
+    <li>Das <strong>n-te Element</strong> hat also den Index <strong>n − 1</strong>.</li>
+  </ul>
+</div>
+
+<div class="box box-info">
+  <span class="box-titel">ℹ️ Statisch, dynamisch – und was macht Python?</span>
+  <p>
+    Bei <strong>statischen</strong> Arrays muss die Anzahl der Elemente von Anfang an
+    festgelegt werden und kann nie mehr geändert werden. <strong>Dynamische</strong>
+    Arrays können dagegen wachsen und schrumpfen. In Python werden Arrays mit
+    sogenannten <strong>Listen</strong> umgesetzt – die sind dynamisch. Der Einfachheit
+    halber sprechen wir weiterhin von Arrays.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="anlegen"><span class="knr">4.3</span>Arrays anlegen (Deklaration &amp; Initialisierung)</h2>
+
+<p><strong>Möglichkeit 1:</strong> Das Array wird erzeugt und direkt mit Werten gefüllt:</p>
+
+<pre class="code"># Deklaration und Initialisierung
+namensliste = ["Uli", "Anna", "Emil", "Sophia"]</pre>
+
+<p>
+  <strong>Möglichkeit 2:</strong> Zuerst wird ein leeres Array erzeugt, dann werden
+  die Werte mit der Funktion <code>append()</code> nach und nach <strong>am Ende
+  angehängt</strong>:
+</p>
+
+<pre class="code"># Deklaration und Initialisierung
+himmelsrichtungen = []
+
+# Zuweisung
+himmelsrichtungen.append("Nord")
+himmelsrichtungen.append("Ost")
+himmelsrichtungen.append("Süd")
+himmelsrichtungen.append("West")</pre>
+
+<p>Im Ergebnis ist das Array <code>["Nord", "Ost", "Süd", "West"]</code> entstanden.</p>
+
+<div class="box box-tipp">
+  <span class="box-titel">💡 Wann welche Möglichkeit?</span>
+  <p>
+    Möglichkeit 1 passt, wenn die Werte von Anfang an feststehen. Möglichkeit 2
+    brauchen Sie, wenn die Werte erst nach und nach entstehen – z.&nbsp;B. bei
+    Benutzereingaben: <code>zahlen.append(int(input("Zahl: ")))</code>
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="index"><span class="knr">4.4</span>Zugriff mit dem Index</h2>
+
+<p>
+  Auf ein einzelnes Element greift man mit dem Array-Namen und dem Index in
+  <strong>eckigen Klammern</strong> zu:
+</p>
+
+<pre class="code">himmelsrichtungen = ["Nord", "Ost", "Süd", "West"]
+print(himmelsrichtungen[3])   # Ausgabe: West
+print(himmelsrichtungen[0])   # Ausgabe: Nord</pre>
+
+<pre class="output">West
+Nord</pre>
+
+<h3>Elemente verändern</h3>
+
+<p>
+  Die Elemente sind nicht fest – über den Index können bestehende Werte
+  <strong>überschrieben</strong> werden. Verfolgen Sie, wie sich das Array
+  <code>training</code> Zeile für Zeile verändert:
+</p>
+
+<table class="tab">
+  <tr><th style="width:46%">Python-Code</th><th>Inhalt des Arrays danach</th></tr>
+  <tr><td><code>training = ["Montag", "Donnerstag"]</code></td><td><code>["Montag", "Donnerstag"]</code></td></tr>
+  <tr><td><code>training[0] = "Dienstag"</code></td><td><code>["Dienstag", "Donnerstag"]</code></td></tr>
+  <tr><td><code>training.append("Freitag")</code></td><td><code>["Dienstag", "Donnerstag", "Freitag"]</code></td></tr>
+  <tr><td><code>training[2] = "Samstag"</code></td><td><code>["Dienstag", "Donnerstag", "Samstag"]</code></td></tr>
+</table>
+
+<div class="box box-achtung">
+  <span class="box-titel">⚠️ Achtung: IndexError</span>
+  <p>
+    Der Zugriff auf einen Index, den es nicht gibt (z.&nbsp;B. <code>training[5]</code>
+    bei nur 3 Elementen), führt zur Fehlermeldung
+    <code>IndexError: list index out of range</code>. Häufigste Ursache: vergessen,
+    dass die Zählung bei 0 beginnt!
+  </p>
+</div>
+
+<div class="quiz" data-erklaerung="Die Zählung beginnt bei 0 – das vierte Element hat den Index 3.">
+  <span class="quiz-titel">🧠 Kurz-Check</span>
+  <p class="quiz-frage">Mit welchem Ausdruck greifen Sie auf das <strong>vierte</strong> Element des Arrays <code>werte</code> zu?</p>
+  <button class="antwort"><code>werte[4]</code></button>
+  <button class="antwort" data-richtig><code>werte[3]</code></button>
+  <button class="antwort"><code>werte(4)</code></button>
+  <p class="quiz-feedback"></p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="laenge"><span class="knr">4.5</span>Die Länge eines Arrays: len()</h2>
+
+<p>
+  Oft muss ein Programm wissen, <strong>wie viele Elemente</strong> ein Array enthält.
+  Das ermittelt die Funktion <code>len()</code> (von englisch <em>length</em> = Länge):
+</p>
+
+<pre class="code">training = ["Montag", "Mittwoch", "Freitag"]
+anzahl = len(training)
+print("Trainingstage:", anzahl)</pre>
+
+<pre class="output">Trainingstage: 3</pre>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Merke</span>
+  <p>
+    <code>len(array)</code> liefert die <strong>Anzahl der Elemente</strong>.
+    Das letzte Element hat dann den Index <code>len(array) - 1</code>.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="schleife"><span class="knr">4.6</span>Arrays mit der for-Schleife durchlaufen</h2>
+
+<p>Betrachten Sie dieses Array:</p>
+
+<pre class="code">zahlenliste = [12, 9, 17, 31, 8, 24, 51, 67, 2, 34]</pre>
+
+<p>
+  Um alle Werte auszugeben, könnte man zehnmal <code>print(zahlenliste[0])</code>,
+  <code>print(zahlenliste[1])</code>, … schreiben. Bei 10&nbsp;000 Zahlen wären das
+  10&nbsp;000 Zeilen – das muss einfacher gehen! Hier hilft die bekannte
+  <strong>for-Schleife</strong>:
+</p>
+
+<div class="vergleich">
+  <div>
+    <h4>Python-Programm</h4>
+<pre class="code">himmelsrichtungen = ["Nord", "Ost", "Süd", "West"]
+
+for i in range(len(himmelsrichtungen)):
+    print(himmelsrichtungen[i])</pre>
+  </div>
+  <div>
+    <h4>Struktogramm</h4>
+    <div class="stg">
+      <div class="stg-titel">Array ausgeben</div>
+      <div class="stg-schleife">
+        <div class="stg-schleife-kopf">wiederhole für i = 0 bis len − 1</div>
+        <div class="stg-schleife-koerper">
+          <div class="stg-zeile">Ausgabe: himmelsrichtungen[i]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<pre class="output">Nord
+Ost
+Süd
+West</pre>
+
+<p>
+  Die Schleifenvariable <code>i</code> durchläuft alle Index-Werte von 0 bis
+  <code>len(...) - 1</code> – egal, ob das Array 4 oder 10&nbsp;000 Elemente hat, das
+  Programm bleibt gleich lang.
+</p>
+
+<h3>Typische Muster: Größtes, Kleinstes, Durchschnitt</h3>
+
+<p>
+  Mit demselben Schleifen-Prinzip lassen sich Arrays <strong>auswerten</strong>.
+  Diese drei Muster brauchen Sie immer wieder (z.&nbsp;B. in den Übungen
+  „Trainingsanalyse“ und „Wetterstation“):
+</p>
+
+<pre class="code">punkte = [5, 40, 3, 60, 20, 16]
+laenge = len(punkte)
+
+# Muster 1: Groesstes Element finden
+groesster = punkte[0]
+for i in range(laenge):
+    if punkte[i] &gt; groesster:
+        groesster = punkte[i]
+
+# Muster 2: Kleinstes Element finden
+kleinster = punkte[0]
+for i in range(laenge):
+    if punkte[i] &lt; kleinster:
+        kleinster = punkte[i]
+
+# Muster 3: Durchschnitt berechnen (Summe / Anzahl)
+summe = 0
+for i in range(laenge):
+    summe = summe + punkte[i]
+durchschnitt = summe / laenge
+
+print("Bester Wurf:", groesster)
+print("Schlechtester Wurf:", kleinster)
+print("Durchschnittliche Punktzahl:", durchschnitt)</pre>
+
+<pre class="output">Bester Wurf: 60
+Schlechtester Wurf: 3
+Durchschnittliche Punktzahl: 24.0</pre>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Merke: Das Suchmuster</span>
+  <p>
+    Beim Suchen des größten (kleinsten) Elements startet man mit dem
+    <strong>ersten Element als Zwischenstand</strong> und vergleicht dann der Reihe
+    nach: Ist das aktuelle Element größer (kleiner) als der Zwischenstand, wird der
+    Zwischenstand ersetzt.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="operationen"><span class="knr">4.7</span>Tauschen, Einfügen, Entfernen</h2>
+
+<h3>Zwei Elemente tauschen</h3>
+
+<p>
+  Um zwei Werte zu vertauschen, braucht man einen <strong>Zwischenspeicher</strong> –
+  sonst würde beim Überschreiben ein Wert verloren gehen (wie beim Umfüllen von zwei
+  Gläsern: ohne drittes Glas geht es nicht):
+</p>
+
+<pre class="code">orte = ["Mannheim", "Stuttgart"]
+
+zwischenspeicher = orte[0]
+orte[0] = orte[1]
+orte[1] = zwischenspeicher
+
+print(orte)   # ['Stuttgart', 'Mannheim']</pre>
+
+<h3>Ein Element an einer bestimmten Position einfügen</h3>
+
+<p>
+  Python fügt neue Elemente mit <code>append()</code> grundsätzlich <strong>am Ende</strong>
+  ein. Soll das neue Element an eine bestimmte Position, wird es anschließend
+  <strong>Schritt für Schritt nach vorn getauscht</strong>, bis es an der richtigen
+  Stelle steht. Beispiel: „Esslingen“ soll zwischen „Stuttgart“ und „Freiburg“
+  (also an Index 2):
+</p>
+
+<div class="arr">
+  <span class="arr-name">Schritt 0:</span>
+  <div class="zelle"><div class="wert">Mannheim</div><div class="idx">0</div></div>
+  <div class="zelle"><div class="wert">Stuttgart</div><div class="idx">1</div></div>
+  <div class="zelle"><div class="wert">Freiburg</div><div class="idx">2</div></div>
+  <div class="zelle"><div class="wert">Konstanz</div><div class="idx">3</div></div>
+  <div class="zelle neu"><div class="wert">Esslingen</div><div class="idx">4</div></div>
+</div>
+
+<div class="arr">
+  <span class="arr-name">Schritt 1:</span>
+  <div class="zelle"><div class="wert">Mannheim</div><div class="idx">0</div></div>
+  <div class="zelle"><div class="wert">Stuttgart</div><div class="idx">1</div></div>
+  <div class="zelle"><div class="wert">Freiburg</div><div class="idx">2</div></div>
+  <div class="zelle neu"><div class="wert">Esslingen</div><div class="idx">3</div></div>
+  <div class="zelle"><div class="wert">Konstanz</div><div class="idx">4</div></div>
+</div>
+
+<div class="arr">
+  <span class="arr-name">Schritt 2:</span>
+  <div class="zelle"><div class="wert">Mannheim</div><div class="idx">0</div></div>
+  <div class="zelle"><div class="wert">Stuttgart</div><div class="idx">1</div></div>
+  <div class="zelle neu"><div class="wert">Esslingen</div><div class="idx">2</div></div>
+  <div class="zelle"><div class="wert">Freiburg</div><div class="idx">3</div></div>
+  <div class="zelle"><div class="wert">Konstanz</div><div class="idx">4</div></div>
+</div>
+
+<pre class="code">orte = ["Mannheim", "Stuttgart", "Freiburg", "Konstanz"]
+
+# zusaetzlicher Ort soll an Index 2
+# Einfuegen an letzter Stelle
+orte.append("Esslingen")
+
+# Nach vorne wandern, bis an die richtige Position
+for i in range(len(orte) - 1, 2, -1):
+    zwischenspeicher = orte[i - 1]
+    orte[i - 1] = orte[i]
+    orte[i] = zwischenspeicher
+
+print(orte)</pre>
+
+<pre class="output">['Mannheim', 'Stuttgart', 'Esslingen', 'Freiburg', 'Konstanz']</pre>
+
+<p>
+  Die Schleife zählt <strong>rückwärts</strong> (Schrittweite −1) vom letzten Index
+  bis zur Zielposition und tauscht das neue Element jeweils mit seinem Vorgänger.
+</p>
+
+<h3>Ein Element entfernen</h3>
+
+<p>
+  Beim Entfernen ist es umgekehrt: Alle Elemente <strong>hinter</strong> der zu
+  entfernenden Position rücken um eine Stelle <strong>nach vorn</strong>. Beispiel:
+  „Stuttgart“ (Index 1) soll aus dem Array verschwinden:
+</p>
+
+<pre class="code">orte = ["Mannheim", "Stuttgart", "Esslingen", "Freiburg", "Konstanz"]
+
+# zu loeschender Ort hat Index 1
+for i in range(1, len(orte) - 1):
+    orte[i] = orte[i + 1]
+
+# letztes Element 'leeren'
+orte[len(orte) - 1] = ""
+
+print(orte)</pre>
+
+<pre class="output">['Mannheim', 'Esslingen', 'Freiburg', 'Konstanz', '']</pre>
+
+<p>
+  Jedes Element überschreibt seinen Vorgänger. Das letzte Feld bleibt doppelt übrig
+  und wird „geleert“. (Das zeigt übrigens gut, warum das Entfernen aus Arrays
+  technisch aufwändiger ist als das Anhängen – in Kapitel 6 lernen Sie mit der
+  verketteten Liste eine Struktur kennen, die genau das eleganter löst.)
+</p>
+
+<!-- ============================================================ -->
+<h2 id="uebungen"><span class="knr">4.8</span>Übungsaufgaben</h2>
+
+<p>
+  Wie gewohnt gilt: <strong>Problemanalyse → Struktogramm → Programmcode</strong> –
+  und Lösungen erst aufklappen, wenn das eigene Programm läuft.
+</p>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 1 · Weltmeister <span class="schwierigkeit">leicht</span></div>
+  <div class="uebung-inhalt">
+    <p>Formulieren Sie den Python-Code für folgende Anweisungen:</p>
+    <ol>
+      <li>Erzeugen Sie ein Array <code>weltmeister</code> mit den Werten 1954, 1974, 1990 und 2014.</li>
+      <li>Erzeugen Sie ein Array <code>wmtrainer</code> mit den Werten „Sepp Herberger“, „Helmut Schön“ und „Franz Beckenbauer“.</li>
+      <li>Fügen Sie in <code>wmtrainer</code> den Namen „Joachim Löw“ am Ende ein.</li>
+      <li>Geben Sie die <strong>Anzahl</strong> der Weltmeistertitel in der Konsole aus.</li>
+      <li>Geben Sie <strong>alle Namen</strong> aus <code>wmtrainer</code> in der Konsole aus.</li>
+    </ol>
+    <p class="material">Original: L1_2 Arbeitsauftrag Weltmeister (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">weltmeister = [1954, 1974, 1990, 2014]
+wmtrainer = ["Sepp Herberger", "Helmut Schön", "Franz Beckenbauer"]
+wmtrainer.append("Joachim Löw")
+
+print("Anzahl der Weltmeistertitel:", len(weltmeister))
+
+for i in range(len(wmtrainer)):
+    print(wmtrainer[i])</pre>
+<pre class="output">Anzahl der Weltmeistertitel: 4
+Sepp Herberger
+Helmut Schön
+Franz Beckenbauer
+Joachim Löw</pre>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 2 · Schreibtischtest mit Array <span class="schwierigkeit">klausurtypisch</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Das Array <code>a = [1, 5, 20, 9, 4, 3, 1]</code> wird durch den folgenden
+      Algorithmus verändert. Durchlaufen Sie den Algorithmus auf Papier und notieren
+      Sie den Arrayinhalt <strong>nach jeder Anweisung</strong>:
+    </p>
+<pre class="code">a[1] = a[2]
+a[5] = a[5] + a[6]
+a[6] = 4
+a.append(4)
+i = 3
+a[i] = i</pre>
+    <p class="material">Original: L1_2 Arbeitsauftrag Weltmeister, Aufgabe 2 (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+      <table class="tab">
+        <tr><th style="width:34%">Anweisung</th><th>Arrayinhalt danach</th></tr>
+        <tr><td>Start</td><td><code>[1, 5, 20, 9, 4, 3, 1]</code></td></tr>
+        <tr><td><code>a[1] = a[2]</code></td><td><code>[1, 20, 20, 9, 4, 3, 1]</code></td></tr>
+        <tr><td><code>a[5] = a[5] + a[6]</code></td><td><code>[1, 20, 20, 9, 4, 4, 1]</code></td></tr>
+        <tr><td><code>a[6] = 4</code></td><td><code>[1, 20, 20, 9, 4, 4, 4]</code></td></tr>
+        <tr><td><code>a.append(4)</code></td><td><code>[1, 20, 20, 9, 4, 4, 4, 4]</code></td></tr>
+        <tr><td><code>i = 3</code> und <code>a[i] = i</code></td><td><code>[1, 20, 20, 3, 4, 4, 4, 4]</code></td></tr>
+      </table>
+      <p>
+        Stolperstellen: <code>a[1] = a[2]</code> kopiert den <em>Wert</em> 20 an Index 1;
+        bei <code>a[i] = i</code> wird an Index 3 der Wert der Variablen <code>i</code>
+        (also 3) geschrieben.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 3 · Gewinnziehung <span class="schwierigkeit">leicht</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Beim Dart-Event des Mühlberger SC gibt es eine Gewinnlotterie. Der Ziehungsleiter
+      soll die fünf gezogenen Losnummern nacheinander <strong>eingeben</strong> können;
+      sie werden in einem Array gespeichert. Nach der Ziehung sollen alle
+      Gewinn-Losnummern <strong>ausgegeben</strong> werden.
+    </p>
+    <p class="material">Original: L1_3.2 Arbeitsauftrag Gewinnziehung (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">gewinnlose = []
+
+for i in range(5):
+    losnummer = int(input("Gezogene Losnummer: "))
+    gewinnlose.append(losnummer)
+
+print("--- Gewinnende Losnummern ---")
+for i in range(len(gewinnlose)):
+    print(gewinnlose[i])</pre>
+      <p>
+        Erste Schleife: 5 Eingaben werden mit <code>append()</code> ans (anfangs leere)
+        Array angehängt. Zweite Schleife: Ausgabe aller Elemente über den Index.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 4 · Trainingsanalyse <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Im Training wirft jeder Dartspieler 6 Pfeile. Schreiben Sie ein Programm, das die
+      6 Wurfergebnisse über die Konsole einliest und danach ausgibt:
+      <strong>höchste Punktzahl, niedrigste Punktzahl und durchschnittliche
+      Punktzahl</strong>. (Pro Wurf sind maximal 60 Punkte möglich.)
+    </p>
+<pre class="output">Wurf: <span class="eingabe">5</span>
+Wurf: <span class="eingabe">40</span>
+Wurf: <span class="eingabe">3</span>
+Wurf: <span class="eingabe">60</span>
+Wurf: <span class="eingabe">20</span>
+Wurf: <span class="eingabe">16</span>
+Bester Wurf: 60
+Schlechtester Wurf: 3
+Durchschnittliche Punktzahl: 24.0</pre>
+    <p class="material">Original: L1_3.3 Arbeitsauftrag Trainingsanalyse (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">wuerfe = []
+for i in range(6):
+    wuerfe.append(int(input("Wurf: ")))
+
+bester = wuerfe[0]
+schlechtester = wuerfe[0]
+summe = 0
+
+for i in range(len(wuerfe)):
+    if wuerfe[i] &gt; bester:
+        bester = wuerfe[i]
+    if wuerfe[i] &lt; schlechtester:
+        schlechtester = wuerfe[i]
+    summe = summe + wuerfe[i]
+
+durchschnitt = summe / len(wuerfe)
+
+print("Bester Wurf:", bester)
+print("Schlechtester Wurf:", schlechtester)
+print("Durchschnittliche Punktzahl:", durchschnitt)</pre>
+      <p>
+        Alle drei Muster aus <a href="#schleife">Abschnitt 4.6</a> in einer einzigen
+        Schleife kombiniert.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 5 · Wetterstation <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Führen Sie eine Wochen-Wetterstatistik: Lesen Sie für Montag bis Sonntag jeweils
+      die Höchsttemperatur ein und geben Sie am Ende aus: höchste, niedrigste und
+      durchschnittliche Temperatur sowie die <strong>Abweichung</strong> zwischen
+      höchster und niedrigster Temperatur.
+    </p>
+<pre class="output">Montag: <span class="eingabe">12</span>
+Dienstag: <span class="eingabe">15</span>
+Mittwoch: <span class="eingabe">16</span>
+Donnerstag: <span class="eingabe">10</span>
+Freitag: <span class="eingabe">17</span>
+Samstag: <span class="eingabe">20</span>
+Sonntag: <span class="eingabe">22</span>
+---------AUSWERTUNG---------
+Höchste Temperatur: 22.0
+Niedrigste Temperatur: 10.0
+Durchschnittstemperatur: 16.0
+Temperaturunterschied: 12.0</pre>
+    <p class="material">Original: L1_4.2 Arbeitsauftrag Vertiefung Wetterstation (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">tage = ["Montag", "Dienstag", "Mittwoch", "Donnerstag",
+        "Freitag", "Samstag", "Sonntag"]
+temperaturen = []
+
+for i in range(len(tage)):
+    temperaturen.append(float(input(tage[i] + ": ")))
+
+hoechste = temperaturen[0]
+niedrigste = temperaturen[0]
+summe = 0
+
+for i in range(len(temperaturen)):
+    if temperaturen[i] &gt; hoechste:
+        hoechste = temperaturen[i]
+    if temperaturen[i] &lt; niedrigste:
+        niedrigste = temperaturen[i]
+    summe = summe + temperaturen[i]
+
+durchschnitt = summe / len(temperaturen)
+unterschied = hoechste - niedrigste
+
+print("---------AUSWERTUNG---------")
+print("Höchste Temperatur:", hoechste)
+print("Niedrigste Temperatur:", niedrigste)
+print("Durchschnittstemperatur:", durchschnitt)
+print("Temperaturunterschied:", unterschied)</pre>
+      <p>
+        Raffinesse: Das Array <code>tage</code> liefert gleich die Eingabe-Aufforderungen –
+        zwei Arrays arbeiten hier zusammen.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 6 · Kapitalrechner mit Zinsstaffel <span class="schwierigkeit">schwer</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Die Mühlberger Bank gewährt bei einer Anlage von <strong>mehr als 50.000&nbsp;€</strong>
+      eine Zinsstaffel: Jahr&nbsp;1: 0,1&nbsp;% · Jahr&nbsp;2: 0,2&nbsp;% ·
+      Jahr&nbsp;3: 0,3&nbsp;% · Jahr&nbsp;4: 0,3&nbsp;% · Jahr&nbsp;5: 0,3&nbsp;% ·
+      Jahr&nbsp;6: 0,4&nbsp;% · Jahr&nbsp;7: 0,4&nbsp;% · Jahr&nbsp;8: 0,5&nbsp;% ·
+      Jahr&nbsp;9: 1&nbsp;%.
+    </p>
+    <p>
+      Schreiben Sie ein Programm, das nach Eingabe von Laufzeit (1–9 Jahre) und
+      Anlagebetrag den Auszahlungsbetrag (mit Zinseszins) berechnet. Beträge bis
+      50.000&nbsp;€ werden mit einer Meldung abgelehnt.
+    </p>
+    <details class="hinweis">
+      <summary>Tipp</summary>
+      <p>
+        Speichern Sie die Zinsstaffel in einem Array:
+        <code>zinsen = [0.1, 0.2, 0.3, 0.3, 0.3, 0.4, 0.4, 0.5, 1.0]</code> –
+        der Zinssatz von Jahr <code>j</code> steht dann an Index <code>j - 1</code>.
+      </p>
+    </details>
+    <p class="material">Original: L1_4.3 Arbeitsauftrag Vertiefung Kapitalrechner (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">zinsen = [0.1, 0.2, 0.3, 0.3, 0.3, 0.4, 0.4, 0.5, 1.0]
+
+laufzeit = int(input("Geben Sie die gewünschte Laufzeit ein: "))
+betrag = float(input("Geben Sie den gewünschten Anlagebetrag ein: "))
+
+if betrag &gt; 50000:
+    for jahr in range(laufzeit):
+        betrag = betrag * (1 + zinsen[jahr] / 100)
+    print("Auszahlungsbetrag:", betrag, "EUR")
+else:
+    print("Der Anlagebetrag muss über 50.000 EUR sein!")</pre>
+<pre class="output">Geben Sie die gewünschte Laufzeit ein: <span class="eingabe">5</span>
+Geben Sie den gewünschten Anlagebetrag ein: <span class="eingabe">60000</span>
+Auszahlungsbetrag: 60723.36756810325 EUR</pre>
+      <p>
+        Das Array ersetzt eine lange if-elif-Kette: Der passende Zinssatz wird einfach
+        über den Index <code>jahr</code> nachgeschlagen – genau dafür sind Arrays da.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 7 · Laufzeiten auswerten <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Beim Sporttag wurden die Zeiten für einen 400-m-Lauf in zwei Arrays gespeichert:
+      <code>namen</code> enthält die Namen, <code>zeiten</code> die passenden Laufzeiten
+      in Sekunden.
+    </p>
+<pre class="code">namen = ["Mia", "Noah", "Lina", "Ben", "Sofia", "Emil"]
+zeiten = [62.4, 58.1, 65.0, 57.8, 60.5, 59.9]</pre>
+    <p>Schreiben Sie ein Programm, das ausgibt:</p>
+    <ol>
+      <li>die schnellste Person mit Zeit,</li>
+      <li>die Durchschnittszeit,</li>
+      <li>wie viele Personen unter 60 Sekunden geblieben sind.</li>
+    </ol>
+    <p class="material">Zusatzübung: Arrays gemeinsam auswerten (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">namen = ["Mia", "Noah", "Lina", "Ben", "Sofia", "Emil"]
+zeiten = [62.4, 58.1, 65.0, 57.8, 60.5, 59.9]
+
+bestzeit = zeiten[0]
+best_index = 0
+summe = 0
+unter_60 = 0
+
+for i in range(len(zeiten)):
+    if zeiten[i] &lt; bestzeit:
+        bestzeit = zeiten[i]
+        best_index = i
+    if zeiten[i] &lt; 60:
+        unter_60 = unter_60 + 1
+    summe = summe + zeiten[i]
+
+durchschnitt = summe / len(zeiten)
+
+print("Schnellste Person:", namen[best_index])
+print("Bestzeit:", bestzeit)
+print("Durchschnitt:", durchschnitt)
+print("Unter 60 Sekunden:", unter_60)</pre>
+<pre class="output">Schnellste Person: Ben
+Bestzeit: 57.8
+Durchschnitt: 60.61666666666667
+Unter 60 Sekunden: 3</pre>
+      <p>
+        Wichtig ist hier der <strong>Index</strong>: Wenn die beste Zeit an Index 3
+        steht, steht der passende Name ebenfalls an Index 3.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="box box-tipp">
+  <span class="box-titel">💡 Geschafft?</span>
+  <p>
+    Haken Sie die <a href="checklisten.html#bpe7lf1">Ich-kann-Checkliste zu Kapitel 4</a>
+    ab. In <a href="kapitel-5-sortieren-suchen.html">Kapitel 5</a> bringen Sie
+    Ordnung in Ihre Arrays: mit den klassischen Sortier- und Suchalgorithmen.
+  </p>
+</div>
+
+<div class="seiten-nav">
+  <a href="kapitel-3-kontrollstrukturen.html">← Kapitel 3: Kontrollstrukturen</a>
+  <a href="kapitel-5-sortieren-suchen.html">Kapitel 5: Sortieren &amp; Suchen →</a>
+</div>
+
+</main>
+
+<a class="nach-oben" href="#" title="Nach oben">↑</a>
+
+<footer class="fuss">
+  <div class="fuss-inner">
+    <p>Python-Workbook zur BPE 7 „Algorithmen und Datenstrukturen“ · Kapitel 4</p>
+    <p>Inhaltlich orientiert an den offiziellen Materialien des Landesbildungsservers Baden-Württemberg (Lernfortschritt 1).</p>
+  </div>
+</footer>
+
+<script src="assets/workbook.js"></script>
+</body>
+</html>

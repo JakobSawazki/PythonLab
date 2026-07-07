@@ -656,6 +656,10 @@
               <i data-lucide="code-2"></i>
               Aufgaben öffnen
             </button>
+            <button class="button button-secondary" type="button" data-route="workbook">
+              <i data-lucide="book-open-text"></i>
+              Workbook lesen
+            </button>
           </div>
         </div>
       </section>
@@ -1225,6 +1229,123 @@
             <pre>${escapeHtml(item.code)}</pre>
           </article>`).join("")}
       </div>
+      </section>`;
+  }
+
+  function renderWorkbook() {
+    setHeading("Lesen und verstehen", "Workbook");
+    activateNav("workbook");
+    const workbookHighlights = [
+      {
+        title: "BPE 5 · Grundlagen der Programmierung",
+        text: "Kara, erste Python-Programme, Variablen, Eingabe, Funktionen, Kontrollstrukturen und Struktogramme.",
+        href: "workbook/index.html#lernweg",
+        icon: "book-open",
+        meta: "Kapitel 1-3"
+      },
+      {
+        title: "BPE 7 · Algorithmen und Datenstrukturen",
+        text: "Arrays, Sortieren, Suchen, verkettete Liste, Stack, Queue, Baum und Binärbaum verständlich erklärt.",
+        href: "workbook/index.html#lernweg-jg2",
+        icon: "workflow",
+        meta: "Kapitel 4-6"
+      },
+      {
+        title: "Glossar und Befehle",
+        text: "Kurze Begriffserklärungen und die wichtigsten Python-Befehle als schnelle Nachschlagehilfe.",
+        href: "workbook/glossar.html",
+        icon: "braces",
+        meta: "Begriffe · Syntax"
+      },
+      {
+        title: "Spickzettel",
+        text: "Kompakte Übersicht zu Syntax, Operatoren, Struktogrammen, Arrays, Suchen und Sortieren.",
+        href: "workbook/referenz.html",
+        icon: "clipboard-list",
+        meta: "Alles auf einen Blick"
+      },
+      {
+        title: "Ich-kann-Checklisten",
+        text: "Selbstcheck für BPE 5 und BPE 7: abhaken, was schon sicher sitzt.",
+        href: "workbook/checklisten.html",
+        icon: "badge-check",
+        meta: "Selbsteinschätzung"
+      },
+      {
+        title: "Inhaltsverzeichnis",
+        text: "Die komplette Lernlandkarte mit direkten Sprungmarken zu allen Kapiteln und Abschnitten.",
+        href: "workbook/inhaltsverzeichnis.html",
+        icon: "map",
+        meta: "Lernlandkarte"
+      }
+    ];
+
+    main.innerHTML = `
+      <section class="workbook-hero">
+        <div>
+          <p class="eyebrow">Lesemodus ohne Punkte</p>
+          <h2>Das Workbook ist dein ruhiges Lehrbuch neben dem PythonLab.</h2>
+          <p>
+            Hier geht es nicht um XP, sondern um Verstehen: anschauliche Erklärungen,
+            konkrete Beispiele, Struktogramme, Grafiken und Lösungen zum Nachlesen.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="workbook/index.html">
+              <i data-lucide="book-open"></i>
+              Workbook öffnen
+            </a>
+            <a class="button button-secondary" href="workbook/inhaltsverzeichnis.html">
+              <i data-lucide="route"></i>
+              Inhaltsverzeichnis
+            </a>
+          </div>
+        </div>
+        <aside class="workbook-hero-note">
+          <span><i data-lucide="sparkles"></i></span>
+          <strong>So ergänzt es PythonLab</strong>
+          <p>Erst im Workbook nachlesen, dann im Lab Aufgaben lösen und Punkte sammeln.</p>
+        </aside>
+      </section>
+
+      <section class="content-section">
+        <div class="section-heading">
+          <div>
+            <h2>Direkt einsteigen</h2>
+            <p>Wähle den passenden Lesebereich. Die Seiten öffnen im gleichen Fenster und führen oben zurück zu PythonLab.</p>
+          </div>
+        </div>
+        <div class="workbook-grid">
+          ${workbookHighlights.map((item) => `
+            <a class="workbook-card" href="${item.href}">
+              <span class="workbook-card-icon"><i data-lucide="${item.icon}"></i></span>
+              <span class="workbook-card-meta">${escapeHtml(item.meta)}</span>
+              <h3>${escapeHtml(item.title)}</h3>
+              <p>${escapeHtml(item.text)}</p>
+              <span class="text-button">Öffnen <i data-lucide="arrow-right"></i></span>
+            </a>
+          `).join("")}
+        </div>
+      </section>
+
+      <section class="content-section workbook-bridge">
+        <div>
+          <p class="eyebrow">Didaktische Trennung</p>
+          <h2>Workbook zum Verstehen, Lab zum Anwenden.</h2>
+          <p>
+            Die Workbook-Seiten behalten ihren helleren Lehrbuch-Charakter. PythonLab bleibt
+            der aktive Übungsraum mit Editor, Rückmeldungen und Fortschritt.
+          </p>
+        </div>
+        <div class="workbook-bridge-actions">
+          <button class="button button-secondary" type="button" data-route="practice">
+            <i data-lucide="code-2"></i>
+            Zu den Aufgaben
+          </button>
+          <button class="button button-secondary" type="button" data-route="structograms">
+            <i data-lucide="workflow"></i>
+            Zum Struktogramm-Labor
+          </button>
+        </div>
       </section>`;
   }
 
@@ -2511,6 +2632,8 @@
       renderAchievements();
     } else if (route.name === "reference") {
       renderReference();
+    } else if (route.name === "workbook") {
+      renderWorkbook();
     } else if (route.name === "lesson") {
       renderLesson(route.id);
     } else if (route.name === "command") {

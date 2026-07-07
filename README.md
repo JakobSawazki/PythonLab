@@ -1,7 +1,7 @@
 # PythonLab
 
-**Aktuelle Version:** 0.18.1
-**Dokumentationsstand:** 29. Juni 2026
+**Aktuelle Version:** 0.19.0
+**Dokumentationsstand:** 7. Juli 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
 
@@ -75,6 +75,7 @@ Repository übernommen.
 - freiwillig aktivierbarer Gemini-Lerncoach: Nach Zustimmung gibt er nach fehlgeschlagenen Prüfungen automatisch kleine Denkimpulse; identische Anfragen werden für die Sitzung zwischengespeichert (siehe „KI-Lerncoach aktivieren“)
 - schwebender Feedback-Button unten rechts: öffnet ohne zusätzliches Secret ein vorbereitetes GitHub-Issue und kann später über einen geschützten `feedbackEndpoint` direkt angebunden werden
 - kompakter Nachschlagebereich
+- eigener Reiter **Workbook**: ruhiger Lesemodus mit dem eingebundenen HTML-Workbook zu BPE 5 und BPE 7 (`workbook/`), inklusive Rücklink zu PythonLab
 - schlichter Footer-Hinweis `Designed by Sawazki Electronics`
 - responsive Oberfläche für Computer, Tablet und Smartphone
 - Tastaturbedienung und semantische Bedienelemente
@@ -282,6 +283,13 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - abschließender Abruf der GitHub-Pages-Version
 
 ## Versionsverlauf
+
+### 0.19.0 – 7. Juli 2026
+
+- neues eingebundenes **Workbook** unter `workbook/` übernommen; es enthält das HTML-Lehrbuch zu BPE 5 und BPE 7 mit Kapiteln, Glossar, Spickzettel und Ich-kann-Checklisten
+- linken Navigationsreiter **Workbook** ergänzt und in `app.js` eine eigene `#workbook`-Übersichtsseite gebaut, die den Lehrbuchbereich bewusst vom XP-Übungsbereich trennt
+- Workbook-Seiten mit Rücklink `← PythonLab` versehen und den Link im Workbook-Design hervorgehoben
+- Cache-Bust-Versionen in `index.html` auf `0.19.0` angehoben
 
 ### 0.18.1 – 29. Juni 2026
 

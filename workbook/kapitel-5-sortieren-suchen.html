@@ -1,0 +1,765 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kapitel 5 · Sortieren &amp; Suchen – Python-Workbook</title>
+<link rel="stylesheet" href="assets/style.css?v=1.6">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">Python-Workbook</a>
+    <a class="lab-ruecklink" href="../index.html#workbook">← PythonLab</a>
+    <a href="index.html">Start</a>
+    <a href="inhaltsverzeichnis.html">Inhalt</a>
+    <a href="kapitel-1-kara.html">K1 Kara</a>
+    <a href="kapitel-2-python-grundlagen.html">K2 Python</a>
+    <a href="kapitel-3-kontrollstrukturen.html">K3 Kontrolle</a>
+    <a href="kapitel-4-arrays.html">K4 Arrays</a>
+    <a href="kapitel-5-sortieren-suchen.html" class="aktiv">K5 Algorithmen</a>
+    <a href="kapitel-6-datenstrukturen.html">K6 Datenstrukturen</a>
+    <a href="glossar.html">Glossar</a>
+    <a href="referenz.html">Spickzettel</a>
+    <a href="checklisten.html">Checklisten</a>
+  </div>
+</nav>
+
+<header class="seitenkopf">
+  <div class="kopf-inner">
+    <p class="dachzeile">Kapitel 5 · Jahrgangsstufe 2 · BPE 7.2 · Lernfortschritt 2</p>
+    <h1>Sortieren &amp; Suchen 🔍</h1>
+    <p class="untertitel">
+      Bubble Sort, Selection Sort, lineare und binäre Suche – die Klassiker der
+      Informatik. Sie lernen, wie diese Algorithmen funktionieren, führen sie von Hand
+      auf Papier durch und implementieren sie in Python.
+    </p>
+  </div>
+</header>
+
+<main>
+
+<div class="kapitel-toc">
+  <strong>In diesem Kapitel:</strong>
+  <ol>
+    <li><a href="#algorithmus">Was ist ein Algorithmus?</a></li>
+    <li><a href="#sortieren">Warum ist Sortieren so wichtig?</a></li>
+    <li><a href="#bubble">Bubble Sort</a></li>
+    <li><a href="#selection">Selection Sort</a></li>
+    <li><a href="#linear">Die lineare Suche</a></li>
+    <li><a href="#binaer">Die binäre Suche</a></li>
+    <li><a href="#vergleichalgo">Algorithmen im Vergleich</a></li>
+    <li><a href="#uebungen">Übungsaufgaben</a></li>
+  </ol>
+</div>
+
+<div class="box box-ziel">
+  <span class="box-titel">🎯 Das können Sie nach diesem Kapitel</span>
+  <ul>
+    <li>den Begriff Algorithmus definieren und seine Eigenschaften erklären,</li>
+    <li>Bubble Sort und Selection Sort beschreiben, tabellarisch von Hand durchführen und implementieren,</li>
+    <li>die lineare und die binäre Suche beschreiben und implementieren,</li>
+    <li>begründen, welcher Such- bzw. Sortieralgorithmus zu einer Problemstellung passt.</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="algorithmus"><span class="knr">5.1</span>Was ist ein Algorithmus?</h2>
+
+<p>
+  Algorithmen begegnen uns ständig: beim Onlinebanking, im Routenplaner, beim
+  Online-Shopping, bei der Internetsuche. Aber auch außerhalb der Informatik –
+  Bedienungsanleitungen, Spielregeln oder Anwendungshinweise für Arzneimittel sind
+  nichts anderes als Algorithmen in normaler Sprache.
+</p>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Merke: Algorithmus</span>
+  <p>
+    Ein <strong>Algorithmus</strong> ist eine Folge von Handlungsanweisungen, die
+    <strong>eindeutig</strong> den Weg zur Lösung eines gegebenen Problems beschreiben.
+  </p>
+</div>
+
+<h3>Eigenschaften von Algorithmen</h3>
+
+<p>Damit eine Handlungsvorschrift wirklich ein Algorithmus ist, muss sie diese Eigenschaften erfüllen:</p>
+
+<table class="tab">
+  <tr><th style="width:22%">Eigenschaft</th><th>Bedeutung</th><th style="width:34%">Gegenbeispiel (verletzt die Eigenschaft)</th></tr>
+  <tr>
+    <td><strong>Allgemeingültigkeit</strong></td>
+    <td>Der Algorithmus löst eine ganze <strong>Klasse</strong> gleichartiger Probleme, nicht nur einen Einzelfall.</td>
+    <td>Ein Primzahl-Algorithmus, der nur für den Bereich 3–100 funktioniert.</td>
+  </tr>
+  <tr>
+    <td><strong>Eindeutigkeit</strong></td>
+    <td>Die Anweisungen dürfen sich <strong>nicht widersprechen</strong>.</td>
+    <td>„Zwiebel in Würfel schneiden“ – aber später: „Zwiebelringe in die Pfanne geben“.</td>
+  </tr>
+  <tr>
+    <td><strong>Ausführbarkeit</strong></td>
+    <td>Jede einzelne Anweisung muss für den Ausführenden (Mensch oder Computer) verständlich und <strong>ausführbar</strong> sein.</td>
+    <td>„Wasser auf 120&nbsp;°C erhitzen“ – geht (im offenen Topf) nicht.</td>
+  </tr>
+  <tr>
+    <td><strong>Finitheit</strong></td>
+    <td>Die Beschreibung besteht aus <strong>endlich vielen</strong> Anweisungen mit begrenzter Zeichenzahl.</td>
+    <td>„Addiere 1. Addiere 1. Addiere 1. …“ (unendlich aufgeschrieben)</td>
+  </tr>
+  <tr>
+    <td><strong>Terminiertheit</strong></td>
+    <td>Der Algorithmus kommt nach endlich vielen Schritten zu einem <strong>Ende</strong> und liefert ein Ergebnis.</td>
+    <td><code>zahl = 2</code>, dann: „Wiederhole solange zahl &gt; 0: zahl = zahl · 2“ – endet nie.</td>
+  </tr>
+  <tr>
+    <td><strong>Determiniertheit</strong></td>
+    <td>Gleiche Eingaben liefern immer <strong>dasselbe Ergebnis</strong>.</td>
+    <td>Die Anweisung „Bearbeite die Hausaufgaben“ – das Ergebnis fällt jedes Mal anders aus.</td>
+  </tr>
+  <tr>
+    <td><strong>Determinismus</strong></td>
+    <td>Zu jedem Zeitpunkt gibt es <strong>höchstens eine</strong> Möglichkeit fortzufahren – der Folgeschritt ist eindeutig.</td>
+    <td>Ein Rezept mit mehreren Würz-Varianten ohne Vorgabe, welche zu wählen ist.</td>
+  </tr>
+</table>
+
+<div class="quiz" data-erklaerung="Die Schleife zahl = zahl · 2 mit der Bedingung zahl > 0 endet nie – der Algorithmus terminiert nicht.">
+  <span class="quiz-titel">🧠 Kurz-Check</span>
+  <p class="quiz-frage">
+    <code>zahl = 2</code> · „Wiederhole solange <code>zahl &gt; 0</code>:
+    <code>zahl = zahl * 2</code>“ – welche Eigenschaft ist verletzt?
+  </p>
+  <button class="antwort">Determiniertheit</button>
+  <button class="antwort" data-richtig>Terminiertheit</button>
+  <button class="antwort">Eindeutigkeit</button>
+  <p class="quiz-feedback"></p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="sortieren"><span class="knr">5.2</span>Warum ist Sortieren so wichtig?</h2>
+
+<ul>
+  <li>Bis zu <strong>¼ der Rechenzeit</strong> von Großrechnern entfällt auf Sortierung (Studie der Stanford University).</li>
+  <li>Mehr als <strong>40 verschiedene Sortierverfahren</strong> sind bekannt und werden genutzt.</li>
+  <li>Sortierte Daten lassen sich <strong>viel schneller durchsuchen</strong> (z.&nbsp;B. Stichwortverzeichnis) – das sehen Sie in Abschnitt 5.6 selbst.</li>
+  <li>Sortieren ist Bestandteil zahlreicher weiterer Algorithmen und dient der Visualisierung von Daten (z.&nbsp;B. Medaillenspiegel bei Olympia).</li>
+</ul>
+
+<div class="box box-info">
+  <span class="box-titel">ℹ️ Best Case und Worst Case</span>
+  <p>
+    Um Sortieralgorithmen zu bewerten, vergleicht man oft den <strong>Best Case</strong>
+    (bester/schnellster Fall) mit dem <strong>Worst Case</strong> (schlechtester/langsamster
+    Fall): Wie lange dauert die Sortierung mindestens – und wie lange höchstens?
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="bubble"><span class="knr">5.3</span>Bubble Sort</h2>
+
+<p>
+  Der <strong>Bubble Sort</strong> ist ein vergleichsbasierter Sortieralgorithmus.
+  Sein Prinzip: Benachbarte Elemente werden verglichen und bei Bedarf getauscht –
+  die großen Werte steigen dabei wie Luftblasen (englisch <em>bubbles</em>) ans Ende
+  des Arrays auf.
+</p>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Das Prinzip in vier Schritten</span>
+  <ol>
+    <li>Starte mit dem ersten Array-Element. Ist es größer als sein rechter Nachbar, werden beide <strong>getauscht</strong>.</li>
+    <li>Fahre mit dem zweiten Element fort – wieder: Ist es größer als der rechte Nachbar, tauschen.</li>
+    <li>Wiederhole das bis zum Ende des Arrays. (Ein kompletter Durchlauf heißt <strong>Bubble-Phase</strong>.)</li>
+    <li>Wiederhole die Bubble-Phasen, bis das Array sortiert ist. Das jeweils letzte Element der vorherigen Phase muss nicht mehr betrachtet werden – das größte Element ist ja bereits ans Ende „aufgestiegen“.</li>
+  </ol>
+</div>
+
+<h3>Bubble-Phase 1 von Hand (Array [5, 4, 9, 1, 3])</h3>
+
+<table class="tab">
+  <tr><th>Vergleich</th><th style="width:12%">a[0]</th><th style="width:12%">a[1]</th><th style="width:12%">a[2]</th><th style="width:12%">a[3]</th><th style="width:12%">a[4]</th></tr>
+  <tr><td>Start</td><td>5</td><td>4</td><td>9</td><td>1</td><td>3</td></tr>
+  <tr><td>5 &gt; 4? Ja → Tausch</td><td><strong>4</strong></td><td><strong>5</strong></td><td>9</td><td>1</td><td>3</td></tr>
+  <tr><td>5 &gt; 9? Nein → kein Tausch</td><td>4</td><td>5</td><td>9</td><td>1</td><td>3</td></tr>
+  <tr><td>9 &gt; 1? Ja → Tausch</td><td>4</td><td>5</td><td><strong>1</strong></td><td><strong>9</strong></td><td>3</td></tr>
+  <tr><td>9 &gt; 3? Ja → Tausch</td><td>4</td><td>5</td><td>1</td><td><strong>3</strong></td><td><strong>9</strong></td></tr>
+</table>
+
+<p>
+  Ende der ersten Bubble-Phase: Die 9 ist ganz nach hinten „aufgestiegen“ – ab
+  <code>a[4]</code> ist das Array sortiert. Die weiteren Phasen laufen genauso, nur
+  jeweils ein Feld kürzer: Nach Phase 2 ist <code>[4, 1, 3, 5, 9]</code>, nach
+  Phase 3 <code>[1, 3, 4, 5, 9]</code> – Phase 4 stellt fest, dass nichts mehr
+  getauscht wird: fertig.
+</p>
+
+<h3>Implementierung in Python</h3>
+
+<pre class="code">zahlen = [5, 4, 9, 1, 3]
+laenge = len(zahlen)
+anzahl_bubble_phasen = 0
+tausch = True
+
+while tausch:
+    tausch = False
+    anzahl_bubble_phasen = anzahl_bubble_phasen + 1
+    for i in range(0, laenge - anzahl_bubble_phasen):
+        if zahlen[i] &gt; zahlen[i + 1]:
+            zwischenspeicher = zahlen[i]
+            zahlen[i] = zahlen[i + 1]
+            zahlen[i + 1] = zwischenspeicher
+            tausch = True
+
+print(zahlen)
+print("Anzahl der Bubble-Phasen:", anzahl_bubble_phasen)</pre>
+
+<pre class="output">[1, 3, 4, 5, 9]
+Anzahl der Bubble-Phasen: 4</pre>
+
+<p>So arbeiten die Bausteine zusammen:</p>
+
+<ul>
+  <li>Die <strong>äußere while-Schleife</strong> startet so lange neue Bubble-Phasen, wie in der letzten Phase noch getauscht wurde (Merkvariable <code>tausch</code>).</li>
+  <li>Die <strong>innere for-Schleife</strong> ist eine Bubble-Phase: Sie vergleicht Nachbarn und tauscht mit dem bekannten <strong>Zwischenspeicher-Muster</strong> aus Kapitel 4.</li>
+  <li><code>laenge - anzahl_bubble_phasen</code> verkürzt jede Phase um ein Feld – der bereits sortierte hintere Teil wird nicht mehr angefasst.</li>
+</ul>
+
+<div class="quiz" data-erklaerung="Wird in einer kompletten Phase nichts mehr getauscht, bleibt tausch auf False – die while-Schleife endet.">
+  <span class="quiz-titel">🧠 Kurz-Check</span>
+  <p class="quiz-frage">Woran erkennt der Bubble Sort, dass das Array fertig sortiert ist?</p>
+  <button class="antwort">Die for-Schleife hat den letzten Index erreicht.</button>
+  <button class="antwort" data-richtig>In einer kompletten Bubble-Phase fand kein einziger Tausch mehr statt.</button>
+  <button class="antwort">Das erste Element ist das kleinste.</button>
+  <p class="quiz-feedback"></p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="selection"><span class="knr">5.4</span>Selection Sort</h2>
+
+<p>
+  Der <strong>Selection Sort</strong> (englisch <em>selection</em> = Auswahl) geht
+  intuitiver vor – so würden viele Menschen Spielkarten sortieren:
+</p>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Das Prinzip</span>
+  <ol>
+    <li>Suche das <strong>kleinste</strong> Element und tausche es mit dem <strong>ersten</strong> Element.</li>
+    <li>Suche das <strong>zweitkleinste</strong> Element (im Rest-Array) und tausche es mit dem <strong>zweiten</strong> Element.</li>
+    <li>Und so weiter – bis zum vorletzten Element. (Das letzte ist dann automatisch richtig.)</li>
+  </ol>
+</div>
+
+<h3>Ablauf von Hand (Array [5, 4, 9, 1, 3])</h3>
+
+<table class="tab">
+  <tr><th style="width:35%">Schritt</th><th>Array danach</th></tr>
+  <tr><td>Kleinstes (1) mit a[0] tauschen</td><td><code>[<strong>1</strong>, 4, 9, 5, 3]</code> – bis Index 0 sortiert</td></tr>
+  <tr><td>Zweitkleinstes (3) mit a[1] tauschen</td><td><code>[1, <strong>3</strong>, 9, 5, 4]</code> – bis Index 1 sortiert</td></tr>
+  <tr><td>Nächstes (4) mit a[2] tauschen</td><td><code>[1, 3, <strong>4</strong>, 5, 9]</code> – bis Index 2 sortiert</td></tr>
+  <tr><td>Nächstes (5) ist schon an a[3]</td><td><code>[1, 3, 4, <strong>5</strong>, 9]</code> – bis Index 3 sortiert → fertig!</td></tr>
+</table>
+
+<h3>Implementierung in Python</h3>
+
+<pre class="code">zahlen = [5, 4, 9, 1, 3]
+laenge = len(zahlen)
+
+for akt_idx in range(laenge - 1):
+    min_idx = akt_idx
+    for j in range(akt_idx + 1, laenge):
+        # Suche nach der niedrigsten Zahl
+        if zahlen[j] &lt; zahlen[min_idx]:
+            min_idx = j
+    # Tausch
+    if akt_idx != min_idx:
+        zwischenspeicher = zahlen[akt_idx]
+        zahlen[akt_idx] = zahlen[min_idx]
+        zahlen[min_idx] = zwischenspeicher
+
+print(zahlen)</pre>
+
+<pre class="output">[1, 3, 4, 5, 9]</pre>
+
+<ul>
+  <li>Die <strong>äußere Schleife</strong> läuft über die Zielposition <code>akt_idx</code> (0, 1, 2, …).</li>
+  <li>Die <strong>innere Schleife</strong> sucht im Rest-Array den Index des kleinsten Elements (<code>min_idx</code>) – das ist das Such-Muster aus Kapitel 4.6, nur dass hier der <em>Index</em> gemerkt wird statt des Werts.</li>
+  <li>Danach wird höchstens <strong>einmal pro Durchlauf getauscht</strong> – anders als beim Bubble Sort, der in jeder Phase viele Nachbar-Täusche machen kann.</li>
+</ul>
+
+<div class="box box-info">
+  <span class="box-titel">ℹ️ Array komplett ausgeben</span>
+  <p>
+    Für die Kontrolle können Sie ein Array elementweise mit der for-Schleife ausgeben –
+    oder als Ganzes mit <code>print(zahlen)</code>. Beides haben Sie in
+    <a href="kapitel-4-arrays.html#schleife">Kapitel 4.6</a> gelernt.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="linear"><span class="knr">5.5</span>Die lineare Suche</h2>
+
+<p>
+  Die <strong>lineare Suche</strong> ist der einfachste Suchalgorithmus:
+  <strong>Jedes</strong> Arrayelement wird der Reihe nach geprüft, ob es mit dem
+  gesuchten Wert übereinstimmt. Beispiel – gesucht wird die 42:
+</p>
+
+<div class="arr">
+  <div class="zelle"><div class="wert">10</div><div class="idx">0 ✘</div></div>
+  <div class="zelle"><div class="wert">5</div><div class="idx">1 ✘</div></div>
+  <div class="zelle"><div class="wert">18</div><div class="idx">2 ✘</div></div>
+  <div class="zelle"><div class="wert">50</div><div class="idx">3 ✘</div></div>
+  <div class="zelle hervor"><div class="wert">42</div><div class="idx">4 ✔</div></div>
+  <div class="zelle"><div class="wert">25</div><div class="idx">5</div></div>
+</div>
+
+<p>
+  Nach 5 Vergleichen ist die 42 gefunden – die Merkvariable <code>gefunden</code>
+  wird auf <code>True</code> gesetzt.
+</p>
+
+<h3>Implementierung: Einlass-Kontrolle im Verein</h3>
+
+<pre class="code"># Mitgliedsnummern
+mnr = [1001, 1019, 1014, 1009, 1005, 1002, 1018, 1008, 1003, 1010,
+       1007, 1004, 1020, 1013, 1015, 1011, 1017, 1012, 1006, 1016]
+
+# Eingabe
+nummer = int(input("Mitgliedsnummer eingeben: "))
+
+laenge = len(mnr)
+gefunden = False
+
+# Suche
+for i in range(laenge):
+    if mnr[i] == nummer:
+        gefunden = True
+
+# Ausgabe
+if gefunden:
+    print("Zutritt gewährt")
+else:
+    print("Zutritt verweigert")</pre>
+
+<pre class="output">Mitgliedsnummer eingeben: <span class="eingabe">1013</span>
+Zutritt gewährt</pre>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Merke</span>
+  <p>
+    Die lineare Suche funktioniert bei <strong>jedem</strong> Array – sortiert oder
+    unsortiert. Ihr Preis: Im Worst Case (Wert ganz hinten oder gar nicht vorhanden)
+    muss <strong>jedes einzelne Element</strong> geprüft werden.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="binaer"><span class="knr">5.6</span>Die binäre Suche</h2>
+
+<p>
+  Die <strong>binäre Suche</strong> ist deutlich effizienter – sie funktioniert aber
+  <strong>nur auf einem sortierten Array</strong>. Ihr Trick: Der Suchbereich wird mit
+  jedem Vergleich <strong>halbiert</strong> (so wie Sie in einem Wörterbuch auch nicht
+  vorn anfangen, sondern in der Mitte aufschlagen).
+</p>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Vorgehensweise</span>
+  <ol>
+    <li>Setze den Start <code>s</code> auf das erste und das Ende <code>e</code> auf das letzte Element im Array.</li>
+    <li>Ermittle die Mitte <code>m</code> zwischen Start und Ende (ggf. abrunden).</li>
+    <li>Ist das gesuchte Element <strong>kleiner</strong> als Element <code>m</code> → setze <code>e</code> auf <code>m − 1</code>.</li>
+    <li>Ist es <strong>größer</strong> → setze <code>s</code> auf <code>m + 1</code>.</li>
+    <li>Ist es <strong>gleich</strong> → Suche erfolgreich!</li>
+    <li>Wiederhole ab Schritt 2 (solange <code>s ≤ e</code>).</li>
+  </ol>
+</div>
+
+<h3>Beispiel: Gesucht wird die 42</h3>
+
+<div class="arr">
+  <span class="arr-name">1. Vergleich:</span>
+  <div class="zelle"><div class="wert">5</div><div class="idx">s</div></div>
+  <div class="zelle"><div class="wert">10</div><div class="idx"></div></div>
+  <div class="zelle"><div class="wert">11</div><div class="idx"></div></div>
+  <div class="zelle"><div class="wert">18</div><div class="idx"></div></div>
+  <div class="zelle hervor"><div class="wert">20</div><div class="idx">m</div></div>
+  <div class="zelle"><div class="wert">25</div><div class="idx"></div></div>
+  <div class="zelle"><div class="wert">39</div><div class="idx"></div></div>
+  <div class="zelle"><div class="wert">42</div><div class="idx"></div></div>
+  <div class="zelle"><div class="wert">50</div><div class="idx">e</div></div>
+</div>
+<p>42 &gt; 20 → Start auf m + 1 setzen (linke Hälfte fällt komplett weg!)</p>
+
+<div class="arr">
+  <span class="arr-name">2. Vergleich:</span>
+  <div class="zelle"><div class="wert">25</div><div class="idx">s</div></div>
+  <div class="zelle hervor"><div class="wert">39</div><div class="idx">m</div></div>
+  <div class="zelle"><div class="wert">42</div><div class="idx"></div></div>
+  <div class="zelle"><div class="wert">50</div><div class="idx">e</div></div>
+</div>
+<p>42 &gt; 39 → Start auf m + 1 setzen</p>
+
+<div class="arr">
+  <span class="arr-name">3. Vergleich:</span>
+  <div class="zelle hervor"><div class="wert">42</div><div class="idx">s = m</div></div>
+  <div class="zelle"><div class="wert">50</div><div class="idx">e</div></div>
+</div>
+<p>
+  42 = 42 → <strong>gefunden, nach nur 3 Vergleichen!</strong> Die lineare Suche hätte
+  in diesem Array 8 Vergleiche gebraucht.
+</p>
+
+<div class="box box-info">
+  <span class="box-titel">ℹ️ Abrunden mit int()</span>
+  <p>
+    Die Mitte <code>(s + e) / 2</code> ist oft keine ganze Zahl. In Python wird eine
+    Dezimalzahl abgerundet, indem man sie in eine Ganzzahl umwandelt:
+    <code>int(7.98)</code> → 7, <code>int(9.07)</code> → 9.
+  </p>
+</div>
+
+<h3>Implementierung: Losnummern-Prüfung</h3>
+
+<pre class="code">ln_gewinne = [11586, 12569, 22254, 23654, 32541,
+              55589, 85665, 87512, 98521, 98741]
+
+losnr = int(input("Gesuchte Losnummer: "))
+gefunden = False
+index_anfang = 0
+index_ende = len(ln_gewinne) - 1
+
+while gefunden == False and index_anfang &lt;= index_ende:
+    index_mitte = int((index_anfang + index_ende) / 2)
+
+    if ln_gewinne[index_mitte] == losnr:
+        gefunden = True
+    elif ln_gewinne[index_mitte] &gt; losnr:
+        index_ende = index_mitte - 1
+    else:
+        index_anfang = index_mitte + 1
+
+if gefunden:
+    print("Sie haben gewonnen :-)")
+else:
+    print("Sie haben leider nicht gewonnen :-(")</pre>
+
+<pre class="output">Gesuchte Losnummer: <span class="eingabe">85665</span>
+Sie haben gewonnen :-)</pre>
+
+<p>
+  Die while-Schleife läuft, solange nichts gefunden wurde <em>und</em> der Suchbereich
+  nicht leer ist (<code>index_anfang &lt;= index_ende</code>). Ist der Suchbereich
+  leer, kommt die gesuchte Nummer nicht vor.
+</p>
+
+<div class="quiz" data-erklaerung="Die binäre Suche halbiert den Suchbereich anhand von Größenvergleichen – das funktioniert nur, wenn das Array sortiert ist.">
+  <span class="quiz-titel">🧠 Kurz-Check</span>
+  <p class="quiz-frage">Welche Voraussetzung muss für die binäre Suche erfüllt sein?</p>
+  <button class="antwort">Das Array darf keine doppelten Werte enthalten.</button>
+  <button class="antwort" data-richtig>Das Array muss sortiert sein.</button>
+  <button class="antwort">Das Array muss eine gerade Anzahl von Elementen haben.</button>
+  <p class="quiz-feedback"></p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="vergleichalgo"><span class="knr">5.7</span>Algorithmen im Vergleich</h2>
+
+<table class="tab">
+  <tr><th style="width:24%">Algorithmus</th><th>Idee in einem Satz</th><th style="width:32%">Wann geeignet?</th></tr>
+  <tr>
+    <td><strong>Bubble Sort</strong></td>
+    <td>Nachbarn vergleichen und tauschen – Große steigen wie Blasen nach hinten auf.</td>
+    <td>Einfach zu verstehen und zu implementieren; erkennt am Tausch-Merker, wenn früh fertig sortiert ist.</td>
+  </tr>
+  <tr>
+    <td><strong>Selection Sort</strong></td>
+    <td>Immer das kleinste Element des Rests auswählen und nach vorn tauschen.</td>
+    <td>Intuitive Vorgehensweise; pro Durchlauf höchstens ein Tausch.</td>
+  </tr>
+  <tr>
+    <td><strong>Lineare Suche</strong></td>
+    <td>Jedes Element der Reihe nach prüfen.</td>
+    <td>Einziger Weg bei <strong>unsortierten</strong> Arrays; bei kleinen Arrays völlig ausreichend.</td>
+  </tr>
+  <tr>
+    <td><strong>Binäre Suche</strong></td>
+    <td>Suchbereich per Mitte-Vergleich immer wieder halbieren.</td>
+    <td>Sehr schnell bei großen, <strong>sortierten</strong> Arrays (1&nbsp;000&nbsp;000 Elemente → max. ca. 20 Vergleiche!).</td>
+  </tr>
+</table>
+
+<div class="box box-tipp">
+  <span class="box-titel">💡 Probieren Sie es aus</span>
+  <p>
+    Lassen Sie beide Suchverfahren gegeneinander antreten: Wie viele Vergleiche braucht
+    jede Suche, um in <code>[5, 10, 11, 18, 20, 25, 39, 42, 50]</code> die Zahl
+    <strong>5</strong> zu finden? Und die Zahl <strong>50</strong>? Zählen Sie von Hand
+    nach – das Ergebnis überrascht.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="uebungen"><span class="knr">5.8</span>Übungsaufgaben</h2>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 1 · Bubble Sort von Hand <span class="schwierigkeit">klausurtypisch</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Gegeben ist das Array <code>[7, 2, 8, 3, 1]</code>. Führen Sie den Bubble Sort
+      <strong>tabellarisch auf Papier</strong> durch: Notieren Sie jeden Vergleich,
+      jeden Tausch und den Array-Zustand am Ende jeder Bubble-Phase. Wie viele
+      Bubble-Phasen werden benötigt?
+    </p>
+    <p class="material">Original: L2_2.1.2 / L2_2.3.2 Arbeitsaufträge Bubble Sort (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+      <table class="tab">
+        <tr><th>Phase</th><th>Vergleiche und Täusche</th><th>Array am Phasenende</th></tr>
+        <tr><td>1</td><td>7&gt;2 T · 7&gt;8 – · 8&gt;3 T · 8&gt;1 T</td><td><code>[2, 7, 3, 1, 8]</code></td></tr>
+        <tr><td>2</td><td>2&gt;7 – · 7&gt;3 T · 7&gt;1 T</td><td><code>[2, 3, 1, 7, 8]</code></td></tr>
+        <tr><td>3</td><td>2&gt;3 – · 3&gt;1 T</td><td><code>[2, 1, 3, 7, 8]</code></td></tr>
+        <tr><td>4</td><td>2&gt;1 T</td><td><code>[1, 2, 3, 7, 8]</code></td></tr>
+        <tr><td>5</td><td>kein Tausch mehr</td><td><code>[1, 2, 3, 7, 8]</code> – fertig</td></tr>
+      </table>
+      <p>
+        Es werden <strong>5 Bubble-Phasen</strong> benötigt (die letzte stellt nur noch
+        fest, dass nichts mehr zu tauschen ist).
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 2 · Lottozahlen sortieren (Bubble Sort) <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Die sechs gezogenen Lottozahlen <code>[38, 4, 45, 12, 27, 9]</code> sollen für
+      die Fernseh-Anzeige aufsteigend sortiert werden. Implementieren Sie den
+      <strong>Bubble Sort</strong> und geben Sie das sortierte Array aus.
+    </p>
+    <p class="material">Original: L2_2.1.1 Arbeitsauftrag Bubble Sort Lotto (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">lottozahlen = [38, 4, 45, 12, 27, 9]
+laenge = len(lottozahlen)
+anzahl_phasen = 0
+tausch = True
+
+while tausch:
+    tausch = False
+    anzahl_phasen = anzahl_phasen + 1
+    for i in range(0, laenge - anzahl_phasen):
+        if lottozahlen[i] &gt; lottozahlen[i + 1]:
+            zwischenspeicher = lottozahlen[i]
+            lottozahlen[i] = lottozahlen[i + 1]
+            lottozahlen[i + 1] = zwischenspeicher
+            tausch = True
+
+print(lottozahlen)</pre>
+<pre class="output">[4, 9, 12, 27, 38, 45]</pre>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 3 · Selection Sort absteigend <span class="schwierigkeit">schwer</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Für eine Bestenliste sollen fünf eingegebene Punktzahlen <strong>absteigend</strong>
+      (größte zuerst) sortiert werden. Implementieren Sie den <strong>Selection
+      Sort</strong> – überlegen Sie zuerst, welche einzige Stelle des Algorithmus sich
+      gegenüber der aufsteigenden Variante ändert.
+    </p>
+    <p class="material">Original: L2_2.2.3 Arbeitsauftrag Selection Sort absteigend (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">punkte = []
+for i in range(5):
+    punkte.append(int(input("Punktzahl: ")))
+
+laenge = len(punkte)
+
+for akt_idx in range(laenge - 1):
+    max_idx = akt_idx
+    for j in range(akt_idx + 1, laenge):
+        # Suche nach der GRÖSSTEN Zahl
+        if punkte[j] &gt; punkte[max_idx]:
+            max_idx = j
+    if akt_idx != max_idx:
+        zwischenspeicher = punkte[akt_idx]
+        punkte[akt_idx] = punkte[max_idx]
+        punkte[max_idx] = zwischenspeicher
+
+print(punkte)</pre>
+      <p>
+        Nur der <strong>Vergleichsoperator</strong> in der inneren Schleife dreht sich um:
+        Statt des kleinsten wird das <strong>größte</strong> Element gesucht
+        (<code>&gt;</code> statt <code>&lt;</code>) und nach vorn getauscht.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 4 · Lineare Suche: Spieler suchen <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Im Array <code>kader = ["Mila", "Finn", "Lena", "Noah", "Emma", "Luis"]</code>
+      soll per Eingabe geprüft werden, ob ein Spieler zum Volleyball-Kader gehört.
+      Geben Sie „… gehört zum Kader“ oder „… gehört nicht zum Kader“ aus.
+      Zusatz: Geben Sie auch die <strong>Position</strong> (Index) des gefundenen
+      Spielers aus.
+    </p>
+    <p class="material">Original: L2_3.1.3 Arbeitsauftrag Volleyball Spieler suchen (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">kader = ["Mila", "Finn", "Lena", "Noah", "Emma", "Luis"]
+
+name = input("Welcher Spieler wird gesucht? ")
+gefunden = False
+position = 0
+
+for i in range(len(kader)):
+    if kader[i] == name:
+        gefunden = True
+        position = i
+
+if gefunden:
+    print(name, "gehört zum Kader (Index", position, ")")
+else:
+    print(name, "gehört nicht zum Kader")</pre>
+      <p>
+        Die lineare Suche funktioniert genauso mit Zeichenketten – der Vergleich
+        <code>==</code> prüft Texte auf exakte Gleichheit.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 5 · Binäre Suche von Hand <span class="schwierigkeit">klausurtypisch</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Gegeben ist das sortierte Array
+      <code>[1001, 1004, 1009, 1013, 1015, 1017, 1020, 1025, 1031, 1040]</code>
+      (Indizes 0–9). Gesucht wird die <strong>1017</strong>. Führen Sie die binäre
+      Suche auf Papier durch: Notieren Sie für jeden Schritt Start, Ende, Mitte und
+      die Entscheidung.
+    </p>
+    <p class="material">Original: L2_3.2.2 Arbeitsauftrag Binäre Suche Mitgliedernummer (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+      <table class="tab">
+        <tr><th>Schritt</th><th>s</th><th>e</th><th>m = int((s+e)/2)</th><th>Array[m]</th><th>Entscheidung</th></tr>
+        <tr><td>1</td><td>0</td><td>9</td><td>4</td><td>1015</td><td>1017 &gt; 1015 → s = 5</td></tr>
+        <tr><td>2</td><td>5</td><td>9</td><td>7</td><td>1025</td><td>1017 &lt; 1025 → e = 6</td></tr>
+        <tr><td>3</td><td>5</td><td>6</td><td>5</td><td>1017</td><td>gefunden! ✔</td></tr>
+      </table>
+      <p>
+        Nach nur <strong>3 Vergleichen</strong> gefunden – die lineare Suche hätte
+        6 Vergleiche gebraucht.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 6 · Welcher Algorithmus passt? <span class="schwierigkeit">klausurtypisch</span></div>
+  <div class="uebung-inhalt">
+    <p>Begründen Sie jeweils kurz, welcher Suchalgorithmus geeignet ist:</p>
+    <ol>
+      <li>In einem <strong>unsortierten</strong> Array mit 30 Teilnehmernamen soll ein Name gefunden werden.</li>
+      <li>In einem <strong>aufsteigend sortierten</strong> Array mit 1&nbsp;000&nbsp;000 Kundennummern soll eine Nummer gefunden werden.</li>
+      <li>In einem sortierten Array mit 10 Losnummern soll <em>jede</em> Nummer daraufhin geprüft werden, ob sie doppelt vorkommt.</li>
+    </ol>
+    <p class="material">Original: L2_3.3.2 Arbeitsauftrag Suchalgorithmen prüfen (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+      <ol>
+        <li><strong>Lineare Suche</strong> – das Array ist unsortiert, die binäre Suche ist daher nicht anwendbar. Bei nur 30 Elementen ist sie zudem völlig ausreichend schnell.</li>
+        <li><strong>Binäre Suche</strong> – das Array ist sortiert und sehr groß: Statt bis zu 1&nbsp;000&nbsp;000 Vergleichen (linear) braucht die binäre Suche höchstens ca. 20.</li>
+        <li>Hier hilft keine einzelne Suche: Sinnvoll ist ein <strong>Durchlauf mit Vergleich benachbarter Elemente</strong> – in einem sortierten Array stehen Duplikate direkt nebeneinander. (Erkenntnis: Sortierung macht auch andere Aufgaben einfacher!)</li>
+      </ol>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 7 · Binäre Suche: nicht gefunden <span class="schwierigkeit">klausurtypisch</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Gegeben ist das sortierte Array
+      <code>[3, 8, 14, 21, 29, 35, 42, 56, 70, 91]</code>.
+      Gesucht wird die Zahl <strong>34</strong>.
+    </p>
+    <ol>
+      <li>Führen Sie die binäre Suche auf Papier durch.</li>
+      <li>Notieren Sie in jedem Schritt <code>start</code>, <code>ende</code>, <code>mitte</code> und die Entscheidung.</li>
+      <li>Erklären Sie, woran der Algorithmus erkennt, dass die Zahl nicht vorhanden ist.</li>
+    </ol>
+    <p class="material">Zusatzübung: Trace der binären Suche (BPE 7)</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+      <table class="tab">
+        <tr><th>Schritt</th><th>start</th><th>ende</th><th>mitte</th><th>a[mitte]</th><th>Entscheidung</th></tr>
+        <tr><td>1</td><td>0</td><td>9</td><td>4</td><td>29</td><td>34 &gt; 29 → rechts weitersuchen, <code>start = 5</code></td></tr>
+        <tr><td>2</td><td>5</td><td>9</td><td>7</td><td>56</td><td>34 &lt; 56 → links weitersuchen, <code>ende = 6</code></td></tr>
+        <tr><td>3</td><td>5</td><td>6</td><td>5</td><td>35</td><td>34 &lt; 35 → links weitersuchen, <code>ende = 4</code></td></tr>
+        <tr><td>Stopp</td><td>5</td><td>4</td><td>–</td><td>–</td><td><code>start &gt; ende</code>, der Suchbereich ist leer.</td></tr>
+      </table>
+      <p>
+        Die Zahl <strong>34 ist nicht im Array</strong>. Bei der binären Suche bedeutet
+        <code>start &gt; ende</code>: Es gibt keinen Bereich mehr, in dem der gesuchte
+        Wert liegen könnte.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="box box-tipp">
+  <span class="box-titel">💡 Geschafft?</span>
+  <p>
+    Haken Sie die <a href="checklisten.html#bpe7lf2">Ich-kann-Checkliste zu Kapitel 5</a>
+    ab. Zum Abschluss der BPE 7 lernen Sie in
+    <a href="kapitel-6-datenstrukturen.html">Kapitel 6</a> die dynamischen
+    Datenstrukturen kennen – verkettete Liste, Stack, Queue und Baum.
+  </p>
+</div>
+
+<div class="seiten-nav">
+  <a href="kapitel-4-arrays.html">← Kapitel 4: Arrays</a>
+  <a href="kapitel-6-datenstrukturen.html">Kapitel 6: Dynamische Datenstrukturen →</a>
+</div>
+
+</main>
+
+<a class="nach-oben" href="#" title="Nach oben">↑</a>
+
+<footer class="fuss">
+  <div class="fuss-inner">
+    <p>Python-Workbook zur BPE 7 „Algorithmen und Datenstrukturen“ · Kapitel 5</p>
+    <p>Inhaltlich orientiert an den offiziellen Materialien des Landesbildungsservers Baden-Württemberg (Lernfortschritt 2).</p>
+  </div>
+</footer>
+
+<script src="assets/workbook.js"></script>
+</body>
+</html>

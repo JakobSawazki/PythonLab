@@ -1,0 +1,656 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glossar und Python-Befehle · Python-Workbook</title>
+<link rel="stylesheet" href="assets/style.css?v=1.6">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">Python-Workbook</a>
+    <a class="lab-ruecklink" href="../index.html#workbook">← PythonLab</a>
+    <a href="index.html">Start</a>
+    <a href="inhaltsverzeichnis.html">Inhalt</a>
+    <a href="kapitel-1-kara.html">K1 Kara</a>
+    <a href="kapitel-2-python-grundlagen.html">K2 Python</a>
+    <a href="kapitel-3-kontrollstrukturen.html">K3 Kontrolle</a>
+    <a href="kapitel-4-arrays.html">K4 Arrays</a>
+    <a href="kapitel-5-sortieren-suchen.html">K5 Algorithmen</a>
+    <a href="kapitel-6-datenstrukturen.html">K6 Datenstrukturen</a>
+    <a href="glossar.html" class="aktiv">Glossar</a>
+    <a href="referenz.html">Spickzettel</a>
+    <a href="checklisten.html">Checklisten</a>
+  </div>
+</nav>
+
+<header class="seitenkopf">
+  <div class="kopf-inner">
+    <p class="dachzeile">Begriffe · Syntax · Mini-Beispiele</p>
+    <h1>Glossar und Python-Befehlsübersicht</h1>
+    <p class="untertitel">
+      Kurze Erklärungen zu wichtigen Begriffen und eine übersichtliche Sammlung der
+      Python-Bausteine, die im Workbook vorkommen.
+    </p>
+  </div>
+</header>
+
+<main>
+
+<div class="kapitel-toc">
+  <strong>Auf dieser Seite:</strong>
+  <ol>
+    <li><a href="#glossar">Glossar wichtiger Begriffe</a></li>
+    <li><a href="#befehle">Python-Befehle und Schlüsselwörter</a></li>
+    <li><a href="#array-befehle">Arrays, Suchen und Sortieren</a></li>
+    <li><a href="#kara-befehle">PythonKara-Befehle</a></li>
+    <li><a href="#tkinter">Tkinter-Grundbausteine</a></li>
+    <li><a href="#operatoren">Operatoren im Überblick</a></li>
+  </ol>
+</div>
+
+<h2 id="glossar">Glossar wichtiger Begriffe</h2>
+
+<div class="abc-leiste" aria-label="Alphabetische Sprungmarken">
+  <a href="#a">A</a><a href="#b">B</a><a href="#d">D</a><a href="#e">E</a>
+  <a href="#f">F</a><a href="#g">G</a><a href="#i">I</a><a href="#k">K</a>
+  <a href="#l">L</a><a href="#o">O</a><a href="#p">P</a><a href="#r">R</a>
+  <a href="#q">Q</a><a href="#s">S</a><a href="#t">T</a><a href="#v">V</a>
+  <a href="#w">W</a><a href="#z">Z</a>
+</div>
+
+<h3 id="a">A</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>Algorithmus</h3>
+    <p>Eine eindeutige Schritt-für-Schritt-Anleitung zur Lösung eines Problems.</p>
+    <p class="beispiel">Beispiel: „Solange kein Baum vor Kara steht, gehe einen Schritt weiter.“</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Array</h3>
+    <p>Eine Datenstruktur, die mehrere Werte in einer festen Reihenfolge speichert. In Python wird dafür meistens eine Liste verwendet.</p>
+    <p class="beispiel"><code>noten = [2, 1, 3]</code></p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Alternative</h3>
+    <p>Eine Entscheidung im Programm. Je nach Bedingung wird ein anderer Block ausgeführt.</p>
+    <p class="beispiel">Python: <code>if</code>, <code>elif</code>, <code>else</code></p>
+  </div>
+</div>
+
+<h3 id="b">B</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>Baum</h3>
+    <p>Eine hierarchische Datenstruktur aus Knoten. Oben steht die Wurzel, darunter folgen Kindknoten und Blätter.</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Bedingung</h3>
+    <p>Eine Aussage, die in Python entweder <code>True</code> oder <code>False</code> ergibt.</p>
+    <p class="beispiel">Beispiel: <code>alter &gt;= 18</code></p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Binäre Suche</h3>
+    <p>Suchverfahren für sortierte Arrays. In jedem Schritt wird nur noch die linke oder rechte Hälfte weiter betrachtet.</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Binärbaum</h3>
+    <p>Baum, bei dem jeder Knoten höchstens zwei Kindknoten besitzt: ein linkes und ein rechtes Kind.</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Boolean</h3>
+    <p>Datentyp für Wahrheitswerte. Es gibt nur <code>True</code> und <code>False</code>.</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Bubble Sort</h3>
+    <p>Sortierverfahren, bei dem benachbarte Werte verglichen und bei falscher Reihenfolge getauscht werden.</p>
+  </div>
+</div>
+
+<h3 id="d">D</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>Datentyp</h3>
+    <p>Die Art eines Werts, zum Beispiel Text, Ganzzahl, Dezimalzahl oder Wahrheitswert.</p>
+    <p class="beispiel">Python: <code>str</code>, <code>int</code>, <code>float</code>, <code>bool</code></p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Datenstruktur</h3>
+    <p>Eine Art, mehrere Daten so zu speichern, dass ein Programm gut damit arbeiten kann.</p>
+    <p class="beispiel">Beispiele: Array, verkettete Liste, Stack, Queue, Baum</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Debugger</h3>
+    <p>Werkzeug, mit dem ein Programm Schritt für Schritt ausgeführt und beobachtet wird.</p>
+  </div>
+</div>
+
+<h3 id="e">E</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>Eingabe</h3>
+    <p>Daten, die eine Nutzerin oder ein Nutzer in ein Programm eingibt.</p>
+    <p class="beispiel">Python: <code>input("Name: ")</code></p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Einrückung</h3>
+    <p>Leerzeichen am Zeilenanfang. In Python zeigt die Einrückung, welche Zeilen zu einem Block gehören.</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>EVA-Prinzip</h3>
+    <p>Grundmuster vieler Programme: Eingabe → Verarbeitung → Ausgabe.</p>
+  </div>
+</div>
+
+<h3 id="f">F</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>float</h3>
+    <p>Datentyp für Dezimalzahlen. In Python wird ein Punkt statt eines Kommas verwendet.</p>
+    <p class="beispiel"><code>preis = 2.99</code></p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>FIFO</h3>
+    <p>„First in, first out“: Das zuerst eingefügte Element wird zuerst wieder entnommen. Das ist das Prinzip einer Queue.</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Funktion</h3>
+    <p>Ein benannter Programmbaustein, der bei Bedarf aufgerufen werden kann.</p>
+    <p class="beispiel"><code>def quadrat(p_zahl):</code></p>
+  </div>
+</div>
+
+<h3 id="g">G</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>GUI</h3>
+    <p>Grafische Benutzeroberfläche mit Fenstern, Textfeldern, Buttons und Labels.</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Ganzzahl</h3>
+    <p>Zahl ohne Nachkommastellen. Der Python-Datentyp heißt <code>int</code>.</p>
+  </div>
+</div>
+
+<h3 id="i">I</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>Initialisierung</h3>
+    <p>Eine Variable bekommt zum ersten Mal einen Wert.</p>
+    <p class="beispiel"><code>summe = 0</code></p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Index</h3>
+    <p>Die Nummer eines Speicherplatzes in einem Array. In Python beginnt der erste Index bei <code>0</code>.</p>
+    <p class="beispiel"><code>namen[0]</code> ist das erste Element.</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Iteration</h3>
+    <p>Ein einzelner Durchlauf einer Schleife.</p>
+  </div>
+</div>
+
+<h3 id="k">K</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>Kommentar</h3>
+    <p>Text im Programm, der von Python ignoriert wird. Kommentare erklären den Code.</p>
+    <p class="beispiel"><code># Das ist ein Kommentar</code></p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Knoten</h3>
+    <p>Ein einzelnes Element in einer verketteten Liste oder in einem Baum. Ein Knoten enthält Daten und oft Verweise auf andere Knoten.</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Konsole</h3>
+    <p>Textbereich, in dem ein Programm Eingaben annimmt und Ausgaben anzeigt.</p>
+  </div>
+</div>
+
+<h3 id="l">L</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>Liste</h3>
+    <p>Eine geordnete Sammlung von mehreren Werten.</p>
+    <p class="beispiel"><code>zahlen = [2, 4, 6]</code></p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>LIFO</h3>
+    <p>„Last in, first out“: Das zuletzt eingefügte Element wird zuerst wieder entnommen. Das ist das Prinzip eines Stacks.</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Lineare Suche</h3>
+    <p>Suchverfahren, bei dem die Elemente der Reihe nach geprüft werden, bis der gesuchte Wert gefunden wurde oder das Array endet.</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Logischer Operator</h3>
+    <p>Verknüpft oder verändert Bedingungen: <code>and</code>, <code>or</code>, <code>not</code>.</p>
+  </div>
+</div>
+
+<h3 id="o">O</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>Operator</h3>
+    <p>Ein Zeichen oder Wort, das mit Werten arbeitet.</p>
+    <p class="beispiel"><code>+</code>, <code>*</code>, <code>==</code>, <code>and</code></p>
+  </div>
+</div>
+
+<h3 id="p">P</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>Parameter</h3>
+    <p>Eine Information, die beim Aufruf an eine Funktion übergeben wird.</p>
+    <p class="beispiel"><code>def gruessen(p_name):</code></p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Programm</h3>
+    <p>Eine Folge von Anweisungen, die der Computer ausführt.</p>
+  </div>
+</div>
+
+<h3 id="r">R</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>Rückgabewert</h3>
+    <p>Das Ergebnis, das eine Funktion mit <code>return</code> an die Aufrufstelle zurückgibt.</p>
+  </div>
+</div>
+
+<h3 id="q">Q</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>Queue</h3>
+    <p>Warteschlange: Neue Elemente werden hinten angefügt, vorne wird entnommen. Die Queue arbeitet nach dem FIFO-Prinzip.</p>
+  </div>
+</div>
+
+<h3 id="s">S</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>Schleife</h3>
+    <p>Eine Kontrollstruktur, die Anweisungen wiederholt.</p>
+    <p class="beispiel">Python: <code>for</code> oder <code>while</code></p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Schreibtischtest</h3>
+    <p>Man führt ein Programm gedanklich aus und notiert die Werte der Variablen Schritt für Schritt.</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Selection Sort</h3>
+    <p>Sortierverfahren, bei dem immer das kleinste Element des unsortierten Rests gesucht und nach vorne getauscht wird.</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Sequenz</h3>
+    <p>Anweisungen werden nacheinander von oben nach unten ausgeführt.</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Stack</h3>
+    <p>Stapelspeicher: Neue Elemente werden oben abgelegt und auch oben wieder entnommen. Der Stack arbeitet nach dem LIFO-Prinzip.</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Struktogramm</h3>
+    <p>Grafische Darstellung eines Programmablaufs. Es zeigt Sequenzen, Schleifen und Alternativen.</p>
+  </div>
+</div>
+
+<h3 id="t">T</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>Traceback</h3>
+    <p>Fehlerbericht von Python. Die letzte Zeile nennt meist den Fehlertyp.</p>
+  </div>
+</div>
+
+<h3 id="v">V</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>Variable</h3>
+    <p>Ein Name für einen gespeicherten Wert. Man kann sich eine Variable wie eine beschriftete Schublade vorstellen.</p>
+    <p class="beispiel"><code>alter = 17</code></p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Vergleichsoperator</h3>
+    <p>Vergleicht zwei Werte und liefert <code>True</code> oder <code>False</code>.</p>
+    <p class="beispiel"><code>&lt;</code>, <code>&gt;=</code>, <code>==</code>, <code>!=</code></p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Verkettete Liste</h3>
+    <p>Datenstruktur aus Knoten, bei der jeder Knoten auf den nächsten Knoten verweist. Dadurch kann man Elemente flexibel einfügen und entfernen.</p>
+  </div>
+</div>
+
+<h3 id="w">W</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>Wahrheitswert</h3>
+    <p>Ein Wert, der nur wahr oder falsch sein kann: <code>True</code> oder <code>False</code>.</p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Wertzuweisung</h3>
+    <p>Eine Variable bekommt mit <code>=</code> einen Wert.</p>
+    <p class="beispiel"><code>punkte = 12</code></p>
+  </div>
+  <div class="glossar-eintrag">
+    <h3>Wurzel</h3>
+    <p>Der oberste Knoten eines Baums. Von der Wurzel aus erreicht man alle anderen Knoten.</p>
+  </div>
+</div>
+
+<h3 id="z">Z</h3>
+<div class="glossar-grid">
+  <div class="glossar-eintrag">
+    <h3>Zeiger</h3>
+    <p>Ein Verweis auf ein anderes Element, zum Beispiel vom aktuellen Knoten einer verketteten Liste zum nächsten Knoten.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="befehle">Python-Befehle und Schlüsselwörter</h2>
+
+<h3>Ein- und Ausgabe</h3>
+<div class="befehl-grid">
+  <div class="befehl-card">
+    <h3><code>print()</code></h3>
+    <p>Gibt Text, Zahlen oder Variablen in der Konsole aus.</p>
+<pre class="code">name = "Kara"
+print("Hallo", name)</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>input()</code></h3>
+    <p>Liest eine Tastatureingabe ein. Wichtig: Das Ergebnis ist immer ein Text.</p>
+<pre class="code">name = input("Name: ")
+print("Willkommen", name)</pre>
+  </div>
+</div>
+
+<h3>Umwandeln und Prüfen</h3>
+<div class="befehl-grid">
+  <div class="befehl-card">
+    <h3><code>int()</code></h3>
+    <p>Wandelt einen passenden Wert in eine Ganzzahl um.</p>
+<pre class="code">anzahl = int(input("Anzahl: "))</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>float()</code></h3>
+    <p>Wandelt einen passenden Wert in eine Dezimalzahl um.</p>
+<pre class="code">preis = float(input("Preis: "))</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>str()</code></h3>
+    <p>Wandelt einen Wert in Text um, damit er mit anderen Texten verbunden werden kann.</p>
+<pre class="code">alter_text = str(17)</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>type()</code></h3>
+    <p>Zeigt den Datentyp eines Werts oder einer Variable an.</p>
+<pre class="code">zahl = 3.5
+print(type(zahl))</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>round()</code></h3>
+    <p>Rundet eine Zahl auf eine bestimmte Anzahl von Nachkommastellen.</p>
+<pre class="code">preis = round(3.14159, 2)</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>len()</code></h3>
+    <p>Zählt Elemente, zum Beispiel Zeichen in einem Text oder Werte in einer Liste.</p>
+<pre class="code">wort = "Python"
+print(len(wort))</pre>
+  </div>
+</div>
+
+<h3>Kontrollstrukturen</h3>
+<div class="befehl-grid">
+  <div class="befehl-card">
+    <h3><code>if</code></h3>
+    <p>Führt einen Block nur aus, wenn die Bedingung wahr ist.</p>
+<pre class="code">if alter &gt;= 18:
+    print("volljährig")</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>else</code></h3>
+    <p>Fängt den Nein-Fall einer Verzweigung auf.</p>
+<pre class="code">if alter &gt;= 18:
+    print("ja")
+else:
+    print("nein")</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>elif</code></h3>
+    <p>Prüft eine weitere Bedingung, wenn die vorherige Bedingung falsch war.</p>
+<pre class="code">if note == 1:
+    print("sehr gut")
+elif note == 2:
+    print("gut")</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>for</code></h3>
+    <p>Wiederholt einen Block für alle Werte einer Folge.</p>
+<pre class="code">for zahl in range(1, 6):
+    print(zahl)</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>while</code></h3>
+    <p>Wiederholt einen Block, solange die Bedingung wahr ist.</p>
+<pre class="code">zahl = 1
+while zahl &lt;= 5:
+    print(zahl)
+    zahl = zahl + 1</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>range()</code></h3>
+    <p>Erzeugt eine Zahlenfolge für eine Schleife. Der Endwert gehört nicht mehr dazu.</p>
+<pre class="code">for i in range(0, 10, 2):
+    print(i)</pre>
+  </div>
+</div>
+
+<h3>Funktionen und Module</h3>
+<div class="befehl-grid">
+  <div class="befehl-card">
+    <h3><code>def</code></h3>
+    <p>Definiert eine eigene Funktion.</p>
+<pre class="code">def begruessen(p_name):
+    print("Hallo", p_name)</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>return</code></h3>
+    <p>Gibt ein Ergebnis aus einer Funktion zurück.</p>
+<pre class="code">def quadrat(p_zahl):
+    return p_zahl * p_zahl</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>import</code></h3>
+    <p>Lädt ein Modul, damit zusätzliche Funktionen verwendet werden können.</p>
+<pre class="code">import random
+zahl = random.randint(1, 6)</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>from ... import ...</code></h3>
+    <p>Lädt bestimmte Bausteine direkt aus einem Modul.</p>
+<pre class="code">from random import randint
+zahl = randint(1, 6)</pre>
+  </div>
+</div>
+
+<h3>Listen und Zufall</h3>
+<div class="befehl-grid">
+  <div class="befehl-card">
+    <h3><code>list()</code></h3>
+    <p>Wandelt eine Folge in eine Liste um, zum Beispiel zum Anzeigen von <code>range()</code>.</p>
+<pre class="code">zahlen = list(range(1, 6))
+print(zahlen)</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>randint()</code></h3>
+    <p>Erzeugt eine zufällige Ganzzahl im angegebenen Bereich, inklusive Start und Ende.</p>
+<pre class="code">from random import randint
+wuerfel = randint(1, 6)</pre>
+  </div>
+</div>
+
+<h3 id="array-befehle">Arrays, Suchen und Sortieren (BPE 7)</h3>
+
+<div class="box box-info">
+  <span class="box-titel">Index-Merker</span>
+  <p>Die erste Zelle hat den Index <code>0</code>. Der letzte gültige Index ist immer <code>len(array) - 1</code>.</p>
+  <div class="arr" aria-label="Array mit Werten und Indexnummern">
+    <span class="zelle"><span class="wert">12</span><span class="idx">0</span></span>
+    <span class="zelle"><span class="wert">7</span><span class="idx">1</span></span>
+    <span class="zelle"><span class="wert">19</span><span class="idx">2</span></span>
+    <span class="zelle hervor"><span class="wert">4</span><span class="idx">3</span></span>
+  </div>
+</div>
+
+<div class="befehl-grid">
+  <div class="befehl-card">
+    <h3><code>[]</code></h3>
+    <p>Legt ein leeres Array an, das später gefüllt werden kann.</p>
+<pre class="code">zahlen = []</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>[wert1, wert2]</code></h3>
+    <p>Legt ein Array direkt mit Startwerten an.</p>
+<pre class="code">namen = ["Mia", "Leo", "Ali"]</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>append()</code></h3>
+    <p>Fügt ein Element am Ende des Arrays an.</p>
+<pre class="code">zahlen.append(42)</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>array[index]</code></h3>
+    <p>Liest oder verändert ein bestimmtes Element. Achtung: Der erste Index ist <code>0</code>.</p>
+<pre class="code">print(namen[0])
+namen[1] = "Lina"</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>insert()</code></h3>
+    <p>Fügt ein Element an einer bestimmten Position ein. Die folgenden Elemente rücken nach rechts.</p>
+<pre class="code">farben.insert(1, "gruen")</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>pop()</code></h3>
+    <p>Entfernt das Element an einem Index und gibt es zurück.</p>
+<pre class="code">entfernt = farben.pop(2)</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>remove()</code></h3>
+    <p>Entfernt den ersten passenden Wert aus einem Array.</p>
+<pre class="code">farben.remove("rot")</pre>
+  </div>
+  <div class="befehl-card">
+    <h3><code>len(array)</code></h3>
+    <p>Liefert die Anzahl der Elemente. Besonders wichtig für Schleifen über Arrays.</p>
+<pre class="code">for i in range(len(zahlen)):
+    print(i, zahlen[i])</pre>
+  </div>
+  <div class="befehl-card">
+    <h3>Werte tauschen</h3>
+    <p>Beim Sortieren werden zwei Werte häufig mit einem Zwischenspeicher getauscht.</p>
+<pre class="code">temp = a[i]
+a[i] = a[j]
+a[j] = temp</pre>
+  </div>
+  <div class="befehl-card">
+    <h3>Lineare Suche</h3>
+    <p>Prüft die Werte von links nach rechts. Funktioniert auch bei unsortierten Arrays.</p>
+<pre class="code">position = -1
+for i in range(len(a)):
+    if a[i] == gesucht:
+        position = i</pre>
+  </div>
+  <div class="befehl-card">
+    <h3>Binäre Suche</h3>
+    <p>Halbiert den Suchbereich. Voraussetzung: Das Array ist sortiert.</p>
+<pre class="code">m = int((start + ende) / 2)
+if gesucht &lt; a[m]:
+    ende = m - 1
+else:
+    start = m + 1</pre>
+  </div>
+  <div class="befehl-card">
+    <h3>Stack / Queue</h3>
+    <p>Mit Python-Listen lassen sich Stapel und Warteschlangen modellieren.</p>
+<pre class="code">stack.append("A")   # push
+oben = stack.pop()  # pop
+
+queue.append("A")   # enqueue
+vorn = queue.pop(0) # dequeue</pre>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="kara-befehle">PythonKara-Befehle</h2>
+
+<table class="tab">
+  <tr><th style="width:34%">Befehl</th><th>Bedeutung</th></tr>
+  <tr><td><code>kara.move()</code></td><td>Kara geht ein Feld vorwärts.</td></tr>
+  <tr><td><code>kara.turnLeft()</code></td><td>Kara dreht sich um 90 Grad nach links.</td></tr>
+  <tr><td><code>kara.turnRight()</code></td><td>Kara dreht sich um 90 Grad nach rechts.</td></tr>
+  <tr><td><code>kara.putLeaf()</code></td><td>Kara legt ein Blatt auf das aktuelle Feld.</td></tr>
+  <tr><td><code>kara.removeLeaf()</code></td><td>Kara hebt ein Blatt vom aktuellen Feld auf.</td></tr>
+  <tr><td><code>kara.onLeaf()</code></td><td>Sensor: Steht Kara auf einem Blatt?</td></tr>
+  <tr><td><code>kara.treeFront()</code></td><td>Sensor: Steht vor Kara ein Baum?</td></tr>
+  <tr><td><code>kara.treeLeft()</code></td><td>Sensor: Steht links von Kara ein Baum?</td></tr>
+  <tr><td><code>kara.treeRight()</code></td><td>Sensor: Steht rechts von Kara ein Baum?</td></tr>
+  <tr><td><code>kara.mushroomFront()</code></td><td>Sensor: Steht vor Kara ein Pilz?</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2 id="tkinter">Tkinter-Grundbausteine</h2>
+
+<table class="tab">
+  <tr><th style="width:34%">Baustein</th><th>Wofür?</th></tr>
+  <tr><td><code>fenster = Tk()</code></td><td>Erzeugt ein neues Fenster.</td></tr>
+  <tr><td><code>fenster.title("...")</code></td><td>Setzt den Fenstertitel.</td></tr>
+  <tr><td><code>Label(...)</code></td><td>Zeigt Text oder ein Ergebnis an.</td></tr>
+  <tr><td><code>Entry(...)</code></td><td>Eingabefeld für Text oder Zahlen.</td></tr>
+  <tr><td><code>Button(...)</code></td><td>Schaltfläche, die eine Funktion starten kann.</td></tr>
+  <tr><td><code>.grid(row=..., column=...)</code></td><td>Ordnet ein Element in einer Tabellenstruktur an.</td></tr>
+  <tr><td><code>.get()</code></td><td>Liest den Inhalt eines Eingabefelds aus.</td></tr>
+  <tr><td><code>.config(text=...)</code></td><td>Ändert Eigenschaften eines Elements, zum Beispiel den angezeigten Text.</td></tr>
+  <tr><td><code>fenster.mainloop()</code></td><td>Startet die grafische Oberfläche.</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2 id="operatoren">Operatoren im Überblick</h2>
+
+<table class="tab">
+  <tr><th>Gruppe</th><th>Operatoren</th><th>Beispiel</th></tr>
+  <tr><td>Rechnen</td><td><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>**</code></td><td><code>flaeche = radius ** 2 * pi</code></td></tr>
+  <tr><td>Zuweisen</td><td><code>=</code></td><td><code>alter = 17</code></td></tr>
+  <tr><td>Vergleichen</td><td><code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>==</code>, <code>!=</code></td><td><code>alter &gt;= 18</code></td></tr>
+  <tr><td>Logisch verknüpfen</td><td><code>and</code>, <code>or</code>, <code>not</code></td><td><code>alter &gt;= 17 and stunden &gt;= 16</code></td></tr>
+</table>
+
+<div class="box box-achtung">
+  <span class="box-titel">Typischer Fehler</span>
+  <p>
+    <code>=</code> ist eine Zuweisung, <code>==</code> ist ein Vergleich.
+    <code>if alter = 18:</code> ist falsch, richtig ist <code>if alter == 18:</code>.
+  </p>
+</div>
+
+<div class="seiten-nav">
+  <a href="inhaltsverzeichnis.html">← Inhaltsverzeichnis</a>
+  <a href="referenz.html">Spickzettel →</a>
+</div>
+
+</main>
+
+<a class="nach-oben" href="#" title="Nach oben">↑</a>
+
+<footer class="fuss">
+  <div class="fuss-inner">
+    <p>Python-Workbook zur BPE 5 und BPE 7 · Glossar</p>
+  </div>
+</footer>
+
+<script src="assets/workbook.js"></script>
+</body>
+</html>

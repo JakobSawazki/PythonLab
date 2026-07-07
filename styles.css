@@ -1184,6 +1184,144 @@ h4 {
   cursor: pointer;
 }
 
+/* Workbook: ruhiger Lesebereich innerhalb von PythonLab */
+.workbook-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 340px);
+  gap: 22px;
+  align-items: center;
+  padding: clamp(24px, 4vw, 44px);
+  border: 1px solid color-mix(in srgb, var(--green-500) 32%, var(--line));
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--surface) 86%, var(--green-100)) 0%, var(--surface) 66%),
+    var(--surface);
+  box-shadow: var(--shadow-lg);
+}
+
+.workbook-hero h2 {
+  max-width: 760px;
+  margin-bottom: 12px;
+  font-size: clamp(1.9rem, 3.4vw, 3.2rem);
+}
+
+.workbook-hero p {
+  max-width: 690px;
+  color: var(--muted);
+}
+
+.workbook-hero-note {
+  display: grid;
+  gap: 10px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-soft);
+}
+
+.workbook-hero-note span {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--green-grad);
+  color: #fff;
+}
+
+.workbook-hero-note p {
+  margin: 0;
+}
+
+.workbook-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.workbook-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 100%;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.workbook-card:hover {
+  border-color: color-mix(in srgb, var(--blue) 55%, var(--line));
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md), 0 0 0 1px color-mix(in srgb, var(--blue) 18%, transparent);
+}
+
+.workbook-card-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--blue) 12%, var(--surface-soft));
+  color: var(--blue);
+}
+
+.workbook-card-meta {
+  margin-bottom: 6px;
+  color: var(--green-700);
+  font-size: 0.73rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.workbook-card h3 {
+  margin-bottom: 7px;
+  font-size: 1.08rem;
+}
+
+.workbook-card p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.workbook-card .text-button {
+  margin-top: auto;
+}
+
+.workbook-bridge {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: center;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.workbook-bridge h2 {
+  margin-bottom: 6px;
+}
+
+.workbook-bridge p {
+  max-width: 780px;
+  margin: 0;
+  color: var(--muted);
+}
+
+.workbook-bridge-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
 .lesson-card:focus-visible,
 .exercise-card:focus-visible,
 .command-card:focus-visible {
@@ -3549,6 +3687,25 @@ code {
   background: #eef3f0;
 }
 
+:root[data-theme="dark"] .workbook-hero {
+  border-color: #315f4b;
+  background:
+    linear-gradient(135deg, #162a22 0%, #121f1a 68%),
+    var(--surface);
+}
+
+:root[data-theme="dark"] .workbook-hero-note,
+:root[data-theme="dark"] .workbook-card,
+:root[data-theme="dark"] .workbook-bridge {
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+:root[data-theme="dark"] .workbook-card-icon {
+  background: #132b3a;
+  color: #8ed4f2;
+}
+
 @keyframes toast-in {
   from {
     transform: translateY(10px);
@@ -3567,6 +3724,7 @@ code {
   .achievement-grid,
   .command-grid,
   .reference-grid,
+  .workbook-grid,
   .tool-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -3652,10 +3810,16 @@ code {
 
   .structure-promo,
   .structure-lead,
+  .workbook-hero,
+  .workbook-bridge,
   .commands-lead,
   .command-detail-grid,
   .competency-lead {
     grid-template-columns: 1fr;
+  }
+
+  .workbook-bridge-actions {
+    justify-content: flex-start;
   }
 
   .structure-promo-preview {
@@ -3714,6 +3878,7 @@ code {
   .achievement-grid,
   .command-grid,
   .reference-grid,
+  .workbook-grid,
   .operator-grid,
   .tool-grid {
     grid-template-columns: 1fr;

@@ -1,0 +1,925 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kapitel 1 · Programmieren lernen mit Kara – Python-Workbook</title>
+<link rel="stylesheet" href="assets/style.css?v=1.6">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">Python-Workbook</a>
+    <a class="lab-ruecklink" href="../index.html#workbook">← PythonLab</a>
+    <a href="index.html">Start</a>
+    <a href="inhaltsverzeichnis.html">Inhalt</a>
+    <a href="kapitel-1-kara.html" class="aktiv">K1 Kara</a>
+    <a href="kapitel-2-python-grundlagen.html">K2 Python</a>
+    <a href="kapitel-3-kontrollstrukturen.html">K3 Kontrolle</a>
+    <a href="kapitel-4-arrays.html">K4 Arrays</a>
+    <a href="kapitel-5-sortieren-suchen.html">K5 Algorithmen</a>
+    <a href="kapitel-6-datenstrukturen.html">K6 Datenstrukturen</a>
+    <a href="glossar.html">Glossar</a>
+    <a href="referenz.html">Spickzettel</a>
+    <a href="checklisten.html">Checklisten</a>
+  </div>
+</nav>
+
+<header class="seitenkopf">
+  <div class="kopf-inner">
+    <p class="dachzeile">Kapitel 1 · Lernfortschritt 1</p>
+    <h1>Programmieren lernen mit Kara 🐞</h1>
+    <p class="untertitel">
+      Der Marienkäfer Kara lebt in einer einfachen Welt aus Quadraten. Indem Sie ihn
+      steuern, lernen Sie die drei wichtigsten Grundbausteine aller Programme kennen:
+      Sequenz, Wiederholung und Alternative – ganz ohne komplizierte Details.
+    </p>
+  </div>
+</header>
+
+<main>
+
+<div class="kapitel-toc">
+  <strong>In diesem Kapitel:</strong>
+  <ol>
+    <li><a href="#programm">Was ist ein Programm?</a></li>
+    <li><a href="#struktogramm">Struktogramme – der Bauplan eines Programms</a></li>
+    <li><a href="#kara">Die Welt von Kara</a> · <a href="#simulator">🎮 Kara-Simulator</a></li>
+    <li><a href="#sequenz">Die Sequenz – Schritt für Schritt</a></li>
+    <li><a href="#for">Die for-Schleife – Wiederholen mit Zähler</a></li>
+    <li><a href="#while">Die while-Schleife – Wiederholen mit Bedingung</a></li>
+    <li><a href="#alternative">Die Alternative – Entscheidungen treffen</a></li>
+    <li><a href="#uebungen">Übungsaufgaben</a></li>
+  </ol>
+</div>
+
+<div class="box box-ziel">
+  <span class="box-titel">🎯 Das können Sie nach diesem Kapitel</span>
+  <ul>
+    <li>erklären, was ein Programm und was ein Algorithmus ist,</li>
+    <li>Programmabläufe in einem Struktogramm darstellen,</li>
+    <li>Kara mit Anweisungen, Schleifen und Verzweigungen durch seine Welt steuern,</li>
+    <li>die Kontrollstrukturen <em>Sequenz</em>, <em>Wiederholung</em> und <em>Alternative</em> erkennen und gezielt einsetzen.</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="programm"><span class="knr">1.1</span>Was ist ein Programm?</h2>
+
+<p>
+  Ein Computer kann nichts von allein – er braucht eine genaue
+  <strong>Schritt-für-Schritt-Anleitung</strong>. So eine Anleitung kennen Sie aus dem
+  Alltag: ein Kochrezept, eine Aufbauanleitung für ein Möbelstück oder eine
+  Wegbeschreibung. In der Informatik nennt man eine solche eindeutige
+  Handlungsvorschrift einen <strong>Algorithmus</strong>.
+</p>
+
+<p>
+  Wird ein Algorithmus in einer Sprache aufgeschrieben, die der Computer versteht
+  (z.&nbsp;B. Python), entsteht ein <strong>Programm</strong>. Die Entwicklung einer
+  Problemlösung läuft dabei fast immer in zwei Schritten ab:
+</p>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Merke: Vom Problem zum Programm</span>
+  <ol>
+    <li><strong>Strukturieren:</strong> Die einzelnen Arbeitsschritte werden geordnet und in einem <strong>Struktogramm</strong> dargestellt.</li>
+    <li><strong>Übersetzen:</strong> Die Arbeitsschritte werden in eine <strong>Programmiersprache</strong> übertragen (Programmcode).</li>
+  </ol>
+</div>
+
+<div class="box box-tipp">
+  <span class="box-titel">💡 Probieren Sie es aus</span>
+  <p>
+    Beschreiben Sie einem Mitschüler / einer Mitschülerin nur mit Worten, wie man ein
+    Marmeladenbrot schmiert – er oder sie führt <em>exakt</em> das aus, was Sie sagen
+    (und nicht mehr!). Sie werden merken: Ein Computer braucht wirklich
+    <em>jede</em> Einzelheit. Genau darum geht es beim Programmieren.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="struktogramm"><span class="knr">1.2</span>Struktogramme – der Bauplan eines Programms</h2>
+
+<p>
+  Ein <strong>Struktogramm</strong> (auch Nassi-Shneiderman-Diagramm genannt) stellt
+  einen Programmablauf grafisch dar – wie ein Bauplan, bevor gebaut wird. Es besteht
+  aus wenigen Grundelementen, die Sie in diesem Kapitel nach und nach kennenlernen:
+</p>
+
+<table class="tab">
+  <tr><th style="width:25%">Element</th><th>Bedeutung</th></tr>
+  <tr><td><strong>Sequenz</strong></td><td>Anweisungen, die einfach nacheinander ausgeführt werden – jeder Befehl bekommt einen eigenen rechteckigen Block.</td></tr>
+  <tr><td><strong>Wiederholung</strong></td><td>Ein Block von Anweisungen wird mehrfach ausgeführt (Schleife). Der Schleifenkörper ist eingerückt dargestellt.</td></tr>
+  <tr><td><strong>Alternative</strong></td><td>Je nach Bedingung wird der Ja-Zweig (links) oder der Nein-Zweig (rechts) ausgeführt.</td></tr>
+</table>
+
+<p>So sieht ein einfaches Struktogramm aus – gelesen wird immer von oben nach unten:</p>
+
+<div class="stg">
+  <div class="stg-titel">Morgenroutine</div>
+  <div class="stg-zeile">Wecker ausschalten</div>
+  <div class="stg-zeile">Aufstehen</div>
+  <div class="stg-zeile">Zähne putzen</div>
+  <div class="stg-zeile">Frühstücken</div>
+</div>
+
+<div class="box box-info">
+  <span class="box-titel">ℹ️ Struktogramme am Computer zeichnen</span>
+  <p>
+    Mit dem kostenlosen Werkzeug <a href="http://www.struktogrammer.ch/JavaVersion/jstgr.html"
+    target="_blank" rel="noopener">hus-Struktogrammer</a> lassen sich Struktogramme
+    digital erstellen. Die Elemente werden aus einer Toolbox per Drag&nbsp;&amp;&nbsp;Drop
+    eingefügt; fertige Struktogramme können als PNG-Grafik exportiert und in
+    Textdokumente eingefügt werden.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="kara"><span class="knr">1.3</span>Die Welt von Kara</h2>
+
+<p>
+  <strong>Kara</strong> ist eine Lernumgebung, die an der ETH Zürich entwickelt wurde.
+  Der Marienkäfer Kara lebt in einer Welt aus quadratischen Feldern (standardmäßig
+  9&nbsp;×&nbsp;9). In dieser Welt gibt es drei Dinge, mit denen Kara umgehen muss:
+</p>
+
+<table class="tab">
+  <tr><th style="width:22%">Akteur</th><th>Eigenschaft</th></tr>
+  <tr><td>🌳 <strong>Baum</strong> (tree)</td><td>Ein Hindernis – Kara kann nicht durch Bäume hindurchlaufen.</td></tr>
+  <tr><td>🍄 <strong>Pilz</strong> (mushroom)</td><td>Kann von Kara geschoben werden.</td></tr>
+  <tr><td>🍀 <strong>Blatt</strong> (leaf)</td><td>Kann von Kara abgelegt und aufgehoben werden.</td></tr>
+</table>
+
+<h3>Karas Befehle (Aktionen)</h3>
+
+<p>
+  Kara versteht nur fünf Befehle. In <strong>PythonKara</strong> schreibt man sie so:
+</p>
+
+<table class="tab">
+  <tr><th style="width:34%">Python-Befehl</th><th>Was Kara tut</th></tr>
+  <tr><td><code>kara.move()</code></td><td>geht ein Feld vorwärts</td></tr>
+  <tr><td><code>kara.turnLeft()</code></td><td>dreht sich um 90° nach links</td></tr>
+  <tr><td><code>kara.turnRight()</code></td><td>dreht sich um 90° nach rechts</td></tr>
+  <tr><td><code>kara.putLeaf()</code></td><td>legt ein Blatt auf sein Feld</td></tr>
+  <tr><td><code>kara.removeLeaf()</code></td><td>hebt das Blatt von seinem Feld auf</td></tr>
+</table>
+
+<h3>Karas Sensoren</h3>
+
+<p>
+  Zusätzlich hat Kara <strong>Sensoren</strong>, mit denen er seine Umgebung wahrnehmen
+  kann. Ein Sensor liefert immer einen <strong>Wahrheitswert</strong> zurück:
+  <code>True</code> (wahr) oder <code>False</code> (falsch). Sensoren brauchen wir
+  später für Schleifen und Verzweigungen.
+</p>
+
+<table class="tab">
+  <tr><th style="width:34%">Sensor</th><th>Frage, die der Sensor beantwortet</th></tr>
+  <tr><td><code>kara.treeFront()</code></td><td>Steht vor mir ein Baum?</td></tr>
+  <tr><td><code>kara.treeLeft()</code></td><td>Steht links von mir ein Baum?</td></tr>
+  <tr><td><code>kara.treeRight()</code></td><td>Steht rechts von mir ein Baum?</td></tr>
+  <tr><td><code>kara.mushroomFront()</code></td><td>Steht vor mir ein Pilz?</td></tr>
+  <tr><td><code>kara.onLeaf()</code></td><td>Stehe ich auf einem Blatt?</td></tr>
+</table>
+
+<div class="box box-info">
+  <span class="box-titel">ℹ️ Kommentare im Programmcode</span>
+  <p>
+    Zeilen, die mit <code>#</code> beginnen, sind <strong>Kommentare</strong>. Sie werden
+    vom Computer ignoriert und dienen nur der Erklärung für Menschen. Mehrzeilige
+    Kommentare werden mit drei Anführungszeichen <code>"""</code> begonnen und beendet.
+  </p>
+</div>
+
+<div class="box box-info">
+  <span class="box-titel">ℹ️ Speichern in PythonKara</span>
+  <p>
+    Ein PythonKara-Projekt besteht immer aus <strong>zwei Dateien</strong>:
+    der <strong>Welt</strong> (Endung <code>.world</code> – enthält Kara, Bäume, Blätter …)
+    und dem <strong>Programmcode</strong> (Endung <code>.py</code>). Zum Weiterarbeiten
+    müssen beide Dateien geöffnet werden.
+  </p>
+</div>
+
+<h3 id="simulator">🎮 Gleich hier ausprobieren: der Kara-Simulator</h3>
+
+<p>
+  Sie müssen nicht warten, bis PythonKara installiert ist – in dieser kleinen
+  Kara-Welt können Sie sofort loslegen. Wählen Sie oben ein Szenario:
+  Im <strong>freien Modus</strong> steuern Sie Kara selbst per Knopfdruck, in den
+  <strong>Programm-Szenarien</strong> sehen Sie Schritt für Schritt, welche Code-Zeile
+  gerade ausgeführt wird (gelb markiert) und was Kara daraufhin tut. Die
+  Programm-Szenarien passen zu den Abschnitten 1.4 bis 1.7 – kommen Sie also gern
+  hierher zurück, während Sie weiterlesen!
+</p>
+
+<div class="kara-sim" id="kara-sim">
+  <div class="kara-sim-kopf">
+    <label for="kara-szenario"><strong>Szenario:</strong></label>
+    <select id="kara-szenario">
+      <option value="frei">Freies Ausprobieren (Steuerung per Knopf)</option>
+      <option value="sequenz">1.4 · Sequenz: Pfad ablaufen</option>
+      <option value="forschleife">1.5 · for-Schleife: 5 Schritte gehen</option>
+      <option value="whileschleife">1.6 · while-Schleife: bis zum Baum laufen</option>
+      <option value="sammler">1.7 · while + Alternative: Blätter sammeln</option>
+    </select>
+    <button id="kara-step">▶ Schritt</button>
+    <button id="kara-play">▶▶ Abspielen</button>
+    <button id="kara-reset">↺ Zurücksetzen</button>
+  </div>
+  <div class="kara-sim-body">
+    <div id="kara-welt"></div>
+    <div>
+      <pre id="kara-code"></pre>
+      <p id="kara-info"></p>
+      <div id="kara-manuell">
+        <button data-befehl="move">move()</button>
+        <button data-befehl="turnLeft">turnLeft()</button>
+        <button data-befehl="turnRight">turnRight()</button>
+        <button data-befehl="putLeaf">putLeaf()</button>
+        <button data-befehl="removeLeaf">removeLeaf()</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="box box-info">
+  <span class="box-titel">ℹ️ Simulator und echtes PythonKara</span>
+  <p>
+    Der Simulator zeigt das Prinzip – für die Übungsaufgaben und die Arbeit im
+    Unterricht verwenden Sie das richtige <strong>PythonKara</strong>, in dem Sie den
+    Programmcode selbst eintippen und eigene Welten bauen können.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="sequenz"><span class="knr">1.4</span>Die Sequenz – Schritt für Schritt</h2>
+
+<div class="box box-ziel">
+  <span class="box-titel">🎯 Lernziel</span>
+  <p>Sie können Anweisungen in der richtigen Reihenfolge anordnen und als Struktogramm sowie als Programm notieren.</p>
+</div>
+
+<p>
+  Eine <strong>Sequenz</strong> (auch: linearer Ablauf) ist eine Folge von Anweisungen,
+  die der Reihe nach – von oben nach unten – ausgeführt werden. Das ist die einfachste
+  Struktur, aus der jedes Programm besteht.
+</p>
+
+<p>
+  <strong>Beispiel:</strong> Kara soll drei Felder vorwärtsgehen, sich nach rechts
+  drehen, zwei Felder gehen und sich wieder nach links drehen.
+</p>
+
+<div class="vergleich">
+  <div>
+    <h4>Struktogramm</h4>
+    <div class="stg">
+      <div class="stg-titel">Kara läuft den Pfad ab</div>
+      <div class="stg-zeile">Kara, gehe einen Schritt vorwärts</div>
+      <div class="stg-zeile">Kara, gehe einen Schritt vorwärts</div>
+      <div class="stg-zeile">Kara, gehe einen Schritt vorwärts</div>
+      <div class="stg-zeile">Kara, drehe nach rechts</div>
+      <div class="stg-zeile">Kara, gehe einen Schritt vorwärts</div>
+      <div class="stg-zeile">Kara, gehe einen Schritt vorwärts</div>
+      <div class="stg-zeile">Kara, drehe nach links</div>
+    </div>
+  </div>
+  <div>
+    <h4>Python-Programm</h4>
+<pre class="code">kara.move()
+kara.move()
+kara.move()
+kara.turnRight()
+kara.move()
+kara.move()
+kara.turnLeft()</pre>
+  </div>
+</div>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Merke</span>
+  <p>
+    Jede Anweisung steht in einer <strong>eigenen Zeile</strong> und wird in einem
+    Struktogramm als <strong>eigener rechteckiger Block</strong> dargestellt.
+    Die Blöcke werden von oben nach unten durchlaufen.
+  </p>
+</div>
+
+<div class="quiz" data-erklaerung="Die Anweisungen werden der Reihe nach ausgeführt: 2 Schritte, Drehung nach links, 1 Schritt.">
+  <span class="quiz-titel">🧠 Kurz-Check</span>
+  <p class="quiz-frage">
+    Kara blickt nach rechts (Osten). Er führt aus: <code>kara.move()</code>,
+    <code>kara.move()</code>, <code>kara.turnLeft()</code>, <code>kara.move()</code>.
+    Wo steht Kara jetzt – und wohin blickt er?
+  </p>
+  <button class="antwort">3 Felder weiter rechts, Blick nach rechts (Osten)</button>
+  <button class="antwort" data-richtig>2 Felder weiter rechts und 1 Feld weiter oben, Blick nach oben (Norden)</button>
+  <button class="antwort">2 Felder weiter rechts und 1 Feld weiter unten, Blick nach unten (Süden)</button>
+  <p class="quiz-feedback"></p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="for"><span class="knr">1.5</span>Die for-Schleife – Wiederholen mit Zähler</h2>
+
+<div class="box box-ziel">
+  <span class="box-titel">🎯 Lernziel</span>
+  <p>Sie können die Zählerschleife (for-Schleife) erkennen, in einem Struktogramm darstellen und in PythonKara programmieren.</p>
+</div>
+
+<p>
+  Stellen Sie sich vor, Kara soll <strong>14 Felder</strong> vorwärtsgehen. Natürlich
+  könnten Sie 14-mal <code>kara.move()</code> untereinanderschreiben – aber was, wenn es
+  1&nbsp;000 oder 100&nbsp;000 Wiederholungen sein sollen? Dafür gibt es eine
+  Abkürzung: die <strong>Zählerschleife</strong>, in Python <strong>for-Schleife</strong>
+  genannt. Statt denselben Befehl x-mal zu schreiben, sagen wir dem Programm einfach:
+  <em>„Führe diese Anweisung 14-mal aus.“</em>
+</p>
+
+<h3>Aufbau der Zählerschleife</h3>
+
+<p>Eine Zählerschleife benötigt vier Angaben:</p>
+
+<ol>
+  <li>eine <strong>Zählervariable</strong>, mit der die Wiederholungen gezählt werden,</li>
+  <li>einen <strong>Startwert</strong> – mit welcher Zahl beginnt die Zählung?</li>
+  <li>einen <strong>Endwert</strong> – bis wohin wird gezählt?</li>
+  <li>eine <strong>Schrittweite</strong> – in welchen Schritten wird gezählt?</li>
+</ol>
+
+<p>
+  Diese Angaben stehen im <strong>Schleifenkopf</strong>. Die Anweisungen, die bei jedem
+  Durchlauf ausgeführt werden, stehen darunter im <strong>Schleifenkörper</strong>.
+</p>
+
+<div class="vergleich">
+  <div>
+    <h4>Struktogramm</h4>
+    <div class="stg">
+      <div class="stg-titel">Kara geht 14 Schritte</div>
+      <div class="stg-schleife">
+        <div class="stg-schleife-kopf">wiederhole für i = 0 bis 13</div>
+        <div class="stg-schleife-koerper">
+          <div class="stg-zeile">Kara, gehe einen Schritt vorwärts</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h4>Python-Programm</h4>
+<pre class="code">for i in range(0, 14):
+    kara.move()</pre>
+  </div>
+</div>
+
+<h3>So liest man den Schleifenkopf</h3>
+
+<pre class="code">for Zaehlervariable in range(Startwert, Endwert, Schrittweite):
+    Anweisungen, die wiederholt werden sollen</pre>
+
+<ul>
+  <li>Die Zählervariable (hier <code>i</code>) beginnt beim <strong>Startwert</strong> 0.</li>
+  <li>Nach jedem Durchlauf wird sie um die Schrittweite (ohne Angabe: um 1) erhöht.</li>
+  <li>Gezählt wird, <strong>bis die Zahl vor dem Endwert erreicht ist</strong>:
+      bei <code>range(0, 14)</code> also 0, 1, 2, …, 13 – das sind genau <strong>14 Durchläufe</strong>.</li>
+</ul>
+
+<div class="box box-achtung">
+  <span class="box-titel">⚠️ Achtung – die zwei häufigsten Fehler</span>
+  <ul>
+    <li>Der <strong>Endwert gehört nicht mehr dazu</strong>: <code>range(0, 14)</code> zählt nur bis 13. Trotzdem sind es 14 Durchläufe, weil bei 0 gestartet wird.</li>
+    <li>Die Anweisungen im Schleifenkörper müssen <strong>eingerückt</strong> sein. Alles, was wieder am Zeilenanfang steht, gehört nicht mehr zur Schleife!</li>
+  </ul>
+</div>
+
+<div class="box box-tipp">
+  <span class="box-titel">💡 Probieren Sie es aus</span>
+  <p>
+    Lassen Sie Kara mit einer for-Schleife ein <strong>Quadrat</strong> ablaufen:
+    4-mal (drei Schritte gehen, dann nach links drehen). Welche Anweisungen gehören in
+    den Schleifenkörper?
+  </p>
+</div>
+
+<div class="quiz" data-erklaerung="range(0, 5) zählt 0, 1, 2, 3, 4 – das sind 5 Durchläufe.">
+  <span class="quiz-titel">🧠 Kurz-Check</span>
+  <p class="quiz-frage">Wie oft wird <code>kara.move()</code> bei <code>for i in range(0, 5):</code> ausgeführt?</p>
+  <button class="antwort">4-mal</button>
+  <button class="antwort" data-richtig>5-mal</button>
+  <button class="antwort">6-mal</button>
+  <p class="quiz-feedback"></p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="while"><span class="knr">1.6</span>Die while-Schleife – Wiederholen mit Bedingung</h2>
+
+<div class="box box-ziel">
+  <span class="box-titel">🎯 Lernziel</span>
+  <p>Sie können die kopfgesteuerte Schleife (while-Schleife) erkennen, in einem Struktogramm darstellen und in PythonKara programmieren.</p>
+</div>
+
+<p>
+  Nicht immer weiß man vorher, <em>wie oft</em> etwas wiederholt werden muss.
+  Beispiel: Kara soll so lange geradeaus gehen, <strong>bis er vor einem Baum
+  steht</strong>. Wie viele Schritte das sind, hängt von der Welt ab! Für solche Fälle
+  gibt es die <strong>while-Schleife</strong>: Sie wiederholt Anweisungen,
+  <strong>solange eine Bedingung erfüllt ist</strong>.
+</p>
+
+<h3>Vergleichsoperatoren</h3>
+
+<p>
+  Für die Bedingung braucht man oft <strong>Vergleichsoperatoren</strong>. Sie
+  vergleichen zwei Werte und liefern als Ergebnis einen Wahrheitswert
+  (<code>True</code> oder <code>False</code>):
+</p>
+
+<table class="tab">
+  <tr><th style="width:18%">Operator</th><th style="width:25%">Beispiel</th><th>Bedeutung</th></tr>
+  <tr><td><code>&lt;</code></td><td><code>a &lt; b</code></td><td>a ist kleiner als b</td></tr>
+  <tr><td><code>&lt;=</code></td><td><code>a &lt;= b</code></td><td>a ist kleiner oder gleich b</td></tr>
+  <tr><td><code>&gt;</code></td><td><code>a &gt; b</code></td><td>a ist größer als b</td></tr>
+  <tr><td><code>&gt;=</code></td><td><code>a &gt;= b</code></td><td>a ist größer oder gleich b</td></tr>
+  <tr><td><code>==</code></td><td><code>a == b</code></td><td>a ist gleich b</td></tr>
+  <tr><td><code>!=</code></td><td><code>a != b</code></td><td>a ist ungleich b</td></tr>
+</table>
+
+<div class="box box-achtung">
+  <span class="box-titel">⚠️ Achtung</span>
+  <p>
+    Der Vergleich „ist gleich“ wird mit <strong>zwei</strong> Gleichheitszeichen
+    geschrieben (<code>==</code>). Ein einzelnes <code>=</code> bedeutet in Python
+    etwas anderes: eine Wertzuweisung an eine Variable (siehe Kapitel 2).
+  </p>
+</div>
+
+<h3>Aufbau der while-Schleife</h3>
+
+<p>
+  Im <strong>Schleifenkopf</strong> steht hinter dem Schlüsselwort <code>while</code>
+  die Bedingung. Der <strong>Schleifenkörper</strong> enthält die Anweisungen, die bei
+  jedem Durchlauf ausgeführt werden. Vor jedem Durchlauf wird die Bedingung geprüft –
+  deshalb heißt die while-Schleife auch <strong>kopfgesteuerte Schleife</strong>.
+</p>
+
+<p><strong>Beispiel 1:</strong> Kara geht 10 Schritte – gesteuert über eine Zählvariable:</p>
+
+<div class="vergleich">
+  <div>
+    <h4>Struktogramm</h4>
+    <div class="stg">
+      <div class="stg-titel">Kara geht 10 Schritte</div>
+      <div class="stg-zeile">anzahl = 0</div>
+      <div class="stg-schleife">
+        <div class="stg-schleife-kopf">solange anzahl &lt; 10</div>
+        <div class="stg-schleife-koerper">
+          <div class="stg-zeile">Kara, gehe einen Schritt vorwärts</div>
+          <div class="stg-zeile">erhöhe anzahl um 1</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h4>Python-Programm</h4>
+<pre class="code">anzahl = 0
+while anzahl &lt; 10:
+    kara.move()
+    anzahl = anzahl + 1</pre>
+  </div>
+</div>
+
+<p>
+  Ablauf: Zuerst bekommt die Variable <code>anzahl</code> den Startwert 0. Dann wird
+  geprüft: Ist <code>anzahl &lt; 10</code>? Wenn ja, geht Kara einen Schritt und
+  <code>anzahl</code> wird um 1 erhöht. Danach wird <em>wieder geprüft</em> … so lange,
+  bis die Bedingung nicht mehr erfüllt ist.
+</p>
+
+<div class="box box-achtung">
+  <span class="box-titel">⚠️ Achtung</span>
+  <p>
+    Damit die Bedingung überhaupt geprüft werden kann, braucht die Variable
+    <code>anzahl</code> <strong>vor der Schleife einen Anfangswert</strong>. Und:
+    Vergessen Sie nicht, die Variable <strong>im Schleifenkörper zu verändern</strong> –
+    sonst läuft die Schleife endlos!
+  </p>
+</div>
+
+<p>
+  <strong>Beispiel 2:</strong> Richtig praktisch wird die while-Schleife mit Karas
+  Sensoren. So läuft Kara bis zum nächsten Baum – egal, wie weit der entfernt ist:
+</p>
+
+<div class="vergleich">
+  <div>
+    <h4>Struktogramm</h4>
+    <div class="stg">
+      <div class="stg-titel">Kara läuft bis zum Baum</div>
+      <div class="stg-schleife">
+        <div class="stg-schleife-kopf">solange kein Baum vor Kara steht</div>
+        <div class="stg-schleife-koerper">
+          <div class="stg-zeile">Kara, gehe einen Schritt vorwärts</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h4>Python-Programm</h4>
+<pre class="code">while not kara.treeFront():
+    kara.move()</pre>
+  </div>
+</div>
+
+<p>
+  Das Schlüsselwort <code>not</code> kehrt den Wahrheitswert um: Die Schleife läuft,
+  solange <em>kein</em> Baum vor Kara steht. Mehr zu <code>and</code>, <code>or</code>
+  und <code>not</code> gleich im nächsten Abschnitt.
+</p>
+
+<div class="quiz" data-erklaerung="Die Bedingung wird vor jedem Durchlauf geprüft. Steht Kara schon am Anfang vor einem Baum, wird der Schleifenkörper gar nicht ausgeführt.">
+  <span class="quiz-titel">🧠 Kurz-Check</span>
+  <p class="quiz-frage">
+    Kara steht direkt vor einem Baum. Was passiert bei
+    <code>while not kara.treeFront(): kara.move()</code>?
+  </p>
+  <button class="antwort">Kara geht einen Schritt und bleibt dann stehen.</button>
+  <button class="antwort" data-richtig>Kara bewegt sich gar nicht – die Bedingung ist von Anfang an falsch.</button>
+  <button class="antwort">Das Programm stürzt ab.</button>
+  <p class="quiz-feedback"></p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="alternative"><span class="knr">1.7</span>Die Alternative – Entscheidungen treffen</h2>
+
+<div class="box box-ziel">
+  <span class="box-titel">🎯 Lernziel</span>
+  <p>Sie können ein-, zwei- und mehrseitige Alternativen erkennen, in einem Struktogramm darstellen und in PythonKara programmieren.</p>
+</div>
+
+<p>
+  Häufig soll ein Programm auf die aktuelle Situation reagieren:
+  <em>Wenn</em> Kara auf einem Blatt steht, soll er es aufheben – <em>sonst</em> soll er
+  weitergehen. Dieses Vorgehen nennt man <strong>Fallunterscheidung</strong> oder
+  <strong>Alternative</strong>. Sie kennen das Prinzip von der WENN-Funktion aus der
+  Tabellenkalkulation.
+</p>
+
+<h3>Die einseitige Auswahl</h3>
+
+<p>
+  Bei der <strong>einseitigen Auswahl</strong> wird der Anweisungsblock nur ausgeführt,
+  wenn die Bedingung wahr ist. Ist sie falsch, passiert nichts – das Programm macht
+  einfach dahinter weiter.
+</p>
+
+<div class="vergleich">
+  <div>
+    <h4>Struktogramm</h4>
+    <div class="stg">
+      <div class="stg-titel">Blatt aufheben, falls vorhanden</div>
+      <div class="stg-if">
+        <div class="stg-if-kopf">
+          <span class="bed">Steht Kara auf einem Blatt?</span>
+          <span class="ja">Ja</span><span class="nein">Nein</span>
+        </div>
+        <div class="stg-if-zweige">
+          <div><div class="stg-zeile">Kara, hebe das Blatt auf</div></div>
+          <div><div class="leer">∅</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h4>Python-Programm</h4>
+<pre class="code">if kara.onLeaf():
+    kara.removeLeaf()</pre>
+  </div>
+</div>
+
+<p>
+  Die <code>if</code>-Bedingung wird mit einem <strong>Doppelpunkt</strong>
+  abgeschlossen. Die Anweisungen für den Ja-Fall stehen darunter –
+  <strong>eingerückt</strong>, genau wie bei den Schleifen.
+</p>
+
+<h3>Die zweiseitige Auswahl</h3>
+
+<p>
+  Bei der <strong>zweiseitigen Auswahl</strong> gibt es für beide Fälle Anweisungen:
+  Ist die Bedingung wahr, wird Anweisungsblock 1 ausgeführt, sonst Anweisungsblock 2.
+</p>
+
+<div class="vergleich">
+  <div>
+    <h4>Struktogramm</h4>
+    <div class="stg">
+      <div class="stg-titel">Blatt aufheben oder weitergehen</div>
+      <div class="stg-if">
+        <div class="stg-if-kopf">
+          <span class="bed">Steht Kara auf einem Blatt?</span>
+          <span class="ja">Ja</span><span class="nein">Nein</span>
+        </div>
+        <div class="stg-if-zweige">
+          <div><div class="stg-zeile">Kara, hebe das Blatt auf</div></div>
+          <div><div class="stg-zeile">Kara, gehe einen Schritt vorwärts</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h4>Python-Programm</h4>
+<pre class="code">if kara.onLeaf():
+    kara.removeLeaf()
+else:
+    kara.move()</pre>
+  </div>
+</div>
+
+<p>
+  Der Nein-Fall wird mit dem Schlüsselwort <code>else:</code> eingeleitet – auch hier
+  folgen die Anweisungen eingerückt in den nächsten Zeilen.
+</p>
+
+<h3>Die mehrseitige (verschachtelte) Auswahl</h3>
+
+<p>
+  In einem Ja- oder Nein-Zweig kann eine <strong>weitere Alternative</strong> stehen –
+  man spricht dann von einer <strong>verschachtelten Auswahl</strong>. Beispiel: Steht
+  Kara auf einem Blatt <em>und</em> rechts von ihm ein Baum, geht er weiter; steht er
+  auf einem Blatt, aber rechts ist kein Baum, hebt er das Blatt auf; steht er auf
+  keinem Blatt, geht er weiter.
+</p>
+
+<div class="vergleich">
+  <div>
+    <h4>Struktogramm</h4>
+    <div class="stg">
+      <div class="stg-titel">Verschachtelte Auswahl</div>
+      <div class="stg-if">
+        <div class="stg-if-kopf">
+          <span class="bed">Steht Kara auf einem Blatt?</span>
+          <span class="ja">Ja</span><span class="nein">Nein</span>
+        </div>
+        <div class="stg-if-zweige">
+          <div>
+            <div class="stg-if">
+              <div class="stg-if-kopf">
+                <span class="bed">Baum rechts?</span>
+                <span class="ja">Ja</span><span class="nein">Nein</span>
+              </div>
+              <div class="stg-if-zweige">
+                <div><div class="stg-zeile">gehe vorwärts</div></div>
+                <div><div class="stg-zeile">hebe Blatt auf</div></div>
+              </div>
+            </div>
+          </div>
+          <div><div class="stg-zeile">gehe vorwärts</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h4>Python-Programm</h4>
+<pre class="code">if kara.onLeaf():
+    if kara.treeRight():
+        kara.move()
+    else:
+        kara.removeLeaf()
+else:
+    kara.move()</pre>
+  </div>
+</div>
+
+<h3>Mehrere Bedingungen verknüpfen: logische Operatoren</h3>
+
+<p>
+  Kara kann auch auf <strong>mehrere Sensoren gleichzeitig</strong> reagieren. Dazu
+  werden Bedingungen mit logischen Operatoren verknüpft:
+</p>
+
+<table class="tab">
+  <tr><th style="width:14%">Operator</th><th style="width:38%">Beispiel</th><th>Die Gesamtbedingung ist wahr, wenn …</th></tr>
+  <tr>
+    <td><code>and</code></td>
+    <td><code>kara.treeFront() and kara.treeRight()</code></td>
+    <td><strong>beide</strong> Aussagen zutreffen (Baum vorn <em>und</em> rechts).</td>
+  </tr>
+  <tr>
+    <td><code>or</code></td>
+    <td><code>kara.treeFront() or kara.treeRight()</code></td>
+    <td><strong>mindestens eine</strong> Aussage zutrifft (vorn <em>oder</em> rechts <em>oder</em> beides).</td>
+  </tr>
+  <tr>
+    <td><code>not</code></td>
+    <td><code>not kara.treeFront()</code></td>
+    <td>die Aussage <strong>nicht</strong> zutrifft (<code>not</code> macht aus <code>True</code> ein <code>False</code> und umgekehrt).</td>
+  </tr>
+</table>
+
+<div class="box box-merke">
+  <span class="box-titel">📌 Merke: Die drei Kontrollstrukturen</span>
+  <ul>
+    <li><strong>Sequenz:</strong> Anweisungen nacheinander ausführen.</li>
+    <li><strong>Wiederholung:</strong> Anweisungen mehrfach ausführen – mit Zähler (<code>for</code>) oder Bedingung (<code>while</code>).</li>
+    <li><strong>Alternative:</strong> Je nach Bedingung verschiedene Anweisungen ausführen (<code>if</code> / <code>else</code>).</li>
+  </ul>
+  <p>Aus diesen drei Bausteinen ist <strong>jedes</strong> Programm der Welt aufgebaut!</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="uebungen"><span class="knr">1.8</span>Übungsaufgaben</h2>
+
+<p>
+  Bearbeiten Sie die Aufgaben in PythonKara. Erstellen Sie – wo verlangt – zuerst das
+  Struktogramm und übersetzen Sie es dann in ein Programm. Die Lösungen klappen Sie
+  erst auf, wenn Ihr Programm läuft (oder Sie wirklich nicht mehr weiterkommen).
+</p>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 1 · Der Slalomlauf <span class="schwierigkeit">leicht</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Kara steht auf dem Startfeld und blickt nach rechts. Vor ihm stehen zwei Bäume
+      versetzt im Weg. Steuern Sie Kara mit einer <strong>Sequenz</strong> aus
+      Befehlen im Slalom an den Bäumen vorbei: einen Schritt vor, links am ersten Baum
+      vorbei, rechts am zweiten Baum vorbei, dann zum Zielfeld.
+    </p>
+    <p class="material">Passendes Originalmaterial: L1_1_1 Aufgabe Sequenz</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+      <p>Eine mögliche Lösung (abhängig von Ihrer Welt) – wichtig ist das Prinzip: nur
+      <code>move</code>, <code>turnLeft</code> und <code>turnRight</code> in der richtigen Reihenfolge:</p>
+<pre class="code"># Slalom um zwei Baeume
+kara.move()
+kara.turnLeft()
+kara.move()
+kara.turnRight()
+kara.move()
+kara.move()
+kara.turnRight()
+kara.move()
+kara.turnLeft()
+kara.move()</pre>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 2 · Das Quadrat <span class="schwierigkeit">leicht</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Kara soll ein Quadrat mit einer Seitenlänge von 4 Feldern ablaufen und am Ende
+      wieder auf dem Startfeld in Blickrichtung Start stehen.
+      Verwenden Sie eine <strong>for-Schleife</strong>, damit Sie die Befehle für eine
+      Seite nur einmal schreiben müssen. Zeichnen Sie zuerst das Struktogramm.
+    </p>
+    <p class="material">Passendes Originalmaterial: L1_2_1 Aufgabe for-Schleife</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code"># Viermal: eine Seite ablaufen und abbiegen
+for i in range(0, 4):
+    kara.move()
+    kara.move()
+    kara.move()
+    kara.turnLeft()</pre>
+      <p>
+        Der Schleifenkörper wird 4-mal ausgeführt (i = 0, 1, 2, 3). Pro Durchlauf läuft
+        Kara eine Seite (3 Schritte, denn das Eckfeld zählt schon zur nächsten Seite)
+        und dreht sich nach links.
+      </p>
+      <div class="stg">
+        <div class="stg-titel">Quadrat ablaufen</div>
+        <div class="stg-schleife">
+          <div class="stg-schleife-kopf">wiederhole für i = 0 bis 3</div>
+          <div class="stg-schleife-koerper">
+            <div class="stg-zeile">Kara, gehe einen Schritt vorwärts</div>
+            <div class="stg-zeile">Kara, gehe einen Schritt vorwärts</div>
+            <div class="stg-zeile">Kara, gehe einen Schritt vorwärts</div>
+            <div class="stg-zeile">Kara, drehe nach links</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 3 · Die Blätterspur <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Kara soll eine Spur aus 8 Blättern legen: ein Blatt ablegen, einen Schritt
+      vorwärtsgehen, wieder ein Blatt ablegen … Verwenden Sie eine
+      <strong>for-Schleife</strong>.
+    </p>
+    <p class="material">Passendes Originalmaterial: L1_2_2 / L1_2_3 Übungsaufgaben for-Schleife</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">for i in range(0, 8):
+    kara.putLeaf()
+    kara.move()</pre>
+      <p>
+        Bei jedem der 8 Durchläufe legt Kara zuerst ein Blatt auf sein aktuelles Feld
+        und geht dann einen Schritt weiter.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 4 · Lauf bis zum Baum <span class="schwierigkeit">mittel</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Irgendwo vor Kara steht ein Baum – Sie wissen aber nicht, wie weit er entfernt
+      ist. Schreiben Sie ein Programm, das Kara <strong>direkt vor dem Baum</strong>
+      anhalten lässt. Welche Schleife brauchen Sie – for oder while? Begründen Sie kurz.
+    </p>
+    <p class="material">Passendes Originalmaterial: L1_3_1 Aufgabe while-Schleife</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">while not kara.treeFront():
+    kara.move()</pre>
+      <p>
+        Es muss eine <strong>while-Schleife</strong> sein, denn die Anzahl der
+        Wiederholungen ist vorher <em>nicht bekannt</em> – sie hängt davon ab, wo der
+        Baum steht. Die for-Schleife eignet sich nur, wenn die Anzahl der Durchläufe
+        von Anfang an feststeht.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="uebung">
+  <div class="uebung-kopf">Übung 5 · Die Blätter-Sammelmaschine <span class="schwierigkeit">schwer</span></div>
+  <div class="uebung-inhalt">
+    <p>
+      Auf dem Weg zwischen Kara und einem Baum liegen einzelne Blätter verstreut –
+      manche Felder sind leer. Kara soll bis zum Baum laufen und dabei
+      <strong>jedes Blatt aufheben</strong>, auf dem er landet.
+      Kombinieren Sie dazu eine <strong>while-Schleife</strong> mit einer
+      <strong>Alternative</strong>.
+    </p>
+    <p class="material">Passendes Originalmaterial: L1_4_2 / L1_5_1 Übungsaufgaben Alternative &amp; Kontrollstrukturen</p>
+  </div>
+  <details class="loesung">
+    <summary>Lösung anzeigen</summary>
+    <div class="loesung-inhalt">
+<pre class="code">while not kara.treeFront():
+    if kara.onLeaf():
+        kara.removeLeaf()
+    kara.move()
+
+# Auch auf dem letzten Feld vor dem Baum
+# koennte noch ein Blatt liegen:
+if kara.onLeaf():
+    kara.removeLeaf()</pre>
+      <p>
+        In jedem Schleifendurchlauf prüft Kara zuerst, ob er auf einem Blatt steht
+        (einseitige Auswahl). Nur wenn ja, hebt er es auf. Danach geht er in jedem Fall
+        einen Schritt weiter. Der Zusatz nach der Schleife behandelt das letzte Feld
+        direkt vor dem Baum.
+      </p>
+    </div>
+  </details>
+</div>
+
+<div class="box box-tipp">
+  <span class="box-titel">💡 Geschafft?</span>
+  <p>
+    Dann haken Sie Ihre Lernziele auf der Seite
+    <a href="checklisten.html#lf1">Ich-kann-Checkliste zu Kapitel 1</a> ab –
+    und weiter geht’s mit „echtem“ Python in
+    <a href="kapitel-2-python-grundlagen.html">Kapitel 2</a>!
+  </p>
+</div>
+
+<div class="seiten-nav">
+  <a href="index.html">← Zur Startseite</a>
+  <a href="kapitel-2-python-grundlagen.html">Kapitel 2: Python-Grundlagen →</a>
+</div>
+
+</main>
+
+<a class="nach-oben" href="#" title="Nach oben">↑</a>
+
+<footer class="fuss">
+  <div class="fuss-inner">
+    <p>Python-Workbook zur BPE 5 „Grundlagen der Programmierung“ · Kapitel 1</p>
+    <p>Inhaltlich orientiert an den offiziellen Materialien des Landesbildungsservers Baden-Württemberg (Lernfortschritt 1, PythonKara).</p>
+  </div>
+</footer>
+
+<script src="assets/workbook.js"></script>
+<script src="assets/kara.js"></script>
+</body>
+</html>
