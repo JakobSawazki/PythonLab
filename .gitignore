@@ -1,6 +1,10 @@
 .DS_Store
 Thumbs.db
 desktop.ini
+memory/
+**/memory/
+feedback.txt
+ideas.txt
 .idea/
 .vscode/
 .claude/

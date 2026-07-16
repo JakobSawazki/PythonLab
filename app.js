@@ -658,7 +658,7 @@
             </button>
             <button class="button button-secondary" type="button" data-route="workbook">
               <i data-lucide="clipboard-list"></i>
-              Workbook lesen
+              Lehrbuch lesen
             </button>
           </div>
         </div>
@@ -1233,48 +1233,48 @@
   }
 
   function renderWorkbook() {
-    setHeading("Lesen und verstehen", "Workbook");
+    setHeading("Lesen und verstehen", "Lehrbuch");
     activateNav("workbook");
     const workbookHighlights = [
       {
         title: "BPE 5 · Grundlagen der Programmierung",
         text: "Kara, erste Python-Programme, Variablen, Eingabe, Funktionen, Kontrollstrukturen und Struktogramme.",
-        href: "workbook/index.html#lernweg",
+        href: "../Lehrbuch/index.html#lernweg",
         icon: "book-open",
         meta: "Kapitel 1-3"
       },
       {
         title: "BPE 7 · Algorithmen und Datenstrukturen",
         text: "Arrays, Sortieren, Suchen, verkettete Liste, Stack, Queue, Baum und Binärbaum verständlich erklärt.",
-        href: "workbook/index.html#lernweg-jg2",
+        href: "../Lehrbuch/index.html#lernweg-jg2",
         icon: "workflow",
         meta: "Kapitel 4-6"
       },
       {
         title: "Glossar und Befehle",
         text: "Kurze Begriffserklärungen und die wichtigsten Python-Befehle als schnelle Nachschlagehilfe.",
-        href: "workbook/glossar.html",
+        href: "../Lehrbuch/glossar.html",
         icon: "braces",
         meta: "Begriffe · Syntax"
       },
       {
         title: "Spickzettel",
         text: "Kompakte Übersicht zu Syntax, Operatoren, Struktogrammen, Arrays, Suchen und Sortieren.",
-        href: "workbook/referenz.html",
+        href: "../Lehrbuch/referenz.html",
         icon: "clipboard-list",
         meta: "Alles auf einen Blick"
       },
       {
         title: "Ich-kann-Checklisten",
         text: "Selbstcheck für BPE 5 und BPE 7: abhaken, was schon sicher sitzt.",
-        href: "workbook/checklisten.html",
+        href: "../Lehrbuch/checklisten.html",
         icon: "badge-check",
         meta: "Selbsteinschätzung"
       },
       {
         title: "Inhaltsverzeichnis",
         text: "Die komplette Lernlandkarte mit direkten Sprungmarken zu allen Kapiteln und Abschnitten.",
-        href: "workbook/inhaltsverzeichnis.html",
+        href: "../Lehrbuch/inhaltsverzeichnis.html",
         icon: "map",
         meta: "Lernlandkarte"
       }
@@ -1284,17 +1284,17 @@
       <section class="workbook-hero">
         <div>
           <p class="eyebrow">Lesemodus ohne Punkte</p>
-          <h2>Das Workbook ist dein ruhiges Lehrbuch neben dem PythonLab.</h2>
+          <h2>Das Lehrbuch ist dein ruhiger Leseraum neben dem PythonLab.</h2>
           <p>
             Hier geht es nicht um XP, sondern um Verstehen: anschauliche Erklärungen,
-            konkrete Beispiele, Struktogramme, Grafiken und Lösungen zum Nachlesen.
+            konkrete Beispiele, Struktogramme, Grafiken und Aufgaben zum Nachlesen.
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="workbook/index.html">
+            <a class="button button-primary" href="../Lehrbuch/index.html">
               <i data-lucide="book-open"></i>
-              Workbook öffnen
+              Lehrbuch öffnen
             </a>
-            <a class="button button-secondary" href="workbook/inhaltsverzeichnis.html">
+            <a class="button button-secondary" href="../Lehrbuch/inhaltsverzeichnis.html">
               <i data-lucide="route"></i>
               Inhaltsverzeichnis
             </a>
@@ -1303,7 +1303,7 @@
         <aside class="workbook-hero-note">
           <span><i data-lucide="sparkles"></i></span>
           <strong>So ergänzt es PythonLab</strong>
-          <p>Erst im Workbook nachlesen, dann im Lab Aufgaben lösen und Punkte sammeln.</p>
+          <p>Erst im Lehrbuch nachlesen, dann im Lab Aufgaben lösen und Punkte sammeln.</p>
         </aside>
       </section>
 
@@ -1330,9 +1330,9 @@
       <section class="content-section workbook-bridge">
         <div>
           <p class="eyebrow">Didaktische Trennung</p>
-          <h2>Workbook zum Verstehen, Lab zum Anwenden.</h2>
+          <h2>Lehrbuch zum Verstehen, Lab zum Anwenden.</h2>
           <p>
-            Die Workbook-Seiten behalten ihren helleren Lehrbuch-Charakter. PythonLab bleibt
+            Die Lehrbuch-Seiten behalten ihren helleren Lesemodus. PythonLab bleibt
             der aktive Übungsraum mit Editor, Rückmeldungen und Fortschritt.
           </p>
         </div>

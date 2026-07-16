@@ -222,9 +222,9 @@ eine freiwillige Übungsvorbereitung zur Selbstkontrolle.
 7. Juli 2026 mit dem integrierten OpenAI-Bildgenerator eigens für PythonLab
 erzeugt. Bildidee: fotorealistischer, dunkelgrüner Glaskörper mit Code-Reflexen
 und goldenen Leiterbahn-Akzenten; kein Text, keine Logos, kein SVG.
-`workbook/assets/workbook-logo.png` sowie die daraus abgeleiteten Favicons
+`../Lehrbuch/assets/lehrbuch-logo.png` sowie die daraus abgeleiteten Favicons
 wurden am 7. Juli 2026 mit dem integrierten OpenAI-Bildgenerator eigens für
-das Workbook erzeugt. Bildidee: fotorealistisches aufgeschlagenes Arbeitsheft
+das heutige Lehrbuch erzeugt. Bildidee: fotorealistisches aufgeschlagenes Arbeitsheft
 auf blauem Untergrund mit Code-Anmutung, goldener Markierung und grünem
 Lernmaskottchen; kein Text, kein Rot, keine Logos, kein SVG.
 `assets/struktogrammer-mark.png` stammt aus dem lokalen Schwesterprojekt

@@ -65,9 +65,9 @@ Verbindliche fachliche Referenz:
 - lokaler Name beziehungsweise Kürzel, XP, Level, Erfolge und Entwürfe
 - versionierter JSON-Export und -Import des vollständigen Lernstands
 - Nachschlagebereich mit kompakten Syntaxmustern
-- neuer Reiter **Workbook** mit eingebundenem HTML-Lehrbuch zu BPE 5 und BPE 7 (`workbook/`); die Workbook-Seiten behalten ihren helleren Lehrbuchcharakter und führen über `← PythonLab` zurück in die App
-- eigene PNG-Brandmarks statt SVG-Favicon: `assets/pythonlab-logo.png` für PythonLab und `workbook/assets/workbook-logo.png` für das Workbook; das Workbook nutzt außerdem eigene Favicons und verweist in Kapitel 1 auf die offizielle PythonKara-Seite von SwissEduc
-- Workbook-Startseitenfooter ist bewusst reduziert: links ein kleiner Info-Button für BPE-/Quellenhinweise, rechts `Designed by Sawazki Electronics` mit Link auf die Sawazki-Electronics-Homepage
+- Reiter **Lehrbuch** mit Link zum eigenständigen Informatik-Lehrbuch unter `../Lehrbuch/`; der interne Routenname `workbook` bleibt vorerst kompatibel, fachliche Inhalte werden jedoch ausschließlich im Lehrbuch gepflegt
+- eigene PNG-Brandmarks statt SVG-Favicon: `assets/pythonlab-logo.png` für PythonLab und `../Lehrbuch/assets/lehrbuch-logo.png` für das Lehrbuch; das Lehrbuch nutzt eigene Favicons und verweist in Kapitel 1 auf die offizielle PythonKara-Seite von SwissEduc
+- Lehrbuch-Startseitenfooter ist bewusst reduziert: links ein kleiner Info-Button für BPE-/Quellenhinweise, rechts `Designed by Sawazki Electronics` mit Link auf die Sawazki-Electronics-Homepage
 - responsive Navigation und Tastaturbedienung
 - Kompetenzansicht mit drei BPE5-Bereichen, vierzehn Ich-kann-Zielen und verknüpften Lernaktivitäten
 - insgesamt exakt 7200 erreichbare XP mit erweiterten Levelgrenzen und erklärender Punkteanzeige (`totalAvailableXp()` berechnet die Summe zur Laufzeit)
@@ -89,7 +89,7 @@ Verbindliche fachliche Referenz:
 | `assets/pythonlab-favicon.png` | PNG-Favicon für PythonLab |
 | `assets/struktogrammer-mark.png` | Icon für den Struktogrammer-Web-Link |
 | `assets/primzahlen-anwendung.png` | Illustration der Primzahlen-Werkstatt |
-| `workbook/` | eingebundenes HTML-Workbook als ruhiger Lesemodus zu BPE 5 und BPE 7 |
+| `../Lehrbuch/` | eigenständiges Lehrbuchprojekt und alleinige Quelle für den ruhigen Lesemodus |
 | `TASKS.md` | zentrale Aufgabenliste, Versionshistorie, offene Punkte und Ideen |
 | `docs/TECHNIK_UND_DIDAKTIK.md` | Quellen, Datenschutz und didaktische Entscheidungen |
 | `docs/BPE5_ABGLEICH_2025.md` | Abdeckung des offiziellen Kompetenzrasters und offene Ausbauschritte |

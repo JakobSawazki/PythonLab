@@ -13,6 +13,7 @@ das Repository übernommen. Eigene Erklärungen, Übungen und Beispiele werden i
 
 ## Erledigt
 
+- 2026-07-16: Früheren `PythonWorkbook`-Doppelbestand vollständig im eigenständigen Projekt `D:\Google Drive\Codex\Lehrbuch` konsolidiert; PythonLab verweist weiterhin über den Reiter **Lehrbuch** auf `../Lehrbuch/`.
 - 2026-07-07: Footer der Workbook-Startseite vereinfacht: kleiner Info-Button für BPE-/Quellenhinweise links, `Designed by Sawazki Electronics` rechts mit Link auf die Sawazki-Electronics-Homepage.
 - 2026-07-07: PythonLab und Workbook mit eigenen fotorealistischen PNG-Logos/Favicons ausgestattet, Workbook-Navigationsicon unterscheidbar gemacht und offizielle SwissEduc-PythonKara-Links im Workbook ergänzt.
 - 2026-07-07: HTML-Workbook zu BPE 5 und BPE 7 unter `workbook/` in PythonLab eingebunden, neuen Reiter **Workbook** mit Lesemodus-Übersicht ergänzt und Rücklinks vom Workbook zurück zu PythonLab gesetzt.

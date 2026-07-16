@@ -1,6 +1,6 @@
 # PythonLab
 
-**Aktuelle Version:** 0.20.1
+**Aktuelle Version:** 0.21.0
 **Dokumentationsstand:** 7. Juli 2026
 **Live:** https://jakobsawazki.github.io/PythonLab/
 **Repository:** https://github.com/JakobSawazki/PythonLab
@@ -75,8 +75,8 @@ Repository übernommen.
 - freiwillig aktivierbarer Gemini-Lerncoach: Nach Zustimmung gibt er nach fehlgeschlagenen Prüfungen automatisch kleine Denkimpulse; identische Anfragen werden für die Sitzung zwischengespeichert (siehe „KI-Lerncoach aktivieren“)
 - schwebender Feedback-Button unten rechts: öffnet ohne zusätzliches Secret ein vorbereitetes GitHub-Issue und kann später über einen geschützten `feedbackEndpoint` direkt angebunden werden
 - kompakter Nachschlagebereich
-- eigener Reiter **Workbook**: ruhiger Lesemodus mit dem eingebundenen HTML-Workbook zu BPE 5 und BPE 7 (`workbook/`), inklusive Rücklink zu PythonLab
-- eigene fotorealistische PNG-Brandmarks für PythonLab und Workbook: Browser-Favicons, PythonLab-Sidebarlogo und Workbook-Logo in der Workbook-Navigation
+- eigener Reiter **Lehrbuch**: ruhiger Lesemodus mit Link zum eigenständigen Lehrbuch unter `../Lehrbuch/`
+- eigene fotorealistische PNG-Brandmarks für PythonLab und Lehrbuch: Browser-Favicons, PythonLab-Sidebarlogo und Lehrbuch-Logo
 - schlichter Footer-Hinweis `Designed by Sawazki Electronics`
 - responsive Oberfläche für Computer, Tablet und Smartphone
 - Tastaturbedienung und semantische Bedienelemente
@@ -287,6 +287,12 @@ Vor Veröffentlichungen werden mindestens folgende Prüfungen durchgeführt:
 - abschließender Abruf der GitHub-Pages-Version
 
 ## Versionsverlauf
+
+### 0.21.0 – 16. Juli 2026
+
+- Lehrbuch aus PythonLab herausgelöst und als eigenständiges Projekt unter `D:\Google Drive\Codex\Lehrbuch` weitergeführt
+- PythonLab-Navigation zeigt nun **Lehrbuch** und verlinkt auf `../Lehrbuch/`
+- alte interne Route `#workbook` bleibt vorerst aus Kompatibilitätsgründen bestehen
 
 ### 0.20.1 – 7. Juli 2026
 
